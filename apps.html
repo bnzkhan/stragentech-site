@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stragentech Apps — AI Tools for Operational Intelligence</title>
+<meta name="description" content="Free AI tools for operators: Workflow Automation Analyzer, OI Readiness Scorecard, Fraud ROI Calculator, Tech Stack Gap Analyzer. Built by Stragentech.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f8f9fb;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#8b92a0;
+  --gray-600:#4a5263;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* ── NAV ── */
+nav{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:100;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.nav-brand-name{font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--ink);}
+.nav-brand-name span{color:var(--teal);}
+.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
+.nav-links a:hover,.nav-links a.active{color:var(--teal);background:var(--teal-pale);}
+.nav-back{font-family:var(--font-mono);font-size:12px;color:var(--gray-400);text-decoration:none;padding:6px 12px;transition:color .2s;}
+.nav-back:hover{color:var(--teal);}
+
+/* ── HERO ── */
+.apps-hero{padding:52px 32px 44px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
+.apps-hero-inner{max-width:var(--max-w);margin:0 auto;}
+.apps-hero h1{font-family:var(--font-serif);font-size:clamp(30px,4vw,48px);font-weight:400;letter-spacing:-0.3px;margin-bottom:12px;color:var(--ink);line-height:1.1;}
+.apps-hero h1 em{font-style:italic;color:var(--teal);}
+.apps-hero p{font-size:16px;color:var(--gray-400);max-width:560px;line-height:1.75;margin-bottom:24px;font-weight:300;}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:32px;}
+.hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
+.hero-meta-item::before{content:'▸';color:var(--teal);}
+.sequence-box{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:24px 28px;}
+.sequence-label{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+.sequence-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.seq-step{padding:0 20px 0 0;border-right:1px solid var(--gray-100);}
+.seq-step:last-child{border-right:none;padding-right:0;}
+.seq-step:first-child{padding-left:0;}
+.seq-num{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);margin-bottom:5px;}
+.seq-step h4{font-size:13px;font-weight:600;margin-bottom:4px;color:var(--ink);}
+.seq-step p{font-size:12px;color:var(--gray-400);line-height:1.55;font-weight:300;}
+.seq-step a{font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;display:block;margin-top:7px;}
+.seq-step a:hover{text-decoration:underline;}
+
+/* ── LAYOUT ── */
+.apps-body{max-width:var(--max-w);margin:0 auto;padding:48px 32px;}
+
+/* ── SECTION TAG ── */
+.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--gray-100);}
+
+/* ── TOOL OVERVIEW GRID ── */
+.tools-overview{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:48px;}
+.tool-card{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;overflow:hidden;transition:border-color .2s;}
+.tool-card:hover{border-color:var(--teal-mid);}
+.tool-card.wide{grid-column:1/-1;}
+.tool-card-head{padding:20px 22px 16px;border-bottom:1px solid var(--gray-100);}
+.tool-type{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
+.tool-card-head h3{font-size:16px;font-weight:600;margin-bottom:5px;color:var(--ink);}
+.tool-card-head p{font-size:13px;color:var(--gray-400);line-height:1.6;font-weight:300;}
+.tool-card-foot{padding:14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.tool-meta{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.badge{font-family:var(--font-mono);font-size:9px;padding:3px 9px;border-radius:3px;text-transform:uppercase;letter-spacing:1px;}
+.badge-free{background:var(--teal-pale);color:var(--teal-dark);border:1px solid var(--teal-mid);}
+.badge-ai{background:var(--blue-pale);color:var(--blue);border:1px solid #b3cef4;}
+.badge-soon{background:var(--gray-50);color:var(--gray-400);border:1px solid var(--gray-100);}
+
+/* ── LIVE TOOL PANELS ── */
+.live-tool{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:28px;margin-bottom:20px;}
+.live-tool-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
+.live-tool-header h3{font-size:18px;font-weight:600;color:var(--ink);}
+.badges{display:flex;gap:6px;}
+.input-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;}
+.tool-textarea{width:100%;background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;padding:14px;font-size:13px;color:var(--ink);font-family:var(--font-body);outline:none;resize:vertical;min-height:120px;line-height:1.65;transition:border-color .2s;}
+.tool-textarea:focus{border-color:var(--teal);}
+.tool-textarea::placeholder{color:var(--gray-400);}
+.tool-input{width:100%;background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;padding:11px 14px;font-size:13px;color:var(--ink);font-family:var(--font-body);outline:none;transition:border-color .2s;}
+.tool-input:focus{border-color:var(--teal);}
+.tool-input::placeholder{color:var(--gray-400);}
+.input-group{margin-bottom:14px;}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.lead-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:14px 16px;background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;margin-bottom:14px;}
+.lead-row-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;grid-column:1/-1;margin-bottom:4px;}
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
+.btn-run{background:var(--ink);color:var(--white);font-weight:500;}
+.btn-run:hover{background:var(--teal-dark);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
+.btn-teal:hover{background:var(--teal-dark);}
+.tool-output{background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;padding:18px;min-height:120px;font-size:13px;line-height:1.75;color:var(--gray-600);font-family:var(--font-body);white-space:pre-wrap;margin-top:16px;display:none;}
+.tool-output.visible{display:block;}
+.tool-output.loading{color:var(--teal);}
+.output-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--gray-100);}
+
+/* ── SCORECARD ── */
+.progress-bar{height:3px;background:var(--gray-100);border-radius:2px;margin-bottom:24px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .4s;}
+.sc-q{margin-bottom:14px;padding:16px;background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;}
+.sc-q .q-text{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:10px;}
+.sc-q .q-dim{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);margin-bottom:4px;}
+.sc-q .q-opts{display:flex;gap:7px;flex-wrap:wrap;}
+.q-opt{font-family:var(--font-mono);font-size:11px;padding:6px 12px;border:1px solid var(--gray-200);border-radius:4px;cursor:pointer;transition:all .18s;color:var(--gray-600);background:var(--white);}
+.q-opt:hover{border-color:var(--teal);color:var(--teal);}
+.q-opt.selected{background:var(--teal-pale);border-color:var(--teal);color:var(--teal-dark);font-weight:500;}
+
+/* ── DECKS ── */
+.decks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:48px;}
+.deck-card{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:24px;transition:border-color .2s;}
+.deck-card:hover{border-color:var(--teal-mid);}
+.deck-type{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+.deck-card h3{font-size:15px;font-weight:600;margin-bottom:8px;color:var(--ink);}
+.deck-card p{font-size:12px;color:var(--gray-400);line-height:1.65;font-weight:300;margin-bottom:14px;}
+.deck-meta{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
+
+/* ── CODE GRID ── */
+.code-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:48px;}
+.code-card{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:22px;}
+.code-layer{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.code-card h4{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+.code-card p{font-size:12px;color:var(--gray-400);line-height:1.65;font-weight:300;margin-bottom:10px;}
+.code-card a{font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;}
+.code-card a:hover{text-decoration:underline;}
+
+/* ── CTA BAR ── */
+.cta-bar{background:var(--ink);border-radius:10px;padding:40px;text-align:center;margin-bottom:40px;}
+.cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.cta-bar h3{font-family:var(--font-serif);font-size:26px;color:var(--white);font-weight:400;margin-bottom:8px;}
+.cta-bar p{font-size:14px;color:rgba(255,255,255,0.5);max-width:440px;margin:0 auto 24px;font-weight:300;}
+.cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
+.footer-links a:hover{color:var(--teal);}
+
+@media(max-width:760px){
+  .tools-overview,.decks-grid,.code-grid,.input-row{grid-template-columns:1fr;}
+  .tools-overview .tool-card.wide{grid-column:auto;}
+  .sequence-steps{grid-template-columns:1fr 1fr;gap:16px;}
+  .lead-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="stragentech.html" class="nav-brand">
+      <span class="nav-brand-name">STRAGEN<span>TECH</span></span>
+      <span class="nav-brand-sub">/ apps</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#tools" class="active">Tools</a></li>
+      <li><a href="#decks">Decks</a></li>
+      <li><a href="#code">Code</a></li>
+      <li><a href="stragentech.html" class="nav-back">← Main Site</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="apps-hero">
+  <div class="apps-hero-inner">
+    <h1>Tools and decks for<br><em>agentic operations.</em></h1>
+    <p>Live AI tools, assessment scorecards, and downloadable playbooks — all free, no friction. The same frameworks I use in client engagements, available to try before you ever talk to me.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">4 live AI-powered tools</span>
+      <span class="hero-meta-item">3 downloadable decks</span>
+      <span class="hero-meta-item">4 open-source GitHub repos</span>
+      <span class="hero-meta-item">Everything loads instantly</span>
+    </div>
+    <div class="sequence-box">
+      <div class="sequence-label">New here? Follow the sequence</div>
+      <div class="sequence-steps">
+        <div class="seq-step">
+          <div class="seq-num">01 —</div>
+          <h4>Take the OI Scorecard</h4>
+          <p>12 questions. Find out where your ops sit on the AI readiness curve.</p>
+          <a href="#readiness-scorecard">Run the scorecard →</a>
+        </div>
+        <div class="seq-step">
+          <div class="seq-num">02 —</div>
+          <h4>Analyze a Workflow</h4>
+          <p>Paste any manual process. Get an automation score and action plan.</p>
+          <a href="#workflow-analyzer">Open analyzer →</a>
+        </div>
+        <div class="seq-step">
+          <div class="seq-num">03 —</div>
+          <h4>Calculate Fraud ROI</h4>
+          <p>Input your GMV and fraud rate. Get your automation ROI in 2 minutes.</p>
+          <a href="#fraud-roi">Run calculator →</a>
+        </div>
+        <div class="seq-step">
+          <div class="seq-num">04 —</div>
+          <h4>Download the Playbook</h4>
+          <p>The full Agentic Operations Intelligence framework as a slide deck.</p>
+          <a href="#decks">Open the decks →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="apps-body">
+
+<!-- TOOLS OVERVIEW -->
+<div id="tools">
+  <div class="section-tag">// live tools</div>
+  <div class="tools-overview">
+    <div class="tool-card">
+      <div class="tool-card-head">
+        <div class="tool-type">Workflow Tool</div>
+        <h3>Workflow Automation Analyzer</h3>
+        <p>Paste any manual workflow. An AI agent scores it for automation potential and returns a prioritized action plan with effort/impact matrix.</p>
+      </div>
+      <div class="tool-card-foot">
+        <span class="tool-meta">~2 min · powered by Claude</span>
+        <div style="display:flex;gap:5px;"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-card-head">
+        <div class="tool-type">Scorecard</div>
+        <h3>OI Readiness Scorecard</h3>
+        <p>12 questions across 5 dimensions of operational intelligence maturity. Get a scored report with gap identification and next-step recommendations.</p>
+      </div>
+      <div class="tool-card-foot">
+        <span class="tool-meta">~3 min · interactive scoring</span>
+        <div style="display:flex;gap:5px;"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-card-head">
+        <div class="tool-type">Fraud Tool</div>
+        <h3>Fraud Operations ROI Calculator</h3>
+        <p>Input your GMV, fraud rate, manual review cost, and team size. Get a projected ROI for agentic fraud automation with a 30/60/90 roadmap.</p>
+      </div>
+      <div class="tool-card-foot">
+        <span class="tool-meta">~2 min · powered by Claude</span>
+        <div style="display:flex;gap:5px;"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-card-head">
+        <div class="tool-type">Tech Stack</div>
+        <h3>Tech Stack Gap Analyzer</h3>
+        <p>Describe your current tech stack and business context. An AI agent identifies architecture gaps, modernization opportunities, and AI readiness blockers.</p>
+      </div>
+      <div class="tool-card-foot">
+        <span class="tool-meta">~3 min · powered by Claude</span>
+        <div style="display:flex;gap:5px;"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
+      </div>
+    </div>
+    <div class="tool-card wide">
+      <div class="tool-card-head">
+        <div class="tool-type">IoT Tool — Coming Soon</div>
+        <h3>IoT Alert Fatigue Diagnostic</h3>
+        <p>Describe your IoT platform, connected devices, alert volume, and false positive rate. Get an architectural assessment and a path to predictive operations.</p>
+      </div>
+      <div class="tool-card-foot">
+        <span class="tool-meta">~3 min · powered by Claude</span>
+        <div style="display:flex;gap:5px;"><span class="badge badge-free" style="opacity:0.4;">Free</span><span class="badge badge-soon">Coming Soon</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOOL 1: WORKFLOW ANALYZER ══ -->
+<div id="workflow-analyzer" class="live-tool">
+  <div class="live-tool-header">
+    <div>
+      <h3>Workflow Automation Analyzer</h3>
+      <p style="font-size:13px;color:var(--gray-400);margin-top:4px;font-weight:300;">Paste a manual workflow and get an automation score, pain point analysis, and ranked opportunities.</p>
+    </div>
+    <div class="badges"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
+  </div>
+  <div class="input-group">
+    <div class="input-label">Describe a manual workflow or process you want to automate</div>
+    <textarea class="tool-textarea" id="wf-input" placeholder="Example: 'Every morning our ops team pulls fraud alerts from 3 dashboards, cross-references orders in Shopify, emails the finance team a summary, and manually blocks suspicious accounts in our admin panel. This takes 2 people about 90 minutes daily...'"></textarea>
+  </div>
+  <div class="lead-row">
+    <span class="lead-row-label">Optional — get a copy of results emailed to you</span>
+    <input class="tool-input" id="wf-name" type="text" placeholder="Your name">
+    <input class="tool-input" id="wf-email" type="email" placeholder="Work email">
+    <input class="tool-input" id="wf-company" type="text" placeholder="Company">
+  </div>
+  <button class="btn btn-run" onclick="runWorkflowAnalyzer()">▸ Analyze Automation Potential</button>
+  <div id="wf-output" class="tool-output">
+    <div class="output-label">// Workflow Automation Analysis</div>
+    <div id="wf-result"></div>
+  </div>
+</div>
+
+<!-- ══ TOOL 2: OI READINESS SCORECARD ══ -->
+<div id="readiness-scorecard" class="live-tool">
+  <div class="live-tool-header">
+    <div>
+      <h3>Operational Intelligence Readiness Scorecard</h3>
+      <p style="font-size:13px;color:var(--gray-400);margin-top:4px;font-weight:300;">12 questions across 5 dimensions. ~3 minutes. Results scored live and interpreted by AI.</p>
+    </div>
+    <div class="badges"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="sc-progress" style="width:0%"></div></div>
+  <div id="scorecard-questions"></div>
+  <div id="sc-actions" style="display:none;margin-top:16px;">
+    <div class="lead-row">
+      <span class="lead-row-label">Get your full scored report (optional)</span>
+      <input class="tool-input" id="sc-name" type="text" placeholder="Your name">
+      <input class="tool-input" id="sc-email" type="email" placeholder="Work email">
+      <input class="tool-input" id="sc-company" type="text" placeholder="Company">
+    </div>
+    <button class="btn btn-run" onclick="runScorecardAnalysis()">▸ Get My AI-Interpreted Results</button>
+  </div>
+  <div id="sc-output" class="tool-output">
+    <div class="output-label">// OI Readiness Scorecard Results</div>
+    <div id="sc-result"></div>
+  </div>
+</div>
+
+<!-- ══ TOOL 3: FRAUD ROI ══ -->
+<div id="fraud-roi" class="live-tool">
+  <div class="live-tool-header">
+    <div>
+      <h3>Fraud Operations ROI Calculator</h3>
+      <p style="font-size:13px;color:var(--gray-400);margin-top:4px;font-weight:300;">Enter your numbers. Get a projected ROI for agentic fraud automation with a 30/60/90 roadmap.</p>
+    </div>
+    <div class="badges"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
+  </div>
+  <div class="input-row">
+    <div class="input-group">
+      <div class="input-label">Annual GMV / Revenue ($)</div>
+      <input class="tool-input" type="number" id="fr-gmv" placeholder="e.g. 25000000">
+    </div>
+    <div class="input-group">
+      <div class="input-label">Current Fraud / Chargeback Rate (%)</div>
+      <input class="tool-input" type="number" id="fr-rate" placeholder="e.g. 2.5" step="0.1">
+    </div>
+    <div class="input-group">
+      <div class="input-label">Manual Review Team Size</div>
+      <input class="tool-input" type="number" id="fr-team" placeholder="e.g. 3">
+    </div>
+    <div class="input-group">
+      <div class="input-label">Avg Analyst Salary ($)</div>
+      <input class="tool-input" type="number" id="fr-salary" placeholder="e.g. 55000">
+    </div>
+  </div>
+  <div class="input-group">
+    <div class="input-label">Current fraud process (optional — improves accuracy)</div>
+    <textarea class="tool-textarea" id="fr-process" style="min-height:80px;" placeholder="Briefly describe your current fraud review process, tools used, pain points..."></textarea>
+  </div>
+  <button class="btn btn-run" onclick="runFraudROI()">▸ Calculate My Automation ROI</button>
+  <div id="fr-output" class="tool-output">
+    <div class="output-label">// Fraud Automation ROI Analysis</div>
+    <div id="fr-result"></div>
+  </div>
+</div>
+
+<!-- ══ TOOL 4: TECH STACK ANALYZER ══ -->
+<div id="tech-stack" class="live-tool">
+  <div class="live-tool-header">
+    <div>
+      <h3>Tech Stack Gap Analyzer</h3>
+      <p style="font-size:13px;color:var(--gray-400);margin-top:4px;font-weight:300;">Describe your stack and get a maturity score, critical gaps, modernization sequence, and AI blockers.</p>
+    </div>
+    <div class="badges"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
+  </div>
+  <div class="input-group">
+    <div class="input-label">Describe your current tech stack and business context</div>
+    <textarea class="tool-textarea" id="ts-input" style="min-height:140px;" placeholder="Example: 'We're a $20M e-commerce company. Backend is PHP monolith (2012) on AWS EC2. MySQL database, no caching layer. We use Shopify for storefront, Klaviyo for email, manual CSV exports for analytics. No CI/CD, deployments are manual via FTP. Team of 4 engineers. We want to add ML-based product recommendations and automate customer support...'"></textarea>
+  </div>
+  <div class="input-group">
+    <div class="input-label">Business goal or challenge (optional)</div>
+    <textarea class="tool-textarea" id="ts-goal" style="min-height:70px;" placeholder="What are you trying to achieve or what's the main pain point?"></textarea>
+  </div>
+  <button class="btn btn-run" onclick="runTechStackAnalyzer()">▸ Analyze My Stack</button>
+  <div id="ts-output" class="tool-output">
+    <div class="output-label">// Tech Stack Gap Analysis</div>
+    <div id="ts-result"></div>
+  </div>
+</div>
+
+<!-- DECKS -->
+<div id="decks" style="padding-top:8px;">
+  <div class="section-tag">// playbooks & decks</div>
+  <div class="decks-grid">
+    <div class="deck-card">
+      <div class="deck-type">Flagship Deck</div>
+      <h3>Agentic Operations Intelligence Playbook</h3>
+      <p>How to build autonomous systems that detect anomalies, investigate context, and take corrective action — across fraud prevention, industrial IoT, and SaaS ops.</p>
+      <div class="deck-meta">20 slides · PDF + interactive</div>
+      <a href="#" class="btn btn-teal" onclick="alert('Deck coming soon — book a call for early access.');return false;">▸ Open the Playbook</a>
+    </div>
+    <div class="deck-card">
+      <div class="deck-type">ROI Deck</div>
+      <h3>The ROI of Autonomous Fraud Prevention</h3>
+      <p>The business case for replacing manual review queues with agentic fraud intelligence — with real numbers from Amazon Marketplace at scale.</p>
+      <div class="deck-meta">15 slides · PDF</div>
+      <a href="#" class="btn btn-outline" onclick="alert('Deck coming soon — book a call for early access.');return false;">▸ Read the Deck</a>
+    </div>
+    <div class="deck-card">
+      <div class="deck-type">IoT Deck</div>
+      <h3>From Alert Fatigue to Predictive Operations</h3>
+      <p>The architectural pattern for moving from threshold-based alerting to ML anomaly detection and agentic corrective action in industrial IoT environments.</p>
+      <div class="deck-meta">18 slides · PDF</div>
+      <a href="#" class="btn btn-outline" onclick="alert('Deck coming soon — book a call for early access.');return false;">▸ Read the Deck</a>
+    </div>
+  </div>
+</div>
+
+<!-- CODE -->
+<div id="code">
+  <div class="section-tag">// open-source on github</div>
+  <p style="font-size:14px;color:var(--gray-400);margin-bottom:20px;font-weight:300;">The same frameworks I deploy in client engagements. Read it, fork it, run it yourself — or hire me to deploy it for your team.</p>
+  <div class="code-grid">
+    <div class="code-card">
+      <div class="code-layer">Layer 01 — Playbook</div>
+      <h4>agentic-ops-playbook</h4>
+      <p>Context, rules of engagement, and operating playbooks for autonomous operations intelligence systems. The PROMPT layer.</p>
+      <a href="https://github.com/bilal-khan/agentic-ops-playbook" target="_blank">github.com → agentic-ops-playbook ↗</a>
+    </div>
+    <div class="code-card">
+      <div class="code-layer">Layer 02 — Fraud Agent</div>
+      <h4>fraud-detection-agent</h4>
+      <p>Reference implementation of a multi-agent fraud investigation pipeline — anomaly detection, evidence gathering, and autonomous decisioning with HITL gates.</p>
+      <a href="https://github.com/bilal-khan/fraud-detection-agent" target="_blank">github.com → fraud-detection-agent ↗</a>
+    </div>
+    <div class="code-card">
+      <div class="code-layer">Layer 03 — IoT Intelligence</div>
+      <h4>iot-ops-intelligence</h4>
+      <p>Edge-to-cloud telemetry pipeline with ML anomaly detection, predictive maintenance agents, and automated corrective action triggers.</p>
+      <a href="https://github.com/bilal-khan/iot-ops-intelligence" target="_blank">github.com → iot-ops-intelligence ↗</a>
+    </div>
+    <div class="code-card">
+      <div class="code-layer">Layer 04 — Assessment</div>
+      <h4>oi-assessment-toolkit</h4>
+      <p>5-domain Operational Intelligence Readiness Assessment framework — scoring rubrics, gap analysis templates, and roadmap generator.</p>
+      <a href="https://github.com/bilal-khan/oi-assessment-toolkit" target="_blank">github.com → oi-assessment-toolkit ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-bar">
+  <div class="cta-bar-tag">// Ready to go further?</div>
+  <h3>Want this deployed inside your org?</h3>
+  <p>I help operations leaders stand up governed agentic intelligence systems — from first assessment to production implementation.</p>
+  <div class="cta-bar-actions">
+    <a href="stragentech.html#contact" class="btn btn-teal">▸ Book a Working Session</a>
+    <a href="stragentech.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Visit stragentech.com</a>
+  </div>
+</div>
+
+</div><!-- /apps-body -->
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">Built by Bilal A. Khan · stragentech.com · apps.stragentech.com</span>
+    <div class="footer-links">
+      <a href="#tools">Tools</a>
+      <a href="#decks">Decks</a>
+      <a href="#code">Code</a>
+      <a href="stragentech.html">Main Site ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── SCORECARD DATA ──────────────────────────────────────────────────────
+const SC_QUESTIONS = [
+  {dim:'Data Infrastructure',q:'How is your operational data currently collected and stored?',opts:['Manual exports / spreadsheets','Basic databases, no real-time','Real-time pipelines, some analytics','Unified data platform, near-real-time']},
+  {dim:'Data Infrastructure',q:'How quickly can you detect an anomaly in your operations?',opts:['Days (discovered reactively)','Hours (manual monitoring)','Minutes (alerting system)','Seconds (automated detection)']},
+  {dim:'Automation Maturity',q:'How are your repetitive operational tasks currently handled?',opts:['Entirely manual','Some scripts/rules','Partial automation, many manual steps','Mostly automated with exceptions handled']},
+  {dim:'Automation Maturity',q:'When an operational issue is detected, what happens next?',opts:['Email/Slack to a human who decides','Ticket created, human reviews','Partial auto-routing, human resolves','Automated triage + human only for edge cases']},
+  {dim:'AI & ML Readiness',q:'What is your current use of AI or ML in operations?',opts:['None — not explored yet','Exploring / running pilots','One or two production use cases','Multiple production AI systems']},
+  {dim:'AI & ML Readiness',q:'Do you have labeled historical data for your main operational problems?',opts:['No historical data available','Some data, poorly labeled','Decent data, partially labeled','Rich labeled dataset maintained']},
+  {dim:'Team Capability',q:'Does your team have AI/ML implementation experience?',opts:['No internal expertise','Basic familiarity, no builders','One or two engineers with ML skills','Dedicated AI/data engineering capability']},
+  {dim:'Team Capability',q:'How does your leadership think about AI investment?',opts:['Not a priority yet','Interested but no budget','Budget approved, strategy unclear','Clear strategy, active investment']},
+  {dim:'Governance & Compliance',q:'Do you have documented processes for your key operational workflows?',opts:['Little to no documentation','Some documented, inconsistently followed','Most documented, sometimes followed','Fully documented, consistently enforced']},
+  {dim:'Governance & Compliance',q:'How do you handle false positives in automated decisions?',opts:['No automation yet','No formal process','Ad-hoc human review','Structured HITL review with feedback loop']},
+  {dim:'Business Impact',q:'What is the estimated annual cost of your current operational inefficiencies?',opts:['Under $100K','$100K–$500K','$500K–$2M','Over $2M']},
+  {dim:'Business Impact',q:'How urgently does your business need to improve operational efficiency?',opts:['Nice to have, no timeline','This year sometime','Next 90 days','This is a critical priority right now']},
+];
+
+let sc_answers = {};
+function renderScorecard(){
+  const c = document.getElementById('scorecard-questions');
+  c.innerHTML = '';
+  SC_QUESTIONS.forEach((q,i) => {
+    const div = document.createElement('div');
+    div.className = 'sc-q';
+    div.innerHTML = `<div class="q-dim">${q.dim} · Q${i+1}</div><div class="q-text">${q.q}</div><div class="q-opts">${q.opts.map((o,j)=>`<button class="q-opt" onclick="selectAnswer(${i},${j},this)">${o}</button>`).join('')}</div>`;
+    c.appendChild(div);
+  });
+}
+function selectAnswer(qi,oi,el){
+  el.closest('.q-opts').querySelectorAll('.q-opt').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  sc_answers[qi] = oi;
+  const pct = Object.keys(sc_answers).length / SC_QUESTIONS.length * 100;
+  document.getElementById('sc-progress').style.width = pct + '%';
+  if(Object.keys(sc_answers).length >= SC_QUESTIONS.length){
+    document.getElementById('sc-actions').style.display = 'block';
+    document.getElementById('sc-actions').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+}
+renderScorecard();
+
+// ── API HELPER ──────────────────────────────────────────────────────────
+async function callClaude(prompt, outputEl, resultEl){
+  outputEl.classList.add('visible','loading');
+  resultEl.textContent = 'Analyzing...';
+  try{
+    const res = await fetch('/api/analyze',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data = await res.json();
+    outputEl.classList.remove('loading');
+    const text = data.content?.map(b=>b.text||'').join('') || 'No response received.';
+    resultEl.textContent = text;
+  } catch(e){
+    outputEl.classList.remove('loading');
+    resultEl.textContent = 'Error connecting to AI. Please try again or contact bilal@stragentech.com';
+  }
+}
+
+// ── TOOL 1: WORKFLOW ANALYZER ────────────────────────────────────────────
+async function runWorkflowAnalyzer(){
+  const workflow = document.getElementById('wf-input').value.trim();
+  if(!workflow){ alert('Please describe a workflow first.'); return; }
+  const prompt = `You are Bilal Khan, a Fractional CTO specializing in Agentic Operations Intelligence (ex-Amazon, ex-Boeing, 25+ years). A prospect has shared a manual workflow they want to automate.
+
+WORKFLOW:
+${workflow}
+
+Provide a structured analysis in this exact format:
+
+AUTOMATION SCORE: [1-10]/10
+
+AUTOMATION POTENTIAL SUMMARY:
+[2-3 sentences on overall automation feasibility and primary opportunity]
+
+CURRENT PAIN POINTS:
+• [pain point 1]
+• [pain point 2]
+• [pain point 3]
+
+TOP AUTOMATION OPPORTUNITIES (ranked by impact/effort):
+1. [HIGH IMPACT / LOW EFFORT] — [specific opportunity]
+2. [HIGH IMPACT / MEDIUM EFFORT] — [specific opportunity]
+3. [MEDIUM IMPACT / LOW EFFORT] — [quick win]
+
+RECOMMENDED AGENTIC PATTERN:
+[Describe the Detect→Investigate→Act agent pattern for this workflow in 2-3 sentences]
+
+ESTIMATED ROI RANGE:
+[Time savings estimate per week/month and rough cost reduction estimate]
+
+SUGGESTED NEXT STEP:
+[One specific, concrete next action to begin automation]`;
+  await callClaude(prompt, document.getElementById('wf-output'), document.getElementById('wf-result'));
+}
+
+// ── TOOL 2: SCORECARD ANALYSIS ───────────────────────────────────────────
+async function runScorecardAnalysis(){
+  const dims = {};
+  SC_QUESTIONS.forEach((q,i) => {
+    dims[q.dim] = (dims[q.dim]||[]);
+    dims[q.dim].push({q:q.q, a:q.opts[sc_answers[i]||0]});
+  });
+  const summary = Object.entries(dims).map(([d,qs])=>`${d}:\n${qs.map(q=>`  Q: ${q.q}\n  A: ${q.a}`).join('\n')}`).join('\n\n');
+  const prompt = `You are Bilal Khan, Fractional CTO specializing in Agentic Operations Intelligence. A potential client has completed an OI Readiness Scorecard. Analyze their responses and provide a scored report.
+
+SCORECARD RESPONSES:
+${summary}
+
+Provide a structured report in this exact format:
+
+OVERALL READINESS LEVEL: [Reactive / Developing / Capable / Advanced] — [score]/100
+
+DIMENSION SCORES:
+• Data Infrastructure: [score]/20 — [one-line summary]
+• Automation Maturity: [score]/20 — [one-line summary]
+• AI & ML Readiness: [score]/20 — [one-line summary]
+• Team Capability: [score]/20 — [one-line summary]
+• Governance & Compliance: [score]/20 — [one-line summary]
+
+KEY STRENGTHS:
+• [strength 1]
+• [strength 2]
+
+HIGHEST-PRIORITY GAPS:
+1. [most critical gap — specific and actionable]
+2. [second gap]
+3. [third gap]
+
+RECOMMENDED STARTING POINT:
+[Based on their specific responses, what is the single best first initiative — be specific, not generic]
+
+ESTIMATED TIME TO FIRST MEASURABLE RESULT:
+[Realistic timeline estimate with what success looks like]`;
+  await callClaude(prompt, document.getElementById('sc-output'), document.getElementById('sc-result'));
+}
+
+// ── TOOL 3: FRAUD ROI ────────────────────────────────────────────────────
+async function runFraudROI(){
+  const gmv = parseFloat(document.getElementById('fr-gmv').value)||0;
+  const rate = parseFloat(document.getElementById('fr-rate').value)||0;
+  const team = parseInt(document.getElementById('fr-team').value)||0;
+  const salary = parseFloat(document.getElementById('fr-salary').value)||0;
+  const process = document.getElementById('fr-process').value;
+  if(!gmv||!rate){ alert('Please enter your GMV and fraud rate.'); return; }
+  const annualFraud = (gmv*rate/100).toFixed(0);
+  const teamCost = (team*salary).toFixed(0);
+  const prompt = `You are Bilal Khan, Fractional CTO specializing in agentic fraud prevention (ex-Amazon Marketplace, delivered $37M+ in fraud savings). A prospect has provided their fraud metrics. Calculate their automation ROI.
+
+INPUTS:
+- Annual GMV/Revenue: $${gmv.toLocaleString()}
+- Current fraud/chargeback rate: ${rate}%
+- Annual fraud loss estimate: $${parseInt(annualFraud).toLocaleString()}
+- Manual review team size: ${team} people
+- Average analyst salary: $${salary.toLocaleString()}
+- Annual team cost: $${parseInt(teamCost).toLocaleString()}
+${process?`- Current process: ${process}`:''}
+
+Provide ROI analysis in this exact format:
+
+CURRENT ANNUAL FRAUD COST: $[calculated total including losses + team cost]
+
+AUTOMATION ROI PROJECTION:
+
+Conservative Scenario (65% automation):
+• Fraud loss reduction: $[amount]
+• Team reduction/redeployment value: $[amount]
+• Net annual savings: $[amount]
+• ROI on $15K/month fractional CTO (12 months): [X]x
+
+Moderate Scenario (78% automation — Amazon Marketplace benchmark):
+• Fraud loss reduction: $[amount]
+• Team reduction/redeployment value: $[amount]
+• Net annual savings: $[amount]
+• ROI on $15K/month fractional CTO (12 months): [X]x
+
+PAYBACK PERIOD: [X months from engagement start to break-even]
+
+30/60/90 IMPLEMENTATION ROADMAP:
+Day 1–30: [specific first phase]
+Day 31–60: [second phase]
+Day 61–90: [third phase — first measurable result]
+
+RISK NOTE:
+[One honest caveat about what determines whether you hit conservative vs moderate scenario]`;
+  await callClaude(prompt, document.getElementById('fr-output'), document.getElementById('fr-result'));
+}
+
+// ── TOOL 4: TECH STACK ───────────────────────────────────────────────────
+async function runTechStackAnalyzer(){
+  const stack = document.getElementById('ts-input').value.trim();
+  const goal = document.getElementById('ts-goal').value.trim();
+  if(!stack){ alert('Please describe your tech stack first.'); return; }
+  const prompt = `You are Bilal Khan, Fractional CTO (ex-Amazon, ex-Boeing, 25+ years). A prospect has shared their tech stack for analysis.
+
+TECH STACK:
+${stack}
+${goal?`\nBUSINESS GOAL: ${goal}`:''}
+
+Provide a structured analysis in this format:
+
+STACK MATURITY SCORE: [1-10]/10
+
+ARCHITECTURE ASSESSMENT:
+[2-3 sentence overall assessment]
+
+CRITICAL GAPS (must address):
+• [gap 1 — specific, not generic]
+• [gap 2]
+• [gap 3]
+
+MODERNIZATION OPPORTUNITIES (ranked by business impact):
+1. [HIGHEST IMPACT] — [specific opportunity with brief rationale]
+2. [HIGH IMPACT] — [opportunity]
+3. [MEDIUM IMPACT] — [opportunity]
+
+AI READINESS BLOCKERS:
+• [what needs to be true before AI/ML can deliver value in their context]
+• [blocker 2]
+
+RECOMMENDED MODERNIZATION SEQUENCE:
+Phase 1 (0–3 months): [specific actions]
+Phase 2 (3–6 months): [specific actions]
+Phase 3 (6–12 months): [specific actions]
+
+ESTIMATED EFFORT:
+[Rough resource/timeline estimate and what "done" looks like]`;
+  await callClaude(prompt, document.getElementById('ts-output'), document.getElementById('ts-result'));
+}
+
+// ── NAV SMOOTH SCROLL ────────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+</script>
+</body>
+</html>

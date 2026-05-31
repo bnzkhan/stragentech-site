@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stragentech Deployment Guide — Go Live Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#fff;
+  --off:#f8f9fb;
+  --g100:#e8eaee;
+  --g400:#8b92a0;
+  --g600:#4a5263;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --orange:#e07b2a;
+  --orange-pale:#fdf3e8;
+  --red:#d94f4f;
+  --red-pale:#fdf0f0;
+  --font:'DM Sans',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+body{font-family:var(--font);color:var(--ink);background:var(--white);line-height:1.7;-webkit-font-smoothing:antialiased;}
+.page{max-width:860px;margin:0 auto;padding:48px 32px 80px;}
+
+/* TITLE */
+.doc-title{margin-bottom:48px;padding-bottom:28px;border-bottom:1px solid var(--g100);}
+.doc-label{font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.doc-title h1{font-size:32px;font-weight:600;color:var(--ink);letter-spacing:-0.3px;margin-bottom:8px;}
+.doc-title p{font-size:15px;color:var(--g400);font-weight:300;}
+.doc-meta{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
+.doc-meta span{font-family:var(--mono);font-size:11px;color:var(--g400);background:var(--off);border:1px solid var(--g100);padding:4px 10px;border-radius:4px;}
+
+/* TOC */
+.toc{background:var(--off);border:1px solid var(--g100);border-radius:8px;padding:22px 26px;margin-bottom:48px;}
+.toc-label{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+.toc ol{padding-left:20px;display:flex;flex-direction:column;gap:5px;}
+.toc li{font-size:14px;color:var(--g600);}
+.toc a{color:var(--blue);text-decoration:none;font-weight:500;}
+.toc a:hover{text-decoration:underline;}
+.toc .sub{margin-top:4px;margin-left:16px;display:flex;flex-direction:column;gap:3px;}
+.toc .sub li{font-size:13px;}
+
+/* PHASE */
+.phase{margin-bottom:52px;}
+.phase-header{display:flex;align-items:flex-start;gap:18px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--g100);}
+.phase-num{width:44px;height:44px;border-radius:50%;background:var(--teal-pale);border:1.5px solid var(--teal-mid);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:16px;color:var(--teal);flex-shrink:0;font-weight:500;}
+.phase-header h2{font-size:22px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.phase-header p{font-size:13px;color:var(--g400);font-weight:300;}
+.phase-time{font-family:var(--mono);font-size:11px;color:var(--teal);background:var(--teal-pale);border:1px solid var(--teal-mid);border-radius:4px;padding:3px 10px;margin-left:auto;flex-shrink:0;align-self:flex-start;}
+
+/* STEPS */
+.step{margin-bottom:28px;}
+.step-label{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--g400);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.step h3{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:10px;}
+.step p{font-size:14px;color:var(--g600);line-height:1.75;margin-bottom:10px;font-weight:300;}
+.step p strong{font-weight:600;color:var(--ink);}
+.step ul,.step ol{padding-left:20px;display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
+.step li{font-size:14px;color:var(--g600);line-height:1.65;font-weight:300;}
+.step li strong{font-weight:600;color:var(--ink);}
+
+/* CODE BLOCKS */
+pre{background:var(--ink);border-radius:6px;padding:16px 18px;overflow-x:auto;margin:12px 0;}
+code{font-family:var(--mono);font-size:12px;line-height:1.7;color:#e8eaee;}
+pre code{background:none;color:#e8eaee;}
+.inline-code{font-family:var(--mono);font-size:12px;background:var(--off);border:1px solid var(--g100);border-radius:4px;padding:2px 7px;color:var(--ink);}
+
+/* CALLOUTS */
+.callout{border-radius:6px;padding:14px 18px;margin:14px 0;font-size:14px;font-weight:400;line-height:1.65;}
+.callout strong{font-weight:600;}
+.callout-info{background:var(--blue-pale);border:1px solid #b3cef4;color:#1a3a6a;}
+.callout-warn{background:var(--orange-pale);border:1px solid #f0c08a;color:#7a4a10;}
+.callout-success{background:var(--teal-pale);border:1px solid var(--teal-mid);color:var(--teal-dark);}
+.callout-danger{background:var(--red-pale);border:1px solid #f4b4b4;color:#8a2020;}
+
+/* FILE TREES */
+.file-tree{background:var(--off);border:1px solid var(--g100);border-radius:6px;padding:16px 18px;font-family:var(--mono);font-size:12px;line-height:1.9;color:var(--g600);margin:12px 0;}
+.file-tree .dir{color:var(--ink);font-weight:500;}
+.file-tree .new{color:var(--teal);}
+.file-tree .comment{color:var(--g400);}
+
+/* SCREENSHOT PLACEHOLDER */
+.screen{background:var(--off);border:1.5px dashed var(--g100);border-radius:6px;padding:20px;margin:12px 0;text-align:center;font-family:var(--mono);font-size:11px;color:var(--g400);}
+
+/* DECISION TABLE */
+.decision-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+.decision-table th{background:var(--ink);color:var(--white);font-weight:600;padding:10px 14px;text-align:left;font-size:12px;}
+.decision-table td{padding:10px 14px;border-bottom:1px solid var(--g100);color:var(--g600);vertical-align:top;font-weight:300;}
+.decision-table tr:nth-child(even) td{background:var(--off);}
+.decision-table .winner{color:var(--teal-dark);font-weight:600;}
+.decision-table .loser{color:var(--g400);}
+.check{color:var(--teal);font-weight:700;}
+.cross{color:var(--red);}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+.check-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--g600);font-weight:300;}
+.check-box{width:18px;height:18px;border:1.5px solid var(--g100);border-radius:3px;flex-shrink:0;margin-top:2px;}
+
+/* PHASE DIVIDER */
+hr.phase-div{border:none;border-top:2px solid var(--off);margin:52px 0;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- TITLE -->
+<div class="doc-title">
+  <div class="doc-label">Stragentech.com · Deployment Playbook</div>
+  <h1>Go Live: Complete Deployment Guide</h1>
+  <p>Step-by-step instructions to deploy stragentech.com and apps.stragentech.com with live AI tools, from zero to production.</p>
+  <div class="doc-meta">
+    <span>Total time: ~90 minutes</span>
+    <span>Skill level: Beginner-friendly</span>
+    <span>Cost: $0 additional (beyond Squarespace)</span>
+    <span>Prerequisites: listed per phase</span>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-label">// Table of Contents</div>
+  <ol>
+    <li><a href="#phase0">Phase 0 — Architecture Decision: Keep Squarespace or Switch?</a></li>
+    <li><a href="#phase1">Phase 1 — GitHub Setup (10 min)</a>
+      <ul class="sub">
+        <li><a href="#p1a">Create your GitHub account & repository</a></li>
+        <li><a href="#p1b">Upload your project files</a></li>
+      </ul>
+    </li>
+    <li><a href="#phase2">Phase 2 — Vercel Deployment (15 min)</a>
+      <ul class="sub">
+        <li><a href="#p2a">Create your Vercel account</a></li>
+        <li><a href="#p2b">Connect GitHub → Vercel</a></li>
+        <li><a href="#p2c">Add your Anthropic API key as a secret</a></li>
+        <li><a href="#p2d">Verify the live tools work</a></li>
+      </ul>
+    </li>
+    <li><a href="#phase3">Phase 3 — DNS: Connect Your Squarespace Domain (20 min + 24h propagation)</a>
+      <ul class="sub">
+        <li><a href="#p3a">Point www.stragentech.com → Vercel</a></li>
+        <li><a href="#p3b">Create apps.stragentech.com subdomain</a></li>
+        <li><a href="#p3c">Verify both domains resolve</a></li>
+      </ul>
+    </li>
+    <li><a href="#phase4">Phase 4 — Post-Launch Checklist (15 min)</a></li>
+    <li><a href="#phase5">Phase 5 — Ongoing: Making Updates (2 min per change)</a></li>
+    <li><a href="#troubleshoot">Troubleshooting Common Issues</a></li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="phase0" class="phase">
+  <div class="phase-header">
+    <div class="phase-num">0</div>
+    <div>
+      <h2>Architecture Decision: Keep Squarespace or Switch?</h2>
+      <p>Understand what you're working with before touching anything.</p>
+    </div>
+    <span class="phase-time">5 min read</span>
+  </div>
+
+  <div class="step">
+    <h3>The short answer: keep your Squarespace domain, host files on Vercel</h3>
+    <p>You own the domain <span class="inline-code">stragentech.com</span> through Squarespace. That's a DNS registration — it's separate from website hosting. Think of it like owning a phone number (Squarespace) vs. where calls get routed (Vercel).</p>
+    <p>The two-part setup you'll build:</p>
+    <ul>
+      <li><strong>stragentech.com (main site)</strong> — hosted on Vercel, your Squarespace domain points to it</li>
+      <li><strong>apps.stragentech.com (apps hub)</strong> — also hosted on Vercel, a subdomain you create in Squarespace DNS</li>
+    </ul>
+    <p>Squarespace itself won't host your custom HTML — it only serves Squarespace-built pages. So the domain stays there, the files live on Vercel.</p>
+  </div>
+
+  <div class="step">
+    <h3>Why Vercel specifically?</h3>
+    <table class="decision-table">
+      <tr><th>Platform</th><th>Free Tier</th><th>Custom Domain</th><th>Subdomains</th><th>API/Backend Functions</th><th>Best For</th></tr>
+      <tr>
+        <td class="winner">Vercel ✓ recommended</td>
+        <td class="check">✓ generous</td>
+        <td class="check">✓ yes</td>
+        <td class="check">✓ yes</td>
+        <td class="check">✓ built-in Edge Functions</td>
+        <td>Your use case — static site + API proxy</td>
+      </tr>
+      <tr>
+        <td>Netlify</td>
+        <td class="check">✓ generous</td>
+        <td class="check">✓ yes</td>
+        <td class="check">✓ yes</td>
+        <td class="check">✓ serverless functions</td>
+        <td>Also good, slightly more complex proxy setup</td>
+      </tr>
+      <tr>
+        <td>Squarespace hosting</td>
+        <td class="cross">✗</td>
+        <td class="check">✓ built-in</td>
+        <td class="cross">✗ no custom HTML subdomains</td>
+        <td class="cross">✗ no backend</td>
+        <td>Squarespace-only sites, not custom HTML</td>
+      </tr>
+      <tr>
+        <td>GitHub Pages</td>
+        <td class="check">✓</td>
+        <td class="check">✓ yes</td>
+        <td class="check">✓ yes</td>
+        <td class="cross">✗ static only, no proxy</td>
+        <td>Static sites only, no API key needed</td>
+      </tr>
+    </table>
+    <p>Vercel wins because you need the API proxy function to keep your Anthropic key private. GitHub Pages can't do that.</p>
+  </div>
+
+  <div class="step">
+    <h3>What you'll need before starting</h3>
+    <div class="checklist">
+      <div class="check-item"><div class="check-box"></div>Your Anthropic API key — get one at <strong>console.anthropic.com</strong> (free to create, pay per use)</div>
+      <div class="check-item"><div class="check-box"></div>A GitHub account — free at <strong>github.com</strong></div>
+      <div class="check-item"><div class="check-box"></div>A Vercel account — free at <strong>vercel.com</strong> (sign up with your GitHub account)</div>
+      <div class="check-item"><div class="check-box"></div>Access to your Squarespace account (for DNS settings only)</div>
+      <div class="check-item"><div class="check-box"></div>The two files from this session: <span class="inline-code">stragentech.html</span> and <span class="inline-code">apps.html</span> (the proxy-ready versions provided)</div>
+    </div>
+  </div>
+
+  <div class="callout callout-info">
+    <strong>Cost check:</strong> Vercel's free tier (Hobby plan) allows 100GB bandwidth/month, unlimited deployments, and serverless function invocations. At typical fractional CTO website traffic, you will not exceed free limits for months. The Anthropic API will cost roughly $0.003–0.01 per tool run at current claude-sonnet-4 pricing. 1,000 tool runs/month ≈ $3–10.
+  </div>
+</div>
+
+<hr class="phase-div">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="phase1" class="phase">
+  <div class="phase-header">
+    <div class="phase-num">1</div>
+    <div>
+      <h2>GitHub Setup</h2>
+      <p>Create a repository and upload your project files. GitHub is the source of truth — Vercel watches it and auto-deploys when you make changes.</p>
+    </div>
+    <span class="phase-time">~10 min</span>
+  </div>
+
+  <div class="callout callout-info">
+    <strong>What is GitHub?</strong> Think of it as Dropbox for code files, with version history. When you push a file change to GitHub, Vercel automatically picks it up and republishes your site within 30 seconds. You never need to manually redeploy.
+  </div>
+
+  <div id="p1a" class="step">
+    <div class="step-label">Step 1.1</div>
+    <h3>Create a GitHub account (if you don't have one)</h3>
+    <ol>
+      <li>Go to <strong>github.com</strong> and click <strong>Sign up</strong></li>
+      <li>Enter your email, create a password, choose a username (e.g. <span class="inline-code">bilalkhan-tech</span>)</li>
+      <li>Verify your email — GitHub sends a code</li>
+      <li>On the welcome screen, choose <strong>Free</strong> plan</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 1.2</div>
+    <h3>Create a new repository</h3>
+    <ol>
+      <li>Click the <strong>+</strong> icon (top right) → <strong>New repository</strong></li>
+      <li>Fill in the form:
+        <ul>
+          <li><strong>Repository name:</strong> <span class="inline-code">stragentech-site</span></li>
+          <li><strong>Description:</strong> Stragentech.com website and apps hub</li>
+          <li><strong>Visibility:</strong> Private (recommended — keeps your code private)</li>
+          <li><strong>Initialize with README:</strong> ✓ check this box</li>
+        </ul>
+      </li>
+      <li>Click <strong>Create repository</strong></li>
+    </ol>
+    <div class="callout callout-success">You now have an empty repository at <span class="inline-code">github.com/YOUR-USERNAME/stragentech-site</span></div>
+  </div>
+
+  <div id="p1b" class="step">
+    <div class="step-label">Step 1.3</div>
+    <h3>Upload your files to GitHub</h3>
+    <p>Your repository needs exactly this file structure:</p>
+    <div class="file-tree">
+<span class="dir">stragentech-site/</span>
+├── <span class="new">index.html</span>          <span class="comment">← rename of stragentech.html (main site)</span>
+├── <span class="new">apps.html</span>           <span class="comment">← the apps hub (proxy-ready version)</span>
+├── <span class="new">vercel.json</span>         <span class="comment">← routing configuration</span>
+├── <span class="dir">api/</span>
+│   └── <span class="new">analyze.js</span>      <span class="comment">← the API proxy function</span>
+└── README.md              <span class="comment">← already there from initialization</span>
+    </div>
+    <p><strong>How to upload via GitHub's web interface (no coding required):</strong></p>
+    <ol>
+      <li>In your new repository, click <strong>Add file</strong> → <strong>Upload files</strong></li>
+      <li>Drag and drop all your files at once. For the <span class="inline-code">api/</span> folder: GitHub's web uploader doesn't create folders directly — use this workaround:</li>
+    </ol>
+    <div class="callout callout-info">
+      <strong>Folder workaround:</strong> When uploading <span class="inline-code">analyze.js</span>, after clicking Upload Files, type <span class="inline-code">api/analyze.js</span> as the filename in the "name" field at the top of the file — GitHub will automatically create the <span class="inline-code">api/</span> folder. Alternatively, use the method below.
+    </div>
+    <p><strong>Alternative: Upload analyze.js directly via GitHub's file editor</strong></p>
+    <ol>
+      <li>In your repository, click <strong>Add file</strong> → <strong>Create new file</strong></li>
+      <li>In the filename box, type: <span class="inline-code">api/analyze.js</span> — GitHub creates the folder automatically when you type the slash</li>
+      <li>Paste the entire contents of <span class="inline-code">analyze.js</span> into the editor</li>
+      <li>Scroll down, click <strong>Commit new file</strong></li>
+      <li>Repeat for <span class="inline-code">vercel.json</span>, <span class="inline-code">index.html</span>, and <span class="inline-code">apps.html</span></li>
+    </ol>
+    <div class="callout callout-warn">
+      <strong>Important rename:</strong> The main site file must be named <span class="inline-code">index.html</span> (not stragentech.html). Vercel serves <span class="inline-code">index.html</span> as the default page at the root URL. Rename it before uploading.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 1.4</div>
+    <h3>Verify your repository structure</h3>
+    <p>After all uploads, your GitHub repository should look like this at <span class="inline-code">github.com/YOUR-USERNAME/stragentech-site</span>:</p>
+    <div class="screen">📁 api/ · 📄 apps.html · 📄 index.html · 📄 vercel.json · 📄 README.md</div>
+    <p>Click into <span class="inline-code">api/</span> and confirm <span class="inline-code">analyze.js</span> is there.</p>
+  </div>
+</div>
+
+<hr class="phase-div">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="phase2" class="phase">
+  <div class="phase-header">
+    <div class="phase-num">2</div>
+    <div>
+      <h2>Vercel Deployment</h2>
+      <p>Connect Vercel to your GitHub repo, set your API key, and get a live URL.</p>
+    </div>
+    <span class="phase-time">~15 min</span>
+  </div>
+
+  <div class="callout callout-info">
+    <strong>What is Vercel?</strong> It's a hosting platform that watches your GitHub repository and automatically publishes your site every time you make a change. It also runs your <span class="inline-code">api/analyze.js</span> function as a serverless backend — this is what keeps your API key private.
+  </div>
+
+  <div id="p2a" class="step">
+    <div class="step-label">Step 2.1</div>
+    <h3>Create a Vercel account</h3>
+    <ol>
+      <li>Go to <strong>vercel.com</strong></li>
+      <li>Click <strong>Sign Up</strong></li>
+      <li>Choose <strong>Continue with GitHub</strong> — this links the two accounts automatically. Authorize when prompted.</li>
+      <li>On the "Tell us about yourself" screen: select <strong>Personal</strong> → <strong>Hobby</strong> (free)</li>
+    </ol>
+  </div>
+
+  <div id="p2b" class="step">
+    <div class="step-label">Step 2.2</div>
+    <h3>Import your GitHub repository into Vercel</h3>
+    <ol>
+      <li>From your Vercel dashboard, click <strong>Add New…</strong> → <strong>Project</strong></li>
+      <li>You'll see a list of your GitHub repositories. Find <span class="inline-code">stragentech-site</span> and click <strong>Import</strong></li>
+      <li>On the configuration screen:
+        <ul>
+          <li><strong>Project Name:</strong> <span class="inline-code">stragentech-apps</span> (this becomes your temporary URL: stragentech-apps.vercel.app)</li>
+          <li><strong>Framework Preset:</strong> leave as <strong>Other</strong></li>
+          <li><strong>Root Directory:</strong> leave blank (uses root)</li>
+          <li><strong>Build & Output Settings:</strong> leave all blank — your site is plain HTML, no build needed</li>
+        </ul>
+      </li>
+      <li>Do <strong>NOT</strong> click Deploy yet — first set the environment variable in the next step</li>
+    </ol>
+    <div class="callout callout-warn">
+      <strong>If you don't see your repo:</strong> Click "Adjust GitHub App Permissions" and grant Vercel access to the <span class="inline-code">stragentech-site</span> repository specifically.
+    </div>
+  </div>
+
+  <div id="p2c" class="step">
+    <div class="step-label">Step 2.3</div>
+    <h3>Add your Anthropic API key as an environment variable</h3>
+    <p>This is the most important security step. Your API key goes into Vercel's encrypted environment — never into your code files.</p>
+
+    <p><strong>Get your Anthropic API key first:</strong></p>
+    <ol>
+      <li>Go to <strong>console.anthropic.com</strong> → sign up or log in</li>
+      <li>Click your account name (top right) → <strong>API Keys</strong></li>
+      <li>Click <strong>Create Key</strong>, give it a name like <span class="inline-code">stragentech-production</span></li>
+      <li>Copy the key — it starts with <span class="inline-code">sk-ant-api03-...</span></li>
+      <li><strong>Save it somewhere safe immediately</strong> — Anthropic only shows it once</li>
+    </ol>
+
+    <p><strong>Add the key to Vercel:</strong></p>
+    <ol>
+      <li>Back on the Vercel import screen, scroll down to <strong>Environment Variables</strong></li>
+      <li>Click <strong>Add</strong> and enter:
+        <ul>
+          <li><strong>Name:</strong> <span class="inline-code">ANTHROPIC_API_KEY</span> (exact — uppercase, underscores)</li>
+          <li><strong>Value:</strong> paste your API key</li>
+          <li><strong>Environments:</strong> check Production, Preview, and Development</li>
+        </ul>
+      </li>
+      <li>Click <strong>Add</strong> to save it</li>
+    </ol>
+
+    <div class="callout callout-danger">
+      <strong>Never put your API key directly in HTML or JavaScript files.</strong> If it's in your code, anyone who views your page source can steal it and run up charges on your account. The environment variable method keeps it server-side only.
+    </div>
+
+    <p>Now click <strong>Deploy</strong>. Vercel will build and deploy in about 30–60 seconds.</p>
+  </div>
+
+  <div id="p2d" class="step">
+    <div class="step-label">Step 2.4</div>
+    <h3>Verify the deployment works</h3>
+    <ol>
+      <li>After deploy completes, Vercel shows a success screen with a confetti animation and a preview URL like <span class="inline-code">stragentech-apps.vercel.app</span></li>
+      <li>Click <strong>Visit</strong> — your main site should load with the Stragentech design</li>
+      <li>Add <span class="inline-code">/apps.html</span> to the URL to visit the apps hub</li>
+      <li><strong>Test a live tool:</strong> Go to the Workflow Analyzer, paste a short description of a process, and click Analyze. You should see the AI response appear within a few seconds.</li>
+    </ol>
+
+    <div class="callout callout-success">
+      <strong>✓ If a tool returns an AI response:</strong> Your proxy is working. The API key is secure. You have a live, functional site.
+    </div>
+    <div class="callout callout-warn">
+      <strong>If a tool returns an error:</strong> The most common cause is a typo in the environment variable name. Go to Vercel Dashboard → Your Project → Settings → Environment Variables → confirm <span class="inline-code">ANTHROPIC_API_KEY</span> is spelled exactly right, then go to Deployments → click the three dots on the latest deployment → Redeploy.
+    </div>
+  </div>
+</div>
+
+<hr class="phase-div">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="phase3" class="phase">
+  <div class="phase-header">
+    <div class="phase-num">3</div>
+    <div>
+      <h2>DNS: Connect Your Squarespace Domain</h2>
+      <p>Point stragentech.com and apps.stragentech.com at your Vercel deployment.</p>
+    </div>
+    <span class="phase-time">~20 min setup + 24–48h propagation</span>
+  </div>
+
+  <div class="callout callout-info">
+    <strong>What is DNS?</strong> DNS (Domain Name System) is the phone book of the internet. When someone types stragentech.com, DNS looks up what server to connect them to. You're about to update that lookup to point to Vercel.
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 3.1</div>
+    <h3>Add your domain in Vercel first</h3>
+    <ol>
+      <li>In your Vercel project dashboard, click <strong>Settings</strong> → <strong>Domains</strong></li>
+      <li>In the "Add Domain" field, type <span class="inline-code">stragentech.com</span> and click <strong>Add</strong></li>
+      <li>Vercel will show you a warning: "Domain is not configured." That's expected — you haven't updated DNS yet.</li>
+      <li>Vercel shows you the DNS record you need to add. It will look like one of these:
+        <pre><code>Type: A
+Name: @
+Value: 76.76.21.21
+
+— OR —
+
+Type: CNAME
+Name: www
+Value: cname.vercel-dns.com</code></pre>
+      </li>
+      <li>Copy these values — you'll paste them into Squarespace in the next step</li>
+      <li>Also click <strong>Add</strong> for <span class="inline-code">www.stragentech.com</span> — Vercel will show a CNAME record for this too</li>
+    </ol>
+  </div>
+
+  <div id="p3a" class="step">
+    <div class="step-label">Step 3.2</div>
+    <h3>Update DNS in Squarespace</h3>
+    <ol>
+      <li>Log into your Squarespace account at <strong>squarespace.com</strong></li>
+      <li>Click your account icon (top right) → <strong>Domains</strong></li>
+      <li>Find <span class="inline-code">stragentech.com</span> and click on it</li>
+      <li>Click <strong>DNS Settings</strong> (or "DNS" in the left sidebar)</li>
+      <li>You'll see existing DNS records. You need to <strong>edit or add</strong> the following:
+        <pre><code>Record 1 — Root domain:
+  Type:  A
+  Host:  @
+  Value: 76.76.21.21    ← use the value Vercel gave you
+
+Record 2 — www subdomain:
+  Type:  CNAME
+  Host:  www
+  Value: cname.vercel-dns.com    ← use the value Vercel gave you</code></pre>
+      </li>
+      <li>If a conflicting record already exists (Squarespace often adds their own A record), <strong>delete or overwrite it</strong> with the Vercel value</li>
+      <li>Click <strong>Save</strong></li>
+    </ol>
+    <div class="callout callout-warn">
+      <strong>Squarespace note:</strong> Squarespace DNS UI varies slightly by account type. Look for a section labeled "Custom Records" or "DNS Settings." If you only see Squarespace's own records and can't edit them, go to Account → Billing → check if DNS management is enabled. It should be on by default for domains registered through Squarespace.
+    </div>
+  </div>
+
+  <div id="p3b" class="step">
+    <div class="step-label">Step 3.3</div>
+    <h3>Create the apps.stragentech.com subdomain</h3>
+    <p>Still inside Squarespace DNS Settings, add one more record:</p>
+    <pre><code>Record 3 — Apps subdomain:
+  Type:  CNAME
+  Host:  apps
+  Value: cname.vercel-dns.com</code></pre>
+    <p>Then in Vercel → Settings → Domains, add <span class="inline-code">apps.stragentech.com</span> the same way you added the root domain.</p>
+    <div class="callout callout-info">
+      <strong>How this routes traffic:</strong> When someone visits <span class="inline-code">apps.stragentech.com</span>, Squarespace DNS says "go to Vercel." Vercel checks its domain list, sees you've registered <span class="inline-code">apps.stragentech.com</span>, and serves your <span class="inline-code">apps.html</span> file. But wait — Vercel will serve <span class="inline-code">index.html</span> by default, not <span class="inline-code">apps.html</span>. See the routing fix below.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 3.4</div>
+    <h3>Fix routing so apps.stragentech.com serves apps.html</h3>
+    <p>Update your <span class="inline-code">vercel.json</span> file in GitHub to route the subdomain correctly:</p>
+    <pre><code>{
+  "version": 2,
+  "name": "stragentech-apps",
+  "routes": [
+    {
+      "src": "/api/analyze",
+      "dest": "/api/analyze.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}</code></pre>
+    <p>Then update your <span class="inline-code">apps.html</span> file: the navigation link <span class="inline-code">href="stragentech.html"</span> should become <span class="inline-code">href="/"</span> or <span class="inline-code">href="https://stragentech.com"</span>, and <span class="inline-code">index.html</span> should use <span class="inline-code">href="https://apps.stragentech.com/apps.html"</span> for the Apps nav link.</p>
+
+    <div class="callout callout-info">
+      <strong>Simpler approach:</strong> Vercel also lets you set a custom "root directory" per domain. In Settings → Domains, after adding apps.stragentech.com, Vercel will ask which page to serve. Point it to <span class="inline-code">/apps.html</span>.
+    </div>
+  </div>
+
+  <div id="p3c" class="step">
+    <div class="step-label">Step 3.5</div>
+    <h3>Wait for DNS propagation and verify</h3>
+    <p>DNS changes take anywhere from <strong>5 minutes to 48 hours</strong> to propagate worldwide. Typically it's under 1 hour.</p>
+    <p>To check propagation status:</p>
+    <ol>
+      <li>Go to <strong>dnschecker.org</strong></li>
+      <li>Enter <span class="inline-code">stragentech.com</span> and select <strong>A</strong> record type</li>
+      <li>When most or all checkmarks show green with the Vercel IP, your domain is live</li>
+    </ol>
+    <p>Meanwhile, Vercel automatically provisions a free SSL certificate (the padlock / https://). This takes a few minutes after DNS propagates.</p>
+    <div class="callout callout-success">
+      <strong>✓ Success state:</strong> You type <span class="inline-code">https://stragentech.com</span> in a browser and your site loads with a padlock. You type <span class="inline-code">https://apps.stragentech.com/apps.html</span> and the apps hub loads. A live tool runs and returns an AI response.
+    </div>
+  </div>
+</div>
+
+<hr class="phase-div">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="phase4" class="phase">
+  <div class="phase-header">
+    <div class="phase-num">4</div>
+    <div>
+      <h2>Post-Launch Checklist</h2>
+      <p>15 minutes of checks to confirm everything is working correctly.</p>
+    </div>
+    <span class="phase-time">~15 min</span>
+  </div>
+
+  <div class="step">
+    <h3>Functional tests — check each one</h3>
+    <div class="checklist">
+      <div class="check-item"><div class="check-box"></div><strong>Main site loads:</strong> Visit https://stragentech.com — all sections visible, navigation works</div>
+      <div class="check-item"><div class="check-box"></div><strong>Apps hub loads:</strong> Visit https://apps.stragentech.com/apps.html — all 4 tool cards visible</div>
+      <div class="check-item"><div class="check-box"></div><strong>SSL/HTTPS active:</strong> Both URLs show a padlock icon in the browser address bar (no "Not Secure" warning)</div>
+      <div class="check-item"><div class="check-box"></div><strong>Workflow Analyzer works:</strong> Paste a process description, click Analyze, get an AI response in under 10 seconds</div>
+      <div class="check-item"><div class="check-box"></div><strong>Scorecard works:</strong> Answer all 12 questions, click Get Results, receive AI-interpreted scorecard</div>
+      <div class="check-item"><div class="check-box"></div><strong>Fraud ROI Calculator works:</strong> Enter test numbers (e.g. GMV: 10000000, rate: 2, team: 3, salary: 55000), get ROI output</div>
+      <div class="check-item"><div class="check-box"></div><strong>Tech Stack Analyzer works:</strong> Paste a stack description, get analysis</div>
+      <div class="check-item"><div class="check-box"></div><strong>Contact form submission:</strong> Fill out the form and click Book — button confirms submission</div>
+      <div class="check-item"><div class="check-box"></div><strong>Mobile layout:</strong> Test on your phone — all sections readable, tools usable, navigation works</div>
+      <div class="check-item"><div class="check-box"></div><strong>Navigation links:</strong> Main site "Apps ↗" link goes to apps hub; apps hub "← Main Site" goes to main site</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>Before sharing publicly — update these placeholders</h3>
+    <ul>
+      <li><strong>Email address:</strong> Replace <span class="inline-code">bilal@stragentech.com</span> with your real email in the contact section</li>
+      <li><strong>LinkedIn URL:</strong> Update <span class="inline-code">linkedin.com/in/bilalakhan</span> to your actual LinkedIn profile URL</li>
+      <li><strong>GitHub links in apps.html:</strong> Update the 4 GitHub repo URLs to your actual repositories once created</li>
+      <li><strong>Testimonials:</strong> These are illustrative — replace with real quotes when available, or remove the section for now</li>
+      <li><strong>Hero stats ($37M+, etc.):</strong> Confirm you're comfortable with these numbers being public</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="phase-div">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="phase5" class="phase">
+  <div class="phase-header">
+    <div class="phase-num">5</div>
+    <div>
+      <h2>Ongoing: Making Updates (2 min per change)</h2>
+      <p>How to update your site after it's live — no developer needed.</p>
+    </div>
+    <span class="phase-time">2 min per update</span>
+  </div>
+
+  <div class="step">
+    <h3>The update workflow: GitHub → auto-deploys to Vercel</h3>
+    <ol>
+      <li>Go to <strong>github.com/YOUR-USERNAME/stragentech-site</strong></li>
+      <li>Click on the file you want to edit (e.g. <span class="inline-code">index.html</span>)</li>
+      <li>Click the <strong>pencil icon</strong> (Edit this file) in the top right of the file view</li>
+      <li>Make your changes — update text, add a section, change a price, etc.</li>
+      <li>Scroll down to <strong>Commit changes</strong> — add a brief note like "Update services pricing"</li>
+      <li>Click <strong>Commit changes</strong></li>
+      <li>Within 30 seconds, Vercel detects the change and redeploys automatically</li>
+      <li>Refresh your live site — the change is live</li>
+    </ol>
+    <div class="callout callout-success">
+      <strong>That's the full workflow.</strong> No FTP, no build process, no command line. Edit in browser → commit → live in 30 seconds.
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>Adding a new blog post or insight article</h3>
+    <p>The current site has placeholder blog cards. When you're ready to publish real articles:</p>
+    <ol>
+      <li>The easiest path: create a new HTML file (e.g. <span class="inline-code">insights/fraud-prevention.html</span>) using the same design system</li>
+      <li>Upload to GitHub → Vercel deploys it automatically</li>
+      <li>Update the blog card in <span class="inline-code">index.html</span> to link to it and remove the "Coming soon" label</li>
+    </ol>
+    <p>Alternatively, link your LinkedIn articles or a Substack publication from the blog cards — that requires only changing a few URLs in the HTML.</p>
+  </div>
+
+  <div class="step">
+    <h3>Rotating your Anthropic API key</h3>
+    <p>If your API key is ever compromised (or you just want to rotate it periodically):</p>
+    <ol>
+      <li>Generate a new key at console.anthropic.com → API Keys → Create Key</li>
+      <li>In Vercel: Project → Settings → Environment Variables → find <span class="inline-code">ANTHROPIC_API_KEY</span> → click Edit → paste new value → Save</li>
+      <li>Go to Deployments → Redeploy the latest deployment (to apply the new key)</li>
+      <li>Delete the old key in Anthropic console</li>
+    </ol>
+  </div>
+</div>
+
+<hr class="phase-div">
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="troubleshoot" class="phase">
+  <div class="phase-header">
+    <div class="phase-num">?</div>
+    <div>
+      <h2>Troubleshooting Common Issues</h2>
+      <p>Most problems have simple fixes.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>Live tool returns an error or blank output</h3>
+    <ul>
+      <li><strong>Most likely:</strong> <span class="inline-code">ANTHROPIC_API_KEY</span> environment variable is missing or misspelled. Check Vercel → Settings → Environment Variables.</li>
+      <li>After fixing an env var, you must redeploy: Vercel → Deployments → three dots → Redeploy</li>
+      <li>Check Vercel Function Logs: Project → Functions tab → click on <span class="inline-code">api/analyze</span> → view error messages</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <h3>Domain shows Vercel's default page or "404"</h3>
+    <ul>
+      <li>DNS hasn't propagated yet — wait up to 48 hours and check again at dnschecker.org</li>
+      <li>The domain wasn't added in Vercel's domain settings — go to Project → Settings → Domains and add it</li>
+      <li>The file is named incorrectly — the root URL serves <span class="inline-code">index.html</span> only. Make sure your main site file is named exactly <span class="inline-code">index.html</span> in GitHub.</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <h3>"Not Secure" warning / no padlock</h3>
+    <ul>
+      <li>Vercel auto-provisions SSL but it takes a few minutes after DNS propagates</li>
+      <li>If it's been more than 1 hour: Vercel → Project → Settings → Domains → click "Refresh" on the domain</li>
+      <li>The <span class="inline-code">www.</span> redirect: add both <span class="inline-code">stragentech.com</span> and <span class="inline-code">www.stragentech.com</span> in Vercel domains to ensure both work with https</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <h3>GitHub upload shows error: "file too large"</h3>
+    <ul>
+      <li>GitHub has a 25MB file size limit for web uploads and 100MB for the repo. Your HTML files are well under 1MB, so this shouldn't occur.</li>
+      <li>If you ever add large assets (images, PDFs): host them on a CDN like Cloudflare Images or store in a GitHub Releases attachment instead of the repo itself.</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <h3>Squarespace DNS — can't find DNS settings</h3>
+    <ul>
+      <li>Navigation varies: try Domains → click your domain → DNS Settings, OR Settings → Domains → [your domain] → DNS panel</li>
+      <li>If Squarespace shows "Domain managed by third party" — your domain may be using external nameservers. In that case, add the DNS records wherever your nameservers are managed.</li>
+      <li>Squarespace support (support.squarespace.com) has live chat that can walk you to the DNS panel.</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-info">
+    <strong>Still stuck?</strong> Vercel's documentation at <span class="inline-code">vercel.com/docs</span> is excellent and beginner-friendly. Their support chat (free tier included) typically responds within a few hours.
+  </div>
+</div>
+
+<hr class="phase-div">
+
+<!-- SUMMARY -->
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num">✓</div>
+    <div>
+      <h2>Summary: What You'll Have When Done</h2>
+    </div>
+  </div>
+  <div class="checklist" style="font-size:15px;">
+    <div class="check-item"><div class="check-box"></div><strong>stragentech.com</strong> — fully designed fractional CTO main site, live and indexed by Google</div>
+    <div class="check-item"><div class="check-box"></div><strong>apps.stragentech.com/apps.html</strong> — 4 live AI tools powered by Claude, free for visitors, zero friction</div>
+    <div class="check-item"><div class="check-box"></div><strong>Secure API proxy</strong> — your Anthropic key is never exposed; all calls go server-side</div>
+    <div class="check-item"><div class="check-box"></div><strong>Auto-deployment pipeline</strong> — edit a file in GitHub, site updates in 30 seconds</div>
+    <div class="check-item"><div class="check-box"></div><strong>Free HTTPS</strong> — SSL certificate on both domains, Vercel-managed</div>
+    <div class="check-item"><div class="check-box"></div><strong>$0/month hosting cost</strong> — Vercel free tier more than sufficient for current traffic</div>
+  </div>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

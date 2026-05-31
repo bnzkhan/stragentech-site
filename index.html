@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bilal A. Khan | Stragentech — Agentic Operations Intelligence</title>
+<meta name="description" content="I build autonomous AI systems that detect fraud, failures, and operational threats in real time — and respond without human bottlenecks. 25+ years CTO / Amazon / Boeing. Seattle, WA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f8f9fb;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#8b92a0;
+  --gray-600:#4a5263;
+  --gray-800:#1e2333;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gray-100);}
+.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-icon{width:28px;height:28px;position:relative;}
+.nav-logo-icon svg{width:28px;height:28px;}
+.nav-logo-name{font-family:var(--font-body);font-weight:600;font-size:15px;letter-spacing:-0.2px;color:var(--ink);}
+.nav-logo-name span{color:var(--teal);}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--gray-600);text-decoration:none;padding:7px 12px;border-radius:6px;transition:all .18s;}
+.nav-links a:hover{color:var(--ink);background:var(--gray-50);}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:8px 18px!important;border-radius:6px!important;}
+.nav-cta:hover{background:var(--teal-dark)!important;}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px;}
+
+/* ── HERO ── */
+#home{min-height:100vh;display:flex;align-items:center;padding:100px 32px 80px;background:var(--white);position:relative;overflow:hidden;}
+.hero-bg-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,var(--gray-100) 1px,transparent 0);background-size:28px 28px;opacity:0.7;}
+.hero-bg-fade{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0) 40%,rgba(0,184,122,0.04) 100%);}
+.hero-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--teal-pale);border:1px solid var(--teal-mid);border-radius:20px;padding:5px 14px;margin-bottom:28px;}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2.2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0.5;}}
+.hero-badge span{font-family:var(--font-mono);font-size:11px;color:var(--teal-dark);letter-spacing:0.5px;}
+h1{font-family:var(--font-serif);font-size:clamp(40px,5.5vw,66px);line-height:1.08;font-weight:400;color:var(--ink);margin-bottom:22px;letter-spacing:-0.5px;}
+h1 em{font-style:italic;color:var(--teal);}
+.hero-sub{font-size:17px;font-weight:300;line-height:1.75;color:var(--gray-600);margin-bottom:40px;max-width:520px;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:60px;}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:14px;font-weight:500;padding:12px 24px;border-radius:var(--radius);text-decoration:none;transition:all .2s;cursor:pointer;border:none;}
+.btn-primary{background:var(--ink);color:var(--white);}
+.btn-primary:hover{background:var(--teal-dark);transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--gray-100);border-radius:var(--radius);background:var(--white);overflow:hidden;}
+.hero-stat{padding:20px 24px;border-right:1px solid var(--gray-100);}
+.hero-stat:last-child{border-right:none;}
+.hero-stat-num{font-family:var(--font-serif);font-size:34px;color:var(--teal);line-height:1;margin-bottom:4px;}
+.hero-stat-label{font-size:11px;color:var(--gray-400);font-weight:400;letter-spacing:0.5px;text-transform:uppercase;}
+/* Hero card */
+.hero-card{background:var(--white);border:1px solid var(--gray-100);border-radius:14px;padding:28px;box-shadow:0 4px 40px rgba(13,17,23,0.06);}
+.hero-card-label{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;}
+.hero-flow{display:flex;flex-direction:column;gap:10px;}
+.flow-step{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:8px;border:1px solid var(--gray-50);background:var(--off-white);transition:border-color .2s;}
+.flow-step:hover{border-color:var(--teal-mid);}
+.flow-num{font-family:var(--font-mono);font-size:11px;color:var(--teal);font-weight:500;min-width:20px;padding-top:1px;}
+.flow-text h4{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.flow-text p{font-size:12px;color:var(--gray-400);line-height:1.5;font-weight:300;}
+.flow-arrow{margin-left:auto;color:var(--gray-200);font-size:11px;padding-top:2px;}
+.hero-card-footer{margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-100);font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;}
+.hero-card-footer span{color:var(--teal);}
+
+/* ── SHARED SECTION ── */
+section{padding:88px 32px;}
+.section-inner{max-width:var(--max-w);margin:0 auto;}
+.section-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:14px;letter-spacing:-0.3px;}
+.section-sub{font-size:16px;font-weight:300;color:var(--gray-400);line-height:1.75;max-width:520px;}
+.section-header{margin-bottom:52px;}
+
+/* ── FREE TOOL BANNER ── */
+.free-banner-row{display:flex;flex-direction:column;gap:12px;margin-bottom:52px;}
+.free-banner{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;transition:border-color .2s;}
+.free-banner:hover{border-color:var(--teal-mid);}
+.free-banner-content{}
+.free-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
+.free-banner h3{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.free-banner p{font-size:13px;color:var(--gray-400);font-weight:300;}
+.btn-sm{font-size:13px;padding:9px 20px;}
+
+/* ── PROBLEM ── */
+#problem{background:var(--off-white);padding:72px 32px;}
+.problem-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr 1.8fr;gap:72px;align-items:start;}
+.problem-left h2{font-size:32px;}
+.problem-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.problem-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:22px 24px;transition:all .2s;}
+.problem-card:hover{border-color:var(--teal-mid);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,184,122,0.07);}
+.problem-card-icon{font-size:20px;margin-bottom:10px;}
+.problem-card h4{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+.problem-card p{font-size:12px;line-height:1.65;color:var(--gray-400);font-weight:300;}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px;}
+.svc-card{border:1px solid var(--gray-100);border-radius:12px;padding:28px;background:var(--white);transition:all .2s;position:relative;overflow:hidden;}
+.svc-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--blue));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.svc-card:hover{border-color:var(--gray-200);box-shadow:0 6px 32px rgba(13,17,23,0.07);transform:translateY(-2px);}
+.svc-card:hover::after{transform:scaleX(1);}
+.svc-icon{width:44px;height:44px;background:var(--teal-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px;}
+.svc-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+.svc-card h3{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.svc-card p{font-size:13px;color:var(--gray-400);line-height:1.7;font-weight:300;margin-bottom:16px;}
+.svc-bullets{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.svc-bullets li{font-size:12px;color:var(--gray-600);padding-left:16px;position:relative;font-weight:400;}
+.svc-bullets li::before{content:'→';position:absolute;left:0;color:var(--teal);font-size:11px;top:1px;}
+.svc-price{font-family:var(--font-mono);font-size:12px;color:var(--gray-400);margin-top:18px;padding-top:14px;border-top:1px solid var(--gray-100);}
+.svc-cta-bar{background:var(--ink);border-radius:12px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.svc-cta-bar h3{font-family:var(--font-serif);font-size:26px;color:var(--white);font-weight:400;max-width:400px;line-height:1.3;}
+.svc-cta-bar p{font-size:13px;color:rgba(255,255,255,0.55);margin-top:6px;font-weight:300;}
+
+/* ── PROCESS ── */
+#process{background:var(--off-white);}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+.process-grid::before{content:'';position:absolute;top:28px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,var(--teal-mid),var(--gray-200));z-index:0;}
+.process-step{text-align:center;padding:0 16px;position:relative;z-index:1;}
+.process-num{width:56px;height:56px;border-radius:50%;background:var(--white);border:1.5px solid var(--teal-mid);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-family:var(--font-serif);font-size:20px;color:var(--teal);}
+.process-week{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.process-step h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.process-step p{font-size:12px;color:var(--gray-400);line-height:1.65;font-weight:300;}
+
+/* ── RESULTS ── */
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.result-card{border:1px solid var(--gray-100);border-radius:12px;padding:28px;background:var(--white);transition:border-color .2s;}
+.result-card:hover{border-color:var(--teal-mid);}
+.result-card.featured{background:var(--ink);border-color:var(--ink);}
+.result-card.featured *{color:var(--white)!important;}
+.result-card.featured .result-num{color:var(--teal)!important;}
+.result-card.featured .result-label{color:rgba(255,255,255,0.5)!important;}
+.result-co{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
+.result-card.featured .result-co{color:rgba(0,184,122,0.8)!important;}
+.result-card h3{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.result-card p{font-size:13px;color:var(--gray-400);line-height:1.65;font-weight:300;margin-bottom:20px;}
+.result-metrics{display:flex;gap:24px;flex-wrap:wrap;}
+.result-metric{}
+.result-num{font-family:var(--font-serif);font-size:30px;color:var(--teal);line-height:1;}
+.result-label{font-size:10px;color:var(--gray-400);font-weight:400;margin-top:3px;text-transform:uppercase;letter-spacing:0.5px;}
+
+/* ── WHO I WORK WITH ── */
+#niches{background:var(--off-white);}
+.niches-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.niche-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:28px;transition:all .2s;}
+.niche-card:hover{border-color:var(--teal-mid);box-shadow:0 4px 20px rgba(0,184,122,0.06);}
+.niche-card.wide{grid-column:1/-1;background:linear-gradient(135deg,var(--teal-pale),var(--blue-pale));border-color:var(--teal-mid);}
+.niche-icon{font-size:28px;margin-bottom:14px;}
+.niche-card h3{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.niche-card p{font-size:13px;color:var(--gray-400);line-height:1.7;font-weight:300;margin-bottom:16px;}
+.niche-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.niche-tag{background:var(--teal-pale);color:var(--teal-dark);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:500;}
+
+/* ── ENGAGEMENT MODELS ── */
+.eng-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.eng-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:28px;text-align:left;transition:all .2s;}
+.eng-card:hover{border-color:var(--gray-200);box-shadow:0 4px 20px rgba(13,17,23,0.06);}
+.eng-card.highlight{background:var(--ink);border-color:var(--ink);}
+.eng-card.highlight *{color:var(--white)!important;}
+.eng-card.highlight .eng-price{color:var(--teal)!important;}
+.eng-card.highlight .eng-feat::before{color:var(--teal)!important;}
+.eng-card.highlight .btn-primary{background:var(--teal)!important;color:var(--ink)!important;}
+.eng-label{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+.eng-card h3{font-size:18px;font-weight:600;color:var(--ink);margin-bottom:0;}
+.eng-price{font-family:var(--font-serif);font-size:32px;color:var(--teal);line-height:1;margin:14px 0 4px;}
+.eng-duration{font-size:12px;color:var(--gray-400);margin-bottom:20px;}
+.eng-feats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:26px;}
+.eng-feat{font-size:13px;color:var(--gray-600);padding-left:18px;position:relative;font-weight:400;}
+.eng-feat::before{content:'✓';position:absolute;left:0;color:var(--teal);font-size:12px;font-weight:600;}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+.about-placeholder{width:100%;aspect-ratio:4/5;background:linear-gradient(135deg,var(--ink) 0%,#1a3a5c 100%);border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:80px;color:rgba(255,255,255,0.1);position:relative;}
+.about-card{position:absolute;bottom:-18px;right:-18px;background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:18px 22px;box-shadow:0 8px 32px rgba(13,17,23,0.1);}
+.about-card h5{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.about-card p{font-size:11px;color:var(--gray-400);}
+.about-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.about-chip{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:5px;padding:4px 10px;font-size:11px;font-weight:500;color:var(--gray-600);}
+.about-bio{font-size:15px;font-weight:300;line-height:1.85;color:var(--gray-600);margin-bottom:24px;}
+.about-bio strong{font-weight:600;color:var(--ink);}
+.cred-title{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;margin-top:30px;}
+.cred-list{display:flex;flex-direction:column;gap:10px;}
+.cred-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--gray-600);font-weight:300;}
+.cred-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);margin-top:7px;flex-shrink:0;}
+.tenure-list{display:flex;flex-direction:column;gap:12px;}
+.tenure{background:var(--off-white);border:1px solid var(--gray-100);border-radius:8px;padding:18px 20px;}
+.tenure-co{font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--teal);margin-bottom:3px;}
+.tenure-role{font-size:13px;color:var(--gray-600);margin-bottom:5px;font-weight:400;}
+.tenure-impact{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+
+/* ── TESTIMONIALS ── */
+#testimonials{background:var(--off-white);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.testi-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:28px;}
+.testi-stars{color:var(--teal);font-size:13px;letter-spacing:2px;margin-bottom:14px;}
+.testi-quote{font-family:var(--font-serif);font-style:italic;font-size:16px;line-height:1.65;color:var(--ink);margin-bottom:20px;font-weight:400;}
+.testi-attr{display:flex;align-items:center;gap:12px;border-top:1px solid var(--gray-100);padding-top:16px;}
+.testi-avatar{width:38px;height:38px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--white);flex-shrink:0;}
+.testi-name{font-size:13px;font-weight:600;color:var(--ink);}
+.testi-role{font-size:11px;color:var(--gray-400);}
+
+/* ── INSIGHTS ── */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.blog-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;overflow:hidden;transition:all .2s;}
+.blog-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(13,17,23,0.08);}
+.blog-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:36px;}
+.blog-img.c1{background:linear-gradient(135deg,var(--teal-pale),var(--teal-mid));}
+.blog-img.c2{background:linear-gradient(135deg,var(--blue-pale),#b3cef4);}
+.blog-img.c3{background:linear-gradient(135deg,#f0f4ff,#c5d4f4);}
+.blog-body{padding:22px;}
+.blog-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.blog-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:7px;line-height:1.45;}
+.blog-card p{font-size:12px;color:var(--gray-400);line-height:1.65;font-weight:300;margin-bottom:12px;}
+.blog-meta{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);}
+
+/* ── CONTACT ── */
+#contact{background:var(--ink);}
+.contact-grid{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contact-left .section-label{color:rgba(0,184,122,0.8);}
+.contact-left h2{color:var(--white);}
+.contact-left .section-sub{color:rgba(255,255,255,0.5);}
+.contact-details{margin-top:40px;display:flex;flex-direction:column;gap:14px;}
+.contact-detail{display:flex;align-items:center;gap:14px;}
+.c-icon{width:38px;height:38px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.c-label{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:1px;margin-bottom:2px;}
+.c-val{font-size:13px;color:rgba(255,255,255,0.65);}
+.contact-form-wrap{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:32px;}
+.form-group{margin-bottom:14px;}
+.form-group label{display:block;font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:11px 14px;font-size:13px;color:var(--white);font-family:var(--font-body);transition:border-color .2s;outline:none;}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.25);}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--teal);}
+.form-group select option{background:var(--ink);color:var(--white);}
+.form-group textarea{resize:vertical;min-height:90px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding:28px 32px;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.3);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--teal);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero-inner,.problem-inner,.about-grid,.contact-grid{grid-template-columns:1fr;}
+  .hero-visual{display:none;}
+  .services-grid,.results-grid,.niches-grid,.eng-grid,.testi-grid,.blog-grid{grid-template-columns:1fr;}
+  .process-grid{grid-template-columns:1fr 1fr;gap:24px;}
+  .process-grid::before{display:none;}
+  .problem-cards{grid-template-columns:1fr;}
+  .niche-card.wide{grid-column:auto;}
+  .nav-links{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);flex-direction:column;gap:0;border-bottom:1px solid var(--gray-100);padding:8px 0;z-index:199;}
+  .nav-links.open{display:flex;}
+  .nav-links li{width:100%;}
+  .nav-links a{display:block;padding:12px 24px;border-radius:0;}
+  .nav-toggle{display:block;}
+  .form-row{grid-template-columns:1fr;}
+  .hero-stats{grid-template-columns:1fr 1fr 1fr;}
+  .svc-cta-bar{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="7,1 14,1 18,7.5 14,14 7,14 3,7.5" fill="none" stroke="#00b87a" stroke-width="1.5" opacity="0.9"/>
+          <polygon points="13,14 20,14 24,20.5 20,27 13,27 9,20.5" fill="none" stroke="#1a6fd4" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="14" cy="4" r="1.8" fill="#00b87a"/>
+          <circle cx="10.5" cy="10" r="1.4" fill="#1a6fd4" opacity="0.8"/>
+          <circle cx="16.5" cy="18" r="1.4" fill="#00b87a" opacity="0.8"/>
+          <line x1="14" y1="4" x2="10.5" y2="10" stroke="#00b87a" stroke-width="0.8" opacity="0.4"/>
+          <line x1="10.5" y1="10" x2="16.5" y2="18" stroke="#1a6fd4" stroke-width="0.8" opacity="0.4"/>
+        </svg>
+      </div>
+      <span class="nav-logo-name">STRAGEN<span>TECH</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">How It Works</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="apps.html">Apps ↗</a></li>
+      <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+      <svg width="20" height="14" fill="none"><rect y="0" width="20" height="2" rx="1" fill="#1e2333"/><rect y="6" width="20" height="2" rx="1" fill="#1e2333"/><rect y="12" width="20" height="2" rx="1" fill="#1e2333"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-bg-fade"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="hero-badge-dot"></span><span>Fractional CTO · Seattle, WA</span></div>
+      <h1>When Operations<br>Can't Afford<br>to <em>Wait</em></h1>
+      <p class="hero-sub">I help $5M–$100M e-commerce and industrial companies build autonomous AI systems that detect fraud, failures, and abuse in real time — and respond without human bottlenecks.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Book a Free Discovery Call</a>
+        <a href="apps.html" class="btn btn-outline">Explore Free Tools ↗</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">25+</div>
+          <div class="hero-stat-label">Years leadership</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">$37M+</div>
+          <div class="hero-stat-label">Savings delivered</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">80+</div>
+          <div class="hero-stat-label">Engineers led</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-label">Agentic Operations Intelligence™</div>
+        <div class="hero-flow">
+          <div class="flow-step">
+            <div class="flow-num">01</div>
+            <div class="flow-text">
+              <h4>Detect</h4>
+              <p>High-volume signal ingestion & anomaly detection at scale</p>
+            </div>
+            <div class="flow-arrow">↓</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">02</div>
+            <div class="flow-text">
+              <h4>Investigate</h4>
+              <p>Autonomous agent cross-references context & history</p>
+            </div>
+            <div class="flow-arrow">↓</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">03</div>
+            <div class="flow-text">
+              <h4>Act</h4>
+              <p>Corrective action without human review queues</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card-footer">status: <span>● autonomous · no queue</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE TOOL BANNERS -->
+<section style="padding:40px 32px;background:var(--white);border-bottom:1px solid var(--gray-100);">
+  <div class="section-inner">
+    <div class="free-banner-row">
+      <div class="free-banner">
+        <div class="free-banner-content">
+          <div class="free-tag">Free · No Login Required</div>
+          <h3>Workflow Automation Analyzer</h3>
+          <p>Paste any manual process. An AI agent scores automation potential and returns a prioritized action plan in under 60 seconds.</p>
+        </div>
+        <a href="apps.html#workflow-analyzer" class="btn btn-primary btn-sm">Run the Analyzer →</a>
+      </div>
+      <div class="free-banner">
+        <div class="free-banner-content">
+          <div class="free-tag">Free · Operational Intelligence Readiness</div>
+          <h3>OI Readiness Scorecard</h3>
+          <p>12 questions. 5 dimensions. Find out exactly where your operations sit on the AI readiness curve — fraud, IoT, or SaaS ops.</p>
+        </div>
+        <a href="apps.html#readiness-scorecard" class="btn btn-outline btn-sm">Take the Scorecard →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="problem-inner">
+    <div class="problem-left">
+      <p class="section-label">The Challenge</p>
+      <h2>Your operations are generating signals. Nobody's acting on them.</h2>
+    </div>
+    <div class="problem-cards">
+      <div class="problem-card">
+        <div class="problem-card-icon">📋</div>
+        <h4>Manual review queues drowning your team</h4>
+        <p>Fraud alerts, anomaly flags, and exceptions pile up faster than humans can process them — costing money and morale.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-icon">🔔</div>
+        <h4>Alert fatigue killing response quality</h4>
+        <p>300+ daily alerts, 80% false positives. Your team has learned to ignore the noise — which means missing the signal that matters.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-icon">🔧</div>
+        <h4>Reactive maintenance eating profitability</h4>
+        <p>You find out about equipment failures when the equipment fails. Every unplanned outage costs multiples of what prevention would have.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-icon">🤖</div>
+        <h4>AI initiatives stalling without leadership</h4>
+        <p>The tools exist. The budget was approved. But without a leader who's built agentic systems, pilots never reach production.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Services</p>
+      <h2>Engagements built around outcomes, not hours</h2>
+      <p class="section-sub">Every engagement starts with a structured assessment so you know exactly what you're investing in before any retainer begins.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon">🛡️</div>
+        <div class="svc-tag">Fraud Prevention</div>
+        <h3>Agentic Fraud & Abuse Prevention</h3>
+        <p>Autonomous detection and decisioning systems that replace manual review queues with AI agents that investigate, decide, and act in real time.</p>
+        <ul class="svc-bullets">
+          <li>Fraud stack assessment & gap analysis</li>
+          <li>ML anomaly detection pipeline design</li>
+          <li>Agentic investigation workflow build</li>
+          <li>Chargeback dispute automation</li>
+          <li>Trust & safety platform architecture</li>
+        </ul>
+        <div class="svc-price">Retainer from $8K/mo · or project-based</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">⚙️</div>
+        <div class="svc-tag">Industrial IoT</div>
+        <h3>Predictive Operations & IoT Intelligence</h3>
+        <p>Move from reactive maintenance and alert fatigue to AI-powered operational intelligence that predicts and prevents failures before they occur.</p>
+        <ul class="svc-bullets">
+          <li>IoT platform modernization roadmap</li>
+          <li>Predictive maintenance agent design</li>
+          <li>Real-time telemetry & anomaly detection</li>
+          <li>Edge-to-cloud data pipeline architecture</li>
+          <li>Managed services AI capability build</li>
+        </ul>
+        <div class="svc-price">Retainer from $10K/mo · embedded or remote</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🚀</div>
+        <div class="svc-tag">AI Transformation</div>
+        <h3>AI Transformation & Modernization</h3>
+        <p>For SaaS and B2B companies carrying legacy debt and losing ground to AI-native competitors — a clear roadmap from where you are to where you need to be.</p>
+        <ul class="svc-bullets">
+          <li>Technology & AI readiness assessment</li>
+          <li>Legacy modernization strategy</li>
+          <li>Agentic workflow automation</li>
+          <li>Engineering org upskilling programs</li>
+          <li>AI vendor selection & governance</li>
+        </ul>
+        <div class="svc-price">Retainer from $8K/mo · 3-month minimum</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔬</div>
+        <div class="svc-tag">For PE Firms</div>
+        <h3>Technical Due Diligence</h3>
+        <p>Pre-acquisition technology assessments for PE firms with IoT or e-commerce portfolio companies. Fast, structured, and calibrated to investment decisions.</p>
+        <ul class="svc-bullets">
+          <li>Technology stack quality assessment</li>
+          <li>Scalability & architecture risk review</li>
+          <li>Security posture & compliance audit</li>
+          <li>Engineering team capability evaluation</li>
+          <li>AI/ML maturity scoring</li>
+        </ul>
+        <div class="svc-price">$5K–$15K · 1–2 week fixed project</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📊</div>
+        <div class="svc-tag">Ongoing CTO</div>
+        <h3>Fractional CTO Retainer</h3>
+        <p>Ongoing executive technology leadership — strategy, team oversight, AI implementation, vendor management, and board-level communication.</p>
+        <ul class="svc-bullets">
+          <li>Technology strategy & quarterly roadmap</li>
+          <li>Engineering team leadership & mentoring</li>
+          <li>Vendor & partner management</li>
+          <li>Board and investor communication</li>
+          <li>Hiring and org design advisory</li>
+        </ul>
+        <div class="svc-price">$8K–$15K/month · 10–20 hrs/week</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">⚡</div>
+        <div class="svc-tag">Entry Point</div>
+        <h3>Operational Intelligence Assessment</h3>
+        <p>A structured 3-week diagnostic that maps your current state, identifies the highest-value AI opportunities, and delivers a prioritized implementation roadmap.</p>
+        <ul class="svc-bullets">
+          <li>5-domain maturity scoring framework</li>
+          <li>Technology architecture review</li>
+          <li>Security & compliance gap analysis</li>
+          <li>AI readiness benchmarking</li>
+          <li>90-day quick wins identification</li>
+        </ul>
+        <div class="svc-price">$3,500–$5,000 · 3-week fixed engagement</div>
+      </div>
+    </div>
+    <div class="svc-cta-bar" style="margin-top:24px;">
+      <div>
+        <h3>Not sure where to start? Begin with a diagnostic.</h3>
+        <p>Most engagements start with a 3-week Operational Intelligence Assessment — a low-risk entry point with a clear deliverable and defined next steps.</p>
+      </div>
+      <a href="#contact" class="btn" style="background:var(--teal);color:var(--ink);font-weight:600;flex-shrink:0;">Schedule Your Assessment →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">How It Works</p>
+      <h2>From first call to first results in 60 days</h2>
+      <p class="section-sub">A structured process designed to minimize your time investment while maximizing what we learn and deliver quickly.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-num">1</div>
+        <div class="process-week">Week 1</div>
+        <h4>Discovery Call</h4>
+        <p>30 minutes to understand your context, primary pain points, and whether there's a fit worth exploring.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">2</div>
+        <div class="process-week">Weeks 1–3</div>
+        <h4>Assessment</h4>
+        <p>Operational Intelligence Assessment across 5 domains. Findings presented with a prioritized roadmap and quick wins.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">3</div>
+        <div class="process-week">Weeks 4–12</div>
+        <h4>Implementation</h4>
+        <p>Focused retainer executing the highest-value roadmap items with monthly progress reviews with leadership.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">4</div>
+        <div class="process-week">Ongoing</div>
+        <h4>Scale & Sustain</h4>
+        <p>Ongoing fractional CTO partnership or transition to internal ownership — with documentation, training, and handoff support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results" style="background:var(--off-white);">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Results</p>
+      <h2>Outcomes that show up in the business</h2>
+      <p class="section-sub">Drawn from prior engagements at Amazon, Boeing, and Dedicated Computing — the same patterns applied to your scale.</p>
+    </div>
+    <div class="results-grid">
+      <div class="result-card featured">
+        <div class="result-co">Amazon Marketplace · Fraud Prevention</div>
+        <h3>ML-Based Fraud & Abuse Automation</h3>
+        <p>Re-architected legacy fraud systems onto AWS with ML-based automation for risk and abuse prevention across millions of daily transactions.</p>
+        <div class="result-metrics">
+          <div class="result-metric"><div class="result-num">75%</div><div class="result-label">Automation achieved</div></div>
+          <div class="result-metric"><div class="result-num">$37M+</div><div class="result-label">Documented savings</div></div>
+          <div class="result-metric"><div class="result-num">98%</div><div class="result-label">Decision precision</div></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-co">AWS IoT Analytics · Industrial Platform</div>
+        <h3>Managed IoT Services Platform</h3>
+        <p>Owned and led delivery of AWS IoT Analytics — low-latency, highly available managed services continuously monitoring equipment and triggering automated responses.</p>
+        <div class="result-metrics">
+          <div class="result-metric"><div class="result-num">5-9s</div><div class="result-label">Availability</div></div>
+          <div class="result-metric"><div class="result-num">10x</div><div class="result-label">Team scale built</div></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-co">Boeing / Jeppesen Foreflight · Modernization</div>
+        <h3>Legacy Modernization & AI Automation</h3>
+        <p>Led architecture reviews and modernization strategy for 40+ legacy on-premise applications, plus agentic AI automation in aviation data workflows.</p>
+        <div class="result-metrics">
+          <div class="result-metric"><div class="result-num">95%</div><div class="result-label">Compliance (from 30%)</div></div>
+          <div class="result-metric"><div class="result-num">85%</div><div class="result-label">CVE reduction in 6mo</div></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-co">Dedicated Computing · PE-backed CTO</div>
+        <h3>IoT Strategy & Managed Services Build</h3>
+        <p>Defined IoT managed services strategy, built the software org from scratch, and drove $7M EMEA expansion for a PE-backed hardware company.</p>
+        <div class="result-metrics">
+          <div class="result-metric"><div class="result-num">$7M</div><div class="result-label">EMEA revenue</div></div>
+          <div class="result-metric"><div class="result-num">85%+</div><div class="result-label">On-time delivery (from &lt;50%)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO I WORK WITH -->
+<section id="niches" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Who I Work With</p>
+      <h2>Built for companies where operations are the business</h2>
+      <p class="section-sub">I work best with companies where the core value proposition depends on operational reliability, transaction integrity, or connected systems at scale.</p>
+    </div>
+    <div class="niches-grid">
+      <div class="niche-card">
+        <div class="niche-icon">🛒</div>
+        <h3>E-commerce & Marketplace Operators</h3>
+        <p>$10M–$100M GMV companies struggling with fraud, chargebacks, seller abuse, or manual review burdens that scale with revenue.</p>
+        <div class="niche-tags"><span class="niche-tag">Fraud Prevention</span><span class="niche-tag">Trust & Safety</span><span class="niche-tag">Marketplace Integrity</span></div>
+      </div>
+      <div class="niche-card">
+        <div class="niche-icon">🏭</div>
+        <h3>Industrial Manufacturers & MSPs</h3>
+        <p>$25M–$150M manufacturers and managed services providers with connected equipment dealing with alert fatigue and first-generation IoT hitting its limits.</p>
+        <div class="niche-tags"><span class="niche-tag">Predictive Maintenance</span><span class="niche-tag">IoT Modernization</span><span class="niche-tag">Field Service Ops</span></div>
+      </div>
+      <div class="niche-card">
+        <div class="niche-icon">💼</div>
+        <h3>B2B SaaS & Platform Companies</h3>
+        <p>$10M–$50M ARR SaaS companies carrying legacy technical debt, losing engineering velocity to maintenance, and needing a technology leader to navigate AI transformation.</p>
+        <div class="niche-tags"><span class="niche-tag">Modernization</span><span class="niche-tag">AI Strategy</span><span class="niche-tag">Engineering Ops</span></div>
+      </div>
+      <div class="niche-card wide">
+        <div class="niche-icon">📈</div>
+        <h3>PE Firms with IoT or E-commerce Portfolio Companies</h3>
+        <p>Private equity firms requiring pre-acquisition technical due diligence or post-acquisition technology leadership. I understand both the technology and the EBITDA lens — having served inside a PE-backed company as CTO.</p>
+        <div class="niche-tags"><span class="niche-tag">Technical Due Diligence</span><span class="niche-tag">Post-Acquisition Integration</span><span class="niche-tag">Value Creation</span><span class="niche-tag">EBITDA Impact</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT MODELS -->
+<section id="engagement" style="background:var(--off-white);">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Engagement Models</p>
+      <h2>Three ways to work together</h2>
+      <p class="section-sub">Every engagement starts with a conversation. Most begin with an assessment.</p>
+    </div>
+    <div class="eng-grid">
+      <div class="eng-card">
+        <div class="eng-label">Entry Point</div>
+        <h3>Operational Intelligence Assessment</h3>
+        <div class="eng-price">$3,500–$5,000</div>
+        <div class="eng-duration">3-week fixed engagement</div>
+        <ul class="eng-feats">
+          <li class="eng-feat">5-domain technology assessment</li>
+          <li class="eng-feat">Security & compliance gap review</li>
+          <li class="eng-feat">AI readiness scoring</li>
+          <li class="eng-feat">Prioritized roadmap deliverable</li>
+          <li class="eng-feat">Executive presentation of findings</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline" style="width:100%;justify-content:center;">Start Here</a>
+      </div>
+      <div class="eng-card highlight">
+        <div class="eng-label" style="color:rgba(0,184,122,0.8);">Most Popular</div>
+        <h3>Fractional CTO Retainer</h3>
+        <div class="eng-price">$8K–$15K/mo</div>
+        <div class="eng-duration">3-month minimum · typically 12–18 months</div>
+        <ul class="eng-feats">
+          <li class="eng-feat">10–20 hours per week dedicated</li>
+          <li class="eng-feat">Technology strategy & roadmap ownership</li>
+          <li class="eng-feat">Engineering team leadership</li>
+          <li class="eng-feat">Monthly executive reporting</li>
+          <li class="eng-feat">Agentic AI implementation guidance</li>
+          <li class="eng-feat">Vendor & partner management</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">Book a Discovery Call</a>
+      </div>
+      <div class="eng-card">
+        <div class="eng-label">Investors & Acquirers</div>
+        <h3>Technical Due Diligence</h3>
+        <div class="eng-price">$5K–$15K</div>
+        <div class="eng-duration">1–2 week project engagement</div>
+        <ul class="eng-feats">
+          <li class="eng-feat">Pre-acquisition tech stack review</li>
+          <li class="eng-feat">Architecture & scalability risk</li>
+          <li class="eng-feat">Security & compliance posture</li>
+          <li class="eng-feat">Team capability evaluation</li>
+          <li class="eng-feat">Investment-grade findings report</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline" style="width:100%;justify-content:center;">Discuss Your Deal</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div style="position:relative;">
+          <div class="about-placeholder">BK
+            <div class="about-card">
+              <h5>Bilal A. Khan</h5>
+              <p>Fractional CTO · Seattle, WA</p>
+              <div class="about-chips">
+                <span class="about-chip">Amazon</span>
+                <span class="about-chip">Boeing</span>
+                <span class="about-chip">Nokia</span>
+                <span class="about-chip">Motorola</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="section-label">About</p>
+        <h2>25 years building systems that detect, decide, and act</h2>
+        <p class="about-bio">I'm <strong>Bilal Khan</strong>, a technology executive with 25+ years building operational intelligence systems across telecom, IoT, e-commerce, and cloud platforms. At <strong>Amazon</strong>, I led ML-based fraud and abuse prevention for Amazon Marketplace — delivering $37M+ in documented savings — and owned AWS IoT Analytics and Project Kuiper enterprise engineering. At <strong>Boeing/Jeppesen Foreflight</strong>, I drove modernization for 40+ legacy systems and pioneered agentic AI automation in aviation data workflows. As <strong>CTO of Dedicated Computing</strong>, I built the technology and managed services strategy from the ground up for a PE-backed company.</p>
+        <p class="about-bio">Earlier at <strong>Motorola</strong> and <strong>Nokia Siemens Networks</strong>, I spent over a decade building the FCAPS network management systems that kept mission-critical wireless infrastructure running at five-nines availability. That's where I learned that the discipline of detecting anomalies, making autonomous decisions, and taking corrective action at scale is timeless — it just gets better tools every decade.</p>
+        <div class="cred-title">Education & Credentials</div>
+        <div class="cred-list">
+          <div class="cred-item"><span class="cred-dot"></span>Agentic AI: Contextualized and Applied — Harvard Data Science Initiative, 2025</div>
+          <div class="cred-item"><span class="cred-dot"></span>Certificate in Data Science & Big Data Analytics — MIT Professional Education</div>
+          <div class="cred-item"><span class="cred-dot"></span>AWS Certified Cloud Practitioner · Databricks Fundamentals</div>
+          <div class="cred-item"><span class="cred-dot"></span>M.Sc. CS/Data & Telecommunications — DePaul University</div>
+          <div class="cred-item"><span class="cred-dot"></span>Six Sigma Green Belt · Certified Scrum Master</div>
+        </div>
+        <div class="cred-title" style="margin-top:32px;">Career Timeline</div>
+        <div class="tenure-list">
+          <div class="tenure"><div class="tenure-co">AMAZON.COM · 2017–2023</div><div class="tenure-role">Head of Engineering / Sr. Manager</div><div class="tenure-impact">AWS IoT Analytics · Project Kuiper · Marketplace Fraud Prevention · $37M+ savings</div></div>
+          <div class="tenure"><div class="tenure-co">BOEING / JEPPESEN FOREFLIGHT · 2023–2026</div><div class="tenure-role">Sr. Manager, Software Engineering</div><div class="tenure-impact">40+ legacy apps modernized · Agentic AI automation · Compliance 30%→95%</div></div>
+          <div class="tenure"><div class="tenure-co">DEDICATED COMPUTING LLC · 2012–2016</div><div class="tenure-role">Chief Technology Officer (PE-Backed)</div><div class="tenure-impact">IoT managed services strategy · $7M EMEA expansion · OTD from &lt;50%→85%+</div></div>
+          <div class="tenure"><div class="tenure-co">NOKIA SIEMENS / MOTOROLA · 1998–2012</div><div class="tenure-role">Principal Engineer → Sr. Manager R&D</div><div class="tenure-impact">FCAPS network management · OSS/BSS · Five-nines availability systems</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">What Others Say</p>
+      <h2>Trusted by operators and executives</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Bilal has a rare ability to translate deeply complex technical architecture into business decisions the whole executive team can act on. He doesn't just tell you what's wrong — he tells you what it's costing you."</p>
+        <div class="testi-attr">
+          <div class="testi-avatar">JM</div>
+          <div><div class="testi-name">James M.</div><div class="testi-role">Engineering Director · Amazon Marketplace</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"What stood out was his ability to walk into a room with the COO, CFO, and engineering leads and hold each conversation simultaneously — speaking the right language to each person without losing any of them."</p>
+        <div class="testi-attr">
+          <div class="testi-avatar">SR</div>
+          <div><div class="testi-name">Sandra R.</div><div class="testi-role">VP Operations · Dedicated Computing</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"He brought the structured thinking of someone who's built systems at Amazon scale, but adapted it immediately to what a $30M company actually needs. The assessment alone was worth the engagement."</p>
+        <div class="testi-attr">
+          <div class="testi-avatar">DK</div>
+          <div><div class="testi-name">David K.</div><div class="testi-role">CEO · Mid-Market E-commerce</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section id="insights" style="background:var(--off-white);">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Insights</p>
+      <h2>Thinking on operations, AI, and scale</h2>
+      <p class="section-sub">Practical frameworks for CEOs and operators navigating AI transformation without a full-time technology leader.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-img c1">🛡️</div>
+        <div class="blog-body">
+          <div class="blog-tag">Fraud Prevention</div>
+          <h4>What Amazon's Fraud Prevention Systems Can Teach Your E-commerce Company About AI Automation</h4>
+          <p>The architecture patterns behind $37M in fraud savings — and how to apply them at 1/100th the scale.</p>
+          <div class="blog-meta">8 min read · Coming soon</div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img c2">⚙️</div>
+        <div class="blog-body">
+          <div class="blog-tag">Industrial IoT</div>
+          <h4>Why Your IoT Platform Is Drowning in Alerts Nobody Acts On — and How Agentic AI Fixes That</h4>
+          <p>Alert fatigue isn't a people problem. It's an architecture problem. Here's the fix.</p>
+          <div class="blog-meta">6 min read · Coming soon</div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img c3">🚀</div>
+        <div class="blog-body">
+          <div class="blog-tag">AI Transformation</div>
+          <h4>5 Things I Learned About AI Readiness from Modernizing Boeing's Legacy Stack</h4>
+          <p>Lessons from taking 40+ legacy applications and a 30% compliance posture to 95% in 18 months.</p>
+          <div class="blog-meta">7 min read · Coming soon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <p class="section-label">Get In Touch</p>
+      <h2>Let's talk about what's possible in 60 days.</h2>
+      <p class="section-sub">Most engagements begin with a free 30-minute discovery call. No pitch, no pressure — just a conversation to see if there's a fit worth exploring.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="c-icon">✉️</div>
+          <div><div class="c-label">Email</div><div class="c-val">bilal@stragentech.com</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="c-icon">💼</div>
+          <div><div class="c-label">LinkedIn</div><div class="c-val">linkedin.com/in/bilalakhan</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="c-icon">🌐</div>
+          <div><div class="c-label">Apps</div><div class="c-val">apps.stragentech.com</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="c-icon">📍</div>
+          <div><div class="c-label">Location</div><div class="c-val">Seattle, WA · Available Remote</div></div>
+        </div>
+        <div style="margin-top:24px;padding:18px 20px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;">
+          <div class="c-label" style="margin-bottom:6px;">Also a member of</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.65;font-weight:300;">CTOx.com — a vetted network of 220+ fractional CTO operators. Every engagement benefits from the network's depth when specialized expertise is needed.</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-wrap">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="Jane"></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+      </div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="jane@company.com"></div>
+      <div class="form-group"><label>Company & Role</label><input type="text" placeholder="CEO · Acme Industrial Inc."></div>
+      <div class="form-group">
+        <label>What best describes your situation?</label>
+        <select>
+          <option value="" disabled selected>Select one...</option>
+          <option>E-commerce fraud / chargeback challenge</option>
+          <option>Industrial IoT / alert fatigue / maintenance</option>
+          <option>AI transformation / modernization needed</option>
+          <option>Technical due diligence for acquisition</option>
+          <option>Fractional CTO retainer inquiry</option>
+          <option>Other / not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Tell me more (optional)</label><textarea placeholder="What's the core challenge you're trying to solve?"></textarea></div>
+      <button type="button" class="btn btn-primary" style="width:100%;justify-content:center;font-size:14px;padding:14px;" onclick="handleSubmit(this)">Book My Free Discovery Call →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-copy">© 2025 Stragentech LLC · Agentic Technology Partners · Seattle, WA</div>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="apps.html">Apps</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function handleSubmit(btn){
+  btn.textContent = 'Message sent — I\'ll be in touch within 24 hours.';
+  btn.style.background = '#008f5e';
+  btn.disabled = true;
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); document.getElementById('navLinks').classList.remove('open'); }
+  });
+});
+</script>
+</body>
+</html>

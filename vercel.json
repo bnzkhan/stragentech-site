@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "name": "stragentech-apps",
+  "routes": [
+    {
+      "src": "/api/analyze",
+      "dest": "/api/analyze.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
