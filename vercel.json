@@ -18,17 +18,6 @@
       ],
       "destination": "/apps.html",
       "permanent": false
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.stragentech.com"
-        }
-      ],
-      "destination": "https://stragentech.com",
-      "permanent": true
     }
   ]
 }
