@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AIoT Operational Intelligence Playbook | Stragentech</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #111827;
+    --mid: #1f2937;
+    --accent: #0f766e;
+    --accent2: #115e59;
+    --accent-light: #ccfbf1;
+    --amber: #d97706;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --slate: #64748b;
+    --light: #f8fafc;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: #0d1117;
+    color: var(--white);
+    line-height: 1.6;
+  }
+
+  /* ── PRINT / PDF ── */
+  @media print {
+    body { background: white; }
+    .slide { page-break-after: always; box-shadow: none; }
+    .nav, .cover-nav { display: none; }
+    .print-btn { display: none; }
+  }
+
+  /* ── NAV ── */
+  .top-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 56px;
+  }
+  .top-bar .brand { font-size: 14px; font-weight: 700; letter-spacing: 2px; color: #5eead4; }
+  .top-bar .slide-counter { font-family: var(--mono); font-size: 12px; color: #94a3b8; }
+  .print-btn {
+    background: var(--accent); color: white; border: none; cursor: pointer;
+    padding: 7px 18px; border-radius: 6px; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.5px; font-family: var(--sans);
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: var(--accent2); }
+
+  /* ── SLIDES WRAPPER ── */
+  .slides { padding-top: 56px; }
+
+  /* ── SLIDE BASE ── */
+  .slide {
+    width: 100%; min-height: 100vh;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+
+  /* ── SLIDE 1: COVER ── */
+  .slide-cover {
+    background: linear-gradient(135deg, #0a0a0a 0%, #0d1f1e 50%, #0a1628 100%);
+    justify-content: center; align-items: center;
+    padding: 80px 64px;
+  }
+  .cover-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .cover-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 3px; color: #5eead4; text-transform: uppercase; margin-bottom: 20px; }
+  .cover-title { font-size: clamp(32px, 4vw, 52px); font-weight: 900; line-height: 1.1; color: white; margin-bottom: 24px; }
+  .cover-title span { color: #5eead4; }
+  .cover-sub { font-size: 16px; color: #94a3b8; line-height: 1.7; margin-bottom: 36px; }
+  .cover-author { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+  .author-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #1d4ed8);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800; color: white; flex-shrink: 0;
+  }
+  .author-info .name { font-size: 15px; font-weight: 700; color: white; }
+  .author-info .title { font-size: 12px; color: #64748b; }
+  .author-info .site { font-size: 12px; color: #5eead4; font-family: var(--mono); }
+  .cover-right { position: relative; }
+  .stat-cards { display: grid; gap: 16px; }
+  .stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(94,234,212,0.15);
+    border-radius: 12px; padding: 20px 24px;
+    backdrop-filter: blur(8px);
+  }
+  .stat-card .num { font-size: 36px; font-weight: 900; color: #5eead4; line-height: 1; margin-bottom: 4px; }
+  .stat-card .label { font-size: 13px; color: #94a3b8; }
+  .slide-num {
+    position: absolute; bottom: 28px; right: 32px;
+    font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.2);
+  }
+
+  /* ── SLIDE INNER LAYOUTS ── */
+  .slide-inner {
+    flex: 1; display: flex; flex-direction: column;
+    padding: 64px 72px 48px;
+    max-width: 1200px; margin: 0 auto; width: 100%;
+  }
+  .slide-header { margin-bottom: 40px; }
+  .slide-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .slide-title { font-size: clamp(24px, 3vw, 38px); font-weight: 800; line-height: 1.2; }
+  .slide-desc { font-size: 15px; color: #94a3b8; margin-top: 10px; max-width: 680px; }
+
+  /* ── SLIDE BG VARIANTS ── */
+  .bg-dark { background: #0d1117; color: white; }
+  .bg-dark .slide-eyebrow { color: #5eead4; }
+  .bg-dark .slide-title { color: white; }
+
+  .bg-mid { background: #111827; color: white; }
+  .bg-mid .slide-eyebrow { color: #34d399; }
+  .bg-mid .slide-title { color: white; }
+
+  .bg-light { background: #f8fafc; color: var(--dark); }
+  .bg-light .slide-eyebrow { color: var(--accent); }
+  .bg-light .slide-title { color: var(--dark); }
+  .bg-light .slide-desc { color: #64748b; }
+
+  /* ── SLIDE 2: THE PROBLEM ── */
+  .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+  .problem-card {
+    background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.2);
+    border-radius: 12px; padding: 24px;
+  }
+  .problem-card .icon { font-size: 28px; margin-bottom: 12px; }
+  .problem-card .num { font-size: 32px; font-weight: 900; color: #f87171; margin-bottom: 4px; }
+  .problem-card .label { font-size: 13px; color: #94a3b8; margin-bottom: 8px; }
+  .problem-card .detail { font-size: 12px; color: #64748b; line-height: 1.5; }
+  .problem-bottom {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 24px 28px;
+    display: grid; grid-template-columns: 1fr 2px 1fr 2px 1fr; gap: 24px; align-items: center;
+  }
+  .pb-item { text-align: center; }
+  .pb-item .pct { font-size: 28px; font-weight: 800; color: #fbbf24; }
+  .pb-item .txt { font-size: 12px; color: #64748b; margin-top: 4px; }
+  .divider-v { background: rgba(255,255,255,0.08); align-self: stretch; }
+
+  /* ── SLIDE 3: OPPORTUNITY ── */
+  .opp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .opp-left { display: flex; flex-direction: column; gap: 16px; }
+  .opp-row {
+    background: rgba(15,118,110,0.1); border: 1px solid rgba(15,118,110,0.25);
+    border-radius: 10px; padding: 18px 22px;
+    display: grid; grid-template-columns: 56px 1fr; gap: 16px; align-items: center;
+  }
+  .opp-row .before { text-align: center; }
+  .opp-row .before .val { font-size: 20px; font-weight: 700; color: #f87171; }
+  .opp-row .before .lbl { font-size: 10px; color: #64748b; }
+  .opp-row .arrow-right { font-size: 20px; color: #5eead4; text-align: center; }
+  .opp-row .content .metric { font-size: 15px; font-weight: 700; color: white; }
+  .opp-row .content .sub { font-size: 12px; color: #64748b; }
+  .opp-right {
+    background: linear-gradient(135deg, rgba(15,118,110,0.15) 0%, rgba(17,94,89,0.05) 100%);
+    border: 1px solid rgba(94,234,212,0.15);
+    border-radius: 14px; padding: 28px;
+    display: flex; flex-direction: column; justify-content: center; gap: 20px;
+  }
+  .roi-headline { font-size: 13px; font-weight: 600; color: #5eead4; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .roi-num { font-size: 52px; font-weight: 900; color: white; line-height: 1; }
+  .roi-sub { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+  .roi-source { font-family: var(--mono); font-size: 10px; color: #475569; margin-top: 8px; }
+  .roi-divider { height: 1px; background: rgba(255,255,255,0.06); }
+
+  /* ── SLIDE 4: WHAT IS AGENTIC AIoT ── */
+  .wat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .wat-left { display: flex; flex-direction: column; gap: 16px; }
+  .wat-concept {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 18px 20px;
+    display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: flex-start;
+  }
+  .wat-concept .icon { font-size: 22px; padding-top: 2px; }
+  .wat-concept h4 { font-size: 14px; font-weight: 700; color: #5eead4; margin-bottom: 4px; }
+  .wat-concept p { font-size: 12px; color: #94a3b8; line-height: 1.5; }
+  .vs-box {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden;
+    height: fit-content;
+  }
+  .vs-col { padding: 20px; }
+  .vs-col.before { background: rgba(220,38,38,0.06); border-right: 1px solid rgba(255,255,255,0.06); }
+  .vs-col.after { background: rgba(15,118,110,0.08); }
+  .vs-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+  .vs-col.before h4 { color: #f87171; }
+  .vs-col.after h4 { color: #34d399; }
+  .vs-item { font-size: 12px; color: #94a3b8; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: flex-start; gap: 8px; }
+  .vs-item:last-child { border-bottom: none; }
+  .vs-item .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .vs-col.before .dot { background: #f87171; }
+  .vs-col.after .dot { background: #34d399; }
+
+  /* ── SLIDE 5: ARCHITECTURE ── */
+  .arch-layers { display: flex; flex-direction: column; gap: 10px; }
+  .arch-layer {
+    border-radius: 10px; padding: 14px 20px;
+    display: grid; grid-template-columns: 130px 1fr; gap: 20px; align-items: center;
+  }
+  .arch-layer.l5 { background: rgba(15,118,110,0.20); border: 1.5px solid rgba(94,234,212,0.3); }
+  .arch-layer.l4 { background: rgba(15,118,110,0.15); border: 2px solid rgba(94,234,212,0.4); }
+  .arch-layer.l3 { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+  .arch-layer.l2 { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
+  .arch-layer.l1 { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
+  .arch-layer .layer-label { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 1px; }
+  .arch-layer.l5 .layer-label, .arch-layer.l4 .layer-label { color: #5eead4; }
+  .arch-layer.l3 .layer-label, .arch-layer.l2 .layer-label, .arch-layer.l1 .layer-label { color: #64748b; }
+  .arch-layer .layer-name { font-size: 13px; font-weight: 700; color: white; margin-bottom: 1px; }
+  .arch-layer.l3 .layer-name, .arch-layer.l2 .layer-name, .arch-layer.l1 .layer-name { color: #cbd5e1; }
+  .arch-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .arch-tag {
+    font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 500;
+  }
+  .arch-layer.l5 .arch-tag, .arch-layer.l4 .arch-tag { background: rgba(94,234,212,0.1); color: #5eead4; border: 1px solid rgba(94,234,212,0.2); }
+  .arch-layer.l3 .arch-tag { background: rgba(99,102,241,0.1); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.2); }
+  .arch-layer.l2 .arch-tag { background: rgba(251,191,36,0.08); color: #fbbf24; border: 1px solid rgba(251,191,36,0.15); }
+  .arch-layer.l1 .arch-tag { background: rgba(148,163,184,0.08); color: #94a3b8; border: 1px solid rgba(148,163,184,0.15); }
+  .arch-arrow { text-align: center; font-size: 13px; color: #334155; letter-spacing: 1px; }
+
+  /* ── SLIDE 6: MATURITY MODEL ── */
+  .maturity-track { display: flex; gap: 0; position: relative; }
+  .maturity-stage {
+    flex: 1; padding: 22px 16px; position: relative;
+    border-top: 3px solid transparent;
+  }
+  .maturity-stage:not(:last-child)::after {
+    content: '›'; position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
+    font-size: 24px; color: #334155; z-index: 1;
+  }
+  .ms-1 { background: rgba(220,38,38,0.06); border-top-color: #f87171; border-radius: 10px 0 0 10px; }
+  .ms-2 { background: rgba(217,119,6,0.06); border-top-color: #fbbf24; }
+  .ms-3 { background: rgba(59,130,246,0.06); border-top-color: #60a5fa; }
+  .ms-4 { background: rgba(15,118,110,0.08); border-top-color: #34d399; }
+  .ms-5 { background: rgba(15,118,110,0.15); border-top-color: #5eead4; border-radius: 0 10px 10px 0; }
+  .ms-badge { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .ms-1 .ms-badge { color: #f87171; }
+  .ms-2 .ms-badge { color: #fbbf24; }
+  .ms-3 .ms-badge { color: #60a5fa; }
+  .ms-4 .ms-badge { color: #34d399; }
+  .ms-5 .ms-badge { color: #5eead4; }
+  .ms-title { font-size: 13px; font-weight: 700; color: white; margin-bottom: 10px; }
+  .ms-items { list-style: none; }
+  .ms-items li { font-size: 11px; color: #94a3b8; padding: 3px 0; }
+  .ms-items li::before { content: '·  '; }
+  .maturity-you {
+    margin-top: 24px; background: rgba(15,118,110,0.08); border: 1px solid rgba(94,234,212,0.15);
+    border-radius: 10px; padding: 16px 20px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
+  }
+  .my-item .my-label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .my-item .my-val { font-size: 13px; font-weight: 600; color: #5eead4; }
+
+  /* ── SLIDE 7: 90-DAY ROADMAP ── */
+  .roadmap-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .roadmap-phase {
+    border-radius: 12px; padding: 22px;
+    display: flex; flex-direction: column;
+  }
+  .rp-1 { background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.2); }
+  .rp-2 { background: rgba(217,119,6,0.06); border: 1px solid rgba(217,119,6,0.2); }
+  .rp-3 { background: rgba(15,118,110,0.1); border: 1px solid rgba(15,118,110,0.25); }
+  .rp-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .rp-1 .rp-tag { color: #f87171; }
+  .rp-2 .rp-tag { color: #fbbf24; }
+  .rp-3 .rp-tag { color: #34d399; }
+  .rp-title { font-size: 16px; font-weight: 800; color: white; margin-bottom: 14px; }
+  .rp-items { list-style: none; flex: 1; }
+  .rp-items li {
+    font-size: 12px; color: #94a3b8; padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .rp-items li:last-child { border-bottom: none; }
+  .rp-items li span { color: inherit; }
+  .rp-items .check { font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+  .rp-1 .check { color: #f87171; }
+  .rp-2 .check { color: #fbbf24; }
+  .rp-3 .check { color: #34d399; }
+  .rp-outcome {
+    margin-top: 14px; padding: 10px 14px; border-radius: 8px;
+    font-size: 12px; font-weight: 600;
+  }
+  .rp-1 .rp-outcome { background: rgba(220,38,38,0.08); color: #fca5a5; }
+  .rp-2 .rp-outcome { background: rgba(217,119,6,0.08); color: #fcd34d; }
+  .rp-3 .rp-outcome { background: rgba(15,118,110,0.12); color: #6ee7b7; }
+
+  /* ── SLIDE 8: USE CASES ── */
+  .use-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .use-card {
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 20px 22px;
+    display: grid; grid-template-columns: 40px 1fr; gap: 14px;
+    transition: border-color 0.2s;
+  }
+  .use-card:hover { border-color: rgba(94,234,212,0.3); }
+  .use-icon { font-size: 26px; }
+  .use-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 6px; }
+  .use-desc { font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 10px; }
+  .use-result { font-size: 12px; font-weight: 600; color: #5eead4; }
+
+  /* ── SLIDE 9: GOVERNANCE ── */
+  .gov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .gov-left { display: flex; flex-direction: column; gap: 14px; }
+  .gov-item {
+    background: rgba(255,255,255,0.03); border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0; padding: 14px 18px;
+  }
+  .gov-item h4 { font-size: 13px; font-weight: 700; color: #5eead4; margin-bottom: 4px; }
+  .gov-item p { font-size: 12px; color: #94a3b8; line-height: 1.5; }
+  .gov-right {
+    background: rgba(15,118,110,0.06); border: 1px solid rgba(94,234,212,0.1);
+    border-radius: 12px; padding: 24px;
+  }
+  .gov-right h3 { font-size: 14px; font-weight: 700; color: white; margin-bottom: 16px; }
+  .risk-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+  .risk-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; white-space: nowrap; margin-top: 2px; }
+  .risk-high { background: rgba(220,38,38,0.15); color: #fca5a5; }
+  .risk-med { background: rgba(217,119,6,0.15); color: #fcd34d; }
+  .risk-low { background: rgba(15,118,110,0.15); color: #6ee7b7; }
+  .risk-text h5 { font-size: 12px; font-weight: 600; color: #cbd5e1; margin-bottom: 2px; }
+  .risk-text p { font-size: 11px; color: #64748b; }
+
+  /* ── SLIDE 10: CTA ── */
+  .slide-cta {
+    background: linear-gradient(135deg, #0a0f1e 0%, #0d1f1e 60%, #0a0a0a 100%);
+    justify-content: center; align-items: center;
+    padding: 80px 64px;
+  }
+  .cta-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+  .cta-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 3px; color: #5eead4; text-transform: uppercase; margin-bottom: 20px; }
+  .cta-title { font-size: clamp(28px, 4vw, 48px); font-weight: 900; color: white; line-height: 1.15; margin-bottom: 20px; }
+  .cta-title span { color: #5eead4; }
+  .cta-sub { font-size: 16px; color: #64748b; max-width: 580px; margin: 0 auto 40px; line-height: 1.7; }
+  .cta-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 44px; }
+  .cta-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 20px 16px; text-align: center;
+  }
+  .cta-card .icon { font-size: 24px; margin-bottom: 10px; }
+  .cta-card h4 { font-size: 13px; font-weight: 700; color: white; margin-bottom: 6px; }
+  .cta-card p { font-size: 11px; color: #64748b; line-height: 1.5; }
+  .cta-contact { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: white; border: none; cursor: pointer;
+    padding: 14px 32px; border-radius: 8px; font-size: 14px; font-weight: 700;
+    font-family: var(--sans); text-decoration: none; display: inline-block;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent; color: #94a3b8;
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer; padding: 14px 32px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; font-family: var(--sans);
+    text-decoration: none; display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: #5eead4; color: #5eead4; }
+  .cta-footer {
+    margin-top: 40px; padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap;
+  }
+  .cta-footer .brand-name { font-size: 14px; font-weight: 700; color: #5eead4; letter-spacing: 1px; }
+  .cta-footer .cta-name { font-size: 13px; color: #94a3b8; }
+  .cta-footer .cta-url { font-family: var(--mono); font-size: 12px; color: #475569; }
+  .sep { color: #1e293b; }
+
+  /* ── MISC ── */
+  .source-line { font-family: var(--mono); font-size: 9px; color: #334155; margin-top: 20px; }
+  .highlight { color: #5eead4; }
+  .footnote { font-size: 10px; color: #475569; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="brand">STRAGENTECH</div>
+  <div class="slide-counter">Agentic AIoT Playbook · 10 Slides</div>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <a href="agentic-aiot-playbook.pdf" download class="print-btn" style="text-decoration:none;">↓ Download PDF</a>
+    <button class="print-btn" onclick="window.print()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);">🖨 Print</button>
+  </div>
+</div>
+
+<div class="slides">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 1: COVER -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide slide-cover">
+  <div class="cover-grid">
+    <div class="cover-left">
+      <div class="cover-eyebrow">Stragentech · Fractional CTO Advisory</div>
+      <h1 class="cover-title">Agentic AIoT<br><span>Operational Intelligence</span><br>Playbook</h1>
+      <p class="cover-sub">How SMB manufacturers can deploy Agentic AI + Industrial IoT to monitor equipment, eliminate unplanned downtime, and automate remediation — without an enterprise budget.</p>
+      <div class="cover-author">
+        <div class="author-avatar">BK</div>
+        <div class="author-info">
+          <div class="name">Bilal A. Khan</div>
+          <div class="title">Fractional CTO · Senior Engineering Leader · 25+ Years</div>
+          <div class="site">stragentech.com</div>
+        </div>
+      </div>
+    </div>
+    <div class="cover-right">
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="num">$260K</div>
+          <div class="label">Average cost of one hour of unplanned manufacturing downtime</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">10×</div>
+          <div class="label">Potential ROI from predictive maintenance at maturity (Deloitte)</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">90 sec</div>
+          <div class="label">Target automated remediation time with Agentic AI in production</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">01 / 10</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 2: THE PROBLEM -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">The Problem</div>
+      <h2 class="slide-title">Most SMB Manufacturers Are Flying Blind</h2>
+      <p class="slide-desc">Equipment knows it's going to fail. The data is there. The problem is no one is listening — and when someone does hear the alarm, it's already too late.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">⏱</div>
+        <div class="num">800+</div>
+        <div class="label">Hours of unplanned downtime / plant / year</div>
+        <div class="detail">That's 33+ lost production days annually. Most SMBs treat this as a fixed cost of operations. It isn't.</div>
+      </div>
+      <div class="problem-card">
+        <div class="icon">💸</div>
+        <div class="num">$200M</div>
+        <div class="label">Avg annual downtime loss for mid-size manufacturers</div>
+        <div class="detail">For a 200-person shop, the proportional figure still routinely exceeds $2M–$5M/year in lost throughput and emergency repair costs.</div>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🔧</div>
+        <div class="num">5–6 hrs</div>
+        <div class="label">Typical MTTR (Mean Time to Repair) without AI</div>
+        <div class="detail">Root cause diagnosis alone consumes 60–70% of that window. The machine had the answer the whole time.</div>
+      </div>
+    </div>
+    <div class="problem-bottom">
+      <div class="pb-item">
+        <div class="pct">73%</div>
+        <div class="txt">of manufacturers still rely on reactive or scheduled maintenance cycles</div>
+      </div>
+      <div class="divider-v"></div>
+      <div class="pb-item">
+        <div class="pct">&lt;5%</div>
+        <div class="txt">of sensor data generated on the factory floor is currently analyzed</div>
+      </div>
+      <div class="divider-v"></div>
+      <div class="pb-item">
+        <div class="pct">3%</div>
+        <div class="txt">efficiency loss per year from deferred maintenance on aging equipment</div>
+      </div>
+    </div>
+    <div class="source-line">Sources: Infodeck Unplanned Downtime Crisis Report · Oxmaint Global Maintenance Report 2025 · Verdantis Predictive Maintenance Statistics</div>
+  </div>
+  <div class="slide-num">02 / 10</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 3: THE OPPORTUNITY -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-mid">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">The Opportunity</div>
+      <h2 class="slide-title">What Changes When You Wire in Agentic AIoT</h2>
+      <p class="slide-desc">The shift from reactive to agentic isn't incremental. It compounds. Each layer you add multiplies the value of the layer below it.</p>
+    </div>
+    <div class="opp-grid">
+      <div class="opp-left">
+        <div class="opp-row">
+          <div>
+            <div style="font-size:10px;color:#64748b;text-align:center">FROM</div>
+            <div style="font-size:16px;font-weight:700;color:#f87171;text-align:center">6 hrs</div>
+          </div>
+          <div>
+            <div class="content">
+              <div class="metric">MTTR drops to &lt;45 minutes</div>
+              <div class="sub">AI agents diagnose root cause in real time, cross-reference maintenance history, and execute the first response — before a technician is dispatched</div>
+            </div>
+          </div>
+        </div>
+        <div class="opp-row">
+          <div>
+            <div style="font-size:10px;color:#64748b;text-align:center">FROM</div>
+            <div style="font-size:16px;font-weight:700;color:#f87171;text-align:center">3 AM call</div>
+          </div>
+          <div>
+            <div class="content">
+              <div class="metric">Autonomous overnight monitoring</div>
+              <div class="sub">No NOC required. Agents watch continuously — temperature drift, vibration baseline, current draw anomalies — and act before shift change</div>
+            </div>
+          </div>
+        </div>
+        <div class="opp-row">
+          <div>
+            <div style="font-size:10px;color:#64748b;text-align:center">FROM</div>
+            <div style="font-size:16px;font-weight:700;color:#f87171;text-align:center">Guesswork</div>
+          </div>
+          <div>
+            <div class="content">
+              <div class="metric">Parts ordered before failure occurs</div>
+              <div class="sub">Digital twins model remaining useful life per machine. Work orders and parts procurement trigger automatically at defined confidence thresholds</div>
+            </div>
+          </div>
+        </div>
+        <div class="opp-row">
+          <div>
+            <div style="font-size:10px;color:#64748b;text-align:center">FROM</div>
+            <div style="font-size:16px;font-weight:700;color:#f87171;text-align:center">Silos</div>
+          </div>
+          <div>
+            <div class="content">
+              <div class="metric">Operations, MES + maintenance unified</div>
+              <div class="sub">Agentic AI ingests live signals from MES, SCADA, maintenance logs, and logistics — connecting data that's never talked to each other before</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="opp-right">
+        <div>
+          <div class="roi-headline">Predictive Maintenance ROI</div>
+          <div class="roi-num">10×</div>
+          <div class="roi-sub">Potential ROI at full deployment maturity</div>
+          <div class="roi-source">Deloitte · Mordor Intelligence</div>
+        </div>
+        <div class="roi-divider"></div>
+        <div>
+          <div class="roi-headline">Downtime Reduction</div>
+          <div class="roi-num">35–45%</div>
+          <div class="roi-sub">Reduction in unplanned downtime for early adopters</div>
+          <div class="roi-source">North American avg · Verdantis Research</div>
+        </div>
+        <div class="roi-divider"></div>
+        <div>
+          <div class="roi-headline">Maintenance Cost</div>
+          <div class="roi-num">10–40%</div>
+          <div class="roi-sub">Reduction in total maintenance spend within 24 months</div>
+          <div class="roi-source">Deloitte Manufacturing Analysis 2025</div>
+        </div>
+        <div class="roi-divider"></div>
+        <div>
+          <div class="roi-headline">Adopters Seeing ROI</div>
+          <div class="roi-num">95%</div>
+          <div class="roi-sub">Report positive ROI within 12 months of deployment</div>
+          <div class="roi-source">Verdantis Predictive Maintenance Study</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">03 / 10</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 4: WHAT IS AGENTIC AIoT -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">Foundational Concepts</div>
+      <h2 class="slide-title">Agentic AIoT: What It Actually Means</h2>
+      <p class="slide-desc">Not another dashboard. Not a notification system. An Agentic AIoT system watches, reasons, decides, and acts — autonomously.</p>
+    </div>
+    <div class="wat-grid">
+      <div class="wat-left">
+        <div class="wat-concept">
+          <div class="icon">🌐</div>
+          <div>
+            <h4>Industrial IoT (IIoT)</h4>
+            <p>Sensors, PLCs, and edge gateways collect raw physical signals from equipment — temperature, vibration, current draw, pressure, acoustic output — and stream them continuously into a data layer.</p>
+          </div>
+        </div>
+        <div class="wat-concept">
+          <div class="icon">🧠</div>
+          <div>
+            <h4>AIoT Layer</h4>
+            <p>AI models run on top of IIoT data to establish per-machine baselines, detect anomalies, score severity, and model remaining useful life (RUL) using digital twins and time-series analysis.</p>
+          </div>
+        </div>
+        <div class="wat-concept">
+          <div class="icon">⚡</div>
+          <div>
+            <h4>Agentic AI Core</h4>
+            <p>Autonomous agents — Monitor, Diagnosis, Remediation — coordinate in sequence. They hold context over time, connect anomaly data to operational state, and execute multi-step responses without human initiation.</p>
+          </div>
+        </div>
+        <div class="wat-concept">
+          <div class="icon">🔗</div>
+          <div>
+            <h4>MCP Tool Layer</h4>
+            <p>Model Context Protocol gives agents a standardized interface to live systems: SCADA, MES, CMMS, parts inventory, scheduling tools. The agent acts where the work actually happens.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="vs-box">
+          <div class="vs-col before">
+            <h4>Traditional Approach</h4>
+            <div class="vs-item"><div class="dot"></div>Scheduled maintenance on calendar intervals</div>
+            <div class="vs-item"><div class="dot"></div>Alert fires → someone investigates → team decides → action taken</div>
+            <div class="vs-item"><div class="dot"></div>Maintenance log updated manually, if at all</div>
+            <div class="vs-item"><div class="dot"></div>Parts ordered reactively after diagnosis</div>
+            <div class="vs-item"><div class="dot"></div>Knowledge locked in senior technicians' heads</div>
+            <div class="vs-item"><div class="dot"></div>Night shift runs on hope and phone coverage</div>
+            <div class="vs-item"><div class="dot"></div>Root cause found in 2–4 hours on average</div>
+          </div>
+          <div class="vs-col after">
+            <h4>Agentic AIoT</h4>
+            <div class="vs-item"><div class="dot"></div>Continuous monitoring against per-machine baselines</div>
+            <div class="vs-item"><div class="dot"></div>Anomaly detected → agent diagnoses → agent acts → human informed</div>
+            <div class="vs-item"><div class="dot"></div>Maintenance log and asset history updated automatically</div>
+            <div class="vs-item"><div class="dot"></div>Parts procurement triggered at defined confidence threshold</div>
+            <div class="vs-item"><div class="dot"></div>Diagnostic logic encoded and scaled across all assets</div>
+            <div class="vs-item"><div class="dot"></div>Overnight monitoring fully automated, no on-call required</div>
+            <div class="vs-item"><div class="dot"></div>Root cause identified in seconds by Diagnosis Agent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">04 / 10</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 5: ARCHITECTURE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-mid">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">Technical Architecture</div>
+      <h2 class="slide-title">The Five-Layer Stack</h2>
+      <p class="slide-desc">Each layer builds on the one below. SMBs can start at Layer 1–2, prove value, and add layers incrementally — no big-bang transformation required.</p>
+    </div>
+    <div class="arch-layers">
+      <div class="arch-layer l5">
+        <div>
+          <div class="layer-label">LAYER 5 · OUTPUT</div>
+          <div class="layer-name">Automated Actions</div>
+        </div>
+        <div class="arch-tags">
+          <span class="arch-tag">Auto-Remediation</span>
+          <span class="arch-tag">Work Order Generation</span>
+          <span class="arch-tag">On-Call Alerting</span>
+          <span class="arch-tag">Parts Procurement</span>
+          <span class="arch-tag">Preventive Schedule Update</span>
+        </div>
+      </div>
+      <div class="arch-arrow">↑ &nbsp; agent decisions flow up &nbsp; · &nbsp; control commands flow down &nbsp; ↓</div>
+      <div class="arch-layer l4">
+        <div>
+          <div class="layer-label">LAYER 4 · BRAIN</div>
+          <div class="layer-name">Agentic AI Core</div>
+        </div>
+        <div class="arch-tags">
+          <span class="arch-tag">Monitor Agent</span>
+          <span class="arch-tag">Diagnosis Agent</span>
+          <span class="arch-tag">Remediation Agent</span>
+          <span class="arch-tag">Context Memory</span>
+          <span class="arch-tag">Multi-Agent Orchestration</span>
+        </div>
+      </div>
+      <div class="arch-arrow">↑ &nbsp; anomalies + context</div>
+      <div class="arch-layer l3">
+        <div>
+          <div class="layer-label">LAYER 3 · INTELLIGENCE</div>
+          <div class="layer-name">AIoT Platform</div>
+        </div>
+        <div class="arch-tags">
+          <span class="arch-tag">Time-Series Database</span>
+          <span class="arch-tag">Anomaly Detection Models</span>
+          <span class="arch-tag">Digital Twin / RUL Modeling</span>
+          <span class="arch-tag">Maintenance History Context</span>
+        </div>
+      </div>
+      <div class="arch-arrow">↑ &nbsp; processed signals</div>
+      <div class="arch-layer l2">
+        <div>
+          <div class="layer-label">LAYER 2 · CONNECTIVITY</div>
+          <div class="layer-name">IoT Edge Layer</div>
+        </div>
+        <div class="arch-tags">
+          <span class="arch-tag">Sensor Gateways</span>
+          <span class="arch-tag">Data Pipeline (filter / normalize / timestamp)</span>
+          <span class="arch-tag">MCP Tool Interface</span>
+          <span class="arch-tag">Edge Compute</span>
+        </div>
+      </div>
+      <div class="arch-arrow">↑ &nbsp; raw sensor data</div>
+      <div class="arch-layer l1">
+        <div>
+          <div class="layer-label">LAYER 1 · PHYSICAL</div>
+          <div class="layer-name">Shop Floor Equipment</div>
+        </div>
+        <div class="arch-tags">
+          <span class="arch-tag">CNC Machines</span>
+          <span class="arch-tag">Motors + Pumps</span>
+          <span class="arch-tag">Compressors</span>
+          <span class="arch-tag">HVAC / Pneumatics</span>
+          <span class="arch-tag">PLC / SCADA Systems</span>
+        </div>
+      </div>
+    </div>
+    <div class="source-line">Architecture informed by: OptAgent Framework (arXiv 2601.20005) · Deloitte Agentic AI in Manufacturing 2025 · Spartakus IIoT Predictive Maintenance Guide</div>
+  </div>
+  <div class="slide-num">05 / 10</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 6: MATURITY MODEL -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">Maturity Model</div>
+      <h2 class="slide-title">Where Are You on the Operational Intelligence Curve?</h2>
+      <p class="slide-desc">Five stages — from paper-based reactive to fully autonomous. Most SMBs sit at Stage 1–2. The jump to Stage 3 delivers 80% of the value.</p>
+    </div>
+    <div class="maturity-track">
+      <div class="maturity-stage ms-1">
+        <div class="ms-badge">Stage 1</div>
+        <div class="ms-title">Reactive</div>
+        <ul class="ms-items">
+          <li>Fix on failure</li>
+          <li>Paper logs</li>
+          <li>No sensor data</li>
+          <li>Tribal knowledge</li>
+          <li>MTTR: 6–12 hrs</li>
+        </ul>
+      </div>
+      <div class="maturity-stage ms-2">
+        <div class="ms-badge">Stage 2</div>
+        <div class="ms-title">Preventive</div>
+        <ul class="ms-items">
+          <li>Calendar-based PM</li>
+          <li>Basic CMMS</li>
+          <li>Some sensors</li>
+          <li>Manual alerts</li>
+          <li>MTTR: 4–6 hrs</li>
+        </ul>
+      </div>
+      <div class="maturity-stage ms-3">
+        <div class="ms-badge">Stage 3</div>
+        <div class="ms-title">Predictive</div>
+        <ul class="ms-items">
+          <li>IIoT sensors live</li>
+          <li>Anomaly detection</li>
+          <li>Digital twins</li>
+          <li>Condition alerts</li>
+          <li>MTTR: 1–3 hrs</li>
+        </ul>
+      </div>
+      <div class="maturity-stage ms-4">
+        <div class="ms-badge">Stage 4</div>
+        <div class="ms-title">Prescriptive</div>
+        <ul class="ms-items">
+          <li>AI recommends action</li>
+          <li>RUL modeling</li>
+          <li>Auto work orders</li>
+          <li>Parts pre-staged</li>
+          <li>MTTR: 30–60 min</li>
+        </ul>
+      </div>
+      <div class="maturity-stage ms-5">
+        <div class="ms-badge">Stage 5</div>
+        <div class="ms-title">Autonomous</div>
+        <ul class="ms-items">
+          <li>Agentic AI acts</li>
+          <li>Self-healing loops</li>
+          <li>Continuous learning</li>
+          <li>Human confirms only</li>
+          <li>MTTR: &lt;45 min</li>
+        </ul>
+      </div>
+    </div>
+    <div class="maturity-you">
+      <div class="my-item">
+        <div class="my-label">Most SMBs Today</div>
+        <div class="my-val">Stage 1–2 (Reactive / Preventive)</div>
+      </div>
+      <div class="my-item">
+        <div class="my-label">Target in 12 Months</div>
+        <div class="my-val">Stage 3–4 (Predictive + Prescriptive)</div>
+      </div>
+      <div class="my-item">
+        <div class="my-label">ROI Inflection Point</div>
+        <div class="my-val">Stage 3 delivers ~80% of the total program value</div>
+      </div>
+    </div>
+    <div class="source-line">Maturity model adapted from: ARC Advisory Group IIoT Maintenance Maturity Model · Arvato Systems IIoT Maturity Levels · Spartakus Reliability Guide</div>
+  </div>
+  <div class="slide-num">06 / 10</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 7: 90-DAY ROADMAP -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-mid">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">Implementation Roadmap</div>
+      <h2 class="slide-title">90-Day Fast Start: From Stage 1 to Stage 3</h2>
+      <p class="slide-desc">Proven sequence for SMB manufacturers. Start with the 3 highest-criticality assets. Prove value. Then scale. No multi-million dollar transformation required.</p>
+    </div>
+    <div class="roadmap-cols">
+      <div class="roadmap-phase rp-1">
+        <div class="rp-tag">Days 1–30</div>
+        <div class="rp-title">Foundation &amp; Discovery</div>
+        <ul class="rp-items">
+          <li><span class="check">▸</span><span>Asset criticality ranking — identify top 3–5 machines by failure impact on throughput</span></li>
+          <li><span class="check">▸</span><span>Baseline data audit — what sensor data exists? What's missing? What's the CMMS state?</span></li>
+          <li><span class="check">▸</span><span>IoT sensor deployment on priority assets: vibration, temp, current draw</span></li>
+          <li><span class="check">▸</span><span>Edge gateway install + data pipeline to time-series store (AWS IoT / Azure IoT Hub)</span></li>
+          <li><span class="check">▸</span><span>Define KPIs: target MTTR, downtime hours/month, false positive rate</span></li>
+          <li><span class="check">▸</span><span>Stakeholder alignment: maintenance, ops, IT, plant manager</span></li>
+        </ul>
+        <div class="rp-outcome">✓ Outcome: Live sensor feeds on top 3 assets. Baseline established.</div>
+      </div>
+      <div class="roadmap-phase rp-2">
+        <div class="rp-tag">Days 31–60</div>
+        <div class="rp-title">Intelligence Layer</div>
+        <ul class="rp-items">
+          <li><span class="check">▸</span><span>Train anomaly detection models on 30 days of baseline data per asset</span></li>
+          <li><span class="check">▸</span><span>Configure per-machine thresholds for alert triggering (not global, per-asset)</span></li>
+          <li><span class="check">▸</span><span>Build digital twin models for Remaining Useful Life (RUL) on priority equipment</span></li>
+          <li><span class="check">▸</span><span>Integrate CMMS with anomaly layer — historical maintenance context feeding models</span></li>
+          <li><span class="check">▸</span><span>Deploy Monitor Agent — first autonomous agent watching and flagging 24/7</span></li>
+          <li><span class="check">▸</span><span>Alert validation sprint: tune thresholds to reach &lt;15% false positive rate</span></li>
+        </ul>
+        <div class="rp-outcome">✓ Outcome: Anomaly detection live. First real-time warnings surfaced.</div>
+      </div>
+      <div class="roadmap-phase rp-3">
+        <div class="rp-tag">Days 61–90</div>
+        <div class="rp-title">Agentic Action Layer</div>
+        <ul class="rp-items">
+          <li><span class="check">▸</span><span>Deploy Diagnosis Agent — automated root cause analysis on flagged anomalies</span></li>
+          <li><span class="check">▸</span><span>Deploy Remediation Agent — first automated responses: backup pump spin-up, throttle, isolate</span></li>
+          <li><span class="check">▸</span><span>MCP integrations: connect agents to SCADA, parts inventory, scheduling, on-call paging</span></li>
+          <li><span class="check">▸</span><span>Automated work order generation from agent-confirmed anomalies</span></li>
+          <li><span class="check">▸</span><span>Human-in-the-loop escalation rules: define what agents handle vs. what gets escalated</span></li>
+          <li><span class="check">▸</span><span>First 90-day ROI review: measure MTTR delta, downtime hours saved, cost avoidance</span></li>
+        </ul>
+        <div class="rp-outcome">✓ Outcome: Agentic AI acting autonomously. MTTR measurably reduced.</div>
+      </div>
+    </div>
+    <div class="source-line">Roadmap informed by: Spartakus IIoT Implementation Guide · Deloitte Agentic AI in Manufacturing · IIoT World 2026 Industrial AI Trends</div>
+  </div>
+  <div class="slide-num">07 / 10</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 8: USE CASES -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">Use Cases</div>
+      <h2 class="slide-title">Eight High-Value Applications for SMB Manufacturers</h2>
+      <p class="slide-desc">These are the use cases delivering measurable ROI within 12 months in manufacturing environments comparable to yours.</p>
+    </div>
+    <div class="use-grid">
+      <div class="use-card">
+        <div class="use-icon">⚙️</div>
+        <div>
+          <div class="use-title">Rotating Equipment Health</div>
+          <div class="use-desc">Vibration and thermal monitoring on motors, pumps, and compressors. Agents detect bearing wear, misalignment, and cavitation weeks before failure.</div>
+          <div class="use-result">→ 42% improvement in predictive maintenance accuracy (automotive sector, 2025)</div>
+        </div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">🌡️</div>
+        <div>
+          <div class="use-title">Thermal Runaway Prevention</div>
+          <div class="use-desc">Real-time temperature monitoring on motors and electrical panels. Agent initiates cooling protocols or load reduction at defined thresholds — before thermal damage occurs.</div>
+          <div class="use-result">→ Target: zero thermal-failure events within 6 months of deployment</div>
+        </div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">💧</div>
+        <div>
+          <div class="use-title">Fluid System Monitoring</div>
+          <div class="use-desc">Pressure and flow monitoring on hydraulic and pneumatic systems. Agents detect seal degradation, blockages, and pressure anomalies autonomously and reroute flow automatically.</div>
+          <div class="use-result">→ Automated backup pump activation in &lt;90 seconds vs. 45-min manual response</div>
+        </div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">🏭</div>
+        <div>
+          <div class="use-title">Production Quality Correlation</div>
+          <div class="use-desc">Correlate machine condition signals with product quality metrics. Agents surface equipment degradation before it produces defects — not after the batch is scrapped.</div>
+          <div class="use-result">→ 35% reduction in production errors (leading automotive manufacturer, 2025)</div>
+        </div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">📦</div>
+        <div>
+          <div class="use-title">Predictive Parts Procurement</div>
+          <div class="use-desc">RUL models trigger parts orders at defined confidence thresholds. Agents integrate with inventory and procurement systems. Parts arrive before the failure — not after.</div>
+          <div class="use-result">→ Eliminates emergency part sourcing premium (avg 30–60% cost markup avoided)</div>
+        </div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">🔌</div>
+        <div>
+          <div class="use-title">Energy Anomaly Detection</div>
+          <div class="use-desc">Current draw monitoring across production assets identifies energy inefficiencies, motor degradation, and load imbalances — converting energy waste into maintenance intelligence.</div>
+          <div class="use-result">→ 10–15% energy reduction reported by early IIoT adopters in discrete manufacturing</div>
+        </div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">📋</div>
+        <div>
+          <div class="use-title">Autonomous Work Order Management</div>
+          <div class="use-desc">Agents create, prioritize, route, and update maintenance work orders without human initiation. Integrates directly with CMMS. Maintenance history auto-updated post-resolution.</div>
+          <div class="use-result">→ 80% of transactional workflow decisions automated (Danfoss, 2025)</div>
+        </div>
+      </div>
+      <div class="use-card">
+        <div class="use-icon">🌙</div>
+        <div>
+          <div class="use-title">Overnight Autonomous Operations</div>
+          <div class="use-desc">Full plant monitoring during off-shift hours without dedicated NOC staff. Agents handle Tier-1 incidents autonomously, escalating only what exceeds defined operational impact thresholds.</div>
+          <div class="use-result">→ Replaces $200K–$400K/year in after-hours staffing costs for a 200-person plant</div>
+        </div>
+      </div>
+    </div>
+    <div class="source-line">Sources: AIMonk Agentic AI Enterprise ROI Case Studies 2025 · IIoT World Predictive Maintenance Cost Savings · Deloitte Manufacturing Analysis</div>
+  </div>
+  <div class="slide-num">08 / 10</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 9: GOVERNANCE & RISK -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-mid">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">Governance &amp; Risk</div>
+      <h2 class="slide-title">What SMBs Get Wrong About Agentic AI Deployment</h2>
+      <p class="slide-desc">The technology is the easy part. These are the operational, governance, and risk factors that determine whether the program delivers or stalls.</p>
+    </div>
+    <div class="gov-grid">
+      <div class="gov-left">
+        <div class="gov-item">
+          <h4>Define Human-in-the-Loop Boundaries First</h4>
+          <p>Before deploying, document exactly which actions agents execute autonomously vs. which require human confirmation. High-impact actions (line shutdown, emergency maintenance) should never be fully autonomous without defined override protocols.</p>
+        </div>
+        <div class="gov-item">
+          <h4>Data Quality Precedes AI Quality</h4>
+          <p>Agents are only as reliable as the sensor data they consume. Bad data produces confident wrong answers. Invest 30–40% of the initial program budget in data pipeline integrity, sensor calibration, and signal validation before training models.</p>
+        </div>
+        <div class="gov-item">
+          <h4>Alert Fatigue Kills Programs</h4>
+          <p>The #1 reason AIoT programs fail within 6 months is alert fatigue — too many false positives causing operators to ignore or disable the system. Set aggressive false positive rate targets (&lt;10%) and tune before scaling.</p>
+        </div>
+        <div class="gov-item">
+          <h4>Cost Predictability Over Flexibility</h4>
+          <p>SMBs in 2026 are wary of usage-based AI pricing with unpredictable monthly costs. Structure vendor and cloud contracts with consumption caps and flat-rate components before committing to a platform.</p>
+        </div>
+        <div class="gov-item">
+          <h4>Tribal Knowledge Transfer is Non-Negotiable</h4>
+          <p>Senior technicians hold failure pattern knowledge that no dataset contains. Extract and encode this before running AI programs — structured interviews, failure mode workshops, and technician feedback loops are program-critical, not optional.</p>
+        </div>
+      </div>
+      <div class="gov-right">
+        <h3>Risk Register: Top Deployment Risks</h3>
+        <div class="risk-item">
+          <span class="risk-badge risk-high">HIGH</span>
+          <div class="risk-text">
+            <h5>Over-automation before trust is earned</h5>
+            <p>Giving agents too much autonomy before operators trust the system triggers disengagement and manual overrides that invalidate the program.</p>
+          </div>
+        </div>
+        <div class="risk-item">
+          <span class="risk-badge risk-high">HIGH</span>
+          <div class="risk-text">
+            <h5>Legacy OT/IT integration complexity</h5>
+            <p>Older PLCs and SCADA systems often lack modern APIs. Budget for integration engineering before committing to go-live timelines.</p>
+          </div>
+        </div>
+        <div class="risk-item">
+          <span class="risk-badge risk-med">MED</span>
+          <div class="risk-text">
+            <h5>Skills gap in OT + AI overlap</h5>
+            <p>The rarest skill in 2025 is the engineer who understands both operational technology and AI agent systems. Plan for upskilling and fractional expertise.</p>
+          </div>
+        </div>
+        <div class="risk-item">
+          <span class="risk-badge risk-med">MED</span>
+          <div class="risk-text">
+            <h5>Vendor lock-in on sensor + platform stack</h5>
+            <p>Proprietary sensor protocols and cloud platforms can trap you. Prioritize open standards (OPC-UA, MQTT) and portable data formats from day one.</p>
+          </div>
+        </div>
+        <div class="risk-item">
+          <span class="risk-badge risk-low">LOW</span>
+          <div class="risk-text">
+            <h5>Cybersecurity exposure on OT network</h5>
+            <p>Connecting OT equipment to cloud platforms expands attack surface. Air-gap critical controls and implement zero-trust segmentation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">09 / 10</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 10: CTA -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide slide-cta">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Stragentech · Fractional CTO Advisory</div>
+    <h2 class="cta-title">Ready to Turn Your Factory Floor<br>Into a <span>Self-Monitoring System?</span></h2>
+    <p class="cta-sub">I work with SMB manufacturers as a Fractional CTO to design and deploy Agentic AIoT programs — from sensor strategy through autonomous remediation. Structured, time-boxed engagements with clear ROI milestones.</p>
+    <div class="cta-cards">
+      <div class="cta-card">
+        <div class="icon">🗺️</div>
+        <h4>AIoT Readiness Assessment</h4>
+        <p>2-week engagement. Asset criticality map, data audit, architecture recommendations, and a sequenced roadmap you can take to your board.</p>
+      </div>
+      <div class="cta-card">
+        <div class="icon">🚀</div>
+        <h4>90-Day Fast Start</h4>
+        <p>Sensors deployed, anomaly detection live, first agentic response automated. Fixed scope, fixed deliverables, measurable MTTR delta at day 90.</p>
+      </div>
+      <div class="cta-card">
+        <div class="icon">🏗️</div>
+        <h4>Ongoing Fractional CTO</h4>
+        <p>Embedded fractional CTO advisory for 6–18 months. Technology strategy, vendor governance, team upskilling, and program oversight.</p>
+      </div>
+    </div>
+    <div class="cta-contact">
+      <a href="https://stragentech.com" class="btn-primary">Schedule a Discovery Call →</a>
+      <a href="https://linkedin.com/in/bilalkhan" class="btn-secondary">Connect on LinkedIn</a>
+    </div>
+    <div class="cta-footer">
+      <span class="brand-name">STRAGENTECH</span>
+      <span class="sep">|</span>
+      <span class="cta-name">Bilal A. Khan · Fractional CTO</span>
+      <span class="sep">|</span>
+      <span class="cta-url">stragentech.com</span>
+      <span class="sep">|</span>
+      <span style="font-size:11px;color:#334155">Harvard Agentic AI · Google AI Certified · 25+ Years Engineering Leadership</span>
+    </div>
+  </div>
+  <div class="slide-num">10 / 10</div>
+</section>
+
+</div><!-- /slides -->
+
+</body>
+</html>
