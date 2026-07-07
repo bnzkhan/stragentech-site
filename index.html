@@ -211,9 +211,11 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .testi-role{font-size:12px;color:var(--gray-400);}
 
 /* ── INSIGHTS ── */
-.blog-arrow-row{display:flex;justify-content:flex-end;gap:8px;margin-bottom:16px;}
-.blog-arrow{width:36px;height:36px;border-radius:50%;border:1px solid var(--gray-100);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gray-600);transition:all .2s;line-height:1;}
-.blog-arrow:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-pale);}
+.blog-carousel-wrap{position:relative;}
+.blog-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:10;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,0.88);backdrop-filter:blur(6px);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);box-shadow:0 2px 16px rgba(13,17,23,0.14);transition:all .2s;font-size:22px;font-weight:300;line-height:1;}
+.blog-arrow:hover{background:var(--teal);color:#fff;box-shadow:0 4px 20px rgba(15,118,110,0.28);}
+.blog-arrow-left{left:12px;}
+.blog-arrow-right{right:12px;}
 .blog-grid{display:flex;gap:18px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:4px;}
 .blog-grid::-webkit-scrollbar{display:none;}
 .blog-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;overflow:hidden;transition:all .2s;min-width:320px;flex:0 0 calc(33.333% - 12px);}
@@ -777,11 +779,9 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
       <h2>Thinking on operations, AI, and scale</h2>
       <p class="section-sub">Practical frameworks for CEOs and operators navigating AI transformation without a full-time technology leader.</p>
     </div>
-    <div class="blog-arrow-row">
-      <button class="blog-arrow" onclick="scrollBlog(-1)" aria-label="Previous">&#8592;</button>
-      <button class="blog-arrow" onclick="scrollBlog(1)" aria-label="Next">&#8594;</button>
-    </div>
-    <div class="blog-grid" id="blogGrid">
+    <div class="blog-carousel-wrap">
+      <button class="blog-arrow blog-arrow-left" onclick="scrollBlog(-1)" aria-label="Previous">&#8249;</button>
+      <div class="blog-grid" id="blogGrid">
       <div class="blog-card">
         <div class="blog-img c2">⚙️</div>
         <div class="blog-body">
@@ -827,6 +827,8 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
           <div class="blog-meta">8 min read · Coming soon</div>
         </div>
       </div>
+    </div>
+    <button class="blog-arrow blog-arrow-right" onclick="scrollBlog(1)" aria-label="Next">&#8250;</button>
     </div>
   </div>
 </section>
