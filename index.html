@@ -211,13 +211,18 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .testi-role{font-size:12px;color:var(--gray-400);}
 
 /* ── INSIGHTS ── */
-.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-.blog-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;overflow:hidden;transition:all .2s;}
+.blog-arrow-row{display:flex;justify-content:flex-end;gap:8px;margin-bottom:16px;}
+.blog-arrow{width:36px;height:36px;border-radius:50%;border:1px solid var(--gray-100);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gray-600);transition:all .2s;line-height:1;}
+.blog-arrow:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-pale);}
+.blog-grid{display:flex;gap:18px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:4px;}
+.blog-grid::-webkit-scrollbar{display:none;}
+.blog-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;overflow:hidden;transition:all .2s;min-width:320px;flex:0 0 calc(33.333% - 12px);}
 .blog-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(13,17,23,0.08);}
 .blog-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:36px;}
 .blog-img.c1{background:linear-gradient(135deg,var(--teal-pale),var(--teal-mid));}
 .blog-img.c2{background:linear-gradient(135deg,var(--blue-pale),#b3cef4);}
 .blog-img.c3{background:linear-gradient(135deg,#f0f4ff,#c5d4f4);}
+.blog-img.c4{background:linear-gradient(135deg,#e0f2fe,#93c5fd);}
 .blog-body{padding:22px;}
 .blog-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
 .blog-card h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:7px;line-height:1.45;}
@@ -262,7 +267,9 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 @media(max-width:960px){
   .hero-inner,.problem-inner,.about-1pager-grid,.contact-grid{grid-template-columns:1fr;}
   .hero-visual{display:none;}
-  .services-grid,.results-grid,.niches-grid,.eng-grid,.testi-grid,.blog-grid{grid-template-columns:1fr;}
+  .services-grid,.results-grid,.niches-grid,.eng-grid,.testi-grid{grid-template-columns:1fr;}
+  .blog-grid{flex-direction:column;}
+  .blog-card{min-width:unset;flex:unset;width:100%;}
   .process-grid{grid-template-columns:1fr 1fr;gap:24px;}
   .process-grid::before{display:none;}
   .problem-cards{grid-template-columns:1fr;}
@@ -770,16 +777,11 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
       <h2>Thinking on operations, AI, and scale</h2>
       <p class="section-sub">Practical frameworks for CEOs and operators navigating AI transformation without a full-time technology leader.</p>
     </div>
-    <div class="blog-grid">
-      <div class="blog-card">
-        <div class="blog-img c1">🛡️</div>
-        <div class="blog-body">
-          <div class="blog-tag">Fraud Prevention</div>
-          <h4>What Amazon's Fraud Prevention Systems Can Teach Your E-commerce Company About AI Automation</h4>
-          <p>The architecture patterns behind $37M in fraud savings — and how to apply them at 1/100th the scale.</p>
-          <div class="blog-meta">8 min read · Coming soon</div>
-        </div>
-      </div>
+    <div class="blog-arrow-row">
+      <button class="blog-arrow" onclick="scrollBlog(-1)" aria-label="Previous">&#8592;</button>
+      <button class="blog-arrow" onclick="scrollBlog(1)" aria-label="Next">&#8594;</button>
+    </div>
+    <div class="blog-grid" id="blogGrid">
       <div class="blog-card">
         <div class="blog-img c2">⚙️</div>
         <div class="blog-body">
@@ -802,6 +804,27 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
             <span class="blog-meta">7 min read · Free whitepaper</span>
             <a href="whitepaper-ai-readiness.html" style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Read Whitepaper →</a>
           </div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img c4">✈️</div>
+        <div class="blog-body">
+          <div class="blog-tag">Aviation & Aerospace · Whitepaper</div>
+          <h4>State of AI in Aviation: When Deterministic Certification Meets Learning Systems</h4>
+          <p>Where AI adoption in aviation stands today, why traditional certification frameworks are struggling to keep pace with ML systems, and what engineering leaders can do to close the gap.</p>
+          <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span class="blog-meta">Industry report · Free download</span>
+            <a href="State-of-AI-in-Aviation-Whitepaper.pdf" download style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Download Report →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img c1">🛡️</div>
+        <div class="blog-body">
+          <div class="blog-tag">Fraud Prevention</div>
+          <h4>What Amazon's Fraud Prevention Systems Can Teach Your E-commerce Company About AI Automation</h4>
+          <p>The architecture patterns behind $37M in fraud savings — and how to apply them at 1/100th the scale.</p>
+          <div class="blog-meta">8 min read · Coming soon</div>
         </div>
       </div>
     </div>
@@ -904,6 +927,13 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 </footer>
 
 <script>
+function scrollBlog(dir){
+  var grid=document.getElementById('blogGrid');
+  var card=grid.querySelector('.blog-card');
+  var step=card.offsetWidth+18;
+  grid.scrollBy({left:dir*step,behavior:'smooth'});
+}
+
 function handleSubmit(btn){
   document.querySelectorAll('.field-error').forEach(function(el){el.classList.remove('show');});
   document.querySelectorAll('.error').forEach(function(el){el.classList.remove('error');});
