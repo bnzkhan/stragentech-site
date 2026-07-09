@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stragentech Apps — AI Tools for Operational Intelligence</title>
-<meta name="description" content="Free AI tools for operators: Workflow Automation Analyzer, OI Readiness Scorecard, Fraud ROI Calculator, Tech Stack Gap Analyzer. Built by Stragentech.">
+<meta name="description" content="Free AI tools for operators: Workflow Automation Analyzer, OI Readiness Scorecard, Fraud ROI Calculator, Tech Debt Cost Calculator. Built by Stragentech.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -192,7 +192,8 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
     <h1>Tools and decks for<br><em>agentic operations.</em></h1>
     <p>Live AI tools, assessment scorecards, and downloadable playbooks — all free, no friction. The same frameworks I use in client engagements, available to try before you ever talk to me.</p>
     <div class="hero-meta">
-      <span class="hero-meta-item">4 live AI-powered tools</span>
+      <span class="hero-meta-item">3 live AI-powered tools</span>
+      <span class="hero-meta-item">1 tech debt cost calculator</span>
       <span class="hero-meta-item">3 downloadable decks</span>
       <span class="hero-meta-item">4 open-source GitHub repos</span>
       <span class="hero-meta-item">Everything loads instantly</span>
@@ -268,16 +269,17 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
         <div style="display:flex;gap:5px;"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
       </div>
     </div>
-    <div class="tool-card">
+    <div class="tool-card wide">
       <div class="tool-card-head">
-        <div class="tool-type">Tech Stack</div>
-        <h3>Tech Stack Gap Analyzer</h3>
-        <p>Describe your current tech stack and business context. An AI agent identifies architecture gaps, modernization opportunities, and AI readiness blockers.</p>
+        <div class="tool-type">Tech Debt Tool</div>
+        <h3>Tech Debt Cost Calculator</h3>
+        <p>Answer questions about your team, stack, and spend — no system access required. Get a directional estimate of what legacy tech debt costs you annually across code, architecture, licensing, cloud/FinOps, staffing, security, and operations.</p>
       </div>
       <div class="tool-card-foot">
-        <span class="tool-meta">~3 min · powered by Claude</span>
-        <div style="display:flex;gap:5px;"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
+        <span class="tool-meta">~5 min · deterministic calculator</span>
+        <div style="display:flex;gap:5px;"><span class="badge badge-free">Free</span></div>
       </div>
+      <div style="padding:0 22px 18px;"><a href="tech-debt-calculator.html" class="btn btn-run">▸ Open Calculator</a></div>
     </div>
     <div class="tool-card wide">
       <div class="tool-card-head">
@@ -380,30 +382,6 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
   <div id="fr-output" class="tool-output">
     <div class="output-label">// Fraud Automation ROI Analysis</div>
     <div id="fr-result"></div>
-  </div>
-</div>
-
-<!-- ══ TOOL 4: TECH STACK ANALYZER ══ -->
-<div id="tech-stack" class="live-tool">
-  <div class="live-tool-header">
-    <div>
-      <h3>Tech Stack Gap Analyzer</h3>
-      <p style="font-size:13px;color:var(--gray-400);margin-top:4px;font-weight:300;">Describe your stack and get a maturity score, critical gaps, modernization sequence, and AI blockers.</p>
-    </div>
-    <div class="badges"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
-  </div>
-  <div class="input-group">
-    <div class="input-label">Describe your current tech stack and business context</div>
-    <textarea class="tool-textarea" id="ts-input" style="min-height:140px;" placeholder="Example: 'We're a $20M e-commerce company. Backend is PHP monolith (2012) on AWS EC2. MySQL database, no caching layer. We use Shopify for storefront, Klaviyo for email, manual CSV exports for analytics. No CI/CD, deployments are manual via FTP. Team of 4 engineers. We want to add ML-based product recommendations and automate customer support...'"></textarea>
-  </div>
-  <div class="input-group">
-    <div class="input-label">Business goal or challenge (optional)</div>
-    <textarea class="tool-textarea" id="ts-goal" style="min-height:70px;" placeholder="What are you trying to achieve or what's the main pain point?"></textarea>
-  </div>
-  <button class="btn btn-run" onclick="runTechStackAnalyzer()">▸ Analyze My Stack</button>
-  <div id="ts-output" class="tool-output">
-    <div class="output-label">// Tech Stack Gap Analysis</div>
-    <div id="ts-result"></div>
   </div>
 </div>
 
@@ -684,48 +662,6 @@ Day 61–90: [third phase — first measurable result]
 RISK NOTE:
 [One honest caveat about what determines whether you hit conservative vs moderate scenario]`;
   await callClaude(prompt, document.getElementById('fr-output'), document.getElementById('fr-result'));
-}
-
-// ── TOOL 4: TECH STACK ───────────────────────────────────────────────────
-async function runTechStackAnalyzer(){
-  const stack = document.getElementById('ts-input').value.trim();
-  const goal = document.getElementById('ts-goal').value.trim();
-  if(!stack){ alert('Please describe your tech stack first.'); return; }
-  const prompt = `You are Bilal Khan, Fractional CTO (ex-Amazon, ex-Boeing, 25+ years). A prospect has shared their tech stack for analysis.
-
-TECH STACK:
-${stack}
-${goal?`\nBUSINESS GOAL: ${goal}`:''}
-
-Provide a structured analysis in this format:
-
-STACK MATURITY SCORE: [1-10]/10
-
-ARCHITECTURE ASSESSMENT:
-[2-3 sentence overall assessment]
-
-CRITICAL GAPS (must address):
-• [gap 1 — specific, not generic]
-• [gap 2]
-• [gap 3]
-
-MODERNIZATION OPPORTUNITIES (ranked by business impact):
-1. [HIGHEST IMPACT] — [specific opportunity with brief rationale]
-2. [HIGH IMPACT] — [opportunity]
-3. [MEDIUM IMPACT] — [opportunity]
-
-AI READINESS BLOCKERS:
-• [what needs to be true before AI/ML can deliver value in their context]
-• [blocker 2]
-
-RECOMMENDED MODERNIZATION SEQUENCE:
-Phase 1 (0–3 months): [specific actions]
-Phase 2 (3–6 months): [specific actions]
-Phase 3 (6–12 months): [specific actions]
-
-ESTIMATED EFFORT:
-[Rough resource/timeline estimate and what "done" looks like]`;
-  await callClaude(prompt, document.getElementById('ts-output'), document.getElementById('ts-result'));
 }
 
 // ── NAV SMOOTH SCROLL ────────────────────────────────────────────────────

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Debt Cost Calculator — Stragentech</title>
+<meta name="description" content="Free calculator estimating what legacy technical debt is really costing your organization — across code velocity, architecture, licensing, cloud/FinOps, staffing, security & compliance, and operations.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f8f9fb;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#8b92a0;
+  --gray-600:#4a5263;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --amber:#b3691a;
+  --amber-pale:#fbf1e4;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* ── NAV ── */
+nav{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:100;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.nav-brand-name{font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--ink);}
+.nav-brand-name span{color:var(--teal);}
+.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);white-space:nowrap;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
+.nav-links a:hover{color:var(--teal);background:var(--teal-pale);}
+
+/* ── HERO ── */
+.calc-hero{padding:36px 32px 24px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
+.calc-hero-inner{max-width:var(--max-w);margin:0 auto;}
+.calc-hero h1{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:400;letter-spacing:-0.3px;margin-bottom:8px;color:var(--ink);line-height:1.1;}
+.calc-hero h1 em{font-style:italic;color:var(--teal);}
+.calc-hero p{font-size:15px;color:var(--gray-400);max-width:620px;line-height:1.65;font-weight:300;margin-bottom:14px;}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;}
+.hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
+.hero-meta-item::before{content:'▸';color:var(--teal);}
+
+/* ── LAYOUT ── */
+.calc-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
+
+/* ── WIZARD ── */
+.wizard{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:24px;}
+.progress-bar{height:3px;background:var(--gray-100);border-radius:2px;margin-bottom:20px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .3s;}
+.step-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
+.step-title{font-size:19px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.step-sub{font-size:13px;color:var(--gray-400);line-height:1.6;font-weight:300;margin-bottom:20px;max-width:640px;}
+.field-group{margin-bottom:18px;}
+.field-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;display:block;}
+.field-hint{font-size:11.5px;color:var(--gray-400);font-weight:300;margin-top:5px;line-height:1.5;}
+.tool-input{width:100%;background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;padding:11px 14px;font-size:13px;color:var(--ink);font-family:var(--font-body);outline:none;transition:border-color .2s;}
+.tool-input:focus{border-color:var(--teal);}
+.tool-input::placeholder{color:var(--gray-400);}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.opt-cards{display:flex;gap:8px;flex-wrap:wrap;}
+.opt-card{font-family:var(--font-mono);font-size:11.5px;padding:10px 15px;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;transition:all .18s;color:var(--gray-600);background:var(--white);text-align:left;line-height:1.5;}
+.opt-card:hover{border-color:var(--teal);color:var(--teal);}
+.opt-card.selected{background:var(--teal-pale);border-color:var(--teal);color:var(--teal-dark);font-weight:500;}
+.opt-card .opt-sub{display:block;font-family:var(--font-body);font-size:11px;color:var(--gray-400);font-weight:300;margin-top:2px;}
+.opt-card.selected .opt-sub{color:var(--teal-dark);opacity:0.75;}
+.wizard-nav{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding-top:18px;border-top:1px solid var(--gray-100);}
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
+.btn-run{background:var(--ink);color:var(--white);font-weight:500;}
+.btn-run:hover{background:var(--teal-dark);}
+.btn-run:disabled{opacity:0.4;cursor:not-allowed;}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.btn-outline:disabled{opacity:0.3;cursor:not-allowed;}
+.btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
+.btn-teal:hover{background:var(--teal-dark);}
+.step-dots{display:flex;gap:5px;}
+.step-dot{width:6px;height:6px;border-radius:50%;background:var(--gray-200);}
+.step-dot.active{background:var(--teal);}
+.step-dot.done{background:var(--teal-mid);}
+
+/* ── RESULTS ── */
+.results{display:none;}
+.results.visible{display:block;}
+.headline-card{background:var(--ink);border-radius:10px;padding:34px 32px;margin-bottom:20px;text-align:center;}
+.headline-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.75);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.headline-num{font-family:var(--font-serif);font-size:clamp(36px,6vw,58px);color:var(--white);font-weight:400;line-height:1;margin-bottom:8px;}
+.headline-range{font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:4px;}
+.headline-note{font-size:12.5px;color:rgba(255,255,255,0.4);font-weight:300;max-width:440px;margin:14px auto 0;line-height:1.6;}
+
+.locked-wrap{position:relative;}
+.locked-content{filter:blur(7px);pointer-events:none;user-select:none;}
+.lock-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;}
+.lock-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:28px 30px;box-shadow:0 8px 40px rgba(13,17,23,0.12);max-width:420px;width:100%;}
+.lock-icon{font-size:22px;margin-bottom:10px;}
+.lock-card h3{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.lock-card p{font-size:13px;color:var(--gray-400);line-height:1.6;font-weight:300;margin-bottom:16px;}
+.lock-card .tool-input{margin-bottom:10px;}
+.lock-error{font-size:11.5px;color:#c53030;margin-top:-4px;margin-bottom:10px;display:none;}
+.lock-error.show{display:block;}
+
+.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+.breakdown{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+.cat-row{margin-bottom:14px;}
+.cat-row:last-child{margin-bottom:0;}
+.cat-row-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+.cat-name{font-size:13px;font-weight:500;color:var(--ink);}
+.cat-val{font-family:var(--font-mono);font-size:13px;color:var(--ink);font-weight:500;}
+.cat-bar-track{height:8px;background:var(--gray-50);border-radius:4px;overflow:hidden;}
+.cat-bar-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--blue));border-radius:4px;}
+.cat-total-row{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--gray-100);}
+.cat-total-row .cat-name{font-size:14px;font-weight:600;}
+.cat-total-row .cat-val{font-size:16px;}
+
+.fiveyr-card{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:24px 28px;margin-bottom:20px;}
+.fiveyr-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.fiveyr-card p{font-size:13px;color:var(--gray-400);font-weight:300;line-height:1.65;margin-bottom:14px;}
+.fiveyr-num{font-family:var(--font-serif);font-size:30px;color:var(--teal-dark);margin-bottom:2px;}
+
+.reco-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+.reco-item{padding:16px 0;border-bottom:1px solid var(--gray-100);}
+.reco-item:last-child{border-bottom:none;padding-bottom:0;}
+.reco-item:first-child{padding-top:0;}
+.reco-cat{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
+.reco-item h5{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:5px;}
+.reco-item p{font-size:13px;color:var(--gray-600);line-height:1.65;font-weight:300;}
+
+.disclaimer-box{background:var(--amber-pale);border:1px solid #ecd6b0;border-radius:10px;padding:20px 24px;margin-bottom:20px;}
+.disclaimer-box .d-tag{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.disclaimer-box p{font-size:12.5px;color:#6b4a1f;line-height:1.7;font-weight:400;margin-bottom:8px;}
+.disclaimer-box p:last-child{margin-bottom:0;}
+
+.cta-bar{background:var(--ink);border-radius:10px;padding:36px;text-align:center;margin-bottom:8px;}
+.cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.cta-bar h3{font-family:var(--font-serif);font-size:24px;color:var(--white);font-weight:400;margin-bottom:8px;}
+.cta-bar p{font-size:13.5px;color:rgba(255,255,255,0.5);max-width:440px;margin:0 auto 22px;font-weight:300;}
+.cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
+.footer-links a:hover{color:var(--teal);}
+
+@media(max-width:760px){
+  .input-row{grid-template-columns:1fr;}
+  .wizard-nav{flex-wrap:wrap;gap:10px;}
+  .headline-num{font-size:38px;}
+}
+@media(max-width:480px){
+  .nav-brand-sub{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="apps.html" class="nav-brand">
+      <span class="nav-brand-name">STRAGEN<span>TECH</span></span>
+      <span class="nav-brand-sub">/ tech debt calculator</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="apps.html">← Apps</a></li>
+      <li><a href="index.html">Main Site</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <h1>Tech Debt <em>Cost Calculator</em></h1>
+    <p>Answer questions about your stack, team, and spend — no system access required. Get a directional estimate of what legacy technical debt is costing you annually across 7 dimensions.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">7 cost dimensions</span>
+      <span class="hero-meta-item">~5 minutes</span>
+      <span class="hero-meta-item">Free — no system access needed</span>
+      <span class="hero-meta-item">Educated estimate, not an audit</span>
+    </div>
+  </div>
+</div>
+
+<div class="calc-body">
+
+  <!-- WIZARD -->
+  <div class="wizard" id="wizard">
+    <div class="progress-bar"><div class="progress-fill" id="wizProgress" style="width:12.5%"></div></div>
+    <div id="wizStep"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+
+    <div class="headline-card">
+      <div class="headline-tag">// Estimated annual cost of legacy tech debt</div>
+      <div class="headline-num" id="rHeadline">$0</div>
+      <div class="headline-range" id="rRange">Conservative $0 · Aggressive $0</div>
+      <div class="headline-note">This is your "expected" scenario, based on the industry-benchmarked model below. Enter your details to unlock the full breakdown, 5-year projection, and prioritized recommendations.</div>
+    </div>
+
+    <div class="locked-wrap">
+      <div class="locked-content" id="lockedContent">
+
+        <div class="breakdown">
+          <div class="section-tag">// cost breakdown by category</div>
+          <div id="catRows"></div>
+          <div class="cat-total-row">
+            <span class="cat-name">Total estimated annual cost</span>
+            <span class="cat-val" id="catTotalVal">$0</span>
+          </div>
+        </div>
+
+        <div class="fiveyr-card">
+          <h4>Cost of inaction — 5-year outlook</h4>
+          <p>Unaddressed technical debt tends to compound rather than stay flat, as workarounds accumulate and systems age further. Modeled here at an illustrative 18%/year compounding rate.</p>
+          <div class="fiveyr-num" id="fiveYrNum">$0</div>
+          <div class="field-hint">Cumulative estimated cost over 5 years if nothing changes.</div>
+        </div>
+
+        <div class="reco-card">
+          <div class="section-tag">// where to focus first</div>
+          <div id="recoRows"></div>
+        </div>
+
+      </div>
+
+      <div class="lock-overlay" id="lockOverlay">
+        <div class="lock-card">
+          <div class="lock-icon">🔒</div>
+          <h3>Unlock your full report</h3>
+          <p>See the category breakdown, 5-year cost-of-inaction projection, and prioritized recommendations — free.</p>
+          <input class="tool-input" id="leadName" type="text" placeholder="Your name">
+          <input class="tool-input" id="leadEmail" type="email" placeholder="Work email">
+          <input class="tool-input" id="leadCompany" type="text" placeholder="Company">
+          <div class="lock-error" id="leadError">Please enter your name and a valid work email.</div>
+          <button class="btn btn-run" style="width:100%;justify-content:center;" onclick="unlockReport()">▸ Unlock Full Report</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer-box">
+      <div class="d-tag">⚠ Important disclaimer</div>
+      <p><strong>This is an educated estimate, not an audit.</strong> Figures are directional (typically ±30–40%) and derived from self-reported inputs combined with published industry benchmarks (e.g., Stripe Developer Coefficient, McKinsey, Flexera State of the Cloud, DORA/Accelerate, CISQ cost-of-poor-quality research). We have no access to your codebase, infrastructure, or vendor contracts — nothing here constitutes a technical, security, or financial audit.</p>
+      <p>Use this to frame an internal conversation about prioritization and budget, not as a precise forecast or a substitute for formal technical due diligence. Actual costs vary significantly by codebase, team composition, and business context.</p>
+    </div>
+
+    <div class="cta-bar">
+      <div class="cta-bar-tag">// Want a real number, not an estimate?</div>
+      <h3>Get a formal tech debt assessment.</h3>
+      <p>A structured engagement reviews your actual codebase, architecture, vendor contracts, and cloud spend to replace this estimate with hard numbers and a prioritized remediation roadmap.</p>
+      <div class="cta-bar-actions">
+        <a href="index.html#contact" class="btn btn-teal">▸ Book a Free Discovery Call</a>
+        <a href="apps.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Explore More Free Tools</a>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /calc-body -->
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">Built by Bilal A. Khan · stragentech.com</span>
+    <div class="footer-links">
+      <a href="apps.html">Apps</a>
+      <a href="index.html">Main Site</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── STEP DEFINITIONS ─────────────────────────────────────────────────────
+// numeric fields collect raw numbers; radio fields collect a {value,label} via data attrs.
+const STEPS = [
+  { id:'org', tag:'Step 1 of 8 — Organization', title:'About your organization', sub:'These numbers anchor every calculation below. Estimates are fine — round to the nearest sensible figure.',
+    fields:[
+      {type:'number', key:'teamSize', label:'Engineering / IT team size', placeholder:'e.g. 25', hint:'Headcount actively building or maintaining your systems.'},
+      {type:'number', key:'salary', label:'Avg. fully-loaded salary ($/yr, optional)', placeholder:'e.g. 150000', hint:'Base + benefits + overhead. Leave blank to use a $150,000 industry default.'},
+      {type:'number', key:'revenue', label:'Annual revenue ($, optional)', placeholder:'e.g. 20000000', hint:'Used to scale downtime and security risk estimates. Skip if not comfortable sharing.'},
+      {type:'number', key:'licenseSpend', label:'Annual 3rd-party software / license spend ($)', placeholder:'e.g. 400000', hint:'SaaS, vendor platforms, commercial libraries — total annual spend.'},
+      {type:'number', key:'infraSpend', label:'Annual cloud / infrastructure spend ($)', placeholder:'e.g. 600000', hint:'AWS/Azure/GCP, data centers, managed infra.'},
+    ]},
+  { id:'velocity', tag:'Step 2 of 8 — Code & Velocity Debt', title:'Code & velocity debt', sub:'How much of your team\'s time goes to fighting the existing codebase instead of shipping new value.',
+    fields:[
+      {type:'radio', key:'debtTimeFraction', label:'Share of engineering time spent on maintenance, bug-fixing, and workarounds (vs. new features)', opts:[
+        {v:0.12,l:'Under 15%',s:'Mostly building new things'},
+        {v:0.23,l:'15–30%',s:'Industry-typical range'},
+        {v:0.38,l:'30–45%',s:'Debt is actively slowing delivery'},
+        {v:0.55,l:'45%+',s:'Firefighting is the default mode'},
+      ]},
+      {type:'radio', key:'testCoverageMultiplier', label:'Automated test coverage / confidence in the codebase', opts:[
+        {v:1.00,l:'High',s:'>70% coverage, confident deploys'},
+        {v:1.05,l:'Medium',s:'40–70% coverage'},
+        {v:1.12,l:'Low',s:'<40% coverage'},
+        {v:1.08,l:'Unknown',s:'Not measured'},
+      ]},
+    ]},
+  { id:'architecture', tag:'Step 3 of 8 — Architecture Debt', title:'Architecture debt', sub:'Coordination overhead from aging or tightly-coupled system design.',
+    fields:[
+      {type:'radio', key:'systemAgeMultiplier', label:'Age of your core systems / platform', opts:[
+        {v:1.00,l:'Under 2 years'},{v:1.05,l:'2–5 years'},{v:1.15,l:'5–10 years'},{v:1.25,l:'10+ years'},
+      ]},
+      {type:'radio', key:'couplingFreqFraction', label:'How often does a small change require touching multiple systems or teams?', opts:[
+        {v:0.02,l:'Rarely',s:'Well-modularized'},
+        {v:0.06,l:'Sometimes'},
+        {v:0.12,l:'Often',s:'Cross-team coordination is routine'},
+        {v:0.20,l:'Almost always',s:'Tightly-coupled monolith'},
+      ]},
+    ]},
+  { id:'licensing', tag:'Step 4 of 8 — 3rd-Party & Licensing', title:'Third-party & licensing costs', sub:'Shelfware, redundant tools, and unsupported vendor products quietly inflate your software spend.',
+    fields:[
+      {type:'radio', key:'redundancyPct', label:'Estimated share of licenses that are unused, redundant, or overlapping', opts:[
+        {v:0.05,l:'0–10%'},{v:0.17,l:'10–25%'},{v:0.32,l:'25–40%'},{v:0.45,l:'40%+'},
+      ]},
+      {type:'radio', key:'eolVendor', label:'Any end-of-life or unsupported vendor products still in production?', opts:[
+        {v:'no',l:'No'},{v:'unsure',l:'Unsure'},{v:'yes',l:'Yes'},
+      ]},
+    ]},
+  { id:'finops', tag:'Step 5 of 8 — FinOps / Cloud', title:'Cloud & FinOps waste', sub:'Over-provisioned, idle, or poorly-rightsized cloud spend.',
+    fields:[
+      {type:'radio', key:'wastePct', label:'Estimated share of cloud/infra spend that is waste (over-provisioned, idle, unused)', opts:[
+        {v:0.05,l:'Under 10%',s:'Actively FinOps-managed'},
+        {v:0.17,l:'10–25%'},
+        {v:0.32,l:'25–40%'},
+        {v:0.45,l:'40%+'},
+        {v:0.30,l:'Not sure',s:'We\'ll use the ~30% industry average'},
+      ]},
+    ]},
+  { id:'staffing', tag:'Step 6 of 8 — Staffing & Hiring', title:'Staffing & hiring friction', sub:'Legacy stacks make roles harder to fill and existing engineers more likely to leave.',
+    fields:[
+      {type:'number', key:'attritionRate', label:'Annual engineering attrition rate (%)', placeholder:'e.g. 15'},
+      {type:'radio', key:'timeToFillMultiplier', label:'Typical time to fill an open engineering role', opts:[
+        {v:1.00,l:'Under 30 days'},{v:1.15,l:'30–60 days'},{v:1.30,l:'60–90 days'},{v:1.50,l:'90+ days'},
+      ]},
+      {type:'radio', key:'legacyAttribPct', label:'Is the legacy stack cited as a reason for attrition or hiring difficulty?', opts:[
+        {v:0.10,l:'No'},{v:0.30,l:'Somewhat'},{v:0.60,l:'Yes, frequently'},
+      ]},
+    ]},
+  { id:'security', tag:'Step 7 of 8 — Security & Compliance', title:'Security & compliance risk', sub:'Legacy systems accumulate unpatched components and compliance gaps — this shows up as risk exposure, not a guaranteed spend.',
+    fields:[
+      {type:'radio', key:'findingsProb', label:'Known unpatched / end-of-life systems or overdue security findings', opts:[
+        {v:0.02,l:'None known'},{v:0.08,l:'A few'},{v:0.18,l:'Several'},{v:0.32,l:'Many'},
+      ]},
+      {type:'radio', key:'complianceMultiplier', label:'Applicable compliance regime', opts:[
+        {v:1.00,l:'None specific'},{v:1.15,l:'SOC 2 / ISO 27001'},{v:1.30,l:'PCI-DSS'},{v:1.40,l:'HIPAA'},{v:1.60,l:'Multiple regimes'},
+      ]},
+      {type:'radio', key:'recentIncident', label:'Security incident or material audit finding in the last 24 months?', opts:[
+        {v:'no',l:'No'},{v:'yes',l:'Yes'},
+      ]},
+    ]},
+  { id:'operations', tag:'Step 8 of 8 — Operations', title:'Operational & incident cost', sub:'Time and revenue lost to incidents attributable to legacy issues.',
+    fields:[
+      {type:'number', key:'incidentsPerMonth', label:'Production incidents per month attributable to legacy issues', placeholder:'e.g. 4'},
+      {type:'number', key:'avgResolutionHours', label:'Average resolution time per incident (hours)', placeholder:'e.g. 3'},
+      {type:'number', key:'downtimeRevenuePerHr', label:'Revenue impact per hour of downtime ($, optional)', placeholder:'e.g. 5000', hint:'Leave blank if untracked — we\'ll count responder labor cost only.'},
+    ]},
+];
+
+let answers = {};
+let step = 0;
+
+function renderStep(){
+  const s = STEPS[step];
+  const wrap = document.getElementById('wizStep');
+  let html = `<div class="step-tag">${s.tag}</div><div class="step-title">${s.title}</div><div class="step-sub">${s.sub}</div>`;
+  s.fields.forEach(f => {
+    html += `<div class="field-group"><label class="field-label">${f.label}</label>`;
+    if(f.type === 'number'){
+      const val = answers[f.key] !== undefined ? answers[f.key] : '';
+      html += `<input class="tool-input" type="number" min="0" data-key="${f.key}" placeholder="${f.placeholder||''}" value="${val}" oninput="answers['${f.key}']=this.value===''?undefined:parseFloat(this.value)">`;
+      if(f.hint) html += `<div class="field-hint">${f.hint}</div>`;
+    } else if(f.type === 'radio'){
+      html += `<div class="opt-cards" data-key="${f.key}">`;
+      f.opts.forEach(o => {
+        const selected = answers[f.key] === o.v ? ' selected' : '';
+        html += `<button type="button" class="opt-card${selected}" onclick="selectRadio('${f.key}', ${typeof o.v==='string' ? `'${o.v}'` : o.v})">${o.l}${o.s?`<span class="opt-sub">${o.s}</span>`:''}</button>`;
+      });
+      html += `</div>`;
+    }
+    html += `</div>`;
+  });
+  html += `<div class="wizard-nav">
+    <button class="btn btn-outline" onclick="prevStep()" ${step===0?'disabled':''}>← Back</button>
+    <div class="step-dots">${STEPS.map((_,i)=>`<span class="step-dot ${i<step?'done':i===step?'active':''}"></span>`).join('')}</div>
+    ${step < STEPS.length-1
+      ? `<button class="btn btn-run" onclick="nextStep()">Next →</button>`
+      : `<button class="btn btn-run" onclick="calculate()">▸ Calculate My Tech Debt Cost</button>`}
+  </div>`;
+  wrap.innerHTML = html;
+  document.getElementById('wizProgress').style.width = ((step+1)/STEPS.length*100) + '%';
+}
+
+function selectRadio(key, val){
+  answers[key] = val;
+  renderStep();
+}
+
+function stepIsValid(){
+  const s = STEPS[step];
+  if(s.id === 'org' && (!answers.teamSize || answers.teamSize <= 0)){
+    alert('Please enter your team size to continue.');
+    return false;
+  }
+  return true;
+}
+
+function nextStep(){
+  if(!stepIsValid()) return;
+  step = Math.min(step+1, STEPS.length-1);
+  renderStep();
+  document.getElementById('wizard').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function prevStep(){
+  step = Math.max(step-1, 0);
+  renderStep();
+}
+
+// ── CALCULATION ──────────────────────────────────────────────────────────
+// Constants reflect published ranges (Stripe Developer Coefficient, McKinsey,
+// Flexera State of the Cloud, DORA/Accelerate, CISQ cost-of-poor-quality) —
+// treat as illustrative benchmarks, not precise coefficients.
+const DEFAULT_SALARY = 150000;
+let results = null;
+
+function computeResults(){
+  const T = answers.teamSize || 0;
+  const S = answers.salary || DEFAULT_SALARY;
+  const revenue = answers.revenue || 0;
+  const licenseSpend = answers.licenseSpend || 0;
+  const infraSpend = answers.infraSpend || 0;
+
+  const velocityTax = T * S * (answers.debtTimeFraction||0) * (answers.testCoverageMultiplier||1);
+  const archDebt = T * S * (answers.couplingFreqFraction||0) * (answers.systemAgeMultiplier||1);
+
+  const eolAdd = answers.eolVendor === 'yes' ? 0.10 : answers.eolVendor === 'unsure' ? 0.05 : 0;
+  const licenseWaste = licenseSpend * ((answers.redundancyPct||0) + eolAdd);
+
+  const cloudWaste = infraSpend * (answers.wastePct||0);
+
+  const replacementCost = S * 0.5 * (answers.timeToFillMultiplier||1);
+  const attritionCost = ((answers.attritionRate||0)/100) * T * replacementCost * (answers.legacyAttribPct||0);
+
+  const orgSizeCost = revenue > 0
+    ? Math.min(Math.max(revenue*0.002, 75000), 2000000)
+    : (T<20?75000:T<100?250000:T<500?750000:1500000);
+  const incidentProb = (answers.findingsProb||0) * (answers.complianceMultiplier||1) * (answers.recentIncident==='yes'?1.3:1);
+  const riskExposure = incidentProb * orgSizeCost;
+
+  const responderRate = (S/2080) * 2;
+  const opsIncidentCost = (answers.incidentsPerMonth||0) * 12 * (answers.avgResolutionHours||0) * (responderRate + (answers.downtimeRevenuePerHr||0));
+
+  const expectedTotal = velocityTax+archDebt+licenseWaste+cloudWaste+attritionCost+riskExposure+opsIncidentCost;
+  const conservative = expectedTotal*0.65;
+  const aggressive = expectedTotal*1.4;
+
+  const growth = 0.18;
+  let cum = 0, val = expectedTotal;
+  for(let y=1;y<=5;y++){ cum += val; val *= (1+growth); }
+
+  return {
+    categories:[
+      {key:'velocity', name:'Code & Velocity Tax', value:velocityTax},
+      {key:'architecture', name:'Architecture Debt', value:archDebt},
+      {key:'licensing', name:'3rd-Party & Licensing Waste', value:licenseWaste},
+      {key:'finops', name:'Cloud & FinOps Waste', value:cloudWaste},
+      {key:'staffing', name:'Staffing & Hiring Friction', value:attritionCost},
+      {key:'security', name:'Security & Compliance Risk (expected value)', value:riskExposure},
+      {key:'operations', name:'Operational & Incident Cost', value:opsIncidentCost},
+    ],
+    expectedTotal, conservative, aggressive, fiveYearCum:cum,
+  };
+}
+
+const RECOMMENDATIONS = {
+  velocity:{h:'Reclaim engineering capacity', p:'Ring-fence a fixed percentage of every sprint (typically 15–20%) for debt paydown rather than treating it as leftover time. Pair with a lightweight "debt register" so the highest-drag items get tackled first, not just the loudest ones.'},
+  architecture:{h:'Reduce cross-system coordination tax', p:'Map your top 3 change patterns that require touching multiple systems and target the worst offender for decoupling. Even partial modularization (a clean interface boundary, an anti-corruption layer) meaningfully cuts coordination overhead.'},
+  licensing:{h:'Run a vendor & license rationalization pass', p:'A structured audit of your SaaS and vendor contracts at renewal typically recovers 15–30% of spend in the first cycle by cutting unused seats, overlapping tools, and unsupported products.'},
+  finops:{h:'Right-size cloud spend', p:'Start with the biggest line items: rightsizing over-provisioned instances, enabling auto-scaling, and killing orphaned resources. Most teams recover a meaningful share of "waste" within one billing cycle without a full re-architecture.'},
+  staffing:{h:'De-risk hiring & retention exposure', p:'If the legacy stack is cited as a retention or hiring blocker, prioritize the modernization work that most directly affects day-to-day developer experience — it compounds into both attrition and time-to-fill.'},
+  security:{h:'Close the highest-severity security gaps first', p:'Treat this as risk exposure, not a bill — but unpatched/EOL systems under an active compliance regime deserve a remediation timeline now, before an incident or audit forces the pace.'},
+  operations:{h:'Reduce incident frequency and MTTR', p:'Look at whether incidents cluster around a small number of legacy components — targeted hardening or replacement of the top 2–3 offenders usually delivers outsized reduction in both frequency and resolution time.'},
+};
+
+function fmtMoney(n){
+  n = Math.max(0, Math.round(n));
+  return '$' + n.toLocaleString('en-US');
+}
+
+function calculate(){
+  results = computeResults();
+  renderResults();
+  document.getElementById('results').classList.add('visible');
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function renderResults(){
+  document.getElementById('rHeadline').textContent = fmtMoney(results.expectedTotal) + ' / yr';
+  document.getElementById('rRange').textContent = `Conservative ${fmtMoney(results.conservative)} · Aggressive ${fmtMoney(results.aggressive)}`;
+
+  const maxVal = Math.max(...results.categories.map(c=>c.value), 1);
+  document.getElementById('catRows').innerHTML = results.categories.map(c => `
+    <div class="cat-row">
+      <div class="cat-row-head"><span class="cat-name">${c.name}</span><span class="cat-val">${fmtMoney(c.value)}</span></div>
+      <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${Math.max(2,(c.value/maxVal*100))}%"></div></div>
+    </div>`).join('');
+  document.getElementById('catTotalVal').textContent = fmtMoney(results.expectedTotal);
+
+  document.getElementById('fiveYrNum').textContent = fmtMoney(results.fiveYearCum);
+
+  const top = [...results.categories].sort((a,b)=>b.value-a.value).slice(0,3).filter(c=>c.value>0);
+  document.getElementById('recoRows').innerHTML = top.map(c => {
+    const r = RECOMMENDATIONS[c.key];
+    return `<div class="reco-item"><div class="reco-cat">${c.name} — ${fmtMoney(c.value)}/yr</div><h5>${r.h}</h5><p>${r.p}</p></div>`;
+  }).join('') || '<div class="reco-item"><p>Enter more of your metrics above for tailored recommendations.</p></div>';
+}
+
+// ── LEAD CAPTURE / UNLOCK ────────────────────────────────────────────────
+function unlockReport(){
+  const name = document.getElementById('leadName').value.trim();
+  const email = document.getElementById('leadEmail').value.trim();
+  const company = document.getElementById('leadCompany').value.trim();
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errEl = document.getElementById('leadError');
+  if(!name || !emailRe.test(email)){
+    errEl.classList.add('show');
+    return;
+  }
+  errEl.classList.remove('show');
+
+  document.getElementById('lockedContent').classList.remove('locked-content');
+  document.getElementById('lockOverlay').style.display = 'none';
+
+  const summary = results.categories.map(c => `${c.name}: ${fmtMoney(c.value)}`).join('; ');
+  fetch('https://formspree.io/f/xpqerpje', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      'Source':'Tech Debt Cost Calculator',
+      'Name':name,
+      'email':email,
+      'Company':company,
+      'Estimated Annual Cost (Expected)':fmtMoney(results.expectedTotal),
+      'Estimated Annual Cost Range':`${fmtMoney(results.conservative)} – ${fmtMoney(results.aggressive)}`,
+      '5-Year Cost of Inaction':fmtMoney(results.fiveYearCum),
+      'Category Breakdown':summary,
+      'Team Size':answers.teamSize,
+      'Avg Loaded Salary':answers.salary||DEFAULT_SALARY,
+    })
+  }).catch(()=>{ /* lead is already unlocked client-side; submission failure is non-blocking */ });
+}
+
+renderStep();
+</script>
+</body>
+</html>
