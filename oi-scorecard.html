@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OI Readiness Scorecard — Stragentech</title>
+<meta name="description" content="12 questions. 5 dimensions. Find out exactly where your industrial operations sit on the AI readiness curve. Free, no login required.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f8f9fb;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#8b92a0;
+  --gray-600:#4a5263;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:760px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;}
+
+nav{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:100;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-brand{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;}
+.nav-brand span{color:var(--teal);}
+.nav-back{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;padding:6px 12px;border:1px solid var(--gray-100);border-radius:5px;transition:all .18s;}
+.nav-back:hover{color:var(--teal);border-color:var(--teal-mid);}
+
+.hero{padding:48px 32px 36px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
+.hero-inner{max-width:var(--max-w);margin:0 auto;}
+.hero-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.hero h1{font-family:var(--font-serif);font-size:clamp(26px,4vw,40px);font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:12px;}
+.hero h1 em{font-style:italic;color:var(--teal);}
+.hero p{font-size:15px;color:var(--gray-400);line-height:1.75;font-weight:300;max-width:540px;margin-bottom:20px;}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;}
+.hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
+.hero-meta-item::before{content:'▸';color:var(--teal);}
+
+.body{max-width:var(--max-w);margin:0 auto;padding:40px 32px;}
+
+.progress-wrap{margin-bottom:28px;}
+.progress-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;display:flex;justify-content:space-between;}
+.progress-bar{height:4px;background:var(--gray-100);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .4s;}
+
+.dim-label{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin:28px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--gray-100);}
+.dim-label:first-of-type{margin-top:0;}
+
+.sc-q{margin-bottom:12px;padding:18px;background:var(--off-white);border:1px solid var(--gray-100);border-radius:8px;transition:border-color .2s;}
+.sc-q.answered{border-color:var(--teal-mid);background:var(--teal-pale);}
+.q-num{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.5;}
+.q-opts{display:flex;gap:7px;flex-wrap:wrap;}
+.q-opt{font-family:var(--font-mono);font-size:11px;padding:7px 13px;border:1px solid var(--gray-200);border-radius:4px;cursor:pointer;transition:all .18s;color:var(--gray-600);background:var(--white);line-height:1.4;}
+.q-opt:hover{border-color:var(--teal);color:var(--teal);}
+.q-opt.selected{background:var(--teal-pale);border-color:var(--teal);color:var(--teal-dark);font-weight:500;}
+
+.sc-actions{display:none;margin-top:28px;padding:24px;background:var(--off-white);border:1px solid var(--gray-100);border-radius:8px;}
+.sc-actions-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+.lead-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;}
+.tool-input{width:100%;background:var(--white);border:1px solid var(--gray-100);border-radius:6px;padding:10px 14px;font-size:13px;color:var(--ink);font-family:var(--font-body);outline:none;transition:border-color .2s;}
+.tool-input:focus{border-color:var(--teal);}
+.tool-input::placeholder{color:var(--gray-400);}
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 22px;border-radius:5px;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;text-decoration:none;}
+.btn-run{background:var(--ink);color:var(--white);font-weight:500;}
+.btn-run:hover{background:var(--teal-dark);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+
+.tool-output{background:var(--off-white);border:1px solid var(--gray-100);border-radius:8px;padding:20px;min-height:120px;font-size:13px;line-height:1.8;color:var(--gray-600);font-family:var(--font-body);white-space:pre-wrap;margin-top:20px;display:none;}
+.tool-output.visible{display:block;}
+.tool-output.loading{color:var(--teal);}
+.output-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+
+.cta-bar{background:var(--ink);border-radius:10px;padding:36px;text-align:center;margin-top:40px;}
+.cta-bar p{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.cta-bar h3{font-family:var(--font-serif);font-size:22px;color:var(--white);font-weight:400;margin-bottom:8px;}
+.cta-bar span{font-size:13px;color:rgba(255,255,255,0.45);display:block;margin-bottom:20px;font-weight:300;}
+.cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+footer{border-top:1px solid var(--gray-100);padding:18px 32px;margin-top:48px;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
+.footer-links a:hover{color:var(--teal);}
+
+@media(max-width:640px){
+  .lead-row{grid-template-columns:1fr;}
+  .hero,.body{padding-left:20px;padding-right:20px;}
+  nav{padding:0 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://www.stragentech.com" class="nav-brand">STRAGEN<span>TECH</span></a>
+    <a href="apps.html" class="nav-back">← Back to Tools</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Free Scorecard · No Login Required</div>
+    <h1>Operational Intelligence<br><em>Readiness Scorecard</em></h1>
+    <p>12 questions across 5 dimensions of OI maturity. Find out exactly where your industrial operations sit on the AI readiness curve — with gap identification and prioritized next steps.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">~3 minutes</span>
+      <span class="hero-meta-item">5 dimensions scored</span>
+      <span class="hero-meta-item">AI-interpreted results</span>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Progress</span>
+      <span id="progress-count">0 / 12 answered</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="sc-progress" style="width:0%"></div></div>
+  </div>
+
+  <div id="scorecard-questions"></div>
+
+  <div class="sc-actions" id="sc-actions">
+    <div class="sc-actions-label">Get your full scored report (optional)</div>
+    <div class="lead-row">
+      <input class="tool-input" id="sc-name" type="text" placeholder="Your name">
+      <input class="tool-input" id="sc-email" type="email" placeholder="Work email">
+      <input class="tool-input" id="sc-company" type="text" placeholder="Company">
+    </div>
+    <button class="btn btn-run" onclick="runScorecardAnalysis()">▸ Get My AI-Interpreted Results</button>
+  </div>
+
+  <div id="sc-output" class="tool-output">
+    <div class="output-label">// OI Readiness Scorecard Results</div>
+    <div id="sc-result"></div>
+  </div>
+
+  <div class="cta-bar">
+    <p>// Ready to act on the gaps?</p>
+    <h3>Turn your scorecard into a roadmap.</h3>
+    <span>A 3-week Operational Intelligence Assessment translates your gaps into a prioritized 90-day implementation plan.</span>
+    <div class="cta-actions">
+      <a href="https://www.stragentech.com/#contact" class="btn btn-run">▸ Book a Free Discovery Call</a>
+      <a href="apps.html" class="btn btn-outline" style="color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.2);">← Back to All Tools</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">Stragentech · stragentech.com</span>
+    <div class="footer-links">
+      <a href="apps.html">Tools</a>
+      <a href="https://www.stragentech.com">Main Site ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const SC_QUESTIONS = [
+  {dim:'Data Infrastructure',q:'How is your operational data currently collected and stored?',opts:['Manual exports / spreadsheets','Basic databases, no real-time','Real-time pipelines, some analytics','Unified data platform, near-real-time']},
+  {dim:'Data Infrastructure',q:'How quickly can you detect an anomaly in your operations?',opts:['Days (discovered reactively)','Hours (manual monitoring)','Minutes (alerting system)','Seconds (automated detection)']},
+  {dim:'Automation Maturity',q:'How are your repetitive operational tasks currently handled?',opts:['Entirely manual','Some scripts/rules','Partial automation, many manual steps','Mostly automated with exceptions handled']},
+  {dim:'Automation Maturity',q:'When an operational issue is detected, what happens next?',opts:['Email/Slack to a human who decides','Ticket created, human reviews','Partial auto-routing, human resolves','Automated triage + human only for edge cases']},
+  {dim:'AI & ML Readiness',q:'What is your current use of AI or ML in operations?',opts:['None — not explored yet','Exploring / running pilots','One or two production use cases','Multiple production AI systems']},
+  {dim:'AI & ML Readiness',q:'Do you have labeled historical data for your main operational problems?',opts:['No historical data available','Some data, poorly labeled','Decent data, partially labeled','Rich labeled dataset maintained']},
+  {dim:'Team Capability',q:'Does your team have AI/ML implementation experience?',opts:['No internal expertise','Basic familiarity, no builders','One or two engineers with ML skills','Dedicated AI/data engineering capability']},
+  {dim:'Team Capability',q:'How does your leadership think about AI investment?',opts:['Not a priority yet','Interested but no budget','Budget approved, strategy unclear','Clear strategy, active investment']},
+  {dim:'Governance & Compliance',q:'Do you have documented processes for your key operational workflows?',opts:['Little to no documentation','Some documented, inconsistently followed','Most documented, sometimes followed','Fully documented, consistently enforced']},
+  {dim:'Governance & Compliance',q:'How do you handle false positives in automated decisions?',opts:['No automation yet','No formal process','Ad-hoc human review','Structured HITL review with feedback loop']},
+  {dim:'Business Impact',q:'What is the estimated annual cost of your current operational inefficiencies?',opts:['Under $100K','$100K–$500K','$500K–$2M','Over $2M']},
+  {dim:'Business Impact',q:'How urgently does your business need to improve operational efficiency?',opts:['Nice to have, no timeline','This year sometime','Next 90 days','This is a critical priority right now']},
+];
+
+let sc_answers = {};
+
+function renderScorecard(){
+  const container = document.getElementById('scorecard-questions');
+  container.innerHTML = '';
+  let lastDim = '';
+  SC_QUESTIONS.forEach((q, i) => {
+    if(q.dim !== lastDim){
+      const label = document.createElement('div');
+      label.className = 'dim-label';
+      label.textContent = q.dim;
+      container.appendChild(label);
+      lastDim = q.dim;
+    }
+    const div = document.createElement('div');
+    div.className = 'sc-q';
+    div.id = 'q-' + i;
+    div.innerHTML = `<div class="q-num">Q${i+1} of ${SC_QUESTIONS.length}</div><div class="q-text">${q.q}</div><div class="q-opts">${q.opts.map((o,j)=>`<button class="q-opt" onclick="selectAnswer(${i},${j},this)">${o}</button>`).join('')}</div>`;
+    container.appendChild(div);
+  });
+}
+
+function selectAnswer(qi, oi, el){
+  el.closest('.q-opts').querySelectorAll('.q-opt').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('q-'+qi).classList.add('answered');
+  sc_answers[qi] = oi;
+  const answered = Object.keys(sc_answers).length;
+  const pct = answered / SC_QUESTIONS.length * 100;
+  document.getElementById('sc-progress').style.width = pct + '%';
+  document.getElementById('progress-count').textContent = answered + ' / ' + SC_QUESTIONS.length + ' answered';
+  if(answered >= SC_QUESTIONS.length){
+    const actions = document.getElementById('sc-actions');
+    actions.style.display = 'block';
+    actions.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+}
+
+async function runScorecardAnalysis(){
+  const dims = {};
+  SC_QUESTIONS.forEach((q, i) => {
+    if(!dims[q.dim]) dims[q.dim] = [];
+    dims[q.dim].push({q: q.q, a: q.opts[sc_answers[i] || 0]});
+  });
+  const summary = Object.entries(dims).map(([d,qs]) =>
+    `${d}:\n${qs.map(q => `  Q: ${q.q}\n  A: ${q.a}`).join('\n')}`
+  ).join('\n\n');
+
+  const prompt = `You are Bilal Khan, Fractional CTO specializing in Agentic Operations Intelligence for industrial manufacturers and managed services companies. A potential client has completed an OI Readiness Scorecard. Analyze their responses and provide a scored report.
+
+SCORECARD RESPONSES:
+${summary}
+
+Provide a structured report in this exact format:
+
+OVERALL READINESS LEVEL: [Reactive / Developing / Capable / Advanced] — [score]/100
+
+DIMENSION SCORES:
+• Data Infrastructure: [score]/20 — [one-line summary]
+• Automation Maturity: [score]/20 — [one-line summary]
+• AI & ML Readiness: [score]/20 — [one-line summary]
+• Team Capability: [score]/20 — [one-line summary]
+• Governance & Compliance: [score]/20 — [one-line summary]
+
+KEY STRENGTHS:
+• [strength 1]
+• [strength 2]
+
+HIGHEST-PRIORITY GAPS:
+1. [most critical gap — specific and actionable]
+2. [second gap]
+3. [third gap]
+
+RECOMMENDED STARTING POINT:
+[Based on their specific responses, what is the single best first initiative — be specific to industrial/IoT operations, not generic]
+
+ESTIMATED TIME TO FIRST MEASURABLE RESULT:
+[Realistic timeline estimate with what success looks like for an industrial SMB]`;
+
+  const outputEl = document.getElementById('sc-output');
+  const resultEl = document.getElementById('sc-result');
+  outputEl.classList.add('visible', 'loading');
+  resultEl.textContent = 'Analyzing your responses...';
+
+  try{
+    const res = await fetch('/api/analyze', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1200,
+        messages: [{role: 'user', content: prompt}]
+      })
+    });
+    const data = await res.json();
+    outputEl.classList.remove('loading');
+    resultEl.textContent = data.content?.map(b => b.text || '').join('') || 'No response received.';
+  } catch(e){
+    outputEl.classList.remove('loading');
+    resultEl.textContent = 'Error connecting to AI. Please try again or contact bilal@stragentech.com';
+  }
+}
+
+renderScorecard();
+</script>
+</body>
+</html>
