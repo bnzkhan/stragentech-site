@@ -212,13 +212,13 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 
 /* ── INSIGHTS ── */
 .blog-carousel-wrap{position:relative;}
-.blog-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:10;width:52px;height:52px;border-radius:50%;border:2px solid rgba(255,255,255,0.35);background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;text-shadow:0 1px 4px rgba(13,17,23,0.5);box-shadow:0 2px 16px rgba(13,17,23,0.1);transition:all .2s;font-size:32px;font-weight:700;line-height:1;}
-.blog-arrow:hover{background:rgba(15,118,110,0.75);border-color:var(--teal);box-shadow:0 4px 20px rgba(15,118,110,0.35);}
+.blog-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:10;width:56px;height:56px;border-radius:50%;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);text-shadow:0 0 8px rgba(255,255,255,0.9),0 0 2px rgba(255,255,255,0.9);transition:all .2s;font-size:42px;font-weight:900;line-height:1;}
+.blog-arrow:hover{color:var(--teal);text-shadow:0 0 10px rgba(255,255,255,0.9);}
 .blog-arrow-left{left:12px;}
 .blog-arrow-right{right:12px;}
 .blog-grid{display:flex;gap:18px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:4px;}
 .blog-grid::-webkit-scrollbar{display:none;}
-.blog-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;overflow:hidden;transition:all .2s;min-width:300px;flex:0 0 calc(48% - 9px);}
+.blog-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;overflow:hidden;transition:all .2s;min-width:240px;flex:0 0 calc(36% - 9px);}
 .blog-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(13,17,23,0.08);}
 .blog-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:36px;}
 .blog-img.c1{background:linear-gradient(135deg,var(--teal-pale),var(--teal-mid));}
@@ -750,26 +750,14 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
         </div>
       </div>
       <div class="blog-card">
-        <div class="blog-img c3">🚀</div>
+        <div class="blog-img c6">🔩</div>
         <div class="blog-body">
-          <div class="blog-tag">AI Transformation · Whitepaper</div>
-          <h4>5 Things We Learned About AI Readiness from Modernizing Boeing's Legacy Stack</h4>
-          <p>Lessons from taking 40+ legacy applications and a 30% compliance posture to 95% in 18 months.</p>
+          <div class="blog-tag">Tech Debt · Whitepaper</div>
+          <h4>Tech Debt Is an Operations Problem: The Hidden Cost Your P&L Isn't Capturing</h4>
+          <p>Legacy code isn't just a developer headache — it's slowing your operations, increasing your incident rate, and blocking every AI initiative you try to launch. Here's how to measure it.</p>
           <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-            <span class="blog-meta">7 min read · Free whitepaper</span>
-            <a href="whitepaper-ai-readiness.html" style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Read Whitepaper →</a>
-          </div>
-        </div>
-      </div>
-      <div class="blog-card">
-        <div class="blog-img c4">✈️</div>
-        <div class="blog-body">
-          <div class="blog-tag">Aviation & Aerospace · Whitepaper</div>
-          <h4>State of AI in Aviation: When Deterministic Certification Meets Learning Systems</h4>
-          <p>Where AI adoption in aviation stands today, why traditional certification frameworks are struggling to keep pace with ML systems, and what engineering leaders can do to close the gap.</p>
-          <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-            <span class="blog-meta">Industry report · Free download</span>
-            <a href="State-of-AI-in-Aviation-Whitepaper.pdf" download style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Download Report →</a>
+            <span class="blog-meta">Whitepaper · Free download</span>
+            <a href="Tech_Debt_and_Operations_Whitepaper.pdf" download style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Download Whitepaper →</a>
           </div>
         </div>
       </div>
@@ -786,14 +774,26 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
         </div>
       </div>
       <div class="blog-card">
-        <div class="blog-img c6">🔩</div>
+        <div class="blog-img c3">🚀</div>
         <div class="blog-body">
-          <div class="blog-tag">Tech Debt · Whitepaper</div>
-          <h4>Tech Debt Is an Operations Problem: The Hidden Cost Your P&L Isn't Capturing</h4>
-          <p>Legacy code isn't just a developer headache — it's slowing your operations, increasing your incident rate, and blocking every AI initiative you try to launch. Here's how to measure it.</p>
+          <div class="blog-tag">Digital Transformation · Whitepaper</div>
+          <h4>5 Things We Learned from Modernizing Boeing's Legacy Stack</h4>
+          <p>Lessons from taking 40+ legacy applications and a 30% compliance posture to 95% in 18 months.</p>
           <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-            <span class="blog-meta">Whitepaper · Free download</span>
-            <a href="Tech_Debt_and_Operations_Whitepaper.pdf" download style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Download Whitepaper →</a>
+            <span class="blog-meta">7 min read · Free whitepaper</span>
+            <a href="whitepaper-ai-readiness.html" style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Read Whitepaper →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img c4">✈️</div>
+        <div class="blog-body">
+          <div class="blog-tag">Aviation & Aerospace · Whitepaper</div>
+          <h4>State of AI in Aviation: When Deterministic Certification Meets Learning Systems</h4>
+          <p>Where AI adoption in aviation stands today, why traditional certification frameworks are struggling to keep pace with ML systems, and what engineering leaders can do to close the gap.</p>
+          <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span class="blog-meta">Industry report · Free download</span>
+            <a href="State-of-AI-in-Aviation-Whitepaper.pdf" download style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Download Report →</a>
           </div>
         </div>
       </div>
