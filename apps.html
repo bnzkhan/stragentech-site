@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) — IMPORTANT: replace G-XXXXXXXXXX with real Measurement ID before deploying -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stragentech Apps — AI Tools for Operational Intelligence</title>
@@ -333,6 +341,7 @@ async function callClaude(prompt, outputEl, resultEl){
     outputEl.classList.remove('loading');
     const text = data.content?.map(b=>b.text||'').join('') || 'No response received.';
     resultEl.textContent = text;
+    if(typeof gtag!=='undefined') gtag('event','tool_completed',{'tool_name':'ops_workflow_analyzer'});
   } catch(e){
     outputEl.classList.remove('loading');
     resultEl.textContent = 'Error connecting to AI. Please try again or contact bilal@stragentech.com';
@@ -381,6 +390,17 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
     if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+
+// ── GA4 CTA CLICK TRACKING ───────────────────────────────────────────────
+document.querySelectorAll('.btn').forEach(function(el){
+  el.addEventListener('click', function(){
+    if(typeof gtag==='undefined') return;
+    gtag('event','cta_click',{
+      'cta_label': el.textContent.trim().replace(/[→↗▸]/g,'').trim(),
+      'page_location': window.location.pathname
+    });
   });
 });
 </script>

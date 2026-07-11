@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) — IMPORTANT: replace G-XXXXXXXXXX with real Measurement ID before deploying -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stragentech — Agentic Operational Intelligence</title>
@@ -924,6 +932,7 @@ function handleSubmit(btn){
   if(!company.value.trim()){company.classList.add('error');document.getElementById('companyErr').classList.add('show');valid=false;}
   if(!situation.value){situation.classList.add('error');document.getElementById('situationErr').classList.add('show');valid=false;}
   if(!valid)return;
+  if(typeof gtag!=='undefined') gtag('event','contact_form_submit',{'situation_type':situation.value});
   btn.textContent='Sending…';
   btn.disabled=true;
   fetch('https://formspree.io/f/xpqerpje',{
@@ -959,6 +968,17 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
     if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); document.getElementById('navLinks').classList.remove('open'); }
+  });
+});
+
+// ── GA4 CTA CLICK TRACKING ───────────────────────────────────────────────
+document.querySelectorAll('.btn').forEach(function(el){
+  el.addEventListener('click', function(){
+    if(typeof gtag==='undefined') return;
+    gtag('event','cta_click',{
+      'cta_label': el.textContent.trim().replace(/[→↗▸]/g,'').trim(),
+      'page_location': window.location.pathname
+    });
   });
 });
 </script>
