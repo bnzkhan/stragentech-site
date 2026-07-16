@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stragentech — Email Signature</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; }
+  body { font-family: 'Exo 2', sans-serif; background: #eef0ee; color: #163C5E; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1080px; margin: 0 auto; padding: 56px 40px 90px; }
+  .h-eyebrow { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #2E8FC4; font-weight: 600; margin: 0 0 8px; }
+  h1 { font-size: 30px; font-weight: 800; margin: 0 0 6px; letter-spacing: 0.01em; }
+  .sub { color: #6B7A86; font-size: 15px; margin: 0 0 40px; max-width: 640px; line-height: 1.5; }
+  h2 { font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #8392A0; font-weight: 600; margin: 0 0 16px; }
+  .section { margin-bottom: 44px; }
+  .card { background: #fff; border: 1px solid #e2e6e4; border-radius: 14px; padding: 0; overflow: hidden; }
+  .card-pad { padding: 30px 34px; }
+  .swatch-row { display: flex; flex-wrap: wrap; gap: 18px; }
+  .asset { background: #fff; border: 1px solid #e2e6e4; border-radius: 12px; padding: 22px 26px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .asset.dark { background: #10314f; border-color: #10314f; }
+  .asset .tag { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #98a3ab; }
+  .asset.dark .tag { color: #6f8aa6; }
+  .divider { height: 1px; background: #e2e6e4; margin: 0; }
+  /* ---- signature mock ---- */
+  .mailwrap { font-family: Arial, Helvetica, sans-serif; }
+  .sig-table { border-collapse: collapse; }
+  .sig-name { font-size: 17px; font-weight: 700; color: #163C5E; line-height: 1.2; }
+  .sig-title { font-size: 13.5px; color: #2E8FC4; font-weight: 600; padding-top: 2px; }
+  .sig-meta { font-size: 12.5px; color: #5d6b76; line-height: 1.7; padding-top: 8px; }
+  .sig-meta a { color: #5d6b76; text-decoration: none; }
+  .sig-meta .lbl { color: #9aa6af; display: inline-block; width: 14px; }
+  .note { font-size: 13px; color: #6B7A86; line-height: 1.6; }
+  .note code { background: #f1f3f1; padding: 1px 6px; border-radius: 5px; font-size: 12px; color: #2c5f86; }
+  .specrow { display: flex; gap: 10px; align-items: baseline; font-size: 13px; padding: 7px 0; border-bottom: 1px dashed #e7eae8; }
+  .specrow .k { width: 150px; color: #8392A0; flex: none; }
+  .specrow .v { color: #163C5E; font-weight: 500; }
+  .pill { display: inline-block; background: #eaf4fa; color: #2168A8; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; letter-spacing: 0.03em; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="logo-marks.jsx"></script>
+</head>
+<body>
+<div class="page">
+  <p class="h-eyebrow">Stragentech · Brand Asset</p>
+  <h1>Email Signature Logo</h1>
+  <p class="sub">The horizontal lockup, optimized for email signatures. Recommended display height is <strong>44–56&nbsp;px</strong> (export at 2×–3× for retina). Use the solid version on white, the light version on dark backgrounds.</p>
+
+  <!-- THE ASSET -->
+  <div class="section">
+    <h2>Variant 1 · Compass / Mesh / Gear</h2>
+    <div class="swatch-row">
+      <div class="asset">
+        <div id="v1-light"></div>
+        <div class="tag">On white · primary</div>
+      </div>
+      <div class="asset dark">
+        <div id="v1-dark"></div>
+        <div class="tag">On navy · reversed</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Variant 2 · Compass / Brain / Gear <span class="pill">agentic = brain</span></h2>
+    <div class="swatch-row">
+      <div class="asset">
+        <div id="v2-light"></div>
+        <div class="tag">On white · primary</div>
+      </div>
+      <div class="asset dark">
+        <div id="v2-dark"></div>
+        <div class="tag">On navy · reversed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IN CONTEXT -->
+  <div class="section">
+    <h2>In context — signature template</h2>
+    <div class="card">
+      <div class="card-pad mailwrap">
+        <!-- Layout A: logo left, details right -->
+        <table class="sig-table" cellpadding="0" cellspacing="0" role="presentation">
+          <tr>
+            <td style="padding-right:22px; border-right:2px solid #e2e6e4; vertical-align:middle;">
+              <div id="sig-inline"></div>
+            </td>
+            <td style="padding-left:22px; vertical-align:middle;">
+              <div class="sig-name">Bilal A. Khan</div>
+              <div class="sig-title">Fractional CTO &amp; Advisor</div>
+              <div class="sig-meta">
+                <span class="lbl">✉</span><a href="mailto:bilal.khan@stragentech.com">bilal.khan@stragentech.com</a><br />
+                <span class="lbl">☎</span>+1 (262) 422-9214<br />
+                <span class="lbl">⬡</span><a href="https://www.stragentech.com">www.stragentech.com</a>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="divider"></div>
+      <div class="card-pad mailwrap">
+        <!-- Layout B: stacked -->
+        <table class="sig-table" cellpadding="0" cellspacing="0" role="presentation">
+          <tr><td style="padding-bottom:12px;"><div id="sig-inline2"></div></td></tr>
+          <tr><td>
+            <div class="sig-name">Bilal A. Khan <span style="font-weight:400;color:#9aa6af;">·</span> <span style="font-size:14px;color:#2E8FC4;font-weight:600;">Fractional CTO &amp; Advisor</span></div>
+            <div class="sig-meta">
+              <a href="mailto:bilal.khan@stragentech.com">bilal.khan@stragentech.com</a>&nbsp;&nbsp;·&nbsp;&nbsp;+1 (262) 422-9214&nbsp;&nbsp;·&nbsp;&nbsp;<a href="https://www.stragentech.com">stragentech.com</a>
+            </div>
+          </td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECS -->
+  <div class="section">
+    <h2>Specs &amp; usage</h2>
+    <div class="card">
+      <div class="card-pad">
+        <div class="specrow"><div class="k">Display height</div><div class="v">44–56 px (signature) · keep aspect ratio</div></div>
+        <div class="specrow"><div class="k">Export resolution</div><div class="v">2× or 3× PNG for retina (e.g. 120 px tall source)</div></div>
+        <div class="specrow"><div class="k">Clear space</div><div class="v">≥ half the hex height on all sides</div></div>
+        <div class="specrow"><div class="k">File format</div><div class="v">PNG (email) · SVG (web) — both delivered</div></div>
+        <div class="specrow" style="border-bottom:none;"><div class="k">Do not</div><div class="v">recolor · stretch · add shadows · place on busy photos</div></div>
+        <p class="note" style="margin-top:18px;">Tip: in Gmail / Outlook, host the PNG at a public URL and reference it with an <code>&lt;img&gt;</code> tag inside the signature, sizing it with <code>height="48"</code>. PNG files are in the <code>signature-assets/</code> folder — <span class="pill">96px (2×)</span> &nbsp;<span class="pill">144px (3×)</span>, on white and reversed-on-navy. Ask me for any other size.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/babel">
+  const triadV1 = { top: ICONS.CompassIcon, bl: ICONS.MeshIcon, br: ICONS.GearIcon };
+  const triadV2 = { top: ICONS.CompassIcon, bl: ICONS.BrainIcon, br: ICONS.GearIcon };
+
+  function HSig({ mark = 96, mode = "solid", uid, light = false, word = 78, tag = 23, icons = triadV1 }) {
+    return (
+      <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: `${mark * 0.07}px` }}>
+        <Triad mode={mode} icons={icons} uid={uid} size={mark} />
+        <WM light={light} word={word} tag={tag} />
+      </div>
+    );
+  }
+  // wordmark with light/dark variants
+  function WM({ light, word, tag }) {
+    const primary = light ? "#EAF4FA" : "#163C5E";
+    const accent = "#2E8FC4";
+    const tagcol = light ? "#8FB3CE" : "#6B7A86";
+    return (
+      <div style={{ textAlign: "left", lineHeight: 1 }}>
+        <div style={{ fontFamily: "'Exo 2', sans-serif", fontWeight: 800, fontSize: `${word}px`, letterSpacing: "0.005em", whiteSpace: "nowrap" }}>
+          <span style={{ color: primary }}>STRAGEN</span><span style={{ color: accent, fontWeight: 600 }}>TECH</span>
+        </div>
+        <div style={{ fontFamily: "'Exo 2', sans-serif", fontWeight: 500, fontSize: `${tag}px`, letterSpacing: "0.232em", color: tagcol, marginTop: "12px", whiteSpace: "nowrap" }}>
+          AGENTIC TECHNOLOGY PARTNERS
+        </div>
+      </div>
+    );
+  }
+
+  const r = (id, el) => ReactDOM.createRoot(document.getElementById(id)).render(el);
+  r("v1-light", <HSig mark={150} mode="solid" uid="v1l" icons={triadV1} />);
+  r("v1-dark", <HSig mark={150} mode="solid" uid="v1d" light={true} icons={triadV1} />);
+  r("v2-light", <HSig mark={150} mode="solid" uid="v2l" icons={triadV2} />);
+  r("v2-dark", <HSig mark={150} mode="solid" uid="v2d" light={true} icons={triadV2} />);
+  // inline, signature-scale (small): mark ~76px tall — uses Variant 1
+  r("sig-inline", <HSig mark={92} mode="solid" uid="si" word={44} tag={12.6} icons={triadV1} />);
+  r("sig-inline2", <HSig mark={84} mode="solid" uid="si2" word={40} tag={11.6} icons={triadV1} />);
+</script>
+</body>
+</html>

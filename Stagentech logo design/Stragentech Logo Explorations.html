@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stragentech — Logo Explorations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { font-family: 'Exo 2', sans-serif; background: #f4f5f3; }
+  .board-pad { padding: 30px 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; box-sizing: border-box; }
+  .caption { font-family: 'Exo 2', sans-serif; font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #98a3ab; margin-top: 6px; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="logo-marks.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { useState } = React;
+
+  function Board({ children, caption, bg = "#ffffff" }) {
+    return (
+      <div className="board-pad" style={{ background: bg }}>
+        {children}
+        {caption && <div className="caption">{caption}</div>}
+      </div>
+    );
+  }
+
+  function App() {
+    return (
+      <DesignCanvas>
+        <DCSection id="horizontal" title="Horizontal lockup" subtitle="Mark left · STRAGENTECH right · tagline beneath the name (matches your reference)">
+
+          <DCArtboard id="h1" label="H1 · Solid — Compass / Mesh / Gear" width={980} height={330}>
+            <Board caption="Filled hexes · white knockout glyphs">
+              <StragentechLogo
+                layout="horizontal" mode="solid" uid="h1" markSize={235}
+                icons={{ top: ICONS.CompassIcon, bl: ICONS.MeshIcon, br: ICONS.GearIcon }}
+              />
+            </Board>
+          </DCArtboard>
+
+          <DCArtboard id="h2" label="H2 · Wireframe — Target / Neural / Chip" width={980} height={330}>
+            <Board caption="Outline hexes · node-line glyphs">
+              <StragentechLogo
+                layout="horizontal" mode="wire" uid="h2" markSize={235}
+                icons={{ top: ICONS.TargetIcon, bl: ICONS.NeuralHubIcon, br: ICONS.ChipIcon }}
+              />
+            </Board>
+          </DCArtboard>
+
+          <DCArtboard id="h3" label="H3 · Solid — Target / Mesh / Chip" width={980} height={330}>
+            <Board caption="Filled hexes · alt glyph mix">
+              <StragentechLogo
+                layout="horizontal" mode="solid" uid="h3" markSize={235}
+                icons={{ top: ICONS.TargetIcon, bl: ICONS.MeshIcon, br: ICONS.ChipIcon }}
+              />
+            </Board>
+          </DCArtboard>
+
+        </DCSection>
+
+        <DCSection id="examples" title="Stacked lockup" subtitle="Tight cellular hex triad above the wordmark · Strategy / Agentic / Technology">
+
+          <DCArtboard id="ex1" label="01 · Wireframe — Target / Neural / Chip" width={520} height={560}>
+            <Board caption="Outline hexes · node-line glyphs">
+              <StragentechLogo
+                mode="wire" uid="w1" markSize={350} wordScale={0.94}
+                icons={{ top: ICONS.TargetIcon, bl: ICONS.NeuralHubIcon, br: ICONS.ChipIcon }}
+              />
+            </Board>
+          </DCArtboard>
+
+          <DCArtboard id="ex2" label="02 · Solid gradient — Compass / Mesh / Gear" width={520} height={560}>
+            <Board caption="Filled hexes · white knockout glyphs">
+              <StragentechLogo
+                mode="solid" uid="s2" markSize={350} wordScale={0.94}
+                icons={{ top: ICONS.CompassIcon, bl: ICONS.MeshIcon, br: ICONS.GearIcon }}
+              />
+            </Board>
+          </DCArtboard>
+
+          <DCArtboard id="ex3" label="03 · Tinted — Compass / Robot / Brackets" width={520} height={560}>
+            <Board caption="Soft-tint hexes · robot-face for Agentic">
+              <StragentechLogo
+                mode="tint" uid="t3" markSize={350} wordScale={0.94}
+                icons={{ top: ICONS.CompassIcon, bl: ICONS.RobotIcon, br: ICONS.BracketsIcon }}
+              />
+            </Board>
+          </DCArtboard>
+
+          <DCArtboard id="ex4" label="04 · Solid — Bullseye+Arrow / Robot / Chip" width={520} height={560}>
+            <Board caption="Filled hexes · bullseye + robot-face">
+              <StragentechLogo
+                mode="solid" uid="s4" markSize={350} wordScale={0.94}
+                icons={{ top: ICONS.BullseyeIcon, bl: ICONS.RobotIcon, br: ICONS.ChipIcon }}
+              />
+            </Board>
+          </DCArtboard>
+
+        </DCSection>
+
+        <DCSection id="annotated" title="Concept map" subtitle="Which hex means what">
+          <DCArtboard id="ann" label="Annotated — Strategy · Agentic · Technology" width={560} height={560}>
+            <Board caption="Apex = Strategy · Lower-left = Agentic · Lower-right = Technology" bg="#fbfcfb">
+              <StragentechLogo
+                mode="wire" uid="ann" markSize={400} wordScale={0.9} tagline={false} labels={true}
+                icons={{ top: ICONS.TargetIcon, bl: ICONS.NeuralHubIcon, br: ICONS.ChipIcon }}
+              />
+            </Board>
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection id="marks" title="Mark only" subtitle="Icon without wordmark — for avatars / favicons">
+          <DCArtboard id="m1" label="Mark · Wireframe" width={340} height={340}>
+            <Board bg="#ffffff">
+              <Triad mode="wire" uid="mw" size={280}
+                icons={{ top: ICONS.TargetIcon, bl: ICONS.NeuralHubIcon, br: ICONS.ChipIcon }} />
+            </Board>
+          </DCArtboard>
+          <DCArtboard id="m2" label="Mark · Solid" width={340} height={340}>
+            <Board bg="#ffffff">
+              <Triad mode="solid" uid="ms" size={280}
+                icons={{ top: ICONS.CompassIcon, bl: ICONS.MeshIcon, br: ICONS.GearIcon }} />
+            </Board>
+          </DCArtboard>
+          <DCArtboard id="m3" label="Mark · Solid on navy" width={340} height={340}>
+            <Board bg="#10314f">
+              <Triad mode="solid" uid="mn" size={280}
+                icons={{ top: ICONS.TargetIcon, bl: ICONS.MeshIcon, br: ICONS.ChipIcon }} />
+            </Board>
+          </DCArtboard>
+        </DCSection>
+
+      </DesignCanvas>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
