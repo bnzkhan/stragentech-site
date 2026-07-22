@@ -45,9 +45,9 @@ body{font-family:var(--font-body);color:var(--ink);background:var(--white);overf
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gray-100);}
-.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:110px;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;}
 .nav-logo{display:flex;align-items:center;text-decoration:none;}
-.nav-logo-img{height:90px;width:auto;display:block;}
+.nav-logo-img{height:44px;width:auto;display:block;}
 .nav-links{display:flex;align-items:center;gap:6px;list-style:none;}
 .nav-links a{font-size:14px;font-weight:500;color:var(--gray-600);text-decoration:none;padding:7px 12px;border-radius:6px;transition:all .18s;}
 .nav-links a:hover{color:var(--ink);background:var(--gray-50);}
@@ -56,7 +56,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px;}
 
 /* ── HERO ── */
-#home{min-height:100vh;display:flex;align-items:center;padding:140px 32px 80px;background:var(--white);position:relative;overflow:hidden;}
+#home{min-height:100vh;display:flex;align-items:center;padding:100px 32px 80px;background:var(--white);position:relative;overflow:hidden;}
 .hero-bg-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,var(--gray-100) 1px,transparent 0);background-size:28px 28px;opacity:0.7;}
 .hero-bg-fade{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0) 40%,rgba(0,184,122,0.04) 100%);}
 .hero-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:center;position:relative;z-index:1;}
@@ -306,7 +306,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   .process-grid::before{display:none;}
   .problem-cards{grid-template-columns:1fr;}
   .niche-card.wide{grid-column:auto;}
-  .nav-links{display:none;position:fixed;top:110px;left:0;right:0;background:var(--white);flex-direction:column;gap:0;border-bottom:1px solid var(--gray-100);padding:8px 0;z-index:199;}
+  .nav-links{display:none;position:fixed;top:72px;left:0;right:0;background:var(--white);flex-direction:column;gap:0;border-bottom:1px solid var(--gray-100);padding:8px 0;z-index:199;}
   .nav-links.open{display:flex;}
   .nav-links li{width:100%;}
   .nav-links a{display:block;padding:12px 24px;border-radius:0;}
@@ -322,7 +322,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 <nav>
   <div class="nav-inner">
     <a href="#home" class="nav-logo">
-      <img src="logo-horiz.png" alt="Stragentech — Agentic Technology Partners" class="nav-logo-img">
+      <img src="logo-horiz-lrg.png" alt="Stragentech — Agentic Technology Partners" class="nav-logo-img">
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#process">How It Works</a></li>
