@@ -141,7 +141,7 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .dot-red{background:#ff5f56;}
 .dot-yellow{background:#ffbd2e;}
 .dot-green{background:#27c93f;}
-.terminal-title{font-family:var(--font-mono);font-size:11px;color:#8b949e;letter-spacing:0.5px;flex:1;text-align:right;}
+.terminal-title{font-family:var(--font-mono);font-size:11px;color:#8b949e;letter-spacing:0.5px;flex:1;text-align:left;}
 .terminal-body{padding:24px 28px 22px;display:flex;flex-direction:column;gap:0;flex:1;}
 .terminal-line{font-family:var(--font-mono);font-size:13px;margin-top:13px;line-height:1.4;}
 .terminal-line:first-child{margin-top:0;}
@@ -153,7 +153,7 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .terminal-output{margin-top:4px;padding-left:16px;display:flex;flex-direction:column;gap:3px;}
 .t-success{font-family:var(--font-mono);font-size:12px;color:#3fb950;line-height:1.5;}
 .t-warn{font-family:var(--font-mono);font-size:12px;color:#e3b341;line-height:1.5;}
-.terminal-status{margin-top:14px;padding-top:13px;border-top:1px solid #30363d;font-family:var(--font-mono);font-size:11px;color:#58a6ff;display:flex;align-items:center;gap:8px;}
+.terminal-status{background:#161b22;border-top:1px solid #30363d;padding:6px 12px;font-family:var(--font-mono);font-size:11px;color:#58a6ff;display:flex;align-items:center;gap:8px;}
 .t-pulse{width:7px;height:7px;border-radius:50%;background:#3fb950;display:inline-block;flex-shrink:0;animation:pulse 2.2s ease-in-out infinite;}
 
 /* ── PROCESS ── */
@@ -379,8 +379,8 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
             <div class="t-success">✓ Parts ordered · ETA 6h</div>
             <div class="t-success">✓ Crew scheduled: 2026-07-23 06:00</div>
           </div>
-          <div class="terminal-status"><span class="t-pulse"></span> autonomous · 0 human reviews · 4.2s end-to-end</div>
         </div>
+        <div class="terminal-status"><span class="t-pulse"></span> autonomous · 0 human reviews · 4.2s end-to-end</div>
       </div>
     </div>
   </div>
