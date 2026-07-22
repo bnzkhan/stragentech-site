@@ -20,12 +20,12 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --white:#ffffff;
-  --off-white:#f8f9fb;
+  --off-white:#f0f2f5;
   --gray-50:#f3f4f7;
   --gray-100:#e8eaee;
   --gray-200:#d0d4dc;
-  --gray-400:#6b7280;
-  --gray-600:#374151;
+  --gray-400:#4b5563;
+  --gray-600:#1f2937;
   --gray-800:#1e2333;
   --ink:#0d1117;
   --teal:#00b87a;
@@ -41,7 +41,7 @@
   --radius:8px;
 }
 html{scroll-behavior:smooth;}
-body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:17px;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gray-100);}
@@ -69,7 +69,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .hero-badge span{font-family:var(--font-mono);font-size:12px;color:var(--teal-dark);letter-spacing:0.5px;font-weight:500;}
 h1{font-family:var(--font-serif);font-size:clamp(40px,5.5vw,66px);line-height:1.08;font-weight:400;color:var(--ink);margin-bottom:22px;letter-spacing:-0.5px;}
 h1 em{font-style:italic;color:var(--teal);}
-.hero-sub{font-size:18px;font-weight:300;line-height:1.75;color:var(--gray-600);margin-bottom:40px;max-width:520px;}
+.hero-sub{font-size:18px;font-weight:400;line-height:1.75;color:var(--gray-600);margin-bottom:40px;max-width:520px;}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
 .hero-friction{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);letter-spacing:0.5px;}
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:14px;font-weight:500;padding:13px 26px;border-radius:var(--radius);text-decoration:none;transition:all .2s;cursor:pointer;border:none;}
@@ -95,7 +95,7 @@ section{padding:88px 32px;}
 .section-inner{max-width:var(--max-w);margin:0 auto;}
 .section-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
 h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:14px;letter-spacing:-0.3px;}
-.section-sub{font-size:17px;font-weight:300;color:var(--gray-400);line-height:1.75;max-width:520px;}
+.section-sub{font-size:18px;font-weight:400;color:var(--gray-400);line-height:1.75;max-width:520px;}
 .section-header{margin-bottom:52px;}
 
 /* ── FREE TOOL BANNER ── */
@@ -116,7 +116,7 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .problem-card:hover{border-color:var(--teal-mid);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,184,122,0.07);}
 .problem-card-icon{font-size:20px;margin-bottom:10px;}
 .problem-card h4{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--ink);}
-.problem-card p{font-size:13px;line-height:1.65;color:var(--gray-400);font-weight:300;}
+.problem-card p{font-size:14px;line-height:1.65;color:var(--gray-400);font-weight:400;}
 
 /* ── SERVICES ── */
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px;}
@@ -127,7 +127,7 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .svc-icon{width:44px;height:44px;background:var(--teal-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px;}
 .svc-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
 .svc-card h3{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px;}
-.svc-card p{font-size:14px;color:var(--gray-400);line-height:1.7;font-weight:300;margin-bottom:16px;}
+.svc-card p{font-size:14px;color:var(--gray-400);line-height:1.7;font-weight:400;margin-bottom:16px;}
 .svc-bullets{list-style:none;display:flex;flex-direction:column;gap:6px;}
 .svc-bullets li{font-size:13px;color:var(--gray-600);padding-left:16px;position:relative;font-weight:400;}
 .svc-bullets li::before{content:'→';position:absolute;left:0;color:var(--teal);font-size:11px;top:1px;}
@@ -136,15 +136,38 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .svc-cta-bar h3{font-family:var(--font-serif);font-size:26px;color:var(--white);font-weight:400;max-width:400px;line-height:1.3;}
 .svc-cta-bar p{font-size:14px;color:rgba(255,255,255,0.55);margin-top:6px;font-weight:300;}
 
+/* ── TERMINAL CARD ── */
+.terminal-card{background:#0d1117;border:1px solid #30363d;border-radius:14px;overflow:hidden;box-shadow:0 12px 48px rgba(13,17,23,0.22),0 0 0 1px rgba(255,255,255,0.04);}
+.terminal-titlebar{background:#161b22;border-bottom:1px solid #30363d;padding:11px 16px;display:flex;align-items:center;gap:10px;}
+.terminal-dots{display:flex;gap:6px;flex-shrink:0;}
+.dot{width:12px;height:12px;border-radius:50%;}
+.dot-red{background:#ff5f56;}
+.dot-yellow{background:#ffbd2e;}
+.dot-green{background:#27c93f;}
+.terminal-title{font-family:var(--font-mono);font-size:11px;color:#586069;letter-spacing:0.5px;flex:1;text-align:center;}
+.terminal-body{padding:18px 22px 16px;display:flex;flex-direction:column;gap:0;}
+.terminal-line{font-family:var(--font-mono);font-size:13px;margin-top:13px;line-height:1.4;}
+.terminal-line:first-child{margin-top:0;}
+.t-prompt{color:#58a6ff;}
+.t-obj{color:#c9d1d9;margin-left:6px;}
+.t-punc{color:#8b949e;}
+.t-fn{color:#d2a8ff;}
+.t-str{color:#a5d6ff;}
+.terminal-output{margin-top:4px;padding-left:16px;display:flex;flex-direction:column;gap:3px;}
+.t-success{font-family:var(--font-mono);font-size:12px;color:#3fb950;line-height:1.5;}
+.t-warn{font-family:var(--font-mono);font-size:12px;color:#e3b341;line-height:1.5;}
+.terminal-status{margin-top:14px;padding-top:13px;border-top:1px solid #30363d;font-family:var(--font-mono);font-size:11px;color:#58a6ff;display:flex;align-items:center;gap:8px;}
+.t-pulse{width:7px;height:7px;border-radius:50%;background:#3fb950;display:inline-block;flex-shrink:0;animation:pulse 2.2s ease-in-out infinite;}
+
 /* ── PROCESS ── */
-#process{background:var(--off-white);}
+#process{background:var(--white);}
 .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
 .process-grid::before{content:'';position:absolute;top:28px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,var(--teal-mid),var(--gray-200));z-index:0;}
 .process-step{text-align:center;padding:0 16px;position:relative;z-index:1;}
 .process-num{width:56px;height:56px;border-radius:50%;background:var(--white);border:1.5px solid var(--teal-mid);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-family:var(--font-serif);font-size:20px;color:var(--teal);}
 .process-week{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
 .process-step h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;}
-.process-step p{font-size:13px;color:var(--gray-400);line-height:1.65;font-weight:300;}
+.process-step p{font-size:14px;color:var(--gray-400);line-height:1.65;font-weight:400;}
 
 /* ── RESULTS ── */
 .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
@@ -157,7 +180,7 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .result-co{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
 .result-card.featured .result-co{color:rgba(0,184,122,0.8)!important;}
 .result-card h3{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:8px;}
-.result-card p{font-size:14px;color:var(--gray-400);line-height:1.65;font-weight:300;margin-bottom:20px;}
+.result-card p{font-size:14px;color:var(--gray-400);line-height:1.65;font-weight:400;margin-bottom:20px;}
 .result-metrics{display:flex;gap:24px;flex-wrap:wrap;}
 .result-num{font-family:var(--font-serif);font-size:30px;color:var(--teal);line-height:1;}
 .result-label{font-size:10px;color:var(--gray-400);font-weight:400;margin-top:3px;text-transform:uppercase;letter-spacing:0.5px;}
@@ -170,7 +193,7 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .niche-card.wide{grid-column:1/-1;background:linear-gradient(135deg,var(--teal-pale),var(--blue-pale));border-color:var(--teal-mid);}
 .niche-icon{font-size:28px;margin-bottom:14px;}
 .niche-card h3{font-size:18px;font-weight:600;color:var(--ink);margin-bottom:8px;}
-.niche-card p{font-size:14px;color:var(--gray-400);line-height:1.7;font-weight:300;margin-bottom:16px;}
+.niche-card p{font-size:14px;color:var(--gray-400);line-height:1.7;font-weight:400;margin-bottom:16px;}
 .niche-tags{display:flex;flex-wrap:wrap;gap:6px;}
 .niche-tag{background:var(--teal-pale);color:var(--teal-dark);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:500;}
 
@@ -193,11 +216,11 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 
 /* ── ABOUT / 1-PAGER ── */
 .about-1pager-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
-.about-bio{font-size:16px;font-weight:300;line-height:1.85;color:var(--gray-600);margin-bottom:24px;}
+.about-bio{font-size:17px;font-weight:400;line-height:1.85;color:var(--gray-600);margin-bottom:24px;}
 .about-bio strong{font-weight:600;color:var(--ink);}
 .cred-title{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;margin-top:30px;}
 .cred-list{display:flex;flex-direction:column;gap:10px;}
-.cred-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--gray-600);font-weight:300;}
+.cred-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--gray-600);font-weight:400;}
 .cred-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);margin-top:7px;flex-shrink:0;}
 .onepager-box{background:var(--off-white);border:2px dashed var(--gray-200);border-radius:16px;padding:48px 40px;text-align:center;}
 .onepager-icon{width:64px;height:64px;background:var(--teal-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;}
@@ -238,7 +261,7 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .blog-body{padding:22px;}
 .blog-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
 .blog-card h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:7px;line-height:1.45;}
-.blog-card p{font-size:13px;color:var(--gray-400);line-height:1.65;font-weight:300;margin-bottom:12px;}
+.blog-card p{font-size:13px;color:var(--gray-400);line-height:1.65;font-weight:400;margin-bottom:12px;}
 .blog-meta{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);}
 
 /* ── CONTACT ── */
@@ -317,7 +340,6 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#process">How It Works</a></li>
-      <li><a href="#engagement">Engagements</a></li>
       <li><a href="#results">Results</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="apps.html">Apps ↗</a></li>
@@ -338,74 +360,41 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
       <div class="hero-badge"><span class="hero-badge-dot"></span><span>Operational Intelligence Redefined</span></div>
       <!-- <h1>When Operations<br>Can't Afford<br>to <em>Wait</em></h1> -->
       <h1>The Signals Are There.<br>Is Anyone <em>Acting</em><br> on Them?</h1>
-      <p class="hero-sub">For $5M–$150M industrial manufacturers and managed services companies: autonomous AI systems that detect equipment failures, operational anomalies, and service disruptions in real time — resolving them before they hit the floor.</p>
+      <p class="hero-sub">Stragentech's approach is grounded in fraud prevention systems built at Amazon — processing millions of daily decisions with minimal human review — and in modernizing 40+ legacy systems at Boeing before any AI work could begin. The sequence is deliberate: derisk the platform, unclog the decision bottlenecks, then scale autonomous action. That's the expertise Stragentech brings to industrial operations at the $5M–$150M level.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn btn-primary">Book a Free Discovery Call</a>
-        <a href="apps.html" class="btn btn-outline">Explore Free Tools ↗</a>
       </div>
-      <p class="hero-friction">Free 30-min call · No pitch · No commitment required</p>
+      <p class="hero-friction">Free 30-min call · No commitment required</p>
     </div>
     <div class="hero-visual">
-      <div class="hero-card">
-        <div class="hero-card-label">Agentic Operational Intelligence™</div>
-        <div class="hero-flow">
-          <div class="flow-step">
-            <div class="flow-num">01</div>
-            <div class="flow-text">
-              <h4>Detect</h4>
-              <p>High-volume signal ingestion & anomaly detection at scale</p>
-            </div>
-            <div class="flow-arrow">↓</div>
+      <div class="terminal-card">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
           </div>
-          <div class="flow-step">
-            <div class="flow-num">02</div>
-            <div class="flow-text">
-              <h4>Investigate</h4>
-              <p>Autonomous agent cross-references context & history</p>
-            </div>
-            <div class="flow-arrow">↓</div>
+          <span class="terminal-title">ops-agent · stragentech</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-obj">agent</span><span class="t-punc">.</span><span class="t-fn">detect</span><span class="t-punc">(</span><span class="t-str">"equipment_signals"</span><span class="t-punc">)</span></div>
+          <div class="terminal-output">
+            <div class="t-success">✓ 1,247 signals ingested · 3 anomalies flagged</div>
+            <div class="t-warn">→ Motor bearing #7 | vibration +340% above baseline</div>
           </div>
-          <div class="flow-step">
-            <div class="flow-num">03</div>
-            <div class="flow-text">
-              <h4>Act</h4>
-              <p>Corrective action without human review queues</p>
-            </div>
+          <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-obj">agent</span><span class="t-punc">.</span><span class="t-fn">investigate</span><span class="t-punc">(</span><span class="t-str">anomaly_id=7</span><span class="t-punc">)</span></div>
+          <div class="terminal-output">
+            <div class="t-success">✓ 847 history points cross-referenced</div>
+            <div class="t-warn">→ Root cause: Bearing wear · Est. failure in 72h</div>
           </div>
+          <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-obj">agent</span><span class="t-punc">.</span><span class="t-fn">act</span><span class="t-punc">(</span><span class="t-str">action="schedule_maintenance"</span><span class="t-punc">)</span></div>
+          <div class="terminal-output">
+            <div class="t-success">✓ Work order WO-9847 created</div>
+            <div class="t-success">✓ Parts ordered · ETA 6h</div>
+            <div class="t-success">✓ Crew scheduled: 2026-07-23 06:00</div>
+          </div>
+          <div class="terminal-status"><span class="t-pulse"></span> autonomous · 0 human reviews · 4.2s end-to-end</div>
         </div>
-        <div class="hero-card-footer">status: <span>● autonomous · no queue</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FREE TOOL BANNERS -->
-<section style="padding:40px 32px;background:var(--white);border-bottom:1px solid var(--gray-100);">
-  <div class="section-inner">
-    <div class="free-banner-row">
-      <div class="free-banner">
-        <div class="free-banner-content">
-          <div class="free-tag">Free · No Login Required</div>
-          <h3>Tech Debt Evaluation</h3>
-          <p>What costly signals is your tech debt sending — and is anyone acting on them? Answer a few questions and get a directional cost estimate across architecture, staffing, cloud, and operations.</p>
-        </div>
-        <a href="tech-debt-calculator.html" class="btn btn-primary btn-sm">Run the Evaluation →</a>
-      </div>
-      <div class="free-banner">
-        <div class="free-banner-content">
-          <div class="free-tag">Free · Operational Intelligence Readiness</div>
-          <h3>OI Readiness Scorecard</h3>
-          <p>12 questions. 5 dimensions. Find out exactly where your industrial operations sit on the AI readiness curve — from reactive alerting to autonomous resolution.</p>
-        </div>
-        <a href="apps.html#readiness-scorecard" class="btn btn-outline btn-sm">Take the Scorecard →</a>
-      </div>
-      <div class="free-banner">
-        <div class="free-banner-content">
-          <div class="free-tag">Free · Operations Focus</div>
-          <h3>Ops Workflow Analyzer</h3>
-          <p>Describe your incident management, trouble ticket, or issue-tracking workflow. An AI agent scores it for automation potential and returns a prioritized action plan.</p>
-        </div>
-        <a href="apps.html#workflow-analyzer" class="btn btn-outline btn-sm">Run the Analyzer →</a>
       </div>
     </div>
   </div>
@@ -443,38 +432,32 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   </div>
 </section>
 
-<!-- PROCESS -->
-<section id="process">
+<!-- WHO WE WORK WITH -->
+<section id="niches" style="background:var(--white);">
   <div class="section-inner">
     <div class="section-header">
-      <p class="section-label">How It Works</p>
-      <h2>From first call to first results in 60 days</h2>
-      <p class="section-sub">A structured process designed to minimize your time investment while maximizing what gets learned and delivered quickly.</p>
+      <p class="section-label">Who We Work With</p>
+      <h2>Built for companies where operations are the business</h2>
+      <p class="section-sub">Best suited for companies where the core value proposition depends on operational reliability, transaction integrity, or connected systems at scale.</p>
     </div>
-    <div class="process-grid">
-      <div class="process-step">
-        <div class="process-num">1</div>
-        <div class="process-week">Week 1</div>
-        <h4>Discovery Call</h4>
-        <p>30 minutes to understand your context, primary pain points, and whether there's a fit worth exploring.</p>
+    <div class="niches-grid">
+      <div class="niche-card">
+        <div class="niche-icon">🏭</div>
+        <h3>Industrial Manufacturers & MSPs</h3>
+        <p>$25M–$150M manufacturers and managed services providers with connected equipment dealing with alert fatigue and first-generation IoT hitting its limits.</p>
+        <div class="niche-tags"><span class="niche-tag">Predictive Maintenance</span><span class="niche-tag">IoT Modernization</span><span class="niche-tag">Field Service Ops</span></div>
       </div>
-      <div class="process-step">
-        <div class="process-num">2</div>
-        <div class="process-week">Weeks 1–3</div>
-        <h4>Assessment</h4>
-        <p>Operational Intelligence Assessment across 5 domains. Findings presented with a prioritized roadmap and quick wins.</p>
+      <div class="niche-card">
+        <div class="niche-icon">💼</div>
+        <h3>B2B SaaS & Platform Companies</h3>
+        <p>$10M–$50M ARR SaaS companies carrying legacy technical debt, losing engineering velocity to maintenance, and needing technology leadership to navigate AI transformation.</p>
+        <div class="niche-tags"><span class="niche-tag">Modernization</span><span class="niche-tag">AI Strategy</span><span class="niche-tag">Engineering Ops</span></div>
       </div>
-      <div class="process-step">
-        <div class="process-num">3</div>
-        <div class="process-week">Weeks 4–12</div>
-        <h4>Implementation</h4>
-        <p>Focused retainer executing the highest-value roadmap items with monthly progress reviews with leadership.</p>
-      </div>
-      <div class="process-step">
-        <div class="process-num">4</div>
-        <div class="process-week">Ongoing</div>
-        <h4>Scale & Sustain</h4>
-        <p>Ongoing fractional CTO partnership or transition to internal ownership — with documentation, training, and handoff support.</p>
+      <div class="niche-card">
+        <div class="niche-icon">📈</div>
+        <h3>PE Firms with IoT or Industrial Portfolio Companies</h3>
+        <p>Private equity firms requiring pre-acquisition technical due diligence or post-acquisition technology leadership. The practice understands both the technology and the EBITDA lens — with direct experience inside PE-backed companies.</p>
+        <div class="niche-tags"><span class="niche-tag">Technical Due Diligence</span><span class="niche-tag">Post-Acquisition Integration</span><span class="niche-tag">Value Creation</span><span class="niche-tag">EBITDA Impact</span></div>
       </div>
     </div>
   </div>
@@ -530,88 +513,38 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   </div>
 </section>
 
-<!-- WHO WE WORK WITH -->
-<section id="niches" style="background:var(--white);">
+<!-- PROCESS -->
+<section id="process">
   <div class="section-inner">
     <div class="section-header">
-      <p class="section-label">Who We Work With</p>
-      <h2>Built for companies where operations are the business</h2>
-      <p class="section-sub">Best suited for companies where the core value proposition depends on operational reliability, transaction integrity, or connected systems at scale.</p>
+      <p class="section-label">How It Works</p>
+      <h2>From first call to first results in 60 days</h2>
+      <p class="section-sub">A structured process designed to minimize your time investment while maximizing what gets learned and delivered quickly.</p>
     </div>
-    <div class="niches-grid">
-      <div class="niche-card">
-        <div class="niche-icon">🏭</div>
-        <h3>Industrial Manufacturers & MSPs</h3>
-        <p>$25M–$150M manufacturers and managed services providers with connected equipment dealing with alert fatigue and first-generation IoT hitting its limits.</p>
-        <div class="niche-tags"><span class="niche-tag">Predictive Maintenance</span><span class="niche-tag">IoT Modernization</span><span class="niche-tag">Field Service Ops</span></div>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-num">1</div>
+        <div class="process-week">Week 1</div>
+        <h4>Discovery Call</h4>
+        <p>30 minutes to understand your context, primary pain points, and whether there's a fit worth exploring.</p>
       </div>
-      <div class="niche-card">
-        <div class="niche-icon">💼</div>
-        <h3>B2B SaaS & Platform Companies</h3>
-        <p>$10M–$50M ARR SaaS companies carrying legacy technical debt, losing engineering velocity to maintenance, and needing technology leadership to navigate AI transformation.</p>
-        <div class="niche-tags"><span class="niche-tag">Modernization</span><span class="niche-tag">AI Strategy</span><span class="niche-tag">Engineering Ops</span></div>
+      <div class="process-step">
+        <div class="process-num">2</div>
+        <div class="process-week">Weeks 1–3</div>
+        <h4>Assessment</h4>
+        <p>Operational Intelligence Assessment across 5 domains. Findings presented with a prioritized roadmap and quick wins.</p>
       </div>
-      <div class="niche-card">
-        <div class="niche-icon">📈</div>
-        <h3>PE Firms with IoT or Industrial Portfolio Companies</h3>
-        <p>Private equity firms requiring pre-acquisition technical due diligence or post-acquisition technology leadership. The practice understands both the technology and the EBITDA lens — with direct experience inside PE-backed companies.</p>
-        <div class="niche-tags"><span class="niche-tag">Technical Due Diligence</span><span class="niche-tag">Post-Acquisition Integration</span><span class="niche-tag">Value Creation</span><span class="niche-tag">EBITDA Impact</span></div>
+      <div class="process-step">
+        <div class="process-num">3</div>
+        <div class="process-week">Weeks 4–12</div>
+        <h4>Implementation</h4>
+        <p>Focused retainer executing the highest-value roadmap items with monthly progress reviews with leadership.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ENGAGEMENT MODELS -->
-<section id="engagement" style="background:var(--off-white);">
-  <div class="section-inner">
-    <div class="section-header">
-      <p class="section-label">Engagement Models</p>
-      <h2>Engagements built around outcomes, not hours</h2>
-      <p class="section-sub">Every engagement starts with a structured assessment so you know exactly what you're investing in before any retainer begins.</p>
-    </div>
-    <div class="eng-grid">
-      <div class="eng-card">
-        <div class="eng-label">Entry Point</div>
-        <h3>Operational Intelligence Assessment</h3>
-        <div class="eng-price">$3,500–$5,000</div>
-        <div class="eng-duration">3-week fixed engagement</div>
-        <ul class="eng-feats">
-          <li class="eng-feat">5-domain technology assessment</li>
-          <li class="eng-feat">Security & compliance gap review</li>
-          <li class="eng-feat">AI readiness scoring</li>
-          <li class="eng-feat">Prioritized roadmap deliverable</li>
-          <li class="eng-feat">Executive presentation of findings</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline" style="width:100%;justify-content:center;">Start Here</a>
-      </div>
-      <div class="eng-card highlight">
-        <div class="eng-label" style="color:rgba(0,184,122,0.8);">Most Popular</div>
-        <h3>Fractional CTO Retainer</h3>
-        <div class="eng-price">$10K–$15K/mo</div>
-        <div class="eng-duration">3-month minimum · typically 12–18 months</div>
-        <ul class="eng-feats">
-          <li class="eng-feat">10–20 hours per week dedicated</li>
-          <li class="eng-feat">Technology strategy & roadmap ownership</li>
-          <li class="eng-feat">Engineering team leadership</li>
-          <li class="eng-feat">Monthly executive reporting</li>
-          <li class="eng-feat">Agentic AI implementation guidance</li>
-          <li class="eng-feat">Vendor & partner management</li>
-        </ul>
-        <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">Book a Discovery Call</a>
-      </div>
-      <div class="eng-card">
-        <div class="eng-label">Investors & Acquirers</div>
-        <h3>Technical Due Diligence</h3>
-        <div class="eng-price">$5K–$15K</div>
-        <div class="eng-duration">1–2 week project engagement</div>
-        <ul class="eng-feats">
-          <li class="eng-feat">Pre-acquisition tech stack review</li>
-          <li class="eng-feat">Architecture & scalability risk</li>
-          <li class="eng-feat">Security & compliance posture</li>
-          <li class="eng-feat">Team capability evaluation</li>
-          <li class="eng-feat">Investment-grade findings report</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline" style="width:100%;justify-content:center;">Discuss Your Deal</a>
+      <div class="process-step">
+        <div class="process-num">4</div>
+        <div class="process-week">Ongoing</div>
+        <h4>Scale & Sustain</h4>
+        <p>Ongoing fractional CTO partnership or transition to internal ownership — with documentation, training, and handoff support.</p>
       </div>
     </div>
   </div>
@@ -807,7 +740,6 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   <div class="footer-inner">
     <div class="footer-copy">© 2026 Stragentech LLC · Agentic Technology Partners · Seattle, WA</div>
     <div class="footer-links">
-      <a href="#engagement">Engagements</a>
       <a href="apps.html">Apps</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>

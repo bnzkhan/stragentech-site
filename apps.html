@@ -57,10 +57,22 @@ nav{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 32
 
 /* ── HERO ── */
 .apps-hero{padding:52px 32px 44px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
-.apps-hero-inner{max-width:var(--max-w);margin:0 auto;}
+.apps-hero-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1.3fr 0.7fr;gap:48px;align-items:center;}
 .apps-hero h1{font-family:var(--font-serif);font-size:clamp(30px,4vw,48px);font-weight:400;letter-spacing:-0.3px;margin-bottom:12px;color:var(--ink);line-height:1.1;}
 .apps-hero h1 em{font-style:italic;color:var(--teal);}
 .apps-hero p{font-size:16px;color:var(--gray-400);max-width:560px;line-height:1.75;margin-bottom:24px;font-weight:300;}
+/* ── AOI CARD ── */
+.aoi-card{background:var(--white);border:1px solid var(--gray-100);border-radius:14px;padding:24px;box-shadow:0 4px 32px rgba(13,17,23,0.06);}
+.aoi-card-label{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;}
+.aoi-flow{display:flex;flex-direction:column;gap:8px;}
+.aoi-step{display:flex;align-items:flex-start;gap:12px;padding:11px 13px;border-radius:7px;border:1px solid var(--gray-50);background:var(--off-white);transition:border-color .2s;}
+.aoi-step:hover{border-color:var(--teal-mid);}
+.aoi-num{font-family:var(--font-mono);font-size:11px;color:var(--teal);font-weight:500;min-width:20px;padding-top:1px;}
+.aoi-text h4{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.aoi-text p{font-size:12px;color:var(--gray-400);line-height:1.5;font-weight:300;}
+.aoi-arrow{margin-left:auto;color:var(--gray-200);font-size:11px;padding-top:2px;}
+.aoi-footer{margin-top:14px;padding-top:12px;border-top:1px solid var(--gray-100);font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;}
+.aoi-footer span{color:var(--teal);}
 .hero-meta{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:32px;}
 .hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
 .hero-meta-item::before{content:'▸';color:var(--teal);}
@@ -171,6 +183,8 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
 .footer-links a:hover{color:var(--teal);}
 
 @media(max-width:760px){
+  .apps-hero-inner{grid-template-columns:1fr;}
+  .aoi-card{display:none;}
   .tools-overview,.decks-grid,.code-grid,.input-row{grid-template-columns:1fr;}
   .tools-overview .tool-card.wide{grid-column:auto;}
   .sequence-steps{grid-template-columns:1fr 1fr;gap:16px;}
@@ -198,14 +212,45 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
 <!-- HERO -->
 <div class="apps-hero">
   <div class="apps-hero-inner">
-    <h1>Tools and decks for<br><em>agentic operations.</em></h1>
-    <p>Live AI tools, assessment scorecards, and downloadable playbooks — all free, no friction. The same frameworks I use in client engagements, available to try before you ever talk to me.</p>
-    <div class="hero-meta">
-      <span class="hero-meta-item">2 live AI-powered tools</span>
-      <span class="hero-meta-item">Tech Debt Assessment calculator</span>
-      <span class="hero-meta-item">OI Readiness Scorecard</span>
-      <span class="hero-meta-item">Downloadable playbooks & whitepapers</span>
-      <span class="hero-meta-item">Everything loads instantly</span>
+    <div class="apps-hero-left">
+      <h1>Tools and decks for<br><em>agentic operations.</em></h1>
+      <p>Live AI tools, assessment scorecards, and downloadable playbooks — all free, no friction. The same frameworks I use in client engagements, available to try before you ever talk to me.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">2 live AI-powered tools</span>
+        <span class="hero-meta-item">Tech Debt Assessment calculator</span>
+        <span class="hero-meta-item">OI Readiness Scorecard</span>
+        <span class="hero-meta-item">Downloadable playbooks & whitepapers</span>
+        <span class="hero-meta-item">Everything loads instantly</span>
+      </div>
+    </div>
+    <div class="aoi-card">
+      <div class="aoi-card-label">Agentic Operational Intelligence™</div>
+      <div class="aoi-flow">
+        <div class="aoi-step">
+          <div class="aoi-num">01</div>
+          <div class="aoi-text">
+            <h4>Detect</h4>
+            <p>High-volume signal ingestion & anomaly detection at scale</p>
+          </div>
+          <div class="aoi-arrow">↓</div>
+        </div>
+        <div class="aoi-step">
+          <div class="aoi-num">02</div>
+          <div class="aoi-text">
+            <h4>Investigate</h4>
+            <p>Autonomous agent cross-references context & history</p>
+          </div>
+          <div class="aoi-arrow">↓</div>
+        </div>
+        <div class="aoi-step">
+          <div class="aoi-num">03</div>
+          <div class="aoi-text">
+            <h4>Act</h4>
+            <p>Corrective action without human review queues</p>
+          </div>
+        </div>
+      </div>
+      <div class="aoi-footer">status: <span>● autonomous · no queue</span></div>
     </div>
   </div>
 </div>
