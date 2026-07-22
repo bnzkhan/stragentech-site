@@ -19,12 +19,12 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --white:#ffffff;
-  --off-white:#f8f9fb;
+  --off-white:#f0f2f5;
   --gray-50:#f3f4f7;
   --gray-100:#e8eaee;
   --gray-200:#d0d4dc;
-  --gray-400:#8b92a0;
-  --gray-600:#4a5263;
+  --gray-400:#4b5563;
+  --gray-600:#1f2937;
   --ink:#0d1117;
   --teal:#00b87a;
   --teal-dark:#008f5e;
@@ -39,15 +39,14 @@
   --radius:8px;
 }
 html{scroll-behavior:smooth;}
-body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
 
 /* ── NAV ── */
-nav{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:100;}
-.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:100;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
 .nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;}
-.nav-brand-name{font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--ink);}
-.nav-brand-name span{color:var(--teal);}
-.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.nav-brand-img{height:44px;width:auto;display:block;}
+.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-left:4px;}
 .nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
 .nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
 .nav-links a:hover,.nav-links a.active{color:var(--teal);background:var(--teal-pale);}
@@ -57,21 +56,21 @@ nav{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 32
 
 /* ── HERO ── */
 .apps-hero{padding:52px 32px 44px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
-.apps-hero-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1.3fr 0.7fr;gap:48px;align-items:center;}
-.apps-hero h1{font-family:var(--font-serif);font-size:clamp(30px,4vw,48px);font-weight:400;letter-spacing:-0.3px;margin-bottom:12px;color:var(--ink);line-height:1.1;}
+.apps-hero-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.apps-hero h1{font-family:var(--font-serif);font-size:clamp(30px,4vw,48px);font-weight:400;letter-spacing:-0.3px;margin-bottom:16px;color:var(--ink);line-height:1.1;}
 .apps-hero h1 em{font-style:italic;color:var(--teal);}
-.apps-hero p{font-size:16px;color:var(--gray-400);max-width:560px;line-height:1.75;margin-bottom:24px;font-weight:300;}
+.apps-hero p{font-size:18px;color:var(--gray-400);max-width:560px;line-height:1.75;margin-bottom:0;font-weight:400;}
 /* ── AOI CARD ── */
-.aoi-card{background:var(--white);border:1px solid var(--gray-100);border-radius:14px;padding:24px;box-shadow:0 4px 32px rgba(13,17,23,0.06);}
-.aoi-card-label{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;}
-.aoi-flow{display:flex;flex-direction:column;gap:8px;}
-.aoi-step{display:flex;align-items:flex-start;gap:12px;padding:11px 13px;border-radius:7px;border:1px solid var(--gray-50);background:var(--off-white);transition:border-color .2s;}
+.aoi-card{background:var(--white);border:1px solid var(--gray-100);border-radius:14px;padding:28px;box-shadow:0 4px 32px rgba(13,17,23,0.06);}
+.aoi-card-label{font-family:var(--font-mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;}
+.aoi-flow{display:flex;flex-direction:column;gap:10px;}
+.aoi-step{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:8px;border:1px solid var(--gray-50);background:var(--off-white);transition:border-color .2s;}
 .aoi-step:hover{border-color:var(--teal-mid);}
-.aoi-num{font-family:var(--font-mono);font-size:11px;color:var(--teal);font-weight:500;min-width:20px;padding-top:1px;}
-.aoi-text h4{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px;}
-.aoi-text p{font-size:12px;color:var(--gray-400);line-height:1.5;font-weight:300;}
-.aoi-arrow{margin-left:auto;color:var(--gray-200);font-size:11px;padding-top:2px;}
-.aoi-footer{margin-top:14px;padding-top:12px;border-top:1px solid var(--gray-100);font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;}
+.aoi-num{font-family:var(--font-mono);font-size:12px;color:var(--teal);font-weight:500;min-width:22px;padding-top:1px;}
+.aoi-text h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.aoi-text p{font-size:13px;color:var(--gray-400);line-height:1.55;font-weight:400;}
+.aoi-arrow{margin-left:auto;color:var(--gray-200);font-size:12px;padding-top:2px;}
+.aoi-footer{margin-top:18px;padding-top:14px;border-top:1px solid var(--gray-100);font-family:var(--font-mono);font-size:11px;color:var(--gray-400);letter-spacing:1px;}
 .aoi-footer span{color:var(--teal);}
 .hero-meta{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:32px;}
 .hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
@@ -84,7 +83,7 @@ nav{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 32
 .seq-step:first-child{padding-left:0;}
 .seq-num{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);margin-bottom:5px;}
 .seq-step h4{font-size:13px;font-weight:600;margin-bottom:4px;color:var(--ink);}
-.seq-step p{font-size:12px;color:var(--gray-400);line-height:1.55;font-weight:300;}
+.seq-step p{font-size:13px;color:var(--gray-400);line-height:1.55;font-weight:400;}
 .seq-step a{font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;display:block;margin-top:7px;}
 .seq-step a:hover{text-decoration:underline;}
 
@@ -102,7 +101,7 @@ nav{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 32
 .tool-card-head{padding:20px 22px 16px;border-bottom:1px solid var(--gray-100);}
 .tool-type{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
 .tool-card-head h3{font-size:16px;font-weight:600;margin-bottom:5px;color:var(--ink);}
-.tool-card-head p{font-size:13px;color:var(--gray-400);line-height:1.6;font-weight:300;}
+.tool-card-head p{font-size:14px;color:var(--gray-400);line-height:1.6;font-weight:400;}
 .tool-card-foot{padding:14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 .tool-meta{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
 .badge{font-family:var(--font-mono);font-size:9px;padding:3px 9px;border-radius:3px;text-transform:uppercase;letter-spacing:1px;}
@@ -155,7 +154,7 @@ nav{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 32
 .deck-card:hover{border-color:var(--teal-mid);}
 .deck-type{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
 .deck-card h3{font-size:15px;font-weight:600;margin-bottom:8px;color:var(--ink);}
-.deck-card p{font-size:12px;color:var(--gray-400);line-height:1.65;font-weight:300;margin-bottom:14px;}
+.deck-card p{font-size:13px;color:var(--gray-400);line-height:1.65;font-weight:400;margin-bottom:14px;}
 .deck-meta{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-bottom:14px;}
 
 /* ── CODE GRID ── */
@@ -163,7 +162,7 @@ nav{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 32
 .code-card{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:22px;}
 .code-layer{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
 .code-card h4{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--ink);}
-.code-card p{font-size:12px;color:var(--gray-400);line-height:1.65;font-weight:300;margin-bottom:10px;}
+.code-card p{font-size:13px;color:var(--gray-400);line-height:1.65;font-weight:400;margin-bottom:10px;}
 .code-card a{font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;}
 .code-card a:hover{text-decoration:underline;}
 
@@ -171,7 +170,7 @@ nav{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 32
 .cta-bar{background:var(--ink);border-radius:10px;padding:40px;text-align:center;margin-bottom:40px;}
 .cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
 .cta-bar h3{font-family:var(--font-serif);font-size:26px;color:var(--white);font-weight:400;margin-bottom:8px;}
-.cta-bar p{font-size:14px;color:rgba(255,255,255,0.5);max-width:440px;margin:0 auto 24px;font-weight:300;}
+.cta-bar p{font-size:15px;color:rgba(255,255,255,0.7);max-width:440px;margin:0 auto 24px;font-weight:400;}
 .cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
 
 /* ── FOOTER ── */
@@ -197,7 +196,7 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
 <nav>
   <div class="nav-inner">
     <a href="https://www.stragentech.com" class="nav-brand">
-      <span class="nav-brand-name">STRAGEN<span>TECH</span></span>
+      <img src="logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
       <span class="nav-brand-sub">/ apps</span>
     </a>
     <ul class="nav-links">
@@ -215,13 +214,6 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
     <div class="apps-hero-left">
       <h1>Tools and decks for<br><em>agentic operations.</em></h1>
       <p>Live AI tools, assessment scorecards, and downloadable playbooks — all free, no friction. The same frameworks I use in client engagements, available to try before you ever talk to me.</p>
-      <div class="hero-meta">
-        <span class="hero-meta-item">2 live AI-powered tools</span>
-        <span class="hero-meta-item">Tech Debt Assessment calculator</span>
-        <span class="hero-meta-item">OI Readiness Scorecard</span>
-        <span class="hero-meta-item">Downloadable playbooks & whitepapers</span>
-        <span class="hero-meta-item">Everything loads instantly</span>
-      </div>
     </div>
     <div class="aoi-card">
       <div class="aoi-card-label">Agentic Operational Intelligence™</div>
@@ -293,7 +285,7 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
   <div class="live-tool-header">
     <div>
       <h3>Operations Workflow Analyzer</h3>
-      <p style="font-size:13px;color:var(--gray-400);margin-top:4px;font-weight:300;">Describe your incident management, trouble ticket, or issue-tracking workflow. Get an automation score, pain point analysis, and ranked opportunities.</p>
+      <p style="font-size:14px;color:var(--gray-400);margin-top:4px;font-weight:400;">Describe your incident management, trouble ticket, or issue-tracking workflow. Get an automation score, pain point analysis, and ranked opportunities.</p>
     </div>
     <div class="badges"><span class="badge badge-free">Free</span><span class="badge badge-ai">Live AI</span></div>
   </div>
