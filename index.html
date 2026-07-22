@@ -46,11 +46,8 @@ body{font-family:var(--font-body);color:var(--ink);background:var(--white);overf
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gray-100);}
 .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.nav-logo-icon{width:36px;height:36px;position:relative;}
-.nav-logo-icon svg{width:36px;height:36px;}
-.nav-logo-name{font-family:var(--font-body);font-weight:600;font-size:18px;letter-spacing:-0.2px;color:var(--ink);}
-.nav-logo-name span{color:var(--teal);}
+.nav-logo{display:flex;align-items:center;text-decoration:none;}
+.nav-logo-img{height:54px;width:auto;display:block;}
 .nav-links{display:flex;align-items:center;gap:6px;list-style:none;}
 .nav-links a{font-size:14px;font-weight:500;color:var(--gray-600);text-decoration:none;padding:7px 12px;border-radius:6px;transition:all .18s;}
 .nav-links a:hover{color:var(--ink);background:var(--gray-50);}
@@ -325,18 +322,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 <nav>
   <div class="nav-inner">
     <a href="#home" class="nav-logo">
-      <div class="nav-logo-icon">
-        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="7,1 14,1 18,7.5 14,14 7,14 3,7.5" fill="none" stroke="#00b87a" stroke-width="1.5" opacity="0.9"/>
-          <polygon points="13,14 20,14 24,20.5 20,27 13,27 9,20.5" fill="none" stroke="#1a6fd4" stroke-width="1.5" opacity="0.7"/>
-          <circle cx="14" cy="4" r="1.8" fill="#00b87a"/>
-          <circle cx="10.5" cy="10" r="1.4" fill="#1a6fd4" opacity="0.8"/>
-          <circle cx="16.5" cy="18" r="1.4" fill="#00b87a" opacity="0.8"/>
-          <line x1="14" y1="4" x2="10.5" y2="10" stroke="#00b87a" stroke-width="0.8" opacity="0.4"/>
-          <line x1="10.5" y1="10" x2="16.5" y2="18" stroke="#1a6fd4" stroke-width="0.8" opacity="0.4"/>
-        </svg>
-      </div>
-      <span class="nav-logo-name">STRAGEN<span>TECH</span></span>
+      <img src="Stragentech-logo.jpg" alt="Stragentech — Agentic Technology Partners" class="nav-logo-img">
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#process">How It Works</a></li>
