@@ -194,10 +194,9 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
 /* ── DARK MODE ── */
 .theme-toggle{background:none;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;padding:6px 8px;color:var(--gray-600);display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s;flex-shrink:0;margin-left:4px;}
 .theme-toggle:hover{border-color:var(--teal);color:var(--teal);}
-.theme-toggle svg{display:block;}
-.icon-sun{display:none;}
-[data-theme="dark"] .icon-moon{display:none;}
-[data-theme="dark"] .icon-sun{display:block;}
+.theme-toggle .icon-sun{display:none;}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
 [data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);}
 [data-theme="dark"] nav{background:rgba(13,17,23,0.95)!important;}
 [data-theme="dark"] .nav-links a:hover{background:rgba(255,255,255,0.06);}
