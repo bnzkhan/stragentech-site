@@ -1,268 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>6 Questions to Guide Your AI Strategy - LinkedIn Carousel</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4954SHKF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JY4954SHKF');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6 Questions to Build an AI Strategy That Sticks | Stragentech</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
-    @page {
-      size: 1080px 1080px;
-      margin: 0;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  :root {
+    --black: #0a0a0a;
+    --dark: #111827;
+    --mid: #1f2937;
+    --accent: #0f766e;
+    --accent2: #115e59;
+    --accent-light: #ccfbf1;
+    --slate: #64748b;
+    --light: #f8fafc;
+    --white: #ffffff;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0f172a;
-      color: #f8fafc;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
+  body { font-family: var(--sans); background: #0d1117; color: var(--white); line-height: 1.6; }
 
-    .slide {
-      width: 1080px;
-      height: 1080px;
-      padding: 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      page-break-after: always;
-      overflow: hidden;
-    }
+  /* ── PRINT / PDF ── */
+  @media print {
+    .top-bar { display: none; }
+    .print-btn { display: none; }
+    .slide { page-break-after: always; min-height: 100vh; box-shadow: none; }
+    .slides { padding-top: 0; }
+    .slide-num { display: block; }
+  }
 
-    /* Accent top border */
-    .slide::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 12px;
-      background: linear-gradient(90deg, #38bdf8, #818cf8);
-    }
+  /* ── TOP BAR ── */
+  .top-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,10,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 56px;
+  }
+  .top-bar .brand { font-size: 14px; font-weight: 700; letter-spacing: 2px; color: #5eead4; }
+  .top-bar .slide-counter { font-family: var(--mono); font-size: 12px; color: #94a3b8; }
+  .print-btn {
+    background: var(--accent); color: white; border: none; cursor: pointer;
+    padding: 7px 18px; border-radius: 6px; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.5px; font-family: var(--sans); transition: background 0.2s;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .print-btn:hover { background: var(--accent2); }
+  .print-btn.secondary { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); }
+  .print-btn.secondary:hover { background: rgba(255,255,255,0.14); }
 
-    .header {
-      font-size: 24px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #38bdf8;
-    }
+  /* ── SLIDES WRAPPER ── */
+  .slides { padding-top: 56px; }
 
-    .title {
-      font-size: 56px;
-      font-weight: 800;
-      line-height: 1.25;
-      color: #ffffff;
-      margin-top: 20px;
-    }
+  /* ── SLIDE BASE ── */
+  .slide { width: 100%; min-height: 100vh; display: flex; flex-direction: column; position: relative; overflow: hidden; }
 
-    .content-box {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 40px;
-      margin-top: 30px;
-    }
+  /* ── SLIDE BG VARIANTS ── */
+  .bg-dark { background: #0d1117; color: white; }
+  .bg-dark .slide-eyebrow { color: #5eead4; }
+  .bg-dark .slide-title { color: white; }
+  .bg-mid { background: #111827; color: white; }
+  .bg-mid .slide-eyebrow { color: #34d399; }
+  .bg-mid .slide-title { color: white; }
 
-    .subtitle {
-      font-size: 32px;
-      font-weight: 600;
-      color: #e2e8f0;
-      margin-bottom: 20px;
-    }
+  /* ── COVER ── */
+  .slide-cover {
+    background: linear-gradient(135deg, #0a0a0a 0%, #0d1f1e 50%, #0a1628 100%);
+    justify-content: center; align-items: center; padding: 80px 64px;
+  }
+  .cover-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .cover-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 3px; color: #5eead4; text-transform: uppercase; margin-bottom: 20px; }
+  .cover-title { font-size: clamp(28px, 3.5vw, 46px); font-weight: 900; line-height: 1.1; color: white; margin-bottom: 24px; }
+  .cover-title span { color: #5eead4; }
+  .cover-sub { font-size: 16px; color: #94a3b8; line-height: 1.7; margin-bottom: 36px; }
+  .cover-source { font-family: var(--mono); font-size: 11px; color: #475569; margin-top: 8px; }
+  .cover-author { display: flex; align-items: center; gap: 16px; margin-top: 24px; }
+  .author-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #1d4ed8);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800; color: white; flex-shrink: 0;
+  }
+  .author-info .name { font-size: 15px; font-weight: 700; color: white; }
+  .author-info .title { font-size: 12px; color: #64748b; }
+  .author-info .site { font-size: 12px; color: #5eead4; font-family: var(--mono); }
+  .stat-cards { display: grid; gap: 16px; }
+  .stat-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(94,234,212,0.15); border-radius: 12px; padding: 20px 24px; }
+  .stat-card .num { font-size: 36px; font-weight: 900; color: #5eead4; line-height: 1; margin-bottom: 4px; }
+  .stat-card .label { font-size: 13px; color: #94a3b8; }
 
-    .takeaway {
-      font-size: 26px;
-      line-height: 1.5;
-      color: #94a3b8;
-    }
+  /* ── SLIDE INNER ── */
+  .slide-inner { flex: 1; display: flex; flex-direction: column; padding: 60px 72px 44px; max-width: 1200px; margin: 0 auto; width: 100%; }
+  .slide-header { margin-bottom: 36px; }
+  .slide-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .slide-title { font-size: clamp(22px, 2.8vw, 36px); font-weight: 800; line-height: 1.2; }
+  .slide-desc { font-size: 15px; color: #94a3b8; margin-top: 10px; max-width: 700px; }
 
-    .action-line {
-      margin-top: 24px;
-      font-size: 24px;
-      font-weight: 600;
-      color: #38bdf8;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+  /* ── QUESTION SLIDE LAYOUT ── */
+  .q-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1; }
+  .q-takeaway {
+    background: rgba(15,118,110,0.08); border: 1px solid rgba(94,234,212,0.18);
+    border-left: 4px solid #5eead4; border-radius: 0 12px 12px 0;
+    padding: 28px 28px; display: flex; flex-direction: column; justify-content: center; gap: 20px;
+  }
+  .q-quote-mark { font-size: 48px; color: rgba(94,234,212,0.2); line-height: 1; font-family: Georgia, serif; }
+  .q-takeaway-text { font-size: 16px; line-height: 1.75; color: #cbd5e1; }
+  .q-right { display: flex; flex-direction: column; gap: 16px; }
+  .q-action {
+    background: rgba(15,118,110,0.14); border: 1px solid rgba(94,234,212,0.28);
+    border-radius: 12px; padding: 22px 24px;
+  }
+  .q-action-label { font-family: var(--mono); font-size: 10px; color: #5eead4; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .q-action-label::before { content: '▸'; font-size: 12px; }
+  .q-action-text { font-size: 15px; color: #e2e8f0; font-weight: 600; line-height: 1.55; }
+  .q-insight {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 22px 24px; flex: 1;
+  }
+  .q-insight-label { font-family: var(--mono); font-size: 10px; color: #475569; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+  .q-insight-text { font-size: 13px; color: #64748b; line-height: 1.7; }
+  .q-stat { font-size: 28px; font-weight: 900; color: #5eead4; margin-bottom: 4px; }
+  .q-stat-label { font-size: 12px; color: #64748b; }
 
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 30px;
-      font-size: 20px;
-      color: #64748b;
-    }
+  /* ── SUMMARY SLIDE ── */
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; flex: 1; }
+  .summary-card {
+    border-radius: 14px; padding: 28px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .sc-1 { background: rgba(15,118,110,0.10); border: 1px solid rgba(94,234,212,0.2); }
+  .sc-2 { background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); }
+  .sc-3 { background: rgba(217,119,6,0.08); border: 1px solid rgba(217,119,6,0.2); }
+  .sc-icon { font-size: 28px; margin-bottom: 4px; }
+  .sc-heading { font-size: 15px; font-weight: 800; color: white; }
+  .sc-1 .sc-tag { color: #5eead4; }
+  .sc-2 .sc-tag { color: #a5b4fc; }
+  .sc-3 .sc-tag { color: #fbbf24; }
+  .sc-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+  .sc-items { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .sc-items li { font-size: 13px; color: #94a3b8; display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+  .sc-1 .sc-items li::before { content: '✓'; color: #5eead4; font-weight: 700; flex-shrink: 0; }
+  .sc-2 .sc-items li::before { content: '✓'; color: #a5b4fc; font-weight: 700; flex-shrink: 0; }
+  .sc-3 .sc-items li::before { content: '✓'; color: #fbbf24; font-weight: 700; flex-shrink: 0; }
+  .summary-bottom {
+    margin-top: 20px; background: rgba(15,118,110,0.07); border: 1px solid rgba(94,234,212,0.12);
+    border-radius: 10px; padding: 16px 24px;
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .summary-bottom-text { font-size: 14px; font-weight: 600; color: #cbd5e1; }
+  .summary-bottom-tag { font-family: var(--mono); font-size: 10px; color: #5eead4; letter-spacing: 1px; }
 
-    .footer-source {
-      font-weight: 600;
-      color: #94a3b8;
-    }
+  /* ── CTA SLIDE ── */
+  .slide-cta {
+    background: linear-gradient(135deg, #0a0f1e 0%, #0d1f1e 60%, #0a0a0a 100%);
+    justify-content: center; align-items: center; padding: 80px 64px;
+  }
+  .cta-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+  .cta-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 3px; color: #5eead4; text-transform: uppercase; margin-bottom: 20px; }
+  .cta-title { font-size: clamp(26px, 3.5vw, 44px); font-weight: 900; color: white; line-height: 1.15; margin-bottom: 20px; }
+  .cta-title span { color: #5eead4; }
+  .cta-sub { font-size: 16px; color: #64748b; max-width: 580px; margin: 0 auto 40px; line-height: 1.7; }
+  .cta-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 40px; }
+  .cta-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px 16px; text-align: center; }
+  .cta-card .icon { font-size: 24px; margin-bottom: 10px; }
+  .cta-card h4 { font-size: 13px; font-weight: 700; color: white; margin-bottom: 6px; }
+  .cta-card p { font-size: 11px; color: #64748b; line-height: 1.5; }
+  .cta-contact { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: white; border: none; cursor: pointer;
+    padding: 14px 32px; border-radius: 8px; font-size: 14px; font-weight: 700;
+    font-family: var(--sans); text-decoration: none; display: inline-block;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent; color: #94a3b8; border: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer; padding: 14px 32px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; font-family: var(--sans);
+    text-decoration: none; display: inline-block; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: #5eead4; color: #5eead4; }
+  .cta-footer {
+    margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;
+  }
+  .cta-footer .brand-name { font-size: 14px; font-weight: 700; color: #5eead4; letter-spacing: 1px; }
+  .cta-footer .cta-name { font-size: 13px; color: #94a3b8; }
+  .cta-footer .cta-url { font-family: var(--mono); font-size: 12px; color: #475569; }
+  .sep { color: #1e293b; }
 
-    /* Cover Slide Specifics */
-    .cover-slide {
-      justify-content: center;
-      align-items: flex-start;
-      gap: 30px;
-    }
-    .cover-slide .title {
-      font-size: 68px;
-    }
-    .cover-slide .subtitle {
-      font-size: 30px;
-      color: #94a3b8;
-      font-weight: 400;
-      max-width: 850px;
-    }
-
-    /* Summary Bullets */
-    .bullet-list {
-      list-style: none;
-      margin-top: 20px;
-    }
-    .bullet-list li {
-      font-size: 26px;
-      color: #cbd5e1;
-      margin-bottom: 20px;
-      padding-left: 36px;
-      position: relative;
-    }
-    .bullet-list li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: #38bdf8;
-      font-weight: bold;
-    }
-
-    @media print {
-      body { background: none; }
-      .slide { page-break-after: always; }
-    }
-  </style>
+  /* ── MISC ── */
+  .source-line { font-family: var(--mono); font-size: 9px; color: #334155; margin-top: 20px; }
+  .slide-num { position: absolute; bottom: 24px; right: 32px; font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.18); }
+</style>
 </head>
 <body>
 
-  <!-- Slide 1 -->
-  <div class="slide cover-slide">
-    <div class="header">StragenTECH Insights</div>
-    <div class="title">Stop Chasing the Hype: 6 Questions Every Leader Must Ask Before Building an AI Strategy</div>
-    <div class="subtitle">Practical guidance on moving from isolated AI experiments to sustainable enterprise value.</div>
-    <div class="footer-source" style="margin-top: 40px;">Swipe to explore standard executive framework →</div>
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="brand">STRAGENTECH</div>
+  <div class="slide-counter">AI Strategy Framework · 9 Slides</div>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <button class="print-btn secondary" onclick="window.print()">🖨 Save as PDF</button>
   </div>
+</div>
 
-  <!-- Slide 2 -->
-  <div class="slide">
-    <div class="header">01 | Business Purpose</div>
-    <div class="title">What business problem are you actually trying to solve?</div>
-    <div class="content-box">
-      <div class="takeaway">Don't start with the model—start with the strategy. AI should fix operational bottlenecks, scale revenue, or elevate customer experience, not just fulfill an innovation metric[cite: 2].</div>
-      <div class="action-line">💡 Action: Identify top-tier business bottlenecks before evaluating vendor tools[cite: 2].</div>
-    </div>
-    <div class="footer">
-      <span>AI Strategy Playbook</span>
-      <span class="footer-source">Source: MIT Sloan School of Management</span>
-    </div>
-  </div>
+<div class="slides">
 
-  <!-- Slide 3 -->
-  <div class="slide">
-    <div class="header">02 | Data Readiness</div>
-    <div class="title">Is your data infrastructure ready to support AI?</div>
-    <div class="content-box">
-      <div class="takeaway">Garbage in, garbage out. High-performing AI models require clean, structured, accessible, and secure data pipelines[cite: 2].</div>
-      <div class="action-line">💡 Action: Audit data accessibility, governance, and security early[cite: 2].</div>
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 1: COVER -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide slide-cover">
+  <div class="cover-grid">
+    <div>
+      <div class="cover-eyebrow">Stragentech · AI Strategy Insights</div>
+      <h1 class="cover-title">Stop Chasing the Hype:<br><span>6 Questions</span> Every Leader Must Ask Before Building an AI Strategy</h1>
+      <p class="cover-sub">Practical guidance on moving from isolated AI experiments to sustainable enterprise value — grounded in MIT Sloan research.</p>
+      <p class="cover-source">Framework source: MIT Sloan School of Management</p>
+      <div class="cover-author">
+        <div class="author-avatar">BK</div>
+        <div class="author-info">
+          <div class="name">Bilal A. Khan</div>
+          <div class="title">Fractional CTO · Senior Engineering Leader · 25+ Years</div>
+          <div class="site">stragentech.com</div>
+        </div>
+      </div>
     </div>
-    <div class="footer">
-      <span>AI Strategy Playbook</span>
-      <span class="footer-source">Source: MIT Sloan School of Management</span>
+    <div>
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="num">85%</div>
+          <div class="label">AI pilots that fail to scale beyond proof-of-concept — most due to strategy misalignment, not technology</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">80 / 20</div>
+          <div class="label">AI execution is 20% technology and 80% people, process, and change management</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">3×</div>
+          <div class="label">Greater ROI for companies that align AI to specific business outcomes before selecting tools</div>
+        </div>
+      </div>
     </div>
   </div>
+  <div class="slide-num">01 / 09</div>
+</section>
 
-  <!-- Slide 4 -->
-  <div class="slide">
-    <div class="header">03 | People & Culture</div>
-    <div class="title">Do you have the right talent and culture in place?</div>
-    <div class="content-box">
-      <div class="takeaway">AI execution is 20% technology and 80% change management. Success demands cross-functional collaboration and a culture open to continuous adaptation[cite: 2].</div>
-      <div class="action-line">💡 Action: Map internal skill gaps and prioritize change enablement early[cite: 2].</div>
-    </div>
-    <div class="footer">
-      <span>AI Strategy Playbook</span>
-      <span class="footer-source">Source: MIT Sloan School of Management</span>
-    </div>
-  </div>
 
-  <!-- Slide 5 -->
-  <div class="slide">
-    <div class="header">04 | Workflow Integration</div>
-    <div class="title">How will AI seamlessly fit into daily workflows?</div>
-    <div class="content-box">
-      <div class="takeaway">The best AI tool is useless if adoption friction is too high. AI must augment and streamline current processes rather than adding extra operational steps[cite: 2].</div>
-      <div class="action-line">💡 Action: Design human-centric workflows around existing team routines[cite: 2].</div>
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 2: Q1 — BUSINESS PURPOSE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">01 | Business Purpose</div>
+      <h2 class="slide-title">What business problem are you actually trying to solve?</h2>
+      <p class="slide-desc">The most common AI failure is a solution looking for a problem. Strategy precedes technology — always.</p>
     </div>
-    <div class="footer">
-      <span>AI Strategy Playbook</span>
-      <span class="footer-source">Source: MIT Sloan School of Management</span>
+    <div class="q-layout">
+      <div class="q-takeaway">
+        <div class="q-quote-mark">"</div>
+        <div class="q-takeaway-text">Don't start with the model — start with the strategy. AI should fix operational bottlenecks, scale revenue, or elevate customer experience. It should not exist to fulfill an innovation metric or because a competitor announced something.</div>
+      </div>
+      <div class="q-right">
+        <div class="q-action">
+          <div class="q-action-label">Executive Action</div>
+          <div class="q-action-text">Before evaluating any tool or vendor, identify and rank your top operational bottlenecks by business impact. Map each AI initiative candidate directly to a named business outcome with a measurable target.</div>
+        </div>
+        <div class="q-insight">
+          <div class="q-insight-label">The Trap to Avoid</div>
+          <div class="q-stat">67%</div>
+          <div class="q-stat-label">of organizations select AI tools first, then search for problems they solve</div>
+          <div class="q-insight-text" style="margin-top:12px;">This backwards approach — tool-first, problem-second — is the leading cause of AI initiative failure. The business case must drive the technology selection, not the reverse.</div>
+        </div>
+      </div>
     </div>
+    <div class="source-line">Source: MIT Sloan School of Management · McKinsey AI Adoption Report 2024</div>
   </div>
+  <div class="slide-num">02 / 09</div>
+</section>
 
-  <!-- Slide 6 -->
-  <div class="slide">
-    <div class="header">05 | Risk & Governance</div>
-    <div class="title">How will you manage AI risk, ethics, and compliance?</div>
-    <div class="content-box">
-      <div class="takeaway">AI introduces unique risks regarding data privacy, algorithmic bias, IP exposure, and reliability. Governance cannot be treated as an afterthought[cite: 2].</div>
-      <div class="action-line">💡 Action: Establish robust guardrails and human-in-the-loop validation[cite: 2].</div>
-    </div>
-    <div class="footer">
-      <span>AI Strategy Playbook</span>
-      <span class="footer-source">Source: MIT Sloan School of Management</span>
-    </div>
-  </div>
 
-  <!-- Slide 7 -->
-  <div class="slide">
-    <div class="header">06 | ROI & Value</div>
-    <div class="title">How will you measure success and return on investment?</div>
-    <div class="content-box">
-      <div class="takeaway">Avoid vanity metrics. Track tangible operational efficiency, cost reductions, speed-to-market, or top-line growth tied directly to AI initiatives[cite: 2].</div>
-      <div class="action-line">💡 Action: Define baseline metrics and value milestones before launching pilots[cite: 2].</div>
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 3: Q2 — DATA READINESS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-mid">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">02 | Data Readiness</div>
+      <h2 class="slide-title">Is your data infrastructure ready to support AI?</h2>
+      <p class="slide-desc">No AI model outperforms the data it was trained on. Data readiness is the most underestimated blocker in enterprise AI programs.</p>
     </div>
-    <div class="footer">
-      <span>AI Strategy Playbook</span>
-      <span class="footer-source">Source: MIT Sloan School of Management</span>
+    <div class="q-layout">
+      <div class="q-takeaway">
+        <div class="q-quote-mark">"</div>
+        <div class="q-takeaway-text">Garbage in, garbage out. High-performing AI models require clean, structured, accessible, and secure data pipelines. AI amplifies data quality problems — it doesn't fix them. Every gap in your data foundation becomes a gap in your AI output.</div>
+      </div>
+      <div class="q-right">
+        <div class="q-action">
+          <div class="q-action-label">Executive Action</div>
+          <div class="q-action-text">Audit your data for accessibility, governance, and security before selecting any AI platform. Assign a data readiness score to each initiative before greenlighting it.</div>
+        </div>
+        <div class="q-insight">
+          <div class="q-insight-label">The Rule of Thumb</div>
+          <div class="q-stat">30–40%</div>
+          <div class="q-stat-label">of AI program budget should go to data infrastructure before touching a model</div>
+          <div class="q-insight-text" style="margin-top:12px;">Data pipeline integrity, sensor calibration, signal validation, and governance setup are not overhead — they are the foundation on which AI value is built or lost.</div>
+        </div>
+      </div>
     </div>
+    <div class="source-line">Source: MIT Sloan School of Management · Gartner Data & Analytics Summit 2024</div>
   </div>
+  <div class="slide-num">03 / 09</div>
+</section>
 
-  <!-- Slide 8 -->
-  <div class="slide">
-    <div class="header">Summary</div>
-    <div class="title">AI Strategy is Enterprise Strategy</div>
-    <div class="content-box">
-      <ul class="bullet-list">
-        <li>Align AI initiatives directly with high-value business objectives[cite: 2].</li>
-        <li>Build robust data foundations and empower your human workforce[cite: 2].</li>
-        <li>Implement strict governance early and measure hard ROI[cite: 2].</li>
-      </ul>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 4: Q3 — PEOPLE & CULTURE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">03 | People &amp; Culture</div>
+      <h2 class="slide-title">Do you have the right talent and culture in place?</h2>
+      <p class="slide-desc">AI is a team sport. The organizations winning with AI are not the ones with the most compute — they are the ones with the most aligned people.</p>
     </div>
-    <div class="footer">
-      <span>Save & Share with your Leadership Team</span>
-      <span class="footer-source">Source: MIT Sloan School of Management</span>
+    <div class="q-layout">
+      <div class="q-takeaway">
+        <div class="q-quote-mark">"</div>
+        <div class="q-takeaway-text">AI execution is 20% technology and 80% change management. Success demands cross-functional collaboration, executive sponsorship, and a culture open to continuous adaptation. Resistance is not a people problem — it's a leadership problem.</div>
+      </div>
+      <div class="q-right">
+        <div class="q-action">
+          <div class="q-action-label">Executive Action</div>
+          <div class="q-action-text">Map internal skill gaps across AI literacy, data engineering, and domain expertise. Prioritize change enablement and upskilling programs before or alongside technology deployment — not after.</div>
+        </div>
+        <div class="q-insight">
+          <div class="q-insight-label">What Leaders Get Wrong</div>
+          <div class="q-insight-text">Most organizations treat AI talent as a hiring problem when it's primarily a development and culture problem. The best AI teams combine domain experts who understand the business with technologists who understand the models — and leadership that bridges both worlds.</div>
+        </div>
+      </div>
+    </div>
+    <div class="source-line">Source: MIT Sloan School of Management · Deloitte Human Capital Trends 2025</div>
+  </div>
+  <div class="slide-num">04 / 09</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 5: Q4 — WORKFLOW INTEGRATION -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-mid">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">04 | Workflow Integration</div>
+      <h2 class="slide-title">How will AI seamlessly fit into daily workflows?</h2>
+      <p class="slide-desc">Adoption friction kills AI programs faster than bad models. If the tool doesn't fit the way people actually work, it won't get used.</p>
+    </div>
+    <div class="q-layout">
+      <div class="q-takeaway">
+        <div class="q-quote-mark">"</div>
+        <div class="q-takeaway-text">The best AI tool is useless if adoption friction is too high. AI must augment and streamline existing processes — not add extra steps. Every additional click or context switch your team has to make is a withdrawal from the program's trust account.</div>
+      </div>
+      <div class="q-right">
+        <div class="q-action">
+          <div class="q-action-label">Executive Action</div>
+          <div class="q-action-text">Design AI workflows around existing team routines, not around how the technology works. Map the current workflow first — then identify exactly where AI inserts without breaking the rhythm.</div>
+        </div>
+        <div class="q-insight">
+          <div class="q-insight-label">Integration Principle</div>
+          <div class="q-insight-text">The goal is not to change how people work — it is to make the work they already do faster, smarter, and less error-prone. Start with processes your team already trusts. Earn adoption through demonstrated value on familiar ground before extending into new territory.</div>
+        </div>
+      </div>
+    </div>
+    <div class="source-line">Source: MIT Sloan School of Management · McKinsey Technology Adoption Report</div>
+  </div>
+  <div class="slide-num">05 / 09</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 6: Q5 — RISK & GOVERNANCE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">05 | Risk &amp; Governance</div>
+      <h2 class="slide-title">How will you manage AI risk, ethics, and compliance?</h2>
+      <p class="slide-desc">AI introduces a new class of organizational risk. Governance is not a legal checkbox — it is the operating system of a trustworthy AI program.</p>
+    </div>
+    <div class="q-layout">
+      <div class="q-takeaway">
+        <div class="q-quote-mark">"</div>
+        <div class="q-takeaway-text">AI introduces unique risks around data privacy, algorithmic bias, IP exposure, and model reliability. Governance cannot be treated as an afterthought. The organizations that build guardrails early are the ones that scale safely — and sustainably.</div>
+      </div>
+      <div class="q-right">
+        <div class="q-action">
+          <div class="q-action-label">Executive Action</div>
+          <div class="q-action-text">Establish explicit human-in-the-loop validation before any AI system makes consequential decisions. Define what agents can do autonomously vs. what requires human confirmation — in writing, before deployment.</div>
+        </div>
+        <div class="q-insight">
+          <div class="q-insight-label">The Governance Minimum</div>
+          <div class="q-insight-text">Every AI initiative should have documented answers to: Who is accountable when the model is wrong? What data does it access and who approved that? How do we detect when it drifts from acceptable behavior? If these questions are unanswered, the program is not ready to ship.</div>
+        </div>
+      </div>
+    </div>
+    <div class="source-line">Source: MIT Sloan School of Management · NIST AI Risk Management Framework</div>
+  </div>
+  <div class="slide-num">06 / 09</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 7: Q6 — ROI & VALUE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-mid">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">06 | ROI &amp; Value</div>
+      <h2 class="slide-title">How will you measure success and return on investment?</h2>
+      <p class="slide-desc">What you measure is what you manage. AI programs without clear ROI definitions drift into endless pilots and internal showcases.</p>
+    </div>
+    <div class="q-layout">
+      <div class="q-takeaway">
+        <div class="q-quote-mark">"</div>
+        <div class="q-takeaway-text">Avoid vanity metrics. Track tangible outcomes: operational efficiency gains, cost reductions, speed-to-market improvement, or top-line growth — tied directly to specific AI initiatives. If you can't draw a straight line from the AI output to a business number, you don't have a business case.</div>
+      </div>
+      <div class="q-right">
+        <div class="q-action">
+          <div class="q-action-label">Executive Action</div>
+          <div class="q-action-text">Define your baseline metrics and target value milestones before launching any pilot. Review and publish ROI results at 30, 60, and 90 days — internally. Transparency builds trust and sustains funding.</div>
+        </div>
+        <div class="q-insight">
+          <div class="q-insight-label">Metrics That Matter</div>
+          <div class="q-insight-text">Hard metrics: cost per transaction, cycle time reduction, error rate, headcount reallocation, and revenue per employee. Avoid: "AI interactions," "queries processed," or "models deployed." Those measure activity, not impact. Your CFO will not fund round two on activity metrics.</div>
+        </div>
+      </div>
+    </div>
+    <div class="source-line">Source: MIT Sloan School of Management · BCG AI Value Measurement Study 2024</div>
+  </div>
+  <div class="slide-num">07 / 09</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 8: SUMMARY -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-eyebrow">Summary</div>
+      <h2 class="slide-title">AI Strategy is Enterprise Strategy</h2>
+      <p class="slide-desc">Six questions. Three pillars. One governing principle: the leaders who win with AI are those who treat it as a business discipline — not a technology project.</p>
+    </div>
+    <div class="summary-grid">
+      <div class="summary-card sc-1">
+        <div class="sc-icon">🎯</div>
+        <div class="sc-tag">Pillar 1 · Strategic Alignment</div>
+        <div class="sc-heading">Start with Business, End with Business</div>
+        <ul class="sc-items">
+          <li>Define the business problem before evaluating any tool</li>
+          <li>Map every AI initiative to a named outcome with a measurable target</li>
+          <li>Track hard ROI — operational efficiency, cost, speed, revenue</li>
+          <li>Review and publish results at 30 / 60 / 90 days</li>
+        </ul>
+      </div>
+      <div class="summary-card sc-2">
+        <div class="sc-icon">🏗️</div>
+        <div class="sc-tag">Pillar 2 · Foundation</div>
+        <div class="sc-heading">Build the Foundation, Then Build the Future</div>
+        <ul class="sc-items">
+          <li>Invest 30–40% of program budget in data infrastructure first</li>
+          <li>Map skill gaps and prioritize upskilling before deployment</li>
+          <li>Design AI workflows around how people already work</li>
+          <li>Earn adoption through demonstrated value, not mandates</li>
+        </ul>
+      </div>
+      <div class="summary-card sc-3">
+        <div class="sc-icon">🔒</div>
+        <div class="sc-tag">Pillar 3 · Responsible Scale</div>
+        <div class="sc-heading">Govern Early, Scale Confidently</div>
+        <ul class="sc-items">
+          <li>Document human-in-the-loop boundaries before deployment</li>
+          <li>Answer accountability, data access, and drift detection in writing</li>
+          <li>Treat governance as the operating system, not the compliance tax</li>
+          <li>Build trust through transparency — inside the organization first</li>
+        </ul>
+      </div>
+    </div>
+    <div class="summary-bottom">
+      <div>
+        <div class="summary-bottom-tag">The Governing Principle</div>
+        <div class="summary-bottom-text">AI does not fail because the technology is wrong. It fails because the strategy, foundation, or governance was never built. Fix those three things first — and the technology will deliver.</div>
+      </div>
+    </div>
+    <div class="source-line">Framework: MIT Sloan School of Management · Curated by Stragentech · stragentech.com</div>
+  </div>
+  <div class="slide-num">08 / 09</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SLIDE 9: CONTACT / CTA -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="slide slide-cta">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Stragentech · Fractional CTO Advisory</div>
+    <h2 class="cta-title">Ready to Turn Your AI Strategy<br>Into <span>Measurable Business Value?</span></h2>
+    <p class="cta-sub">I work with CEOs and operators as a Fractional CTO to design and execute AI strategies that deliver hard ROI — not just a roadmap deck. Structured, time-boxed engagements with clear milestones.</p>
+    <div class="cta-cards">
+      <div class="cta-card">
+        <div class="icon">🗺️</div>
+        <h4>AI Readiness Assessment</h4>
+        <p>2-week engagement. Business alignment audit, data readiness score, talent gap analysis, and a prioritized AI roadmap you can take to your board.</p>
+      </div>
+      <div class="cta-card">
+        <div class="icon">🚀</div>
+        <h4>60-Day AI Pilot</h4>
+        <p>One high-impact use case. Full strategy, data pipeline, deployment, and ROI measurement. Fixed scope, fixed deliverables, measurable results at day 60.</p>
+      </div>
+      <div class="cta-card">
+        <div class="icon">🏗️</div>
+        <h4>Fractional CTO Advisory</h4>
+        <p>Ongoing embedded leadership for 6–18 months. AI strategy, vendor governance, team upskilling, and program oversight — without the full-time cost.</p>
+      </div>
+    </div>
+    <div class="cta-contact">
+      <a href="https://calendar.app.google/gSTNDgChThJVdzh8A" target="_blank" rel="noopener" class="btn-primary">Schedule a Free Discovery Call →</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank" rel="noopener" class="btn-secondary">Connect on LinkedIn</a>
+    </div>
+    <div class="cta-footer">
+      <span class="brand-name">STRAGENTECH</span>
+      <span class="sep">|</span>
+      <span class="cta-name">Bilal A. Khan · Fractional CTO</span>
+      <span class="sep">|</span>
+      <span class="cta-url">stragentech.com</span>
+      <span class="sep">|</span>
+      <span style="font-size:11px;color:#334155;font-family:var(--mono);">Harvard Agentic AI · Google AI Certified · 25+ Years Engineering Leadership</span>
     </div>
   </div>
+  <div class="slide-num">09 / 09</div>
+</section>
+
+</div><!-- /slides -->
 
 </body>
 </html>
