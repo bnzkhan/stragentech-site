@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stragentech Apps — AI Tools for Operational Intelligence</title>
-<meta name="description" content="Free AI tools for industrial operators: Tech Debt Assessment, OI Readiness Scorecard, Operations Workflow Analyzer, and downloadable playbooks. Built by Stragentech.">
+<meta name="description" content="Free AI tools for industrial operators: a 7-tool Tech Debt Assessment Suite (cost calculator, scorecard, velocity, ROI, metrics, benchmarks, business case), OI Readiness Scorecard, Operations Workflow Analyzer, and downloadable playbooks. Built by Stragentech.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -109,6 +109,10 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);-webkit-backdro
 .badge-free{background:var(--teal-pale);color:var(--teal-dark);border:1px solid var(--teal-mid);}
 .badge-ai{background:var(--blue-pale);color:var(--blue);border:1px solid #b3cef4;}
 .badge-soon{background:var(--gray-50);color:var(--gray-400);border:1px solid var(--gray-100);}
+
+.subtool-links{display:flex;gap:6px;flex-wrap:wrap;padding:0 22px 16px;}
+.subtool-link{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;padding:5px 11px;border:1px solid var(--gray-100);border-radius:20px;transition:all .18s;}
+.subtool-link:hover{border-color:var(--teal);color:var(--teal-dark);background:var(--teal-pale);}
 
 /* ── LIVE TOOL PANELS ── */
 .live-tool{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:28px;margin-bottom:20px;}
@@ -280,15 +284,24 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
   <div class="tools-overview">
     <div class="tool-card wide">
       <div class="tool-card-head">
-        <div class="tool-type">Tech Debt Tool</div>
-        <h3>Tech Debt Assessment</h3>
-        <p>What costly signals is your tech debt sending — and is anyone acting on them? Answer questions about your team, stack, and spend to get a directional cost estimate across architecture, licensing, cloud/FinOps, staffing, security, and operations.</p>
+        <div class="tool-type">Tech Debt Suite · 7 Tools</div>
+        <h3>Tech Debt Assessment Suite</h3>
+        <p>What costly signals is your tech debt sending — and is anyone acting on them? A full suite of free calculators and guides: cost calculator, 10-dimension scorecard, velocity impact, refactoring ROI, a metrics guide, industry benchmarks, and a board-ready business case builder.</p>
+      </div>
+      <div class="subtool-links">
+        <a href="tech-debt-calculator.html" class="subtool-link">Calculator</a>
+        <a href="tech-debt-assessment.html" class="subtool-link">Assessment</a>
+        <a href="tech-debt-velocity.html" class="subtool-link">Velocity</a>
+        <a href="tech-debt-roi.html" class="subtool-link">ROI</a>
+        <a href="tech-debt-metrics.html" class="subtool-link">Metrics</a>
+        <a href="tech-debt-benchmarks.html" class="subtool-link">Benchmarks</a>
+        <a href="tech-debt-business-case.html" class="subtool-link">Business Case</a>
       </div>
       <div class="tool-card-foot">
-        <span class="tool-meta">~5 min · deterministic calculator</span>
+        <span class="tool-meta">~5 min per tool · deterministic calculators + guides</span>
         <div style="display:flex;gap:5px;"><span class="badge badge-free">Free</span></div>
       </div>
-      <div style="padding:0 22px 18px;"><a href="tech-debt-calculator.html" class="btn btn-run">▸ Open Assessment</a></div>
+      <div style="padding:0 22px 18px;"><a href="tech-debt-calculator.html" class="btn btn-run">▸ Open Assessment Suite</a></div>
     </div>
     <div class="tool-card wide">
       <div class="tool-card-head">

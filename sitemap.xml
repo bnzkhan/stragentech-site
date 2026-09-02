@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://stragentech.com/</loc>
-    <lastmod>2025-05-26</lastmod>
+    <loc>https://www.stragentech.com/</loc>
+    <lastmod>2026-09-01</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://apps.stragentech.com/apps.html</loc>
-    <lastmod>2025-05-26</lastmod>
+    <loc>https://www.stragentech.com/tools.html</loc>
+    <lastmod>2026-09-01</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/tech-debt-calculator.html</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/tech-debt-assessment.html</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/tech-debt-velocity.html</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/tech-debt-roi.html</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/tech-debt-metrics.html</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/tech-debt-benchmarks.html</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/tech-debt-business-case.html</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>
