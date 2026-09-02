@@ -54,6 +54,10 @@
   --orbit-teal-dark:var(--teal-dark);
   --orbit-teal-pale:var(--teal-pale);
   --orbit-orange:#ff9500;
+  --orbit-hitl:#5b6b82;
+  --orbit-hitl-dots:rgba(139,146,160,0.38);
+  --orbit-hitl-bg:rgba(255,255,255,0.55);
+  --orbit-hitl-border:rgba(91,107,130,0.40);
 }
 html{scroll-behavior:smooth;}
 body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
@@ -162,6 +166,23 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .orbit .icon .stroke-teal{stroke:var(--orbit-teal);fill:none;}
 .orbit .icon .fill-teal{fill:var(--orbit-teal);}
 
+/* ── HITL local orbit, centered on the agent.act node-dot ── */
+.orbit .act-hitl{position:absolute;width:104px;height:104px;transform:translate(-50%,-50%);pointer-events:none;z-index:1;}
+.orbit .hitl-dotted{position:absolute;inset:0;border-radius:50%;border:1.5px dotted var(--orbit-hitl-dots);}
+.orbit .hitl-rotor{position:absolute;inset:0;transform-origin:center;animation:orbit-spin 11s linear infinite;}
+.orbit .hitl-mini{
+  position:absolute;top:0;left:50%;width:34px;height:34px;border-radius:50%;
+  background:var(--orbit-hitl-bg);border:1px solid var(--orbit-hitl-border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:0 2px 8px rgba(13,17,23,0.06);
+  backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px);
+  animation:orbit-spinrev 11s linear infinite;transform-origin:center;
+}
+@keyframes orbit-spinrev{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-360deg)}}
+.orbit .hitl-mini svg{width:16px;height:16px;margin-top:1px;}
+.orbit .hitl-mini svg path,.orbit .hitl-mini svg circle{fill:var(--orbit-hitl);}
+.orbit .hitl-mini .lbl{font-family:var(--font-mono);font-size:5px;font-weight:600;color:var(--orbit-hitl);letter-spacing:0.5px;line-height:1;}
+
 @media(max-width:520px){
   .orbit{width:340px;height:340px;}
   .orbit .node{width:104px;}
@@ -169,11 +190,13 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
   .orbit .icon{width:34px;height:34px;}
   .orbit .center-title{font-size:21px;}
   .orbit .center-label{width:150px;}
+  .orbit .act-hitl{width:88px;height:88px;}
+  .orbit .hitl-mini{width:30px;height:30px;}
+  .orbit .hitl-mini svg{width:14px;height:14px;}
 }
 
 @media (prefers-reduced-motion: reduce){
-  .orbit .rotor{animation:none;}
-  .orbit .status-dot{animation:none;}
+  .orbit .rotor,.orbit .status-dot,.orbit .hitl-rotor,.orbit .hitl-mini{animation:none;}
   .orbit .icon .radar-sweep{display:none;}
 }
 
@@ -342,7 +365,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 .theme-toggle .icon-sun{display:none;}
 [data-theme="dark"] .theme-toggle .icon-moon{display:none;}
 [data-theme="dark"] .theme-toggle .icon-sun{display:block;}
-[data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);}
+[data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);--orbit-hitl:#aab4c6;--orbit-hitl-dots:rgba(255,255,255,0.22);--orbit-hitl-bg:rgba(255,255,255,0.10);--orbit-hitl-border:rgba(255,255,255,0.22);}
 [data-theme="dark"] nav{background:rgba(13,17,23,0.95)!important;}
 [data-theme="dark"] .nav-links a:hover{background:rgba(255,255,255,0.06);}
 [data-theme="dark"] .nav-cta{background:var(--teal)!important;color:#0d1117!important;}
@@ -414,7 +437,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
       <p class="hero-friction">Free 30-min call · No commitment required</p>
     </div>
     <div class="hero-visual">
-      <div class="orbit" aria-label="Agentic Operational Intelligence loop: detect, investigate, act">
+      <div class="orbit" aria-label="Agentic Operational Intelligence loop: detect, investigate, act, with human oversight on the act stage">
         <svg class="ring-svg" viewBox="0 0 460 460" aria-hidden="true">
           <g class="spokes"></g>
           <circle class="track-ring" cx="230" cy="230" r="150"/>
@@ -492,7 +515,24 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
             </svg>
           </div>
           <div class="node-name">agent.act</div>
-          <div class="node-desc">Corrective action, no review queue</div>
+          <div class="node-desc">Corrective Action</div>
+        </div>
+
+        <!-- Human-in-the-loop marker, centered on the agent.act node-dot.
+             top is offset 4.8pts above the act node's own top (67.4%) so the
+             dotted ring centers on the ACT ICON circle, not the text block
+             beneath it — the act node's "top" marks the vertical center of
+             its whole dot+name+desc stack, not the icon alone. If the act
+             node moves, keep act-hitl's left equal to it and re-tune this
+             offset so the dotted ring stays concentric with the icon. -->
+        <div class="act-hitl" style="left:17.4%;top:62.6%;" aria-hidden="true">
+          <div class="hitl-dotted"></div>
+          <div class="hitl-rotor">
+            <div class="hitl-mini">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20.5 C4.5 15 8 13.6 12 13.6 C16 13.6 19.5 15 19.5 20.5 Z"/></svg>
+              <span class="lbl">HITL</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
