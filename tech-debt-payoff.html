@@ -12,8 +12,8 @@
 <script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech Debt Benchmarks — Stragentech</title>
-<meta name="description" content="Free industry benchmark data for technical debt — headline cost figures, DORA performance bands, debt ratio by company stage, cost by team size, and industry-specific ranges.">
+<title>Tech Debt Payoff Strategies — Stragentech</title>
+<meta name="description" content="Four proven approaches to actually paying down technical debt — the Debt Sprint, the 20% Rule, the Strangler Fig Pattern, and the Boy Scout Rule — compared side by side, with a prioritization framework and rewrite guidance.">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -100,12 +100,6 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdro
 .step-item h5{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;}
 .step-item p{font-size:13px;color:var(--gray-600);line-height:1.65;font-weight:300;}
 
-.xtable{width:100%;border-collapse:collapse;font-size:13px;}
-.xtable th{font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;color:var(--gray-400);text-align:left;padding:9px 12px;border-bottom:1px solid var(--gray-100);}
-.xtable td{padding:11px 12px;border-bottom:1px solid var(--gray-100);vertical-align:top;}
-.xtable td.bad{color:#c53030;font-weight:500;}
-.xtable td.good{color:var(--teal-dark);font-weight:500;}
-
 .faq-item{border-bottom:1px solid var(--gray-100);padding:14px 0;}
 .faq-item:last-child{border-bottom:none;padding-bottom:0;}
 .faq-item summary{font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;}
@@ -116,25 +110,8 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdro
 
 .tool-cross-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
 
-.rating-scale{display:flex;gap:6px;}
-.rating-btn{width:36px;height:36px;border-radius:6px;border:1px solid var(--gray-200);background:var(--white);font-family:var(--font-mono);font-size:13px;color:var(--gray-600);cursor:pointer;transition:all .18s;}
-.rating-btn:hover{border-color:var(--teal);color:var(--teal);}
-.rating-btn.selected{background:var(--teal);border-color:var(--teal);color:var(--white);font-weight:700;}
-.dim-row{padding:16px 0;border-bottom:1px solid var(--gray-100);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
-.dim-row:last-child{border-bottom:none;padding-bottom:0;}
-.dim-row:first-child{padding-top:0;}
-.dim-info h5{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:3px;}
-.dim-info p{font-size:12.5px;color:var(--gray-400);font-weight:300;max-width:420px;line-height:1.5;}
-.dim-counter{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);letter-spacing:0.5px;margin-bottom:14px;}
-
-.preset-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
-.preset-btn{font-family:var(--font-mono);font-size:12px;padding:9px 16px;border:1px solid var(--gray-200);border-radius:20px;background:var(--white);color:var(--gray-600);cursor:pointer;transition:all .18s;}
-.preset-btn:hover,.preset-btn.selected{border-color:var(--teal);color:var(--teal-dark);background:var(--teal-pale);}
-
 [data-theme="dark"] .subnav{background:rgba(13,17,23,0.95);}
 [data-theme="dark"] .stat-tile,[data-theme="dark"] .guide-card{background:#21262d;}
-[data-theme="dark"] .rating-btn{background:#21262d;border-color:var(--gray-200);}
-[data-theme="dark"] .preset-btn{background:#21262d;}
 
 @media(max-width:760px){
   .stat-grid{grid-template-columns:1fr 1fr;}
@@ -145,105 +122,34 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdro
 .calc-hero-inner{max-width:var(--max-w);margin:0 auto;}
 .calc-hero h1{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:400;letter-spacing:-0.3px;margin-bottom:8px;color:var(--ink);line-height:1.1;}
 .calc-hero h1 em{font-style:italic;color:var(--teal);}
-.calc-hero p{font-size:15px;color:var(--gray-400);max-width:620px;line-height:1.65;font-weight:300;margin-bottom:14px;}
+.calc-hero p{font-size:15px;color:var(--gray-400);max-width:640px;line-height:1.65;font-weight:300;margin-bottom:14px;}
 .hero-meta{display:flex;gap:18px;flex-wrap:wrap;}
 .hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
 .hero-meta-item::before{content:'▸';color:var(--teal);}
 
-/* ── LAYOUT ── */
-.calc-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
-
-/* ── WIZARD ── */
-.wizard{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:24px;}
-.progress-bar{height:3px;background:var(--gray-100);border-radius:2px;margin-bottom:20px;overflow:hidden;}
-.progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .3s;}
-.step-tag{font-family:var(--font-mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
-.step-title{font-size:22px;font-weight:600;color:var(--ink);margin-bottom:4px;}
-.step-sub{font-size:15px;color:var(--gray-400);line-height:1.6;font-weight:300;margin-bottom:20px;max-width:640px;}
-.field-group{margin-bottom:18px;}
-.field-label{font-family:var(--font-mono);font-size:12px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;display:block;}
-.field-hint{font-size:13px;color:var(--gray-400);font-weight:300;margin-top:5px;line-height:1.5;}
-.tool-input{width:100%;background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;padding:11px 14px;font-size:13px;color:var(--ink);font-family:var(--font-body);outline:none;transition:border-color .2s;}
-.tool-input:focus{border-color:var(--teal);}
-.tool-input::placeholder{color:var(--gray-400);}
-.input-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.opt-cards{display:flex;gap:8px;flex-wrap:wrap;}
-.opt-card{font-family:var(--font-mono);font-size:13px;padding:10px 15px;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;transition:all .18s;color:var(--gray-600);background:var(--white);text-align:left;line-height:1.5;}
-.opt-card:hover{border-color:var(--teal);color:var(--teal);}
-.opt-card.selected{background:var(--teal-pale);border-color:var(--teal);color:var(--teal-dark);font-weight:500;}
-.opt-card .opt-sub{display:block;font-family:var(--font-body);font-size:11px;color:var(--gray-400);font-weight:300;margin-top:2px;}
-.opt-card.selected .opt-sub{color:var(--teal-dark);opacity:0.75;}
-.wizard-nav{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding-top:18px;border-top:1px solid var(--gray-100);}
 .btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
 .btn-run{background:var(--ink);color:var(--white);font-weight:500;}
 .btn-run:hover{background:var(--teal-dark);}
-.btn-run:disabled{opacity:0.4;cursor:not-allowed;}
 .btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
 .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
-.btn-outline:disabled{opacity:0.3;cursor:not-allowed;}
 .btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
 .btn-teal:hover{background:var(--teal-dark);}
-.step-dots{display:flex;gap:5px;}
-.step-dot{width:6px;height:6px;border-radius:50%;background:var(--gray-200);}
-.step-dot.active{background:var(--teal);}
-.step-dot.done{background:var(--teal-mid);}
-
-/* ── RESULTS ── */
-.results{display:none;}
-.results.visible{display:block;}
-.headline-card{background:var(--ink);border-radius:10px;padding:34px 32px;margin-bottom:20px;text-align:center;}
-.headline-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.75);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
-.headline-num{font-family:var(--font-serif);font-size:clamp(36px,6vw,58px);color:var(--white);font-weight:400;line-height:1;margin-bottom:8px;}
-.headline-range{font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:4px;}
-.headline-note{font-size:12.5px;color:rgba(255,255,255,0.4);font-weight:300;max-width:440px;margin:14px auto 0;line-height:1.6;}
-
-.locked-wrap{position:relative;}
-.locked-content{filter:blur(7px);pointer-events:none;user-select:none;}
-.lock-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;}
-.lock-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:28px 30px;box-shadow:0 8px 40px rgba(13,17,23,0.12);max-width:420px;width:100%;}
-.lock-icon{font-size:22px;margin-bottom:10px;}
-.lock-card h3{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:6px;}
-.lock-card p{font-size:13px;color:var(--gray-400);line-height:1.6;font-weight:300;margin-bottom:16px;}
-.lock-card .tool-input{margin-bottom:10px;}
-.lock-error{font-size:11.5px;color:#c53030;margin-top:-4px;margin-bottom:10px;display:none;}
-.lock-error.show{display:block;}
-
-.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
-.breakdown{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
-.cat-row{margin-bottom:14px;}
-.cat-row:last-child{margin-bottom:0;}
-.cat-row-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
-.cat-name{font-size:13px;font-weight:500;color:var(--ink);}
-.cat-val{font-family:var(--font-mono);font-size:13px;color:var(--ink);font-weight:500;}
-.cat-bar-track{height:8px;background:var(--gray-50);border-radius:4px;overflow:hidden;}
-.cat-bar-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--blue));border-radius:4px;}
-.cat-total-row{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--gray-100);}
-.cat-total-row .cat-name{font-size:14px;font-weight:600;}
-.cat-total-row .cat-val{font-size:16px;}
-
-.fiveyr-card{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:24px 28px;margin-bottom:20px;}
-.fiveyr-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
-.fiveyr-card p{font-size:13px;color:var(--gray-400);font-weight:300;line-height:1.65;margin-bottom:14px;}
-.fiveyr-num{font-family:var(--font-serif);font-size:30px;color:var(--teal-dark);margin-bottom:2px;}
-
-.reco-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
-.reco-item{padding:16px 0;border-bottom:1px solid var(--gray-100);}
-.reco-item:last-child{border-bottom:none;padding-bottom:0;}
-.reco-item:first-child{padding-top:0;}
-.reco-cat{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
-.reco-item h5{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:5px;}
-.reco-item p{font-size:13px;color:var(--gray-600);line-height:1.65;font-weight:300;}
-
-.disclaimer-box{background:var(--amber-pale);border:1px solid #ecd6b0;border-radius:10px;padding:20px 24px;margin-bottom:20px;}
-.disclaimer-box .d-tag{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
-.disclaimer-box p{font-size:12.5px;color:#6b4a1f;line-height:1.7;font-weight:400;margin-bottom:8px;}
-.disclaimer-box p:last-child{margin-bottom:0;}
 
 .cta-bar{background:var(--ink);border-radius:10px;padding:36px;text-align:center;margin-bottom:8px;}
 .cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
 .cta-bar h3{font-family:var(--font-serif);font-size:24px;color:var(--white);font-weight:400;margin-bottom:8px;}
 .cta-bar p{font-size:13.5px;color:rgba(255,255,255,0.5);max-width:440px;margin:0 auto 22px;font-weight:300;}
 .cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ── STRATEGY CARDS ── */
+.strat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.strat-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:24px 26px;}
+.strat-card h3{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.strat-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.strat-card p{font-size:13px;color:var(--gray-600);line-height:1.65;font-weight:300;margin-bottom:8px;}
+.strat-card p:last-child{margin-bottom:0;}
+@media(max-width:760px){.strat-grid{grid-template-columns:1fr;}}
+[data-theme="dark"] .strat-card{background:#21262d;}
 
 /* ── FOOTER ── */
 footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
@@ -260,11 +166,6 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
 @media(max-width:760px){.footer-cols{grid-template-columns:1fr 1fr;}}
 @media(max-width:480px){.footer-cols{grid-template-columns:1fr;}}
 
-@media(max-width:760px){
-  .input-row{grid-template-columns:1fr;}
-  .wizard-nav{flex-wrap:wrap;gap:10px;}
-  .headline-num{font-size:38px;}
-}
 @media(max-width:480px){
   .nav-brand-sub{display:none;}
 }
@@ -283,28 +184,10 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
 [data-theme="dark"] .btn-run:hover{background:var(--teal-dark);}
 [data-theme="dark"] .btn-outline{border-color:var(--gray-200);color:var(--gray-600);}
 [data-theme="dark"] .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
-[data-theme="dark"] .wizard,
-[data-theme="dark"] .lock-card,
-[data-theme="dark"] .breakdown,
-[data-theme="dark"] .reco-card,
-[data-theme="dark"] .opt-card{background:#21262d;}
-[data-theme="dark"] .fiveyr-card{background:#1c2128;}
-[data-theme="dark"] .headline-card{background:#1c2128;}
-[data-theme="dark"] .headline-num{color:var(--ink);}
 [data-theme="dark"] .cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
 [data-theme="dark"] .cta-bar h3{color:var(--ink);}
 [data-theme="dark"] .cta-bar p{color:var(--gray-400);}
-[data-theme="dark"] .disclaimer-box{background:#1c1a10;border-color:#3d3010;}
-[data-theme="dark"] .disclaimer-box p{color:#c9a84c;}
 [data-theme="dark"] footer{background:#0a0e14;}
-[data-theme="dark"] .wizard .step-tag{color:#f97316;}
-[data-theme="dark"] .wizard .step-title{color:#f97316;}
-[data-theme="dark"] .wizard .step-sub{color:#fb923c;}
-[data-theme="dark"] .wizard .field-label{color:#f97316;}
-[data-theme="dark"] .wizard .field-hint{color:#fb923c;}
-[data-theme="dark"] .wizard .opt-card{color:#fb923c;}
-[data-theme="dark"] .wizard .opt-card.selected{background:rgba(249,115,22,0.12);border-color:#f97316;color:#f97316;}
-[data-theme="dark"] .wizard .opt-card .opt-sub{color:#fb923c;}
 </style>
 </head>
 <body>
@@ -313,7 +196,7 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
   <div class="nav-inner">
     <a href="https://www.stragentech.com" class="nav-brand">
       <img src="logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
-      <span class="nav-brand-sub">/ benchmarks</span>
+      <span class="nav-brand-sub">/ payoff strategies</span>
     </a>
     <ul class="nav-links">
       <li><a href="tools.html">← Tools</a></li>
@@ -333,143 +216,137 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
     <a href="tech-debt-velocity.html" class="subnav-tab">Velocity</a>
     <a href="tech-debt-roi.html" class="subnav-tab">ROI</a>
     <a href="tech-debt-metrics.html" class="subnav-tab">Metrics</a>
-    <a href="tech-debt-benchmarks.html" class="subnav-tab active">Benchmarks</a>
+    <a href="tech-debt-benchmarks.html" class="subnav-tab">Benchmarks</a>
     <a href="tech-debt-interest.html" class="subnav-tab">Interest</a>
     <a href="tech-debt-types.html" class="subnav-tab">Types</a>
-    <a href="tech-debt-payoff.html" class="subnav-tab">Payoff</a>
+    <a href="tech-debt-payoff.html" class="subnav-tab active">Payoff</a>
     <a href="tech-debt-business-case.html" class="subnav-tab">Business Case</a>
   </div>
 </div>
+
 <!-- HERO -->
 <div class="calc-hero">
   <div class="calc-hero-inner">
-    <h1>Tech Debt <em>Benchmarks</em></h1>
-    <p>Industry comparison data for technical debt — headline cost figures, DORA performance bands, and typical debt ratios by company stage and industry.</p>
+    <h1>4 Ways to Actually <em>Pay Down</em> Tech Debt</h1>
+    <p>Quantifying the cost (<a href="tech-debt-calculator.html" style="color:var(--teal-dark);">Cost Calculator</a>) and building the case (<a href="tech-debt-business-case.html" style="color:var(--teal-dark);">Business Case Builder</a>) only gets you to the starting line. This page compares the four execution approaches that actually work in practice — and when to reach for each.</p>
     <div class="hero-meta">
-      <span class="hero-meta-item">2026 edition</span>
-      <span class="hero-meta-item">Free reference</span>
-      <span class="hero-meta-item">CISQ · Stripe · DORA · McKinsey</span>
+      <span class="hero-meta-item">4 strategies</span>
+      <span class="hero-meta-item">Comparison matrix</span>
+      <span class="hero-meta-item">~5 minute read</span>
     </div>
   </div>
 </div>
 
 <div class="guide-body">
 
-  <div class="stat-grid">
-    <div class="stat-tile">
-      <div class="stat-num">$1.52T</div>
-      <div class="stat-label">Accumulated US technical-debt principal</div>
-      <div class="stat-src">CISQ, 2022</div>
+  <div class="strat-grid">
+    <div class="strat-card">
+      <h3>1. The Debt Sprint</h3>
+      <div class="strat-badges">
+        <span class="badge-pill amber">Difficulty: Medium–High</span>
+        <span class="badge-pill">2–4 weeks</span>
+      </div>
+      <p>Pause feature work entirely for a fixed window and put the whole team on debt paydown — the highest-drag items first, not the loudest complaints. It's the fastest way to make a visible dent, and the easiest for leadership to understand because it has a clear start and end date.</p>
+      <p><strong>Rough cost, 10-person team:</strong> team size × avg. fully-loaded salary × (sprint weeks ÷ 52) — a 3-week sprint at a $150K average loads to roughly <strong>$85K–$90K</strong> in opportunity cost against paused feature work, landing most estimates in the commonly-cited $50K–$150K band depending on team size and duration.</p>
+      <p><strong>Pros:</strong> fast, visible, easy to scope and measure. <strong>Cons:</strong> feature roadmap stalls for the duration; requires real management buy-in to protect the freeze from getting cut short.</p>
+      <p><strong>Best for:</strong> teams with a visible crisis (missed sprints, repeated incidents) and a leadership sponsor willing to hold the line.</p>
     </div>
-    <div class="stat-tile">
-      <div class="stat-num">$2.41T</div>
-      <div class="stat-label">Total cost of poor software quality, US</div>
-      <div class="stat-src">CISQ, 2022</div>
+    <div class="strat-card">
+      <h3>2. The 20% Rule</h3>
+      <div class="strat-badges">
+        <span class="badge-pill blue">Difficulty: Low–Medium</span>
+        <span class="badge-pill">Ongoing</span>
+      </div>
+      <p>Ring-fence roughly one-fifth of every sprint for debt work as a standing, non-negotiable allocation — not "whatever's left over." The mechanism is simple; the hard part is holding the line when a deadline gets tight.</p>
+      <p><strong>Pros:</strong> no dedicated budget ask, spreads the cost thin and predictably, keeps debt from re-accumulating once you've paid it down. <strong>Cons:</strong> requires ongoing discipline — it's the first thing that gets cut under deadline pressure, and it moves too slowly to address a genuine crisis on its own.</p>
+      <p><strong>Best for:</strong> steady-state maintenance once your debt ratio is already under roughly 20–25% — see the <a href="tech-debt-benchmarks.html" style="color:var(--teal-dark);">Industry Benchmarks</a> page for where that sits relative to your stage.</p>
     </div>
-    <div class="stat-tile">
-      <div class="stat-num">33%</div>
-      <div class="stat-label">Average developer time spent on tech debt</div>
-      <div class="stat-src">Stripe / Harris Poll, 2018</div>
+    <div class="strat-card">
+      <h3>3. The Strangler Fig Pattern</h3>
+      <div class="strat-badges">
+        <span class="badge-pill amber">Difficulty: Medium–High</span>
+        <span class="badge-pill">3–12 months</span>
+      </div>
+      <p>Named for the fig species that grows around a host tree until the original is gone — build the new implementation alongside the legacy one, and incrementally route traffic or functionality to it, piece by piece, rather than attempting a big-bang cutover.</p>
+      <p><strong>Pros:</strong> the system stays live and shippable the entire time; risk is isolated to whatever slice you're migrating this week; you can stop or reverse course without a wasted rewrite. <strong>Cons:</strong> requires running two implementations in parallel for a while, which has its own coordination overhead; needs careful routing/interface design up front.</p>
+      <p><strong>Best for:</strong> architecture-level debt in systems that genuinely can't tolerate downtime or a hard cutover — most core platform and payments-adjacent systems.</p>
     </div>
-    <div class="stat-tile">
-      <div class="stat-num">17.3 hrs</div>
-      <div class="stat-label">Weekly hours on maintenance &amp; ops work</div>
-      <div class="stat-src">Stripe, 2018</div>
+    <div class="strat-card">
+      <h3>4. The Boy Scout Rule</h3>
+      <div class="strat-badges">
+        <span class="badge-pill">Difficulty: Low</span>
+        <span class="badge-pill">Ongoing</span>
+      </div>
+      <p>"Leave every file a little better than you found it." No dedicated allocation, no sprint carve-out — just a norm that whenever you're already touching a piece of code, you clean up what's immediately around it before you move on.</p>
+      <p><strong>Pros:</strong> effectively free — no budget conversation required, works well layered on top of any of the other three strategies. <strong>Cons:</strong> slow by itself, easy to skip under pressure, and does nothing for debt that nobody happens to be touching.</p>
+      <p><strong>Best for:</strong> codebases that are already in reasonably good shape and want to stay that way, or as a supplement to a more active strategy above.</p>
     </div>
   </div>
 
   <div class="guide-card">
-    <p><strong>20–40%</strong> of technology-estate value is typically tied up in technical debt (McKinsey Digital, 2020). Left unmanaged, debt is modeled to drive a <strong>25–33% velocity decline</strong> within 12 months as complexity compounds.</p>
-  </div>
-
-  <div class="guide-card">
-    <h2>DORA performance bands</h2>
-    <p>The four DORA delivery metrics, across all four performance tiers.</p>
-    <div class="table-scroll" style="margin-top:16px;">
-      <table class="gtable">
-        <thead><tr><th>Metric</th><th>Elite</th><th>High</th><th>Medium</th><th>Low</th></tr></thead>
-        <tbody>
-          <tr><td>Deployment frequency</td><td>On-demand</td><td>Weekly–monthly</td><td>Monthly–6 months</td><td>Fewer than 1 / 6mo</td></tr>
-          <tr><td>Lead time for changes</td><td>Under 1 day</td><td>1 day – 1 week</td><td>1 week – 1 month</td><td>1–6 months</td></tr>
-          <tr><td>Change failure rate</td><td>0–15%</td><td>16–30%</td><td>31–45%</td><td>46–60%</td></tr>
-          <tr><td>Mean time to recovery</td><td>Under 1 hour</td><td>Under 1 day</td><td>1 day – 1 week</td><td>1 week – 6 months</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="margin-top:14px;">Source: Google / DORA State of DevOps, 2019–2024 (20,000–40,000 respondents annually).</p>
-  </div>
-
-  <div class="guide-card">
-    <h2>Technical Debt Ratio by company stage</h2>
+    <h2>Strategy comparison</h2>
     <div class="table-scroll">
       <table class="gtable">
-        <thead><tr><th>Stage</th><th>Typical range</th><th>Target</th></tr></thead>
+        <thead><tr><th>Strategy</th><th>Startup cost</th><th>Ongoing cost</th><th>Buy-in needed</th><th>Risk level</th><th>Time to results</th><th>Best for</th></tr></thead>
         <tbody>
-          <tr><td>Startups</td><td>15–30%</td><td>Below 15%</td></tr>
-          <tr><td>Scale-ups</td><td>10–25%</td><td>Below 10%</td></tr>
-          <tr><td>Enterprises</td><td>8–20%</td><td>Below 5%</td></tr>
-          <tr><td>Agencies / consultancies</td><td>20–40%</td><td>Below 15%</td></tr>
+          <tr><td>Debt Sprint</td><td>High</td><td>None</td><td>High</td><td>Low</td><td>Fast (weeks)</td><td>Visible crisis</td></tr>
+          <tr><td>20% Rule</td><td>Low</td><td>Steady</td><td>Medium</td><td>Low</td><td>Slow (quarters)</td><td>Steady-state maintenance</td></tr>
+          <tr><td>Strangler Fig</td><td>Medium</td><td>Medium (parallel run)</td><td>Medium–High</td><td>Medium</td><td>Slow (months)</td><td>Architecture-level debt</td></tr>
+          <tr><td>Boy Scout Rule</td><td>None</td><td>Minimal</td><td>Low</td><td>Very low</td><td>Very slow (ongoing)</td><td>Already-healthy codebases</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
   <div class="guide-card">
-    <h2>Annual debt cost by team size</h2>
-    <p>Illustrative figures at typical debt levels, using a $150,000 fully-loaded salary assumption. Run the <a href="tech-debt-calculator.html" style="color:var(--teal-dark);">Cost Calculator</a> for your own numbers.</p>
-    <div class="table-scroll" style="margin-top:16px;">
-      <table class="gtable">
-        <thead><tr><th>Engineering team size</th><th>Typical annual debt cost</th><th>FTEs wasted</th></tr></thead>
-        <tbody>
-          <tr><td>5</td><td>$190,000</td><td>0.5</td></tr>
-          <tr><td>10</td><td>$380,000</td><td>1.0</td></tr>
-          <tr><td>25</td><td>$950,000</td><td>2.5</td></tr>
-          <tr><td>50</td><td>$1,900,000</td><td>5.0</td></tr>
-          <tr><td>100</td><td>$3,800,000</td><td>10.0</td></tr>
-          <tr><td>200</td><td>$7,600,000</td><td>20.0</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <h2>Combining strategies</h2>
+    <p>These aren't mutually exclusive, and in practice most successful paydown programs stack two or more:</p>
+    <p><strong>20% Rule + Boy Scout Rule</strong> — the standard combination for steady-state maintenance once you're in reasonable shape.</p>
+    <p><strong>Debt Sprint + 20% Rule</strong> — use the sprint to recover from a bad state, then the 20% Rule to keep debt from creeping back up afterward.</p>
+    <p><strong>Debt Sprint + Strangler Fig</strong> — for critical or architecture-level systems: use focused sprints to build out the new implementation in parallel while the Strangler Fig pattern handles the incremental cutover.</p>
+    <p><strong>All three (Sprint + 20% Rule + Strangler Fig)</strong> — enterprise-scale transformations, where different parts of the estate are at different stages simultaneously.</p>
   </div>
 
   <div class="guide-card">
-    <h2>Industry-specific benchmarks</h2>
-    <div class="table-scroll">
-      <table class="gtable">
-        <thead><tr><th>Industry</th><th>Typical debt range</th><th>Risk tolerance</th></tr></thead>
-        <tbody>
-          <tr><td>Fintech</td><td>25–40%</td><td>Low</td></tr>
-          <tr><td>HealthTech</td><td>20–35%</td><td>Very low (HIPAA / FDA)</td></tr>
-          <tr><td>E-commerce</td><td>20–30%</td><td>Moderate</td></tr>
-          <tr><td>SaaS (B2B)</td><td>15–25%</td><td>Moderate</td></tr>
-          <tr><td>Enterprise software</td><td>25–45%</td><td>High</td></tr>
-          <tr><td>Consumer mobile</td><td>15–25%</td><td>Low</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="guide-card">
-    <h2>Sources &amp; methodology</h2>
+    <h2 id="prioritization">Which debt to pay off first</h2>
     <div class="step-list">
-      <div class="step-item"><span class="step-num">01</span><div><h5>CISQ Cost of Poor Software Quality</h5><p>December 2022. Synthesis across multiple US market sources. Figures are national-economy scale, not directly attributable to any single organization.</p></div></div>
-      <div class="step-item"><span class="step-num">02</span><div><h5>Stripe Developer Coefficient</h5><p>2018. Survey of 1,000+ developers and executives across five countries. Self-reported time allocation, subject to recall bias.</p></div></div>
-      <div class="step-item"><span class="step-num">03</span><div><h5>DORA State of DevOps</h5><p>2019–2024 annual research, 20,000–40,000 respondents. Delivery-performance benchmarks, not debt-specific, but strongly correlated.</p></div></div>
-      <div class="step-item"><span class="step-num">04</span><div><h5>McKinsey Digital</h5><p>October 2020. Survey of 50 CIOs at large organizations — small sample, enterprise-skewed.</p></div></div>
+      <div class="step-item"><span class="step-num">01</span><div><h5>Blast radius</h5><p>How many teams, services, or downstream consumers does this piece of debt actually touch? Debt that's isolated to one team's internal tooling is a lower priority than debt sitting on a shared platform component.</p></div></div>
+      <div class="step-item"><span class="step-num">02</span><div><h5>Change frequency</h5><p>How often does someone actually have to touch this code? Debt in a file that changes weekly compounds into real drag; debt in a file nobody has opened in two years is lower urgency, whatever its raw quality score.</p></div></div>
+      <div class="step-item"><span class="step-num">03</span><div><h5>Incident and security correlation</h5><p>Pull your incident history and unpatched-dependency list (see the <a href="tech-debt-metrics.html" style="color:var(--teal-dark);">Metrics Guide</a>) and look for clustering. Debt that keeps showing up in postmortems jumps the queue.</p></div></div>
+      <div class="step-item"><span class="step-num">04</span><div><h5>Cost to fix vs. cost of inaction</h5><p>Weigh the effort to remediate against what it's costing you to leave it alone — and remember that cost of inaction compounds rather than staying flat. The <a href="tech-debt-interest.html" style="color:var(--teal-dark);">Compound Interest Visualizer</a> models exactly this tradeoff.</p></div></div>
+    </div>
+  </div>
+
+  <div class="guide-card">
+    <h2>When a full rewrite is actually warranted</h2>
+    <p>A rewrite is high-risk by nature — you're pausing forward progress on a known-working system to bet on an unproven one — and should be the last resort considered, not the first idea proposed. It's genuinely warranted only when most of the following are true:</p>
+    <p><strong>1.</strong> The platform has hit a scaling ceiling that no amount of incremental optimization will fix. <strong>2.</strong> The underlying technology is genuinely unsupported or end-of-life with no viable upgrade path. <strong>3.</strong> Incremental strategies — the Strangler Fig pattern included — have already been tried and failed, not just considered. <strong>4.</strong> The business case for a rewrite clearly beats its multi-year cost, including the opportunity cost of frozen feature work. <strong>5.</strong> Leadership is prepared to commit and genuinely protect the team from feature-delivery pressure for the duration.</p>
+    <p>If more than one or two of these don't hold, look harder at the Strangler Fig pattern first — it gets you most of the benefit of a rewrite without betting the whole system on one outcome.</p>
+  </div>
+
+  <div class="guide-card">
+    <h2>Keep going</h2>
+    <p>Once you've picked an approach, here's where to go next:</p>
+    <div class="tool-cross-links">
+      <a href="tech-debt-calculator.html" class="btn btn-outline">▸ Cost Calculator</a>
+      <a href="tech-debt-interest.html" class="btn btn-outline">▸ Compound Interest Visualizer</a>
+      <a href="tech-debt-business-case.html" class="btn btn-outline">▸ Business Case Builder</a>
+      <a href="tech-debt-metrics.html" class="btn btn-outline">▸ Metrics Guide</a>
     </div>
   </div>
 
   <div class="cta-bar">
-    <div class="cta-bar-tag">// Where do you fall on this curve?</div>
-    <h3>Benchmark your own organization.</h3>
-    <p>Run the Assessment scorecard or Cost Calculator to see how your numbers compare to these industry ranges.</p>
+    <div class="cta-bar-tag">// Want help choosing and executing?</div>
+    <h3>Get a prioritized paydown roadmap.</h3>
+    <p>A structured engagement maps your actual debt against these strategies and builds a sequenced plan your team and leadership can both commit to.</p>
     <div class="cta-bar-actions">
-      <a href="tech-debt-assessment.html" class="btn btn-teal">▸ Take the Assessment</a>
-      <a href="tech-debt-calculator.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Open the Cost Calculator</a>
+      <a href="index.html#contact" class="btn btn-teal">▸ Book a Free Discovery Call</a>
+      <a href="tools.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Explore More Free Tools</a>
     </div>
   </div>
 
 </div><!-- /guide-body -->
+
 <footer>
   <div class="footer-cols">
     <div class="footer-col">
