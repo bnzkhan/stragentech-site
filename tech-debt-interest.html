@@ -12,8 +12,8 @@
 <script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Refactoring ROI Calculator — Stragentech</title>
-<meta name="description" content="Free calculator modeling payback period, 3-year ROI, and NPV for a technical debt reduction investment — with a refactor-vs-hire comparison.">
+<title>Compound Interest Visualizer — Stragentech</title>
+<meta name="description" content="See how technical debt compounds over 5 years under different remediation scenarios — from doing nothing to quarterly debt sprints. Free live visualizer.">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -197,17 +197,6 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdro
 .headline-range{font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:4px;}
 .headline-note{font-size:12.5px;color:rgba(255,255,255,0.4);font-weight:300;max-width:440px;margin:14px auto 0;line-height:1.6;}
 
-.locked-wrap{position:relative;}
-.locked-content{filter:blur(7px);pointer-events:none;user-select:none;}
-.lock-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;}
-.lock-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:28px 30px;box-shadow:0 8px 40px rgba(13,17,23,0.12);max-width:420px;width:100%;}
-.lock-icon{font-size:22px;margin-bottom:10px;}
-.lock-card h3{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:6px;}
-.lock-card p{font-size:13px;color:var(--gray-400);line-height:1.6;font-weight:300;margin-bottom:16px;}
-.lock-card .tool-input{margin-bottom:10px;}
-.lock-error{font-size:11.5px;color:#c53030;margin-top:-4px;margin-bottom:10px;display:none;}
-.lock-error.show{display:block;}
-
 .section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
 .breakdown{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
 .cat-row{margin-bottom:14px;}
@@ -220,19 +209,6 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdro
 .cat-total-row{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--gray-100);}
 .cat-total-row .cat-name{font-size:14px;font-weight:600;}
 .cat-total-row .cat-val{font-size:16px;}
-
-.fiveyr-card{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:24px 28px;margin-bottom:20px;}
-.fiveyr-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
-.fiveyr-card p{font-size:13px;color:var(--gray-400);font-weight:300;line-height:1.65;margin-bottom:14px;}
-.fiveyr-num{font-family:var(--font-serif);font-size:30px;color:var(--teal-dark);margin-bottom:2px;}
-
-.reco-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
-.reco-item{padding:16px 0;border-bottom:1px solid var(--gray-100);}
-.reco-item:last-child{border-bottom:none;padding-bottom:0;}
-.reco-item:first-child{padding-top:0;}
-.reco-cat{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
-.reco-item h5{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:5px;}
-.reco-item p{font-size:13px;color:var(--gray-600);line-height:1.65;font-weight:300;}
 
 .disclaimer-box{background:var(--amber-pale);border:1px solid #ecd6b0;border-radius:10px;padding:20px 24px;margin-bottom:20px;}
 .disclaimer-box .d-tag{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
@@ -288,7 +264,6 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
 [data-theme="dark"] .breakdown,
 [data-theme="dark"] .reco-card,
 [data-theme="dark"] .opt-card{background:#21262d;}
-[data-theme="dark"] .fiveyr-card{background:#1c2128;}
 [data-theme="dark"] .headline-card{background:#1c2128;}
 [data-theme="dark"] .headline-num{color:var(--ink);}
 [data-theme="dark"] .cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
@@ -297,14 +272,6 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
 [data-theme="dark"] .disclaimer-box{background:#1c1a10;border-color:#3d3010;}
 [data-theme="dark"] .disclaimer-box p{color:#c9a84c;}
 [data-theme="dark"] footer{background:#0a0e14;}
-[data-theme="dark"] .wizard .step-tag{color:#f97316;}
-[data-theme="dark"] .wizard .step-title{color:#f97316;}
-[data-theme="dark"] .wizard .step-sub{color:#fb923c;}
-[data-theme="dark"] .wizard .field-label{color:#f97316;}
-[data-theme="dark"] .wizard .field-hint{color:#fb923c;}
-[data-theme="dark"] .wizard .opt-card{color:#fb923c;}
-[data-theme="dark"] .wizard .opt-card.selected{background:rgba(249,115,22,0.12);border-color:#f97316;color:#f97316;}
-[data-theme="dark"] .wizard .opt-card .opt-sub{color:#fb923c;}
 </style>
 </head>
 <body>
@@ -313,7 +280,7 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
   <div class="nav-inner">
     <a href="https://www.stragentech.com" class="nav-brand">
       <img src="logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
-      <span class="nav-brand-sub">/ roi calculator</span>
+      <span class="nav-brand-sub">/ compound interest</span>
     </a>
     <ul class="nav-links">
       <li><a href="tools.html">← Tools</a></li>
@@ -331,165 +298,140 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
     <a href="tech-debt-calculator.html" class="subnav-tab">Calculator</a>
     <a href="tech-debt-assessment.html" class="subnav-tab">Assessment</a>
     <a href="tech-debt-velocity.html" class="subnav-tab">Velocity</a>
-    <a href="tech-debt-roi.html" class="subnav-tab active">ROI</a>
+    <a href="tech-debt-roi.html" class="subnav-tab">ROI</a>
     <a href="tech-debt-metrics.html" class="subnav-tab">Metrics</a>
     <a href="tech-debt-benchmarks.html" class="subnav-tab">Benchmarks</a>
-    <a href="tech-debt-interest.html" class="subnav-tab">Interest</a>
+    <a href="tech-debt-interest.html" class="subnav-tab active">Interest</a>
     <a href="tech-debt-types.html" class="subnav-tab">Types</a>
     <a href="tech-debt-payoff.html" class="subnav-tab">Payoff</a>
     <a href="tech-debt-business-case.html" class="subnav-tab">Business Case</a>
   </div>
 </div>
-
 <!-- HERO -->
 <div class="calc-hero">
   <div class="calc-hero-inner">
-    <h1>Refactoring <em>ROI Calculator</em></h1>
-    <p>Model the payback period and 3-year return on a technical debt reduction investment — turn "we should really fix this" into a number a CFO can act on.</p>
+    <h1>Why Waiting Makes Tech Debt <em>More Expensive</em></h1>
+    <p>Ward Cunningham's original 1992 debt metaphor wasn't a warning that code could be flawed — every codebase is. It was the observation that imperfect code charges interest: the longer you carry it, the more it costs to pay off. This visualizer shows what that interest actually looks like over five years, under five different response strategies.</p>
     <div class="hero-meta">
-      <span class="hero-meta-item">Payback period</span>
-      <span class="hero-meta-item">3-year ROI &amp; NPV</span>
-      <span class="hero-meta-item">Free</span>
-      <span class="hero-meta-item">Educated estimate, not an audit</span>
+      <span class="hero-meta-item">Live visualizer</span>
+      <span class="hero-meta-item">5-year projection</span>
+      <span class="hero-meta-item">5 compounding factors</span>
     </div>
   </div>
 </div>
 
-<div class="calc-body">
+<div class="guide-body">
 
-  <!-- INPUTS -->
-  <div class="wizard" id="wizard">
-    <div class="step-tag">Investment scenario</div>
-    <div class="step-title">Model your debt reduction investment</div>
-    <div class="step-sub">Start from a preset scenario, or enter your own numbers directly.</div>
-
-    <div class="preset-row" id="presetRow">
-      <button type="button" class="preset-btn" onclick="applyPreset('quick', this)">Quick Wins</button>
-      <button type="button" class="preset-btn" onclick="applyPreset('focused', this)">Focused Initiative</button>
-      <button type="button" class="preset-btn" onclick="applyPreset('major', this)">Major Overhaul</button>
+  <!-- LIVE VISUALIZER -->
+  <div class="guide-card" id="visualizer">
+    <h2>The compound interest visualizer</h2>
+    <p>Enter your current annual cost of technical debt below (use the <a href="tech-debt-calculator.html" style="color:var(--teal-dark);">Cost Calculator</a> if you don't have this number yet), and see how it compounds over 5 years under each strategy.</p>
+    <div class="field-group" style="max-width:360px;margin-top:16px;">
+      <label class="field-label">Current annual debt cost ($/yr)</label>
+      <input class="tool-input" id="baseCost" type="number" min="0" step="1000" value="400000" oninput="renderVisualizer()">
+      <div class="field-hint"><a href="#" id="prefillLink" onclick="prefillFromCalc(event)" style="color:var(--teal-dark);text-decoration:none;">← Prefill from the Cost Calculator</a></div>
     </div>
 
-    <div class="field-group">
-      <label class="field-label">Current annual debt cost ($)</label>
-      <input class="tool-input" type="number" min="0" id="currentDebtCost" placeholder="e.g. 850000">
-      <div class="field-hint">Don't know this number? Run the <a href="tech-debt-calculator.html" style="color:var(--teal-dark);">Cost Calculator</a> first.</div>
-    </div>
-    <div class="input-row">
-      <div class="field-group">
-        <label class="field-label">Proposed investment ($)</label>
-        <input class="tool-input" type="number" min="0" id="investment" value="250000">
-      </div>
-      <div class="field-group">
-        <label class="field-label">Risk discount (%)</label>
-        <input class="tool-input" type="number" min="0" max="90" id="riskDiscount" value="20">
-        <div class="field-hint">Uncertainty haircut applied to projected savings.</div>
-      </div>
-    </div>
-    <div class="input-row">
-      <div class="field-group">
-        <label class="field-label">Expected debt reduction (%)</label>
-        <input class="tool-input" type="number" min="0" max="100" id="debtReduction" value="35">
-      </div>
-      <div class="field-group">
-        <label class="field-label">Expected velocity improvement (%)</label>
-        <input class="tool-input" type="number" min="0" max="100" id="velocityImprovement" value="22">
-      </div>
-    </div>
+    <div class="section-tag" style="margin-top:24px;">// 5-year cumulative cost by scenario</div>
+    <div id="chartWrap"></div>
 
-    <div class="wizard-nav" style="justify-content:flex-end;">
-      <button class="btn btn-run" onclick="calculateROI()">▸ Calculate ROI</button>
-    </div>
-  </div>
-
-  <!-- RESULTS -->
-  <div class="results" id="results">
-
-    <div class="headline-card">
-      <div class="headline-tag">// Estimated payback period</div>
-      <div class="headline-num" id="rHeadline">0 months</div>
-      <div class="headline-range" id="rRange">3-yr ROI: 0% · NPV: $0</div>
-      <div class="headline-note">Enter your details to unlock the year-by-year savings breakdown, NPV detail, and the refactor-vs-hire comparison.</div>
-    </div>
-
-    <div class="locked-wrap">
-      <div class="locked-content" id="lockedContent">
-
-        <div class="breakdown">
-          <div class="section-tag">// year-by-year savings (risk-adjusted)</div>
-          <div class="table-scroll">
-            <table class="gtable"><tbody id="yearRows"></tbody></table>
-          </div>
-        </div>
-
-        <div class="fiveyr-card">
-          <h4>Compound prevention</h4>
-          <p>Debt reduction doesn't just save this year's cost — it prevents the compound growth an unmanaged debt load would otherwise carry (modeled here at the same 18%/yr rate used by the Cost Calculator). That gap widens every year you wait.</p>
-          <div class="fiveyr-num" id="compoundGapNum">$0</div>
-          <div class="field-hint">Cumulative 3-year gap between the unmanaged and managed cost trajectories.</div>
-        </div>
-
-        <div class="reco-card">
-          <div class="section-tag">// refactor vs. hiring more engineers</div>
-          <div class="table-scroll">
-            <table class="xtable">
-              <thead><tr><th></th><th>Refactoring investment</th><th>Hiring 2 more engineers</th></tr></thead>
-              <tbody id="hireCompareRows"></tbody>
-            </table>
-          </div>
-          <p style="margin-top:14px;font-size:12.5px;color:var(--gray-400);font-weight:300;">Hiring adds capacity without addressing the underlying drag — the debt keeps compounding under the larger team too. Refactoring investment is one-time and compounds in the other direction.</p>
-        </div>
-
-      </div>
-
-      <div class="lock-overlay" id="lockOverlay">
-        <div class="lock-card">
-          <div class="lock-icon">🔒</div>
-          <h3>Unlock the full ROI model</h3>
-          <p>See the year-by-year savings breakdown, compound-prevention gap, and refactor-vs-hire comparison — free.</p>
-          <input class="tool-input" id="leadName" type="text" placeholder="Your name">
-          <input class="tool-input" id="leadEmail" type="email" placeholder="Work email">
-          <input class="tool-input" id="leadCompany" type="text" placeholder="Company">
-          <div class="lock-error" id="leadError">Please enter your name and a valid work email.</div>
-          <button class="btn btn-run" style="width:100%;justify-content:center;" onclick="unlockReport()">▸ Unlock Full ROI Model</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="disclaimer-box">
-      <div class="d-tag">⚠ Important disclaimer</div>
-      <p><strong>This is an illustrative financial model, not a formal business case.</strong> It uses a simplified discounted cash-flow approach with an 18%/yr unmanaged-debt growth assumption and a 10% discount rate for NPV — both illustrative, not derived from your specific financials.</p>
-      <p>Use this to sanity-check whether an investment is directionally worth pursuing, and pair it with the <a href="tech-debt-business-case.html" style="color:#8a6115;">Business Case</a> tool to build the version you'd actually present.</p>
-    </div>
-
-  </div>
-
-  <!-- STATIC WORKED EXAMPLES (always visible) -->
-  <div class="guide-card">
-    <div class="section-tag">// worked examples at three scales</div>
-    <p style="margin-bottom:14px;">Illustrative scenarios at different team sizes, using typical debt-cost and investment ratios.</p>
-    <div class="table-scroll">
+    <div class="table-scroll" style="margin-top:20px;">
       <table class="gtable">
-        <thead><tr><th>Team size</th><th>Annual debt cost</th><th>Investment</th><th>Debt reduction</th><th>Payback</th></tr></thead>
+        <thead><tr><th>Scenario</th><th>Annual growth</th><th>5-year total cost</th><th>Savings vs. Do Nothing</th></tr></thead>
+        <tbody id="scenarioRows"></tbody>
+      </table>
+    </div>
+    <div class="field-hint" style="margin-top:14px;">Growth rates are illustrative midpoints derived from the ranges published by CAST Software's CRASH Report, McKinsey Digital, and Stripe's Developer Coefficient (see below). Your actual trajectory depends on team size, architecture, and how consistently a remediation strategy is followed.</div>
+  </div>
+
+  <!-- FIVE COMPOUNDING FACTORS -->
+  <div class="guide-card">
+    <h2>Five compounding factors</h2>
+    <p>Debt doesn't sit still — it accelerates through five reinforcing mechanisms. Each adds its own annual growth pressure on top of the base cost.</p>
+    <div class="step-list" style="margin-top:14px;">
+      <div class="step-item"><span class="step-num">01</span><div><h5>Coupling growth <span class="badge-pill">+3–5%/yr</span></h5><p>Every function or service that stays un-refactored tends to pick up more callers over time. What was once an isolated shortcut becomes a load-bearing wall — and touching it now means touching everything downstream of it.</p></div></div>
+      <div class="step-item"><span class="step-num">02</span><div><h5>Team growth drag <span class="badge-pill">+2–4%/yr</span></h5><p>New engineers take longer to onboard into a debt-heavy system, and without tribal knowledge to fall back on, they're more likely to unknowingly add to the very debt they're still learning to navigate.</p></div></div>
+      <div class="step-item"><span class="step-num">03</span><div><h5>Dependency drift <span class="badge-pill">+2–3%/yr</span></h5><p>Deferred library and framework upgrades don't stay the same size — they compound. Jumping four major versions at once is exponentially harder than four incremental upgrades, and the security exposure grows the whole time you wait.</p></div></div>
+      <div class="step-item"><span class="step-num">04</span><div><h5>Testing gap widening <span class="badge-pill">+3–6%/yr</span></h5><p>Code written without tests tends to get extended without tests too. Coverage doesn't erode linearly — it collapses in the areas people are most afraid to touch, which are usually the areas that need the most work.</p></div></div>
+      <div class="step-item"><span class="step-num">05</span><div><h5>Workaround accumulation <span class="badge-pill">+2–4%/yr</span></h5><p>Every patch-on-a-patch adds a layer of indirection. Eventually engineers spend more time reconstructing why a workaround exists than they spend on the business logic it was built around.</p></div></div>
+    </div>
+  </div>
+
+  <!-- DEBT CLIFF -->
+  <div class="guide-card">
+    <h2>The debt cliff</h2>
+    <p>Compounding is gradual for years — until the annual cost crosses a threshold your team can no longer absorb inside its existing headcount. That inflection point is the "debt cliff." Here's a worked example for a 25-person engineering org carrying $350,000/year in debt cost at an 18% annual growth rate, measured against the cost of two dedicated senior engineers ($250,000 fully-loaded each, $500,000 combined) as the affordability ceiling.</p>
+    <div class="table-scroll" style="margin-top:16px;">
+      <table class="gtable">
+        <thead><tr><th>Year</th><th>Annual debt cost</th><th>FTE-equivalents consumed</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td>10 engineers</td><td>$380,000</td><td>$75,000</td><td>30%</td><td>~14 months</td></tr>
-          <tr><td>50 engineers</td><td>$1,900,000</td><td>$300,000</td><td>35%</td><td>~11 months</td></tr>
-          <tr><td>200 engineers</td><td>$7,600,000</td><td>$1,200,000</td><td>40%</td><td>~9 months</td></tr>
+          <tr><td>Year 1</td><td>$350,000</td><td>2.3</td><td>Manageable drag</td></tr>
+          <tr><td>Year 2</td><td>$413,000</td><td>2.8</td><td>Velocity decline becomes visible</td></tr>
+          <tr><td>Year 3</td><td>$487,340</td><td>3.2</td><td>Sprint commitments start slipping</td></tr>
+          <tr><td>Year 4</td><td>$575,061</td><td>3.8</td><td><strong>Debt cliff</strong> — exceeds 2 senior hires</td></tr>
+          <tr><td>Year 5</td><td>$678,572</td><td>4.5</td><td>Rewrite conversation begins</td></tr>
         </tbody>
       </table>
+    </div>
+    <p style="margin-top:14px;">By Year 4, the annual cost of doing nothing ($575K) exceeds what it would cost to simply hire two more senior engineers outright — except this spend buys no new capacity, just standing still.</p>
+  </div>
+
+  <!-- INDUSTRY DATA -->
+  <div class="guide-card">
+    <h2>Industry data on compound rates</h2>
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin-top:16px;margin-bottom:0;">
+      <div class="stat-tile">
+        <div class="stat-num">8–12%</div>
+        <div class="stat-label">Annual growth — low-debt codebases (under 15% debt ratio), actively maintained</div>
+        <div class="stat-src">CAST Software CRASH Report</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num">15–20%</div>
+        <div class="stat-label">Annual growth — moderate debt (15–30%), teams aware but not actively reducing</div>
+        <div class="stat-src">McKinsey Digital</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num">25–40%</div>
+        <div class="stat-label">Annual growth — high debt (30%+), a self-reinforcing spiral</div>
+        <div class="stat-src">Stripe Developer Coefficient</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DECISION FRAMEWORK -->
+  <div class="guide-card">
+    <h2>When to act</h2>
+    <div class="step-list" style="margin-top:14px;">
+      <div class="step-item"><span class="step-num">01</span><div><h5>Debt under 15%, growth under 12%</h5><p>The 20% Rule — a standing allocation of sprint capacity to debt paydown — is sufficient. No special initiative required.</p></div></div>
+      <div class="step-item"><span class="step-num">02</span><div><h5>Debt 15–25%, growth over 12%</h5><p>Time to dedicate a focused initiative — a quarterly debt sprint or a named owner — rather than relying on ad hoc attention.</p></div></div>
+      <div class="step-item"><span class="step-num">03</span><div><h5>Debt over 25%, growth over 18%</h5><p>Urgent. You're approaching or past the cliff — a major refactor or phased rewrite needs to be on the roadmap now, not next planning cycle.</p></div></div>
+      <div class="step-item"><span class="step-num">04</span><div><h5>Not sure which bucket you're in?</h5><p>Measure first. Use the <a href="tech-debt-assessment.html" style="color:var(--teal-dark);">Assessment Scorecard</a> and the <a href="tech-debt-metrics.html" style="color:var(--teal-dark);">Metrics Guide</a> to get an honest baseline before choosing a strategy.</p></div></div>
+    </div>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <div class="guide-card">
+    <h2>Next steps</h2>
+    <p>This visualizer shows the cost of waiting. Here's how to turn it into a plan.</p>
+    <div class="tool-cross-links" style="margin-top:14px;">
+      <a href="tech-debt-calculator.html" class="btn btn-outline">Quantify your current cost →</a>
+      <a href="tech-debt-roi.html" class="btn btn-outline">Model the investment to fix it →</a>
+      <a href="tech-debt-payoff.html" class="btn btn-outline">Choose a payoff strategy →</a>
+      <a href="tech-debt-business-case.html" class="btn btn-outline">Present it to leadership →</a>
     </div>
   </div>
 
   <div class="cta-bar">
-    <div class="cta-bar-tag">// Ready to make the case?</div>
-    <h3>Turn this into a board-ready business case.</h3>
-    <p>The Business Case tool translates this model into the language, template, and objection-handling a non-technical stakeholder audience needs to say yes.</p>
+    <div class="cta-bar-tag">// The math says act now, not later</div>
+    <h3>Turn this projection into a funded plan.</h3>
+    <p>A structured engagement replaces these illustrative growth rates with your actual trajectory — and a prioritized roadmap to bend the curve.</p>
     <div class="cta-bar-actions">
-      <a href="tech-debt-business-case.html" class="btn btn-teal">▸ Build the Business Case</a>
-      <a href="index.html#contact" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Book a Free Discovery Call</a>
+      <a href="index.html#contact" class="btn btn-teal">▸ Book a Free Discovery Call</a>
+      <a href="tools.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Explore More Free Tools</a>
     </div>
   </div>
 
-</div><!-- /calc-body -->
+</div><!-- /guide-body -->
 <footer>
   <div class="footer-cols">
     <div class="footer-col">
@@ -533,142 +475,55 @@ document.getElementById('themeToggle').addEventListener('click',function(){
   html.setAttribute('data-theme',isDark?'light':'dark');
   localStorage.setItem('stragentech-theme',isDark?'light':'dark');
 });
-// ── REFACTORING ROI CALCULATOR ───────────────────────────────────────────
-const UNMANAGED_GROWTH = 0.18; // matches the Cost Calculator's 5-yr projection assumption
-const DISCOUNT_RATE = 0.10;
-const DEFAULT_SALARY = 150000;
-let results = null;
 
-const PRESETS = {
-  quick:{investment:50000, debtReduction:15, velocityImprovement:10, riskDiscount:10},
-  focused:{investment:250000, debtReduction:35, velocityImprovement:22, riskDiscount:20},
-  major:{investment:750000, debtReduction:55, velocityImprovement:35, riskDiscount:30},
-};
-
-function applyPreset(key, btnEl){
-  const p = PRESETS[key];
-  document.getElementById('investment').value = p.investment;
-  document.getElementById('debtReduction').value = p.debtReduction;
-  document.getElementById('velocityImprovement').value = p.velocityImprovement;
-  document.getElementById('riskDiscount').value = p.riskDiscount;
-  document.querySelectorAll('#presetRow .preset-btn').forEach(b=>b.classList.remove('selected'));
-  if(btnEl) btnEl.classList.add('selected');
-}
-
-function calculateROI(){
-  const currentDebtCost = parseFloat(document.getElementById('currentDebtCost').value) || 0;
-  const investment = parseFloat(document.getElementById('investment').value) || 0;
-  const debtReductionPct = (parseFloat(document.getElementById('debtReduction').value) || 0) / 100;
-  const velocityImprovementPct = (parseFloat(document.getElementById('velocityImprovement').value) || 0) / 100;
-  const riskDiscountPct = (parseFloat(document.getElementById('riskDiscount').value) || 0) / 100;
-
-  // Unmanaged trajectory: debt cost compounds at the standard 18%/yr rate.
-  const unmanaged = [currentDebtCost];
-  unmanaged.push(unmanaged[0] * (1+UNMANAGED_GROWTH));
-  unmanaged.push(unmanaged[1] * (1+UNMANAGED_GROWTH));
-
-  // Managed trajectory: reduced immediately, then regrows slower thanks to velocity improvement.
-  const managedGrowth = UNMANAGED_GROWTH * (1 - velocityImprovementPct);
-  const managed = [currentDebtCost * (1-debtReductionPct)];
-  managed.push(managed[0] * (1+managedGrowth));
-  managed.push(managed[1] * (1+managedGrowth));
-
-  const grossSavings = [0,1,2].map(i => Math.max(0, unmanaged[i]-managed[i]));
-  const riskAdjSavings = grossSavings.map(s => s * (1-riskDiscountPct));
-
-  const cumulative3yr = riskAdjSavings.reduce((a,b)=>a+b,0);
-  const netSavings3yr = cumulative3yr - investment;
-  const roi3yr = investment > 0 ? (netSavings3yr/investment*100) : 0;
-
-  const npv = -investment + riskAdjSavings.reduce((sum,s,i)=> sum + s/Math.pow(1+DISCOUNT_RATE,i+1), 0);
-
-  // Payback in months: step monthly savings by year, walk cumulative to investment.
-  let paybackMonths = null;
-  let cum = 0;
-  for(let m=1; m<=36; m++){
-    const yearIdx = Math.floor((m-1)/12);
-    cum += riskAdjSavings[yearIdx]/12;
-    if(cum >= investment && paybackMonths===null){ paybackMonths = m; break; }
-  }
-
-  const compoundGap = (unmanaged[0]+unmanaged[1]+unmanaged[2]) - (managed[0]+managed[1]+managed[2]);
-
-  const hireCost3yr = 2 * DEFAULT_SALARY * 1.3 * 3; // 2 engineers, fully loaded, 3 years
-  const refactorTotal3yr = investment + managed.reduce((a,b)=>a+b,0);
-  const hireTotal3yr = hireCost3yr + unmanaged.reduce((a,b)=>a+b,0);
-
-  results = {
-    currentDebtCost, investment, debtReductionPct, velocityImprovementPct, riskDiscountPct,
-    unmanaged, managed, grossSavings, riskAdjSavings, cumulative3yr, netSavings3yr, roi3yr, npv,
-    paybackMonths, compoundGap, hireCost3yr, refactorTotal3yr, hireTotal3yr,
-  };
-
-  renderResults();
-  document.getElementById('results').classList.add('visible');
-  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
-  if(typeof gtag!=='undefined') gtag('event','tool_completed',{'tool_name':'refactoring_roi_calculator','payback_months':paybackMonths,'roi_3yr_pct':roi3yr});
-}
+// ── COMPOUND INTEREST VISUALIZER ─────────────────────────────────────────
+const SCENARIOS = [
+  { key:'none',      name:'Do Nothing',              rate:0.22 },
+  { key:'minimal',   name:'Minimal Effort',          rate:0.15 },
+  { key:'ten',       name:'10% Sprint Allocation',   rate:0.08 },
+  { key:'twenty',    name:'20% Sprint Allocation',   rate:0.02 },
+  { key:'quarterly', name:'Quarterly Debt Sprints',  rate:-0.05 },
+];
 
 function fmtMoney(n){
-  n = Math.round(n);
-  const sign = n<0 ? '-' : '';
-  return sign + '$' + Math.abs(n).toLocaleString('en-US');
+  n = Math.max(0, Math.round(n));
+  return '$' + n.toLocaleString('en-US');
 }
 
-function renderResults(){
-  document.getElementById('rHeadline').textContent = results.paybackMonths ? results.paybackMonths + ' months' : '36+ months';
-  document.getElementById('rRange').textContent = `3-yr ROI: ${results.roi3yr.toFixed(0)}% · NPV: ${fmtMoney(results.npv)}`;
-
-  document.getElementById('yearRows').innerHTML = [0,1,2].map(i => `
-    <tr><td>Year ${i+1}</td><td style="font-family:var(--font-mono);color:var(--ink);font-weight:500;">${fmtMoney(results.riskAdjSavings[i])}</td></tr>
-  `).join('') + `
-    <tr><td style="font-weight:600;">Cumulative 3-yr savings</td><td style="font-family:var(--font-mono);color:var(--ink);font-weight:600;">${fmtMoney(results.cumulative3yr)}</td></tr>
-    <tr><td>Net savings (after investment)</td><td style="font-family:var(--font-mono);color:var(--ink);font-weight:500;">${fmtMoney(results.netSavings3yr)}</td></tr>
-    <tr><td>Net present value (NPV)</td><td style="font-family:var(--font-mono);color:var(--ink);font-weight:500;">${fmtMoney(results.npv)}</td></tr>
-  `;
-
-  document.getElementById('compoundGapNum').textContent = fmtMoney(results.compoundGap);
-
-  document.getElementById('hireCompareRows').innerHTML = `
-    <tr><td>Upfront / annual cost</td><td class="good">${fmtMoney(results.investment)} one-time</td><td class="bad">${fmtMoney(results.hireCost3yr/3)}/yr ongoing</td></tr>
-    <tr><td>Addresses root cause?</td><td class="good">Yes — reduces debt</td><td class="bad">No — adds capacity only</td></tr>
-    <tr><td>3-yr total cost</td><td>${fmtMoney(results.refactorTotal3yr)}</td><td>${fmtMoney(results.hireTotal3yr)}</td></tr>
-  `;
+function computeScenario(base, rate){
+  let cum = 0;
+  for(let y=1; y<=5; y++){ cum += base * Math.pow(1+rate, y); }
+  return cum;
 }
 
-// ── LEAD CAPTURE / UNLOCK ────────────────────────────────────────────────
-function unlockReport(){
-  const name = document.getElementById('leadName').value.trim();
-  const email = document.getElementById('leadEmail').value.trim();
-  const company = document.getElementById('leadCompany').value.trim();
-  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const errEl = document.getElementById('leadError');
-  if(!name || !emailRe.test(email)){
-    errEl.classList.add('show');
-    return;
+function renderVisualizer(){
+  const base = parseFloat(document.getElementById('baseCost').value) || 0;
+  const results = SCENARIOS.map(s => ({ ...s, cum: computeScenario(base, s.rate) }));
+  const doNothingCum = results[0].cum;
+  const maxCum = Math.max(...results.map(r => r.cum), 1);
+
+  document.getElementById('chartWrap').innerHTML = results.map(r => `
+    <div class="cat-row">
+      <div class="cat-row-head"><span class="cat-name">${r.name}</span><span class="cat-val">${fmtMoney(r.cum)}</span></div>
+      <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${Math.max(2, r.cum/maxCum*100)}%"></div></div>
+    </div>`).join('');
+
+  document.getElementById('scenarioRows').innerHTML = results.map(r => {
+    const savings = doNothingCum - r.cum;
+    return `<tr><td>${r.name}</td><td>${r.rate>=0?'+':''}${(r.rate*100).toFixed(0)}%/yr</td><td>${fmtMoney(r.cum)}</td><td>${r.key==='none' ? '—' : fmtMoney(savings)}</td></tr>`;
+  }).join('');
+}
+
+function prefillFromCalc(e){
+  e.preventDefault();
+  const v = localStorage.getItem('stragentech-tdc-annual-cost');
+  if(v && !isNaN(parseFloat(v))){
+    document.getElementById('baseCost').value = Math.round(parseFloat(v));
+    renderVisualizer();
   }
-  errEl.classList.remove('show');
-  if(typeof gtag!=='undefined') gtag('event','tool_report_unlocked',{'tool_name':'refactoring_roi_calculator'});
-
-  document.getElementById('lockedContent').classList.remove('locked-content');
-  document.getElementById('lockOverlay').style.display = 'none';
-
-  fetch('https://formspree.io/f/xpqerpje', {
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({
-      'Source':'Refactoring ROI Calculator',
-      'Name':name,
-      'email':email,
-      'Company':company,
-      'Payback Period (months)':results.paybackMonths,
-      '3-Year ROI':results.roi3yr.toFixed(0)+'%',
-      'NPV':fmtMoney(results.npv),
-      'Current Annual Debt Cost':fmtMoney(results.currentDebtCost),
-      'Proposed Investment':fmtMoney(results.investment),
-    })
-  }).catch(()=>{ /* lead is already unlocked client-side; submission failure is non-blocking */ });
 }
+
+renderVisualizer();
 
 document.querySelectorAll('.btn, .btn-primary, a[href*="contact"]').forEach(function(el){
   el.addEventListener('click', function(){

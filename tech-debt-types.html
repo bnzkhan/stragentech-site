@@ -12,8 +12,8 @@
 <script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech Debt Business Case Builder — Stragentech</title>
-<meta name="description" content="Free framework for presenting technical debt to non-technical stakeholders — a 5-step model, language translation guide, one-page template, and objection-handling playbook for board presentations.">
+<title>Types of Technical Debt — Stragentech</title>
+<meta name="description" content="The four types of technical debt, explained through Martin Fowler's deliberate/inadvertent × reckless/prudent quadrant — with realistic scenarios, warning signs, typical cost ranges, and matched remediation strategies for each.">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -153,97 +153,37 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdro
 /* ── LAYOUT ── */
 .calc-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
 
-/* ── WIZARD ── */
-.wizard{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:24px;}
-.progress-bar{height:3px;background:var(--gray-100);border-radius:2px;margin-bottom:20px;overflow:hidden;}
-.progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .3s;}
-.step-tag{font-family:var(--font-mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
-.step-title{font-size:22px;font-weight:600;color:var(--ink);margin-bottom:4px;}
-.step-sub{font-size:15px;color:var(--gray-400);line-height:1.6;font-weight:300;margin-bottom:20px;max-width:640px;}
-.field-group{margin-bottom:18px;}
-.field-label{font-family:var(--font-mono);font-size:12px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;display:block;}
-.field-hint{font-size:13px;color:var(--gray-400);font-weight:300;margin-top:5px;line-height:1.5;}
-.tool-input{width:100%;background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;padding:11px 14px;font-size:13px;color:var(--ink);font-family:var(--font-body);outline:none;transition:border-color .2s;}
-.tool-input:focus{border-color:var(--teal);}
-.tool-input::placeholder{color:var(--gray-400);}
-.input-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.opt-cards{display:flex;gap:8px;flex-wrap:wrap;}
-.opt-card{font-family:var(--font-mono);font-size:13px;padding:10px 15px;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;transition:all .18s;color:var(--gray-600);background:var(--white);text-align:left;line-height:1.5;}
-.opt-card:hover{border-color:var(--teal);color:var(--teal);}
-.opt-card.selected{background:var(--teal-pale);border-color:var(--teal);color:var(--teal-dark);font-weight:500;}
-.opt-card .opt-sub{display:block;font-family:var(--font-body);font-size:11px;color:var(--gray-400);font-weight:300;margin-top:2px;}
-.opt-card.selected .opt-sub{color:var(--teal-dark);opacity:0.75;}
-.wizard-nav{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding-top:18px;border-top:1px solid var(--gray-100);}
 .btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
 .btn-run{background:var(--ink);color:var(--white);font-weight:500;}
 .btn-run:hover{background:var(--teal-dark);}
-.btn-run:disabled{opacity:0.4;cursor:not-allowed;}
 .btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
 .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
-.btn-outline:disabled{opacity:0.3;cursor:not-allowed;}
 .btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
 .btn-teal:hover{background:var(--teal-dark);}
-.step-dots{display:flex;gap:5px;}
-.step-dot{width:6px;height:6px;border-radius:50%;background:var(--gray-200);}
-.step-dot.active{background:var(--teal);}
-.step-dot.done{background:var(--teal-mid);}
-
-/* ── RESULTS ── */
-.results{display:none;}
-.results.visible{display:block;}
-.headline-card{background:var(--ink);border-radius:10px;padding:34px 32px;margin-bottom:20px;text-align:center;}
-.headline-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.75);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
-.headline-num{font-family:var(--font-serif);font-size:clamp(36px,6vw,58px);color:var(--white);font-weight:400;line-height:1;margin-bottom:8px;}
-.headline-range{font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:4px;}
-.headline-note{font-size:12.5px;color:rgba(255,255,255,0.4);font-weight:300;max-width:440px;margin:14px auto 0;line-height:1.6;}
-
-.locked-wrap{position:relative;}
-.locked-content{filter:blur(7px);pointer-events:none;user-select:none;}
-.lock-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;}
-.lock-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:28px 30px;box-shadow:0 8px 40px rgba(13,17,23,0.12);max-width:420px;width:100%;}
-.lock-icon{font-size:22px;margin-bottom:10px;}
-.lock-card h3{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:6px;}
-.lock-card p{font-size:13px;color:var(--gray-400);line-height:1.6;font-weight:300;margin-bottom:16px;}
-.lock-card .tool-input{margin-bottom:10px;}
-.lock-error{font-size:11.5px;color:#c53030;margin-top:-4px;margin-bottom:10px;display:none;}
-.lock-error.show{display:block;}
-
-.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
-.breakdown{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
-.cat-row{margin-bottom:14px;}
-.cat-row:last-child{margin-bottom:0;}
-.cat-row-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
-.cat-name{font-size:13px;font-weight:500;color:var(--ink);}
-.cat-val{font-family:var(--font-mono);font-size:13px;color:var(--ink);font-weight:500;}
-.cat-bar-track{height:8px;background:var(--gray-50);border-radius:4px;overflow:hidden;}
-.cat-bar-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--blue));border-radius:4px;}
-.cat-total-row{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--gray-100);}
-.cat-total-row .cat-name{font-size:14px;font-weight:600;}
-.cat-total-row .cat-val{font-size:16px;}
-
-.fiveyr-card{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:24px 28px;margin-bottom:20px;}
-.fiveyr-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
-.fiveyr-card p{font-size:13px;color:var(--gray-400);font-weight:300;line-height:1.65;margin-bottom:14px;}
-.fiveyr-num{font-family:var(--font-serif);font-size:30px;color:var(--teal-dark);margin-bottom:2px;}
-
-.reco-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
-.reco-item{padding:16px 0;border-bottom:1px solid var(--gray-100);}
-.reco-item:last-child{border-bottom:none;padding-bottom:0;}
-.reco-item:first-child{padding-top:0;}
-.reco-cat{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
-.reco-item h5{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:5px;}
-.reco-item p{font-size:13px;color:var(--gray-600);line-height:1.65;font-weight:300;}
-
-.disclaimer-box{background:var(--amber-pale);border:1px solid #ecd6b0;border-radius:10px;padding:20px 24px;margin-bottom:20px;}
-.disclaimer-box .d-tag{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
-.disclaimer-box p{font-size:12.5px;color:#6b4a1f;line-height:1.7;font-weight:400;margin-bottom:8px;}
-.disclaimer-box p:last-child{margin-bottom:0;}
 
 .cta-bar{background:var(--ink);border-radius:10px;padding:36px;text-align:center;margin-bottom:8px;}
 .cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
 .cta-bar h3{font-family:var(--font-serif);font-size:24px;color:var(--white);font-weight:400;margin-bottom:8px;}
 .cta-bar p{font-size:13.5px;color:rgba(255,255,255,0.5);max-width:440px;margin:0 auto 22px;font-weight:300;}
 .cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ── QUADRANTS (page-specific) ── */
+.quad-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.quad-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:24px 26px;}
+.quad-eyebrow{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.quad-card h3{font-family:var(--font-serif);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:6px;line-height:1.25;}
+.quad-card .quad-quote{font-size:13px;font-style:italic;color:var(--gray-400);margin-bottom:14px;}
+.quad-card h6{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.5px;text-transform:uppercase;color:var(--gray-400);margin:14px 0 6px;}
+.quad-card h6:first-of-type{margin-top:0;}
+.quad-card p{font-size:13px;color:var(--gray-600);line-height:1.65;font-weight:300;}
+.quad2{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin-bottom:20px;}
+.quad2-cell{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:18px 20px;}
+.quad2-cell h5{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.quad2-cell p{font-size:12.5px;color:var(--gray-400);font-weight:300;line-height:1.5;}
+@media(max-width:760px){
+  .quad-grid{grid-template-columns:1fr;}
+  .quad2{grid-template-columns:1fr;}
+}
 
 /* ── FOOTER ── */
 footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
@@ -260,11 +200,6 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
 @media(max-width:760px){.footer-cols{grid-template-columns:1fr 1fr;}}
 @media(max-width:480px){.footer-cols{grid-template-columns:1fr;}}
 
-@media(max-width:760px){
-  .input-row{grid-template-columns:1fr;}
-  .wizard-nav{flex-wrap:wrap;gap:10px;}
-  .headline-num{font-size:38px;}
-}
 @media(max-width:480px){
   .nav-brand-sub{display:none;}
 }
@@ -283,28 +218,12 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
 [data-theme="dark"] .btn-run:hover{background:var(--teal-dark);}
 [data-theme="dark"] .btn-outline{border-color:var(--gray-200);color:var(--gray-600);}
 [data-theme="dark"] .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
-[data-theme="dark"] .wizard,
-[data-theme="dark"] .lock-card,
-[data-theme="dark"] .breakdown,
-[data-theme="dark"] .reco-card,
-[data-theme="dark"] .opt-card{background:#21262d;}
-[data-theme="dark"] .fiveyr-card{background:#1c2128;}
-[data-theme="dark"] .headline-card{background:#1c2128;}
-[data-theme="dark"] .headline-num{color:var(--ink);}
+[data-theme="dark"] .quad-card,
+[data-theme="dark"] .quad2-cell{background:#21262d;}
 [data-theme="dark"] .cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
 [data-theme="dark"] .cta-bar h3{color:var(--ink);}
 [data-theme="dark"] .cta-bar p{color:var(--gray-400);}
-[data-theme="dark"] .disclaimer-box{background:#1c1a10;border-color:#3d3010;}
-[data-theme="dark"] .disclaimer-box p{color:#c9a84c;}
 [data-theme="dark"] footer{background:#0a0e14;}
-[data-theme="dark"] .wizard .step-tag{color:#f97316;}
-[data-theme="dark"] .wizard .step-title{color:#f97316;}
-[data-theme="dark"] .wizard .step-sub{color:#fb923c;}
-[data-theme="dark"] .wizard .field-label{color:#f97316;}
-[data-theme="dark"] .wizard .field-hint{color:#fb923c;}
-[data-theme="dark"] .wizard .opt-card{color:#fb923c;}
-[data-theme="dark"] .wizard .opt-card.selected{background:rgba(249,115,22,0.12);border-color:#f97316;color:#f97316;}
-[data-theme="dark"] .wizard .opt-card .opt-sub{color:#fb923c;}
 </style>
 </head>
 <body>
@@ -313,7 +232,7 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
   <div class="nav-inner">
     <a href="https://www.stragentech.com" class="nav-brand">
       <img src="logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
-      <span class="nav-brand-sub">/ business case</span>
+      <span class="nav-brand-sub">/ types of tech debt</span>
     </a>
     <ul class="nav-links">
       <li><a href="tools.html">← Tools</a></li>
@@ -335,20 +254,21 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
     <a href="tech-debt-metrics.html" class="subnav-tab">Metrics</a>
     <a href="tech-debt-benchmarks.html" class="subnav-tab">Benchmarks</a>
     <a href="tech-debt-interest.html" class="subnav-tab">Interest</a>
-    <a href="tech-debt-types.html" class="subnav-tab">Types</a>
+    <a href="tech-debt-types.html" class="subnav-tab active">Types</a>
     <a href="tech-debt-payoff.html" class="subnav-tab">Payoff</a>
-    <a href="tech-debt-business-case.html" class="subnav-tab active">Business Case</a>
+    <a href="tech-debt-business-case.html" class="subnav-tab">Business Case</a>
   </div>
 </div>
+
 <!-- HERO -->
 <div class="calc-hero">
   <div class="calc-hero-inner">
-    <h1>Build the <em>Business Case</em></h1>
-    <p>A step-by-step framework, language translation guide, and objection-handling playbook for presenting technical debt to non-technical stakeholders — and getting a yes.</p>
+    <h1>Technical Debt Has <em>4 Faces</em></h1>
+    <p>Not all debt is the same problem wearing different clothes. Martin Fowler's 2009 quadrant maps debt across two axes — how it originated (deliberate or inadvertent) and how it was approached (reckless or prudent). Knowing which quadrant you're in changes which remediation strategy actually works.</p>
     <div class="hero-meta">
-      <span class="hero-meta-item">5-step framework</span>
-      <span class="hero-meta-item">Free reference</span>
-      <span class="hero-meta-item">Board-ready template</span>
+      <span class="hero-meta-item">4 quadrants</span>
+      <span class="hero-meta-item">Fowler framework, 2009</span>
+      <span class="hero-meta-item">~4 minute read</span>
     </div>
   </div>
 </div>
@@ -356,92 +276,120 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
 <div class="guide-body">
 
   <div class="guide-card">
-    <h2>The 5-step framework</h2>
-    <div class="step-list">
-      <div class="step-item"><span class="step-num">01</span><div><h5>Quantify the cost</h5><p>Convert the abstract ("our codebase is a mess") into a specific annual dollar figure ("$1.2 million per year in lost productivity"). Use the <a href="tech-debt-calculator.html" style="color:var(--teal-dark);">Cost Calculator</a> to get there.</p></div></div>
-      <div class="step-item"><span class="step-num">02</span><div><h5>Model the growth</h5><p>Project the 5-year compound cost if nothing changes. Unaddressed debt doesn't stay flat — it compounds as workarounds accumulate.</p></div></div>
-      <div class="step-item"><span class="step-num">03</span><div><h5>Estimate the investment</h5><p>Define concrete resource requirements — "3 engineers for 2 months," not "some refactoring time." Specificity builds credibility.</p></div></div>
-      <div class="step-item"><span class="step-num">04</span><div><h5>Calculate the payback</h5><p>Determine the number of months until the investment pays for itself. The <a href="tech-debt-roi.html" style="color:var(--teal-dark);">ROI Calculator</a> models this directly.</p></div></div>
-      <div class="step-item"><span class="step-num">05</span><div><h5>Frame it as risk</h5><p>Reposition the narrative from "refactoring" to "delivery-risk reduction." Executives fund risk mitigation more readily than code cleanup.</p></div></div>
+    <h2>The two axes</h2>
+    <p>Fowler's insight was that "technical debt" isn't one thing — it's shorthand for four very different situations that get lumped together. The first axis asks whether the trade-off was made <strong>on purpose</strong> (deliberate) or <strong>discovered later</strong> (inadvertent). The second asks whether it was made <strong>carelessly</strong> (reckless) or <strong>thoughtfully, with eyes open</strong> (prudent). Cross them and you get four quadrants — and four different playbooks.</p>
+    <div class="quad2">
+      <div class="quad2-cell"><h5>Deliberate + Reckless</h5><p>"We don't have time for design." The most expensive quadrant — corners cut with no plan to revisit them.</p></div>
+      <div class="quad2-cell"><h5>Deliberate + Prudent</h5><p>"We must ship now and deal with the consequences." A legitimate strategic trade-off, made on the record.</p></div>
+      <div class="quad2-cell"><h5>Inadvertent + Reckless</h5><p>"What's layering?" Debt from not knowing better — usually a skills or experience gap.</p></div>
+      <div class="quad2-cell"><h5>Inadvertent + Prudent</h5><p>"Now we know how we should have done it." Debt from learning — the least blameworthy, still costly.</p></div>
     </div>
   </div>
 
-  <div class="guide-card">
-    <h2>Language translation guide</h2>
-    <p>The same fact lands very differently depending on the words used. Translate before you present.</p>
-    <div class="table-scroll" style="margin-top:16px;">
-      <table class="xtable">
-        <thead><tr><th>Avoid</th><th>Use instead</th></tr></thead>
-        <tbody>
-          <tr><td class="bad">"Refactoring"</td><td class="good">"Engineering efficiency investment"</td></tr>
-          <tr><td class="bad">"Technical debt"</td><td class="good">"Delivery risk"</td></tr>
-          <tr><td class="bad">"The code is bad"</td><td class="good">"Velocity declining 5% quarterly, $X impact"</td></tr>
-          <tr><td class="bad">"We need to rewrite the codebase"</td><td class="good">"A phased modernization roadmap"</td></tr>
-          <tr><td class="bad">"We're slow because of tech debt"</td><td class="good">"Delivery-risk exposure of $X per quarter"</td></tr>
-        </tbody>
-      </table>
+  <div class="quad-grid">
+
+    <div class="quad-card">
+      <div class="quad-eyebrow">Deliberate · Reckless</div>
+      <h3>"We don't have time for design"</h3>
+      <div class="quad-quote">The most expensive quadrant, because nobody planned to come back.</div>
+      <h6>Scenario</h6>
+      <p>A startup commits to shipping an e-commerce platform in six weeks. Under deadline pressure, the team skips service boundaries, duplicates logic across three modules to move faster, and hardcodes configuration values that were meant to be temporary. No one writes down that any of this happened.</p>
+      <h6>How it accumulates</h6>
+      <p>Skipped code reviews, copy-pasted logic instead of shared abstractions, hardcoded values standing in for config, and tests that get commented out "for now" and never restored.</p>
+      <h6>Warning signs</h6>
+      <p>Declining team morale, features that take longer each sprint despite a stable team, a rising incident rate, and new hires needing months instead of weeks to become productive.</p>
+      <h6>Typical cost</h6>
+      <p><span class="badge-pill red">25–40% of engineering time annually</span></p>
+      <h6>Remediation</h6>
+      <p>Dedicated debt sprints to stop the bleeding, then the 20% Rule (see the <a href="tech-debt-payoff.html" style="color:var(--teal-dark);">Payoff Strategies guide</a>) to prevent it from re-accumulating once the backlog is under control.</p>
     </div>
-  </div>
 
-  <div class="guide-card">
-    <h2>One-page template</h2>
-    <p>Slide-ready format — swap in your own numbers from the Cost Calculator and ROI Calculator.</p>
-    <div class="headline-card" style="text-align:left;margin-top:16px;">
-      <div class="headline-tag">// Technical Delivery Risk Reduction</div>
-      <div class="table-scroll">
-        <table class="gtable" style="margin-top:8px;">
-          <tbody>
-            <tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="color:rgba(255,255,255,0.6);border:none;padding:10px 0;">Current annual cost</td><td style="color:#fff;font-family:var(--font-mono);font-weight:600;border:none;padding:10px 0;text-align:right;">$[X]</td></tr>
-            <tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="color:rgba(255,255,255,0.6);border:none;padding:10px 0;">5-year projected cost (unaddressed)</td><td style="color:#fff;font-family:var(--font-mono);font-weight:600;border:none;padding:10px 0;text-align:right;">$[X]</td></tr>
-            <tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="color:rgba(255,255,255,0.6);border:none;padding:10px 0;">Proposed investment</td><td style="color:#fff;font-family:var(--font-mono);font-weight:600;border:none;padding:10px 0;text-align:right;">$[X]</td></tr>
-            <tr><td style="color:rgba(255,255,255,0.6);border:none;padding:10px 0;">Payback period</td><td style="color:#fff;font-family:var(--font-mono);font-weight:600;border:none;padding:10px 0;text-align:right;">[X] months</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="quad-card">
+      <div class="quad-eyebrow">Deliberate · Prudent</div>
+      <h3>"We must ship now and deal with the consequences"</h3>
+      <div class="quad-quote">A trade-off made on the record — not a mistake.</div>
+      <h6>Scenario</h6>
+      <p>A payments team ships with a single-region database ahead of a funding-critical launch date. They document the limitation in an architecture decision record, put a feature flag around the riskiest path, and schedule the multi-region migration for the following quarter.</p>
+      <h6>How it accumulates</h6>
+      <p>Written ADRs, timeboxed workarounds with an owner and a date, feature flags used deliberately, and MVPs scoped with a known, planned second pass.</p>
+      <h6>Warning signs</h6>
+      <p>This quadrant is healthy as long as the "planned second pass" actually happens. The warning sign isn't the debt itself — it's a documented workaround with no revisit date that quietly becomes permanent.</p>
+      <h6>Typical cost</h6>
+      <p><span class="badge-pill">10–20% of engineering time annually</span></p>
+      <h6>Remediation</h6>
+      <p>Treat the 20% Rule as standard operating procedure, not a rescue plan — this is where it works best, because the debt was already scoped and estimated at creation time.</p>
     </div>
+
+    <div class="quad-card">
+      <div class="quad-eyebrow">Inadvertent · Reckless</div>
+      <h3>"What's layering?"</h3>
+      <div class="quad-quote">Debt from not knowing better, not from cutting corners.</div>
+      <h6>Scenario</h6>
+      <p>A team of junior developers, new to distributed systems, builds a healthcare data pipeline without understanding idempotency or retry semantics. Network blips during peak load silently drop records for months before anyone notices the gap.</p>
+      <h6>How it accumulates</h6>
+      <p>Misapplied design patterns, architectural decisions made without awareness of the failure modes they invite, and security practices skipped not on purpose but because the risk was never visible to the team.</p>
+      <h6>Warning signs</h6>
+      <p>Bugs that "shouldn't be possible" according to the code, data quality issues nobody can trace to a root cause, and a growing gap between what the team believes the system does and what it actually does.</p>
+      <h6>Typical cost</h6>
+      <p><span class="badge-pill red">30–50% of engineering time annually</span></p>
+      <h6>Remediation</h6>
+      <p>Structured training paired with the Strangler Fig pattern — replace the misunderstood components incrementally, under supervision, rather than attempting a single high-risk rewrite.</p>
+    </div>
+
+    <div class="quad-card">
+      <div class="quad-eyebrow">Inadvertent · Prudent</div>
+      <h3>"Now we know how we should have done it"</h3>
+      <div class="quad-quote">The least blameworthy quadrant — and still not free.</div>
+      <h6>Scenario</h6>
+      <p>A team builds a microservices architecture with eventual consistency, following the best available guidance at the time. Eighteen months in, real usage patterns reveal the domain actually needed strong consistency in one critical path — something no one could have known upfront.</p>
+      <h6>How it accumulates</h6>
+      <p>Evolving requirements that invalidate earlier assumptions, technology choices that were reasonable when made but have since been superseded, and design decisions that only look wrong in hindsight.</p>
+      <h6>Warning signs</h6>
+      <p>Recurring workarounds clustered around the same subsystem, and engineers describing a component as "correct but fighting the domain" rather than "broken."</p>
+      <h6>Typical cost</h6>
+      <p><span class="badge-pill blue">15–30% of engineering time annually</span></p>
+      <h6>Remediation</h6>
+      <p>Strangler Fig migration, planned and paced rather than rushed — this debt was earned by learning, so the fix should be treated as a normal part of the system's evolution, not an emergency.</p>
+    </div>
+
   </div>
 
   <div class="guide-card">
-    <h2>Objection handling</h2>
-    <div class="faq-item"><details><summary>"We can't afford to pause feature development."</summary><p>Teams already spend roughly 33% of their time on debt-related work (Stripe Developer Coefficient). Addressing debt frees more capacity than the initiative consumes — it's not a pause, it's a reallocation.</p></details></div>
-    <div class="faq-item"><details><summary>"How do we know this will actually work?"</summary><p>Reference DORA metric benchmarks and commit to specific, measurable success targets up front (see the Success Metrics table below) — then report against them monthly.</p></details></div>
-    <div class="faq-item"><details><summary>"Why not just hire more engineers?"</summary><p>Hiring adds capacity without addressing the root cause — the debt keeps compounding under the larger team too. Run the cost comparison in the <a href="tech-debt-roi.html" style="color:var(--teal-dark);">ROI Calculator</a>.</p></details></div>
-    <div class="faq-item"><details><summary>"This is an engineering problem, not a business one."</summary><p>Connect the technical issue directly to revenue, retention, and outage cost — the same categories the Cost Calculator breaks out. Debt is a business problem wearing a technical disguise.</p></details></div>
-    <div class="faq-item"><details><summary>"What's the timeline, and how do we measure it?"</summary><p>Outline a phased approach with monthly tracking against the DORA dashboard — deployment frequency, lead time, change failure rate, and MTTR (see the <a href="tech-debt-metrics.html" style="color:var(--teal-dark);">Metrics Guide</a>).</p></details></div>
-  </div>
-
-  <div class="guide-card">
-    <h2>Success metrics (6-month targets)</h2>
+    <h2>Side-by-side comparison</h2>
     <div class="table-scroll">
       <table class="gtable">
-        <thead><tr><th>Metric</th><th>Target change</th></tr></thead>
+        <thead><tr><th>Quadrant</th><th>Awareness</th><th>Risk</th><th>Typical cost</th><th>Remediation difficulty</th><th>Strategy</th></tr></thead>
         <tbody>
-          <tr><td>Deployment frequency</td><td class="good" style="color:var(--teal-dark);font-weight:500;">+40%</td></tr>
-          <tr><td>Lead time for changes</td><td class="good" style="color:var(--teal-dark);font-weight:500;">−30%</td></tr>
-          <tr><td>Incident rate</td><td class="good" style="color:var(--teal-dark);font-weight:500;">−25%</td></tr>
-          <tr><td>Velocity trend</td><td class="good" style="color:var(--teal-dark);font-weight:500;">Stabilized</td></tr>
+          <tr><td>Deliberate / Reckless</td><td>Known, undocumented</td><td>High</td><td>25–40%</td><td>High</td><td>Debt sprint → 20% Rule</td></tr>
+          <tr><td>Deliberate / Prudent</td><td>Known, documented</td><td>Low (if tracked)</td><td>10–20%</td><td>Low</td><td>20% Rule as policy</td></tr>
+          <tr><td>Inadvertent / Reckless</td><td>Unknown</td><td>Very high</td><td>30–50%</td><td>Very high</td><td>Training + Strangler Fig</td></tr>
+          <tr><td>Inadvertent / Prudent</td><td>Discovered later</td><td>Moderate</td><td>15–30%</td><td>Moderate</td><td>Strangler Fig, paced</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
   <div class="guide-card">
-    <h2>FAQ</h2>
-    <div class="faq-item"><details><summary>What's the single most important number for a CFO?</summary><p>Payback period. It converts a technical initiative into the same unit CFOs already use to evaluate every other capital request — months to break-even.</p></details></div>
-    <div class="faq-item"><details><summary>How do I translate this for a non-technical audience?</summary><p>Lead with the dollar figure and the risk framing, not the technical detail. Save the "why" (complexity, coupling, coverage) for follow-up questions — most executives won't ask, and the ones who do will appreciate the depth being available rather than front-loaded.</p></details></div>
+    <h2>The real risk isn't the debt — it's not tracking it</h2>
+    <p>Deliberate/prudent debt is a legitimate business strategy when it's written down, estimated, and scheduled for repayment. Plenty of successful launches happen because a team knowingly deferred the "right" solution. The quadrant that actually threatens a codebase is any debt — of any origin — that goes <strong>untracked</strong>. Untracked debt of any type compounds the same way: silently, and faster than most teams expect.</p>
+    <div class="tool-cross-links">
+      <a href="tech-debt-interest.html" class="btn btn-outline">See how compounding accelerates cost →</a>
+      <a href="tech-debt-calculator.html" class="btn btn-outline">Quantify your own cost →</a>
+    </div>
   </div>
 
   <div class="cta-bar">
-    <div class="cta-bar-tag">// Ready to present?</div>
-    <h3>Get the numbers behind your business case.</h3>
-    <p>Run the Cost Calculator and ROI Calculator to populate the template above with your own figures — or talk it through directly.</p>
+    <div class="cta-bar-tag">// Know your quadrant?</div>
+    <h3>Put a number on it.</h3>
+    <p>Whichever quadrant dominates your codebase, the cost calculator turns it into an annual dollar figure your organization can act on.</p>
     <div class="cta-bar-actions">
-      <a href="tech-debt-roi.html" class="btn btn-teal">▸ Open the ROI Calculator</a>
-      <a href="index.html#contact" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Book a Free Discovery Call</a>
+      <a href="index.html#contact" class="btn btn-teal">▸ Book a Free Discovery Call</a>
+      <a href="tools.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Explore More Free Tools</a>
     </div>
   </div>
 
 </div><!-- /guide-body -->
+
 <footer>
   <div class="footer-cols">
     <div class="footer-col">

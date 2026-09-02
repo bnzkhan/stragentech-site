@@ -246,12 +246,19 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdro
 .cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
 
 /* ── FOOTER ── */
-footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
+footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
+.footer-cols{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:26px;border-bottom:1px solid var(--gray-100);margin-bottom:18px;}
+.footer-col-title{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.footer-col a{display:block;font-size:13px;color:var(--gray-600);text-decoration:none;padding:4px 0;font-weight:300;}
+.footer-col a:hover{color:var(--teal);}
+.footer-fineprint{max-width:var(--max-w);margin:0 auto 16px;font-size:11.5px;color:var(--gray-400);line-height:1.7;font-weight:300;}
 .footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
 .footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
 .footer-links{display:flex;gap:16px;}
 .footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
 .footer-links a:hover{color:var(--teal);}
+@media(max-width:760px){.footer-cols{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-cols{grid-template-columns:1fr;}}
 
 @media(max-width:760px){
   .input-row{grid-template-columns:1fr;}
@@ -327,6 +334,9 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
     <a href="tech-debt-roi.html" class="subnav-tab">ROI</a>
     <a href="tech-debt-metrics.html" class="subnav-tab">Metrics</a>
     <a href="tech-debt-benchmarks.html" class="subnav-tab">Benchmarks</a>
+    <a href="tech-debt-interest.html" class="subnav-tab">Interest</a>
+    <a href="tech-debt-types.html" class="subnav-tab">Types</a>
+    <a href="tech-debt-payoff.html" class="subnav-tab">Payoff</a>
     <a href="tech-debt-business-case.html" class="subnav-tab">Business Case</a>
   </div>
 </div>
@@ -425,12 +435,37 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
 
 </div><!-- /calc-body -->
 <footer>
-  <div class="footer-inner">
-    <span class="footer-copy">Built by Bilal A. Khan · stragentech.com</span>
-    <div class="footer-links">
-      <a href="tools.html">Apps</a>
-      <a href="index.html">Main Site</a>
-      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <div class="footer-col-title">Calculators</div>
+      <a href="tech-debt-calculator.html">Cost of Technical Debt</a>
+      <a href="tech-debt-velocity.html">Velocity Impact</a>
+      <a href="tech-debt-roi.html">Refactoring ROI</a>
+      <a href="tech-debt-assessment.html">Assessment Scorecard</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Resources</div>
+      <a href="tech-debt-metrics.html">Metrics Guide</a>
+      <a href="tech-debt-types.html">Types of Technical Debt</a>
+      <a href="tech-debt-interest.html">Compound Interest Visualizer</a>
+      <a href="tech-debt-benchmarks.html">Industry Benchmarks</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Strategy</div>
+      <a href="tech-debt-business-case.html">Business Case Builder</a>
+      <a href="tech-debt-payoff.html">Payoff Strategies</a>
+      <a href="tech-debt-payoff.html#prioritization">Prioritization Framework</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-fineprint">Stragentech.com is an independent resource. Calculations are estimates based on industry research from Stripe, CISQ, McKinsey, and DORA. Results should be validated against your organization's actual metrics. Not affiliated with any software vendor.</p>
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Stragentech.com. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="tools.html">Apps</a>
+        <a href="index.html">Main Site</a>
+        <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+      </div>
     </div>
   </div>
 </footer>
