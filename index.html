@@ -200,6 +200,14 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
   .orbit .icon .radar-sweep{display:none;}
 }
 
+.orbit.is-paused .rotor,
+.orbit.is-paused .status-dot,
+.orbit.is-paused .hitl-rotor,
+.orbit.is-paused .hitl-mini,
+.orbit.is-paused .radar-sweep {
+  animation-play-state: paused;
+}
+
 /* ── PROCESS ── */
 #process{background:var(--white);}
 .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
@@ -1009,16 +1017,51 @@ document.querySelectorAll('.btn').forEach(function(el){
   });
 
   // highlight the node the pulse is currently passing (top -> 4 o'clock -> 8 o'clock)
+  var paused = false, rafId = null;
   var nodes = orbit.querySelectorAll('.node');
+  var svg = orbit.querySelector('svg.ring-svg');
+
   function tick(){
     var t = (performance.now() % DUR) / DUR;
     var active = 0;
     if(t >= 0.16 && t < 0.5) active = 1;
     else if(t >= 0.5 && t < 0.83) active = 2;
     nodes.forEach(function(n){ n.classList.toggle('active', parseInt(n.dataset.i) === active); });
-    requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(tick);
   }
-  requestAnimationFrame(tick);
+  function startLoop(){ if(rafId === null) rafId = requestAnimationFrame(tick); }
+  function stopLoop(){ if(rafId !== null){ cancelAnimationFrame(rafId); rafId = null; } }
+
+  function pause(){
+    if(paused) return;
+    paused = true;
+    orbit.classList.add('is-paused');
+    stopLoop();
+    if(svg && svg.pauseAnimations) svg.pauseAnimations();
+  }
+  function resume(){
+    if(!paused) return;
+    paused = false;
+    orbit.classList.remove('is-paused');
+    startLoop();
+    if(svg && svg.unpauseAnimations) svg.unpauseAnimations();
+  }
+
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ e.isIntersecting ? resume() : pause(); });
+    }, { threshold: 0.1 }).observe(orbit);
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden) pause();
+    else {
+      var r = orbit.getBoundingClientRect();
+      if(r.bottom > 0 && r.top < window.innerHeight) resume();
+    }
+  });
+
+  startLoop();
 })();
 </script>
 </body>
