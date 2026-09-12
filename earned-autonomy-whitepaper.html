@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4954SHKF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JY4954SHKF');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Earned Autonomy: Governing Agentic AI at the Industrial Edge | Stragentech</title>
@@ -318,6 +326,28 @@ figcaption b{
 .refs li{margin-bottom:.55rem;}
 .refs a{word-break:break-word;}
 
+/* ---------- top bar ---------- */
+
+body{padding-top:56px;}
+.top-bar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(7,32,26,0.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(238,245,241,0.1);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;height:56px;
+}
+.top-bar .brand{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:500;letter-spacing:2px;color:#5eead4;}
+.top-bar .top-label{font-family:"JetBrains Mono",monospace;font-size:11px;color:#8fae9f;display:none;}
+.top-bar .print-btn{
+  background:var(--teal);color:#06120d;border:none;cursor:pointer;
+  padding:8px 16px;border-radius:6px;font-size:12px;font-weight:600;
+  letter-spacing:.02em;font-family:"DM Sans",sans-serif;text-decoration:none;
+  display:inline-block;transition:background .2s;
+}
+.top-bar .print-btn:hover{background:#00d98c;}
+@media (min-width:640px){.top-bar .top-label{display:block;}}
+
 /* ---------- responsive ---------- */
 
 @media (max-width:760px){
@@ -337,7 +367,8 @@ figcaption b{
 @page{size:A4;margin:16mm 14mm;}
 
 @media print{
-  body{background:#fff;font-size:10.2pt;line-height:1.5;}
+  body{background:#fff;font-size:10.2pt;line-height:1.5;padding-top:0;}
+  .top-bar{display:none;}
   .sheet{box-shadow:none;max-width:none;padding-bottom:0;}
   .cover,.close{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .cover{padding:1.6rem 0 1.2rem;}
@@ -352,6 +383,17 @@ figcaption b{
 </style>
 </head>
 <body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="brand">STRAGENTECH</div>
+  <div class="top-label">Earned Autonomy · Whitepaper · 18 min read</div>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <a href="downloads/Earned-Autonomy-Whitepaper.pdf" download class="print-btn gated-download" data-file="downloads/Earned-Autonomy-Whitepaper.pdf" data-label="Earned Autonomy: Governing Agentic AI at the Industrial Edge">↓ Download PDF</a>
+    <button class="print-btn" onclick="window.print()" style="background:rgba(255,255,255,0.1);color:#eef5f1;">🖨 Print</button>
+  </div>
+</div>
+
 <div class="sheet">
 
 <!-- ============ COVER ============ -->
@@ -1182,5 +1224,6 @@ figcaption b{
 </section>
 
 </div>
+<script src="assets/js/reg-wall.js"></script>
 </body>
 </html>
