@@ -158,7 +158,7 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .orbit .node{position:absolute;width:132px;transform:translate(-50%,-50%);text-align:center;}
 .orbit .node-dot{width:60px;height:60px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:var(--orbit-node-bg);border:1.5px solid var(--orbit-node-border);transition:all .4s;}
 .orbit .node.active .node-dot{border-color:var(--orbit-teal);background:var(--orbit-teal-pale);box-shadow:0 0 0 6px rgba(0,184,122,0.10),0 8px 28px rgba(0,184,122,0.18);transform:scale(1.08);}
-.orbit .node-name{font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--orbit-name);letter-spacing:0.5px;transition:color .4s;overflow-wrap:break-word;}
+.orbit .node-name{font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--orbit-name);letter-spacing:0.5px;transition:color .4s;}
 .orbit .node.active .node-name{color:var(--orbit-teal-dark);}
 .orbit .node-desc{font-family:var(--font-body);font-size:10px;color:var(--orbit-desc);line-height:1.4;font-weight:300;margin-top:3px;}
 
@@ -349,8 +349,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
-  .hero-inner{grid-template-columns:minmax(0,1fr);}
-  .problem-inner,.about-1pager-grid,.contact-grid{grid-template-columns:1fr;}
+  .hero-inner,.problem-inner,.about-1pager-grid,.contact-grid{grid-template-columns:minmax(0,1fr);}
   .services-grid,.results-grid,.niches-grid,.eng-grid,.testi-grid{grid-template-columns:1fr;}
   .blog-grid{flex-direction:column;}
   .blog-card{min-width:unset;flex:unset;width:100%;}
@@ -403,7 +402,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 [data-theme="dark"] .blog-card,
 [data-theme="dark"] .blog-arrow{background:#21262d;}
 </style>
-</head>
+<style>#home{outline:3px solid orange !important;} .hero-inner{outline:3px solid purple !important;} .hero-left{outline:3px solid green !important;} .hero-visual{outline:3px solid blue !important;} .orbit{outline:3px solid red !important;}</style></head>
 <body>
 
 <!-- NAV -->
