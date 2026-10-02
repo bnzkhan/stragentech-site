@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4954SHKF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JY4954SHKF');
+</script>
+<script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operational Incident Cost Glossary — Stragentech</title>
+<meta name="description" content="Plant-floor glossary of operational reliability terms: MTTR, MTBF, OEE, TEEP, RTO/RPO, preventive vs. predictive maintenance, SCADA/PLC/HMI, andon, CMMS, and more — defined for SMB manufacturing.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f0f2f5;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#4b5563;
+  --gray-600:#1f2937;
+  --gray-800:#1e2333;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --amber:#b3691a;
+  --amber-pale:#fbf1e4;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
+
+/* ── NAV ── */
+nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:200;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-brand-img{height:44px;width:auto;display:block;}
+.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);white-space:nowrap;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
+.nav-links a:hover{color:var(--teal);background:var(--teal-pale);}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:7px 14px!important;border-radius:5px;font-weight:600;}
+
+/* ── STATS BANNER ── */
+.stats-banner{background:#0d1117;padding:10px 32px;overflow-x:auto;}
+.stats-banner::-webkit-scrollbar{display:none;}
+.stats-banner-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:28px;white-space:nowrap;}
+.stats-banner-item{font-family:var(--font-mono);font-size:11.5px;color:rgba(255,255,255,0.6);}
+.stats-banner-item strong{color:var(--teal-mid);font-weight:600;}
+[data-theme="dark"] .stats-banner{background:#1c2128;}
+
+/* ── SUBNAV (tool tabs) ── */
+.subnav{position:sticky;top:72px;z-index:190;background:var(--white);border-bottom:1px solid var(--gray-100);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.subnav::-webkit-scrollbar{display:none;}
+.subnav-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:2px;padding:0 32px;}
+.subnav-tab{font-family:var(--font-mono);font-size:12px;color:var(--gray-400);text-decoration:none;padding:14px 13px 12px;border-bottom:2px solid transparent;white-space:nowrap;transition:all .18s;flex-shrink:0;}
+.subnav-tab:hover{color:var(--teal);}
+.subnav-tab.active{color:var(--ink);border-bottom-color:var(--teal);font-weight:600;}
+
+/* ── SHARED GUIDE / CONTENT COMPONENTS ── */
+.guide-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
+.guide-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+.guide-card h2{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:10px;}
+.guide-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.guide-card p{font-size:14px;color:var(--gray-600);line-height:1.7;font-weight:300;}
+.guide-card p+p{margin-top:10px;}
+
+.gtable{width:100%;border-collapse:collapse;font-size:13px;}
+.gtable th{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.5px;text-transform:uppercase;color:var(--teal);text-align:left;padding:8px 12px;border-bottom:1px solid var(--gray-100);}
+.gtable td{padding:10px 12px;border-bottom:1px solid var(--gray-100);color:var(--gray-600);}
+.gtable tr:last-child td{border-bottom:none;}
+.gtable td:first-child,.gtable th:first-child{padding-left:0;}
+.table-scroll{overflow-x:auto;}
+
+.badge-pill{display:inline-block;font-family:var(--font-mono);font-size:10px;padding:3px 9px;border-radius:20px;background:var(--teal-pale);color:var(--teal-dark);font-weight:600;}
+.badge-pill.blue{background:var(--blue-pale);color:var(--blue);}
+
+.faq-item{border-bottom:1px solid var(--gray-100);padding:14px 0;}
+.faq-item:last-child{border-bottom:none;padding-bottom:0;}
+.faq-item summary{font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:'+';font-family:var(--font-mono);color:var(--teal);font-size:16px;flex-shrink:0;}
+.faq-item[open] summary::after{content:'−';}
+.faq-item p{font-size:13px;color:var(--gray-600);line-height:1.7;font-weight:300;margin-top:10px;}
+
+.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
+.btn-run{background:var(--ink);color:var(--white);font-weight:500;}
+.btn-run:hover{background:var(--teal-dark);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
+.btn-teal:hover{background:var(--teal-dark);}
+
+[data-theme="dark"] .subnav{background:rgba(13,17,23,0.95);}
+[data-theme="dark"] .guide-card{background:#21262d;}
+
+/* ── GLOSSARY ── */
+.jump-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px;}
+.jump-nav a{font-family:var(--font-mono);font-size:11.5px;color:var(--gray-600);text-decoration:none;padding:5px 11px;border:1px solid var(--gray-200);border-radius:20px;transition:all .18s;}
+.jump-nav a:hover{border-color:var(--teal);color:var(--teal);}
+.gloss-term{padding:16px 0;border-bottom:1px solid var(--gray-100);scroll-margin-top:160px;}
+.gloss-term:last-child{border-bottom:none;padding-bottom:0;}
+.gloss-term:first-child{padding-top:0;}
+.gloss-term dt{font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.gloss-term dt span{font-weight:400;color:var(--gray-400);font-size:12px;}
+.gloss-term dd{font-size:13.5px;color:var(--gray-600);line-height:1.7;font-weight:300;}
+
+/* ── TOOLKIT GRID ── */
+.toolkit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.toolkit-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;}
+[data-theme="dark"] .toolkit-card{background:#21262d;}
+.toolkit-card .tk-tag{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.toolkit-card h5{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.toolkit-card p{font-size:12px;color:var(--gray-400);line-height:1.6;font-weight:300;margin-bottom:12px;flex-grow:1;}
+.toolkit-card a{font-family:var(--font-mono);font-size:11.5px;color:var(--teal-dark);text-decoration:none;font-weight:600;}
+.toolkit-card a:hover{text-decoration:underline;}
+@media(max-width:760px){.toolkit-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.toolkit-grid{grid-template-columns:1fr;}}
+
+.cta-bar{background:#0d1117;border-radius:10px;padding:36px;text-align:center;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
+.cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.cta-bar h3{font-family:var(--font-serif);font-size:24px;color:var(--white);font-weight:400;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar h3{color:var(--ink);}
+.cta-bar p{font-size:13.5px;color:rgba(255,255,255,0.5);max-width:440px;margin:0 auto 22px;font-weight:300;}
+[data-theme="dark"] .cta-bar p{color:var(--gray-400);}
+.cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ── HERO ── */
+.calc-hero{padding:36px 32px 24px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
+.calc-hero-inner{max-width:var(--max-w);margin:0 auto;}
+.calc-hero h1{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:400;letter-spacing:-0.3px;margin-bottom:8px;color:var(--ink);line-height:1.1;}
+.calc-hero h1 em{font-style:italic;color:var(--teal);}
+.calc-hero p{font-size:15px;color:var(--gray-400);max-width:680px;line-height:1.65;font-weight:300;margin-bottom:14px;}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;}
+.hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
+.hero-meta-item::before{content:'▸';color:var(--teal);}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
+.footer-cols{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:26px;border-bottom:1px solid var(--gray-100);margin-bottom:18px;}
+.footer-col-title{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.footer-col a{display:block;font-size:13px;color:var(--gray-600);text-decoration:none;padding:4px 0;font-weight:300;}
+.footer-col a:hover{color:var(--teal);}
+.footer-fineprint{max-width:var(--max-w);margin:0 auto 16px;font-size:11.5px;color:var(--gray-400);line-height:1.7;font-weight:300;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
+.footer-links a:hover{color:var(--teal);}
+@media(max-width:760px){.footer-cols{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-cols{grid-template-columns:1fr;}}
+
+@media(max-width:480px){
+  .nav-brand-sub{display:none;}
+}
+
+/* ── DARK MODE ── */
+.theme-toggle{background:none;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;padding:6px 8px;color:var(--gray-600);display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s;flex-shrink:0;margin-left:4px;}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal);}
+.theme-toggle .icon-sun{display:none;}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+[data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);}
+[data-theme="dark"] nav{background:rgba(13,17,23,0.95)!important;}
+[data-theme="dark"] .nav-links a:hover{background:rgba(255,255,255,0.06);}
+[data-theme="dark"] .nav-cta{background:var(--teal)!important;color:#0d1117!important;}
+[data-theme="dark"] .btn-run{background:var(--teal);color:#0d1117;}
+[data-theme="dark"] .btn-run:hover{background:var(--teal-dark);}
+[data-theme="dark"] .btn-outline{border-color:var(--gray-200);color:var(--gray-600);}
+[data-theme="dark"] .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+[data-theme="dark"] footer{background:#0a0e14;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://www.stragentech.com" class="nav-brand">
+      <img src="assets/logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
+      <span class="nav-brand-sub">/ incident cost calculator</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="tools.html">← Tools</a></li>
+      <li><a href="https://calendar.app.google/gSTNDgChThJVdzh8A" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="stats-banner">
+  <div class="stats-banner-inner">
+    <span class="stats-banner-item"><strong>11%</strong> of annual revenue lost to unplanned downtime, on average, across global manufacturers — Siemens/Senseye "True Cost of Downtime"</span>
+    <span class="stats-banner-item"><strong>60%</strong> average OEE in manufacturing vs. <strong>85%</strong> "world-class" benchmark — Vorne / OEE.com</span>
+    <span class="stats-banner-item"><strong>98%</strong> of organizations say a single hour of downtime costs over <strong>$100K</strong> — ITIC</span>
+  </div>
+</div>
+
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="incident-cost.html" class="subnav-tab">Overview</a>
+    <a href="incident-cost-calculator.html" class="subnav-tab">Calculator</a>
+    <a href="incident-cost-index.html" class="subnav-tab">Cost Index</a>
+    <a href="incident-cost-types.html" class="subnav-tab">By Incident Type</a>
+    <a href="incident-cost-glossary.html" class="subnav-tab active">Glossary</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <h1>Operational Incident Cost <em>Glossary</em></h1>
+    <p>The reliability and incident-response vocabulary, translated for the plant floor — from classic IT-ops terms like MTTR and RTO to manufacturing-specific ones like OEE, MTBF, and andon.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">30+ terms</span>
+      <span class="hero-meta-item">Key distinctions table</span>
+      <span class="hero-meta-item">Plant-floor context throughout</span>
+    </div>
+  </div>
+</div>
+
+<div class="guide-body">
+
+  <!-- KEY DISTINCTIONS -->
+  <div class="guide-card">
+    <h2>Key Distinctions</h2>
+    <p style="margin-bottom:18px;">The pairs of terms people mix up most often.</p>
+    <div class="table-scroll">
+      <table class="gtable">
+        <tr><th>Term A</th><th>Term B</th><th>The Difference</th></tr>
+        <tr><td>MTTD</td><td>MTTA</td><td>MTTD is how long until the fault is <em>detected</em> (by a sensor, operator, or system). MTTA is how long until someone <em>acknowledges</em> it once an alert has already fired.</td></tr>
+        <tr><td>MTTR (Repair)</td><td>MTTR (Recover)</td><td>Same acronym, two meanings — "time to repair" the failed component vs. "time to recover" the full process back to normal output. Always clarify which one a report means.</td></tr>
+        <tr><td>Unplanned downtime</td><td>Planned downtime</td><td>Unplanned is the failure you didn't schedule — the subject of this whole suite. Planned downtime (changeovers, scheduled PM, holidays) is a capacity-planning problem, not an incident-cost problem.</td></tr>
+        <tr><td>OEE</td><td>TEEP</td><td>OEE measures effectiveness against <em>scheduled</em> production time. TEEP measures it against <em>all calendar time</em>, including hours you never scheduled to run — useful for spotting unused capacity.</td></tr>
+        <tr><td>Preventive maintenance</td><td>Predictive maintenance</td><td>Preventive is maintenance on a fixed schedule (every 500 hours, every quarter). Predictive uses condition data (vibration, temperature, oil analysis) to maintain equipment only when it actually needs it.</td></tr>
+        <tr><td>RTO</td><td>RPO</td><td>RTO is the maximum acceptable <em>time</em> a line or system can be down. RPO is the maximum acceptable <em>data</em> loss, measured in time — more relevant for MES/ERP systems than for the machines themselves.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- FULL GLOSSARY -->
+  <div class="guide-card">
+    <h2>Full Glossary</h2>
+    <div class="jump-nav" style="margin-bottom:18px;">
+      <a href="#g-ale">ALE</a><a href="#g-andon">Andon</a><a href="#g-blast">Blast Radius</a><a href="#g-cmms">CMMS</a>
+      <a href="#g-changeover">Changeover Time</a><a href="#g-event">Event</a><a href="#g-hmi">HMI</a><a href="#g-incident">Incident</a>
+      <a href="#g-mgmt">Incident Management</a><a href="#g-response">Incident Response</a><a href="#g-mtbf">MTBF</a><a href="#g-mttf">MTTF</a>
+      <a href="#g-mtta">MTTA</a><a href="#g-mttd">MTTD</a><a href="#g-mttr">MTTR</a><a href="#g-oee">OEE</a>
+      <a href="#g-otit">OT/IT Convergence</a><a href="#g-p1">P1/P2/P3/P4</a><a href="#g-planned">Planned vs. Unplanned</a><a href="#g-playbook">Playbook/Runbook</a>
+      <a href="#g-plc">PLC</a><a href="#g-postmortem">Postmortem</a><a href="#g-predictive">Predictive Maintenance</a><a href="#g-preventive">Preventive Maintenance</a>
+      <a href="#g-root">Root Cause</a><a href="#g-rpo">RPO</a><a href="#g-rto">RTO</a><a href="#g-scada">SCADA</a>
+      <a href="#g-sla">SLA</a><a href="#g-takt">Takt Time</a><a href="#g-teep">TEEP</a>
+    </div>
+    <dl>
+      <div class="gloss-term" id="g-ale"><dt>Annualized Loss Expectancy (ALE) <span>risk quantification</span></dt><dd>ALE = Single Loss Expectancy (SLE) × Annual Rate of Occurrence (ARO). Originally a cybersecurity risk formula, but directly reusable for operational risk: multiply a typical incident's cost by how often it happens per year to get your expected annual exposure — exactly what the Calculator's "annualized exposure" figure does.</dd></div>
+      <div class="gloss-term" id="g-andon"><dt>Andon</dt><dd>A visual (and often audible) signal system — a light, a cord pull, a digital board — that lets any operator flag a problem and, in many lean systems, stop the line. Makes small problems visible before they become large ones.</dd></div>
+      <div class="gloss-term" id="g-blast"><dt>Blast Radius</dt><dd>How many lines, cells, shifts, or downstream processes are affected by a given incident. A single workstation jam has a small blast radius; a plant-wide power outage has a large one.</dd></div>
+      <div class="gloss-term" id="g-cmms"><dt>CMMS (Computerized Maintenance Management System)</dt><dd>Software that tracks maintenance schedules, work orders, asset history, and downtime by equipment — the foundation for calculating MTBF and justifying a predictive-maintenance investment with real data instead of a hunch.</dd></div>
+      <div class="gloss-term" id="g-changeover"><dt>Changeover Time</dt><dd>Time spent reconfiguring a line between product runs — different from an incident, since it's planned, but it competes for the same production hours and is worth tracking separately from unplanned downtime.</dd></div>
+      <div class="gloss-term" id="g-event"><dt>Event</dt><dd>Any observable occurrence in your operation — a sensor reading, an alarm, a state change. Not every event is an incident; most are routine. An incident is an event (or combination of events) that actually disrupts production, quality, or safety.</dd></div>
+      <div class="gloss-term" id="g-hmi"><dt>HMI (Human-Machine Interface)</dt><dd>The screen or panel an operator uses to monitor and control equipment — often the first thing to fail or freeze during a controls/software incident, even when the underlying machine is fine.</dd></div>
+      <div class="gloss-term" id="g-incident"><dt>Incident (Operational)</dt><dd>Any unplanned event that disrupts production, quality, or safety on the plant floor — equipment failure, a software/OT/controls failure, a power or utility outage, a quality defect, a supply chain disruption, or a safety stoppage. See the full breakdown on <a href="incident-cost-types.html">By Incident Type</a>.</dd></div>
+      <div class="gloss-term" id="g-mgmt"><dt>Incident Management</dt><dd>The ongoing program that defines severity levels, escalation paths, and response processes before anything goes wrong — distinct from incident response, which is what happens during a specific incident.</dd></div>
+      <div class="gloss-term" id="g-response"><dt>Incident Response</dt><dd>The reactive process of handling one specific incident, from detection through containment, repair, and recovery to full output.</dd></div>
+      <div class="gloss-term" id="g-mtbf"><dt>MTBF (Mean Time Between Failures)</dt><dd>Average operating time between failures for a repairable piece of equipment. The core metric for deciding whether an asset needs a predictive-maintenance program or critical spares on hand.</dd></div>
+      <div class="gloss-term" id="g-mttf"><dt>MTTF (Mean Time To Failure)</dt><dd>Like MTBF, but for components that are replaced rather than repaired when they fail (e.g., a bearing or a belt) — average lifespan rather than average time between repairable failures.</dd></div>
+      <div class="gloss-term" id="g-mtta"><dt>MTTA (Mean Time to Acknowledge)</dt><dd>Time between an alert or alarm firing (on a SCADA system, andon board, or CMMS) and a human acknowledging it. A long MTTA often means alert fatigue — too many low-value alarms drowning out the ones that matter.</dd></div>
+      <div class="gloss-term" id="g-mttd"><dt>MTTD (Mean Time to Detect)</dt><dd>Time from when a fault actually begins to when it's detected — by a sensor, an operator, or a quality check. Shorter MTTD generally means a smaller blast radius and lower cost, since the problem is caught before it cascades.</dd></div>
+      <div class="gloss-term" id="g-mttr"><dt>MTTR (Mean Time to Repair / Recover)</dt><dd>Ambiguous on purpose in common usage — "time to repair" (fix the failed component) and "time to recover" (get the full process back to normal output, including restart/ramp-up) are different numbers. Always clarify which one a report is using; the Calculator separates them into "full-stoppage duration" and "ramp-up time."</dd></div>
+      <div class="gloss-term" id="g-oee"><dt>OEE (Overall Equipment Effectiveness)</dt><dd>Availability × Performance × Quality, multiplied together into a single percentage. Industry average is roughly 60%; "world-class" is considered 85% (Vorne/OEE.com). The single most common manufacturing reliability metric.</dd></div>
+      <div class="gloss-term" id="g-otit"><dt>OT/IT Convergence</dt><dd>The ongoing merging of operational technology (PLCs, SCADA, the physical plant floor) with information technology (networks, cloud, MES/ERP). Explains why software and cybersecurity incidents increasingly have real, physical production consequences instead of staying contained to an office network.</dd></div>
+      <div class="gloss-term" id="g-p1"><dt>P1 / P2 / P3 / P4 (Severity Tiers)</dt><dd>P1: full line or plant stoppage, immediate response. P2: partial or single-cell stoppage, urgent response. P3/P4: degraded performance or non-production-affecting issues, handled during normal business hours or on a scheduled basis.</dd></div>
+      <div class="gloss-term" id="g-planned"><dt>Planned vs. Unplanned Downtime</dt><dd>Planned downtime (changeovers, scheduled maintenance, holidays) is a capacity-planning line item. Unplanned downtime — the subject of this entire suite — is what an incident actually costs you beyond what was already budgeted for.</dd></div>
+      <div class="gloss-term" id="g-playbook"><dt>Playbook / Runbook</dt><dd>A documented, pre-built procedure for responding to a specific type of incident — who does what, in what order, with which tools. Plants with tested runbooks for their top failure modes consistently recover faster than those improvising each time.</dd></div>
+      <div class="gloss-term" id="g-plc"><dt>PLC (Programmable Logic Controller)</dt><dd>The industrial computer that directly controls machinery and processes on the plant floor — the thing an HMI displays and a SCADA system aggregates data from. A PLC crash or firmware bug is a classic "software/OT failure."</dd></div>
+      <div class="gloss-term" id="g-postmortem"><dt>Postmortem / Post-Incident Review</dt><dd>Structured analysis after an incident is resolved — what happened, why, what the response did well or poorly, and what changes would prevent a recurrence. The step most plants skip when they're busy, and the one that compounds the most value over time.</dd></div>
+      <div class="gloss-term" id="g-predictive"><dt>Predictive Maintenance</dt><dd>Maintenance triggered by actual equipment condition data — vibration, temperature, oil analysis, current draw — rather than a fixed schedule. Catches developing failures before they become unplanned downtime, at the cost of needing sensors and some analysis capability.</dd></div>
+      <div class="gloss-term" id="g-preventive"><dt>Preventive Maintenance</dt><dd>Maintenance performed on a fixed schedule (every 500 operating hours, every quarter) regardless of actual equipment condition. Simpler to run than predictive maintenance, but can mean servicing healthy equipment or missing a failure that develops faster than the schedule anticipated.</dd></div>
+      <div class="gloss-term" id="g-root"><dt>Root Cause</dt><dd>The fundamental reason an incident occurred, as distinct from its symptoms. A conveyor jam might be the symptom; a misaligned sensor or a worn guide rail might be the root cause. Fixing symptoms without finding root cause is why the same incident keeps recurring.</dd></div>
+      <div class="gloss-term" id="g-rpo"><dt>RPO (Recovery Point Objective)</dt><dd>The maximum acceptable amount of data loss, measured in time — e.g., "we can afford to lose up to 15 minutes of MES production data." More relevant to your IT/MES systems than to the physical machines themselves.</dd></div>
+      <div class="gloss-term" id="g-rto"><dt>RTO (Recovery Time Objective)</dt><dd>The maximum acceptable time a line, cell, or system can be down before the business impact becomes unacceptable. Setting an explicit RTO for your most critical lines is what tells you whether a given backup/redundancy investment is actually justified.</dd></div>
+      <div class="gloss-term" id="g-scada"><dt>SCADA (Supervisory Control and Data Acquisition)</dt><dd>The system that aggregates data from PLCs and other plant-floor devices into dashboards and historical records for monitoring and control at a higher level than any single machine's HMI.</dd></div>
+      <div class="gloss-term" id="g-sla"><dt>SLA (Service Level Agreement)</dt><dd>A contractual commitment — either one you've made to a customer (on-time delivery, quality specs) or one a supplier or utility has made to you. SLA breaches are a common secondary cost driver, especially for supply chain and power/utility incidents.</dd></div>
+      <div class="gloss-term" id="g-takt"><dt>Takt Time</dt><dd>The pace of production needed to meet customer demand (available production time ÷ customer demand). Useful context when estimating lost-production cost — it tells you how much output a given stoppage actually should have produced.</dd></div>
+      <div class="gloss-term" id="g-teep"><dt>TEEP (Total Effective Equipment Performance)</dt><dd>Like OEE, but measured against all calendar time rather than just scheduled production time — surfaces unused capacity (unscheduled shifts, weekends) that OEE doesn't account for.</dd></div>
+    </dl>
+  </div>
+
+  <!-- FAQ -->
+  <div class="guide-card">
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq-item" open>
+      <summary>Why does this glossary include IT-operations terms like MTTR and RTO?</summary>
+      <p>Because the plant floor increasingly runs on them too. As OT and IT converge — PLCs talking to MES systems, cloud-based analytics on production data — the reliability vocabulary that used to live only in a data center now shows up in maintenance meetings. We've kept the IT-native terms that generalize well and reframed each one for a production context.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What did you leave out from a typical IT/security glossary, and why?</summary>
+      <p>Pure cybersecurity terms — EDR, XDR, SIEM, SOAR, breach notification, dwell time — don't apply to most operational incidents and would clutter a glossary meant for plant-floor reliability. If your incident genuinely is a cybersecurity event that happens to hit production (increasingly common with OT/IT convergence), your IT or security team's own glossary is the better reference for that half of it.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Which of these terms actually matters most for a small plant?</summary>
+      <p>If you only track three things, track OEE (how effectively you're using scheduled time), MTBF by critical asset (so you know what's about to fail), and a clear RTO for your most important line (so you know how fast "fast enough" actually is).</p>
+    </details>
+  </div>
+
+  <div class="cta-bar">
+    <div class="cta-bar-tag">// Put these terms to work</div>
+    <h3>Run your numbers on the Calculator.</h3>
+    <p>Now that the vocabulary is covered, see what an actual incident — using these terms — costs your plant.</p>
+    <div class="cta-bar-actions">
+      <a href="incident-cost-calculator.html" class="btn btn-teal">▸ Open the Calculator</a>
+      <a href="incident-cost-types.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Browse by Incident Type</a>
+    </div>
+  </div>
+
+  <!-- TOOLKIT -->
+  <div class="guide-card">
+    <h2>The Complete Suite</h2>
+    <div class="toolkit-grid">
+      <div class="toolkit-card">
+        <div class="tk-tag">Overview</div>
+        <h5>Operational Incident & Outage Cost</h5>
+        <p>The hub page — headline benchmarks, cost components, and links into the full suite.</p>
+        <a href="incident-cost.html">Open Overview →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Calculator</div>
+        <h5>Incident Cost Calculator</h5>
+        <p>Model a real incident against your own revenue, labor, and recovery costs.</p>
+        <a href="incident-cost-calculator.html">Open the Calculator →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Data</div>
+        <h5>Cost Index</h5>
+        <p>Benchmark tables by incident type, duration, and company size for SMB manufacturing.</p>
+        <a href="incident-cost-index.html">View the Index →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Reference</div>
+        <h5>By Incident Type</h5>
+        <p>Deep dive on each incident category — cost drivers, typical duration, and mitigations.</p>
+        <a href="incident-cost-types.html">Browse Types →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <div class="footer-col-title">Calculators</div>
+      <a href="incident-cost-calculator.html">Incident Cost Calculator</a>
+      <a href="incident-cost-index.html">Cost Index</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">By Incident Type</div>
+      <a href="incident-cost-types.html#equipment">Equipment Failure</a>
+      <a href="incident-cost-types.html#software-ot">Software / OT Failure</a>
+      <a href="incident-cost-types.html#power">Power / Utility Outage</a>
+      <a href="incident-cost-types.html#quality">Quality Defect & Recall</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Resources</div>
+      <a href="incident-cost.html">Overview</a>
+      <a href="incident-cost-glossary.html">Glossary</a>
+      <a href="tools.html">All Free Tools</a>
+    </div>
+  </div>
+  <p class="footer-fineprint">Stragentech.com is an independent resource. Headline benchmark figures are cited from Siemens/Senseye, Vorne/OEE.com, and ITIC. Glossary definitions reflect common operational-reliability and manufacturing usage. Not affiliated with any equipment vendor or research firm.</p>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Stragentech.com. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="tools.html">Apps</a>
+      <a href="index.html">Main Site</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('themeToggle').addEventListener('click',function(){
+  var html=document.documentElement;
+  var isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  localStorage.setItem('stragentech-theme',isDark?'light':'dark');
+});
+document.querySelectorAll('.btn, a[href*="contact"]').forEach(function(el){
+  el.addEventListener('click', function(){
+    if(typeof gtag==='undefined') return;
+    gtag('event','cta_click',{
+      'cta_label': el.textContent.trim().replace(/[→↗▸]/g,'').trim(),
+      'page_location': window.location.pathname
+    });
+  });
+});
+</script>
+</body>
+</html>

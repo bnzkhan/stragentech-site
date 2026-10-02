@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4954SHKF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JY4954SHKF');
+</script>
+<script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incident Cost Calculator — Stragentech</title>
+<meta name="description" content="Free, real-time calculator estimating what an operational incident — equipment failure, OT/software outage, power loss, quality defect, supply chain disruption, or safety stoppage — actually costs your plant. No signup, no wizard.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f0f2f5;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#4b5563;
+  --gray-600:#1f2937;
+  --gray-800:#1e2333;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --amber:#b3691a;
+  --amber-pale:#fbf1e4;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
+
+/* ── NAV ── */
+nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:200;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-brand-img{height:44px;width:auto;display:block;}
+.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);white-space:nowrap;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
+.nav-links a:hover{color:var(--teal);background:var(--teal-pale);}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:7px 14px!important;border-radius:5px;font-weight:600;}
+
+/* ── STATS BANNER ── */
+.stats-banner{background:#0d1117;padding:10px 32px;overflow-x:auto;}
+.stats-banner::-webkit-scrollbar{display:none;}
+.stats-banner-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:28px;white-space:nowrap;}
+.stats-banner-item{font-family:var(--font-mono);font-size:11.5px;color:rgba(255,255,255,0.6);}
+.stats-banner-item strong{color:var(--teal-mid);font-weight:600;}
+[data-theme="dark"] .stats-banner{background:#1c2128;}
+
+/* ── SUBNAV (tool tabs) ── */
+.subnav{position:sticky;top:72px;z-index:190;background:var(--white);border-bottom:1px solid var(--gray-100);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.subnav::-webkit-scrollbar{display:none;}
+.subnav-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:2px;padding:0 32px;}
+.subnav-tab{font-family:var(--font-mono);font-size:12px;color:var(--gray-400);text-decoration:none;padding:14px 13px 12px;border-bottom:2px solid transparent;white-space:nowrap;transition:all .18s;flex-shrink:0;}
+.subnav-tab:hover{color:var(--teal);}
+.subnav-tab.active{color:var(--ink);border-bottom-color:var(--teal);font-weight:600;}
+
+/* ── SHARED GUIDE / CONTENT COMPONENTS ── */
+.guide-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
+.guide-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+.guide-card h2{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:10px;}
+.guide-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.guide-card p{font-size:14px;color:var(--gray-600);line-height:1.7;font-weight:300;}
+.guide-card p+p{margin-top:10px;}
+
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.stat-grid.cols-3{grid-template-columns:repeat(3,1fr);}
+.stat-tile{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:20px 18px;}
+.stat-tile .stat-num{font-family:var(--font-serif);font-size:28px;color:var(--teal-dark);line-height:1;margin-bottom:6px;}
+.stat-tile .stat-label{font-size:12px;color:var(--gray-600);font-weight:500;line-height:1.4;margin-bottom:4px;}
+.stat-tile .stat-src{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);}
+
+.gtable{width:100%;border-collapse:collapse;font-size:13px;}
+.gtable th{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.5px;text-transform:uppercase;color:var(--teal);text-align:left;padding:8px 12px;border-bottom:1px solid var(--gray-100);}
+.gtable td{padding:10px 12px;border-bottom:1px solid var(--gray-100);color:var(--gray-600);}
+.gtable tr:last-child td{border-bottom:none;}
+.gtable td:first-child,.gtable th:first-child{padding-left:0;}
+.table-scroll{overflow-x:auto;}
+
+.badge-pill{display:inline-block;font-family:var(--font-mono);font-size:10px;padding:3px 9px;border-radius:20px;background:var(--teal-pale);color:var(--teal-dark);font-weight:600;}
+.badge-pill.amber{background:var(--amber-pale);color:var(--amber);}
+.badge-pill.blue{background:var(--blue-pale);color:var(--blue);}
+.badge-pill.red{background:#fbe8e8;color:#c53030;}
+[data-theme="dark"] .badge-pill.red{background:rgba(197,48,48,0.15);color:#f28b8b;}
+
+.faq-item{border-bottom:1px solid var(--gray-100);padding:14px 0;}
+.faq-item:last-child{border-bottom:none;padding-bottom:0;}
+.faq-item summary{font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:'+';font-family:var(--font-mono);color:var(--teal);font-size:16px;flex-shrink:0;}
+.faq-item[open] summary::after{content:'−';}
+.faq-item p{font-size:13px;color:var(--gray-600);line-height:1.7;font-weight:300;margin-top:10px;}
+
+.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+
+.field-group{margin-bottom:20px;}
+.field-group:last-child{margin-bottom:0;}
+.field-label{font-family:var(--font-mono);font-size:12px;color:var(--gray-400);letter-spacing:0.5px;margin-bottom:7px;display:block;}
+.field-hint{font-size:12px;color:var(--gray-400);font-weight:300;margin-top:6px;line-height:1.5;}
+.tool-input{width:100%;background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;padding:11px 14px;font-size:13px;color:var(--ink);font-family:var(--font-body);outline:none;transition:border-color .2s;}
+.tool-input:focus{border-color:var(--teal);}
+.tool-input::placeholder{color:var(--gray-400);}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.opt-cards{display:flex;gap:8px;flex-wrap:wrap;}
+.opt-card{font-family:var(--font-mono);font-size:12.5px;padding:9px 14px;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;transition:all .18s;color:var(--gray-600);background:var(--white);text-align:left;line-height:1.4;}
+.opt-card:hover{border-color:var(--teal);color:var(--teal);}
+.opt-card.selected{background:var(--teal-pale);border-color:var(--teal);color:var(--teal-dark);font-weight:600;}
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
+.btn-run{background:var(--ink);color:var(--white);font-weight:500;}
+.btn-run:hover{background:var(--teal-dark);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
+.btn-teal:hover{background:var(--teal-dark);}
+
+/* ── SLIDERS ── */
+.slider-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px;}
+.slider-val{font-family:var(--font-mono);font-size:13px;color:var(--teal-dark);font-weight:700;white-space:nowrap;}
+input[type="range"]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:3px;background:var(--gray-100);accent-color:var(--teal);cursor:pointer;}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--teal);border:2px solid var(--white);box-shadow:0 0 0 1px var(--teal);cursor:pointer;}
+input[type="range"]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--teal);border:2px solid var(--white);box-shadow:0 0 0 1px var(--teal);cursor:pointer;}
+[data-theme="dark"] .opt-card{background:#21262d;}
+
+[data-theme="dark"] .subnav{background:rgba(13,17,23,0.95);}
+[data-theme="dark"] .stat-tile,[data-theme="dark"] .guide-card{background:#21262d;}
+
+@media(max-width:760px){
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .stat-grid.cols-3{grid-template-columns:1fr 1fr;}
+}
+
+/* ── HERO ── */
+.calc-hero{padding:36px 32px 24px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
+.calc-hero-inner{max-width:var(--max-w);margin:0 auto;}
+.calc-hero h1{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:400;letter-spacing:-0.3px;margin-bottom:8px;color:var(--ink);line-height:1.1;}
+.calc-hero h1 em{font-style:italic;color:var(--teal);}
+.calc-hero p{font-size:15px;color:var(--gray-400);max-width:640px;line-height:1.65;font-weight:300;margin-bottom:14px;}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;}
+.hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
+.hero-meta-item::before{content:'▸';color:var(--teal);}
+
+/* ── LAYOUT ── */
+.calc-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
+
+/* ── CALCULATOR GRID ── */
+.calc-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:22px;align-items:start;margin-bottom:28px;}
+.input-panel{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;}
+.output-panel{position:sticky;top:128px;display:flex;flex-direction:column;gap:16px;}
+.input-section{margin-bottom:26px;}
+.input-section:last-child{margin-bottom:0;}
+@media(max-width:900px){
+  .calc-grid{grid-template-columns:1fr;}
+  .output-panel{position:static;}
+}
+
+/* ── OUTPUT COMPONENTS ── */
+.headline-card{background:#0d1117;border-radius:10px;padding:28px 26px;text-align:center;}
+.headline-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.75);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.headline-num{font-family:var(--font-serif);font-size:clamp(32px,5vw,46px);color:#ffffff;font-weight:400;line-height:1;margin-bottom:6px;}
+.headline-range{font-family:var(--font-mono);font-size:11.5px;color:rgba(255,255,255,0.55);}
+[data-theme="dark"] .headline-card{background:#1c2128;}
+
+.breakdown{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:22px 24px;}
+[data-theme="dark"] .breakdown{background:#21262d;}
+.cat-row{margin-bottom:13px;}
+.cat-row:last-child{margin-bottom:0;}
+.cat-row-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;gap:8px;}
+.cat-name{font-size:12.5px;font-weight:500;color:var(--ink);}
+.cat-val{font-family:var(--font-mono);font-size:12.5px;color:var(--ink);font-weight:600;white-space:nowrap;}
+.cat-bar-track{height:7px;background:var(--gray-50);border-radius:4px;overflow:hidden;}
+.cat-bar-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--blue));border-radius:4px;transition:width .25s;}
+.cat-total-row{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--gray-100);}
+.cat-total-row .cat-name{font-size:13px;font-weight:600;}
+.cat-total-row .cat-val{font-size:15px;}
+
+.fiveyr-card{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:20px 24px;}
+[data-theme="dark"] .fiveyr-card{background:#1c2128;}
+.fiveyr-card h4{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.fiveyr-card p{font-size:12px;color:var(--gray-400);font-weight:300;line-height:1.6;margin-bottom:10px;}
+.fiveyr-num{font-family:var(--font-serif);font-size:26px;color:var(--teal-dark);margin-bottom:2px;}
+
+.reco-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:22px 24px;}
+[data-theme="dark"] .reco-card{background:#21262d;}
+.reco-item{padding:13px 0;border-bottom:1px solid var(--gray-100);}
+.reco-item:last-child{border-bottom:none;padding-bottom:0;}
+.reco-item:first-child{padding-top:0;}
+.reco-cat{font-family:var(--font-mono);font-size:9.5px;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.reco-item h5{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.reco-item p{font-size:12px;color:var(--gray-600);line-height:1.6;font-weight:300;}
+
+.email-card{background:var(--white);border:1px dashed var(--gray-200);border-radius:10px;padding:20px 22px;}
+[data-theme="dark"] .email-card{background:#21262d;}
+.email-card h4{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.email-card p{font-size:12px;color:var(--gray-400);font-weight:300;margin-bottom:12px;line-height:1.6;}
+.email-card .tool-input{margin-bottom:8px;}
+.email-sent{font-size:12.5px;color:var(--teal-dark);font-weight:600;display:none;}
+.email-sent.show{display:block;}
+
+/* ── TOOLKIT GRID ── */
+.toolkit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.toolkit-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;}
+[data-theme="dark"] .toolkit-card{background:#21262d;}
+.toolkit-card .tk-tag{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.toolkit-card h5{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.toolkit-card p{font-size:12px;color:var(--gray-400);line-height:1.6;font-weight:300;margin-bottom:12px;flex-grow:1;}
+.toolkit-card a{font-family:var(--font-mono);font-size:11.5px;color:var(--teal-dark);text-decoration:none;font-weight:600;}
+.toolkit-card a:hover{text-decoration:underline;}
+@media(max-width:760px){.toolkit-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.toolkit-grid{grid-template-columns:1fr;}}
+
+.disclaimer-box{background:var(--amber-pale);border:1px solid #ecd6b0;border-radius:10px;padding:20px 24px;margin-bottom:20px;}
+.disclaimer-box .d-tag{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.disclaimer-box p{font-size:12.5px;color:#6b4a1f;line-height:1.7;font-weight:400;margin-bottom:8px;}
+.disclaimer-box p:last-child{margin-bottom:0;}
+
+.cta-bar{background:#0d1117;border-radius:10px;padding:36px;text-align:center;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
+.cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.cta-bar h3{font-family:var(--font-serif);font-size:24px;color:var(--white);font-weight:400;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar h3{color:var(--ink);}
+.cta-bar p{font-size:13.5px;color:rgba(255,255,255,0.5);max-width:440px;margin:0 auto 22px;font-weight:300;}
+[data-theme="dark"] .cta-bar p{color:var(--gray-400);}
+.cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
+.footer-cols{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:26px;border-bottom:1px solid var(--gray-100);margin-bottom:18px;}
+.footer-col-title{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.footer-col a{display:block;font-size:13px;color:var(--gray-600);text-decoration:none;padding:4px 0;font-weight:300;}
+.footer-col a:hover{color:var(--teal);}
+.footer-fineprint{max-width:var(--max-w);margin:0 auto 16px;font-size:11.5px;color:var(--gray-400);line-height:1.7;font-weight:300;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
+.footer-links a:hover{color:var(--teal);}
+@media(max-width:760px){.footer-cols{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-cols{grid-template-columns:1fr;}}
+
+@media(max-width:760px){
+  .input-row{grid-template-columns:1fr;}
+  .headline-num{font-size:34px;}
+}
+@media(max-width:480px){
+  .nav-brand-sub{display:none;}
+}
+
+/* ── DARK MODE ── */
+.theme-toggle{background:none;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;padding:6px 8px;color:var(--gray-600);display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s;flex-shrink:0;margin-left:4px;}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal);}
+.theme-toggle .icon-sun{display:none;}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+[data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);}
+[data-theme="dark"] nav{background:rgba(13,17,23,0.95)!important;}
+[data-theme="dark"] .nav-links a:hover{background:rgba(255,255,255,0.06);}
+[data-theme="dark"] .nav-cta{background:var(--teal)!important;color:#0d1117!important;}
+[data-theme="dark"] .btn-run{background:var(--teal);color:#0d1117;}
+[data-theme="dark"] .btn-run:hover{background:var(--teal-dark);}
+[data-theme="dark"] .btn-outline{border-color:var(--gray-200);color:var(--gray-600);}
+[data-theme="dark"] .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+[data-theme="dark"] .input-panel{background:#21262d;}
+[data-theme="dark"] .disclaimer-box{background:#1c1a10;border-color:#3d3010;}
+[data-theme="dark"] .disclaimer-box p{color:#c9a84c;}
+[data-theme="dark"] footer{background:#0a0e14;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://www.stragentech.com" class="nav-brand">
+      <img src="assets/logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
+      <span class="nav-brand-sub">/ incident cost calculator</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="tools.html">← Tools</a></li>
+      <li><a href="https://calendar.app.google/gSTNDgChThJVdzh8A" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="stats-banner">
+  <div class="stats-banner-inner">
+    <span class="stats-banner-item"><strong>11%</strong> of annual revenue lost to unplanned downtime, on average, across global manufacturers — Siemens/Senseye "True Cost of Downtime"</span>
+    <span class="stats-banner-item"><strong>60%</strong> average OEE in manufacturing vs. <strong>85%</strong> "world-class" benchmark — Vorne / OEE.com</span>
+    <span class="stats-banner-item"><strong>98%</strong> of organizations say a single hour of downtime costs over <strong>$100K</strong> — ITIC</span>
+  </div>
+</div>
+
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="incident-cost.html" class="subnav-tab">Overview</a>
+    <a href="incident-cost-calculator.html" class="subnav-tab active">Calculator</a>
+    <a href="incident-cost-index.html" class="subnav-tab">Cost Index</a>
+    <a href="incident-cost-types.html" class="subnav-tab">By Incident Type</a>
+    <a href="incident-cost-glossary.html" class="subnav-tab">Glossary</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <h1>Incident <em>Cost Calculator</em></h1>
+    <p>Model a specific incident — or a typical one — against your own revenue, labor, and recovery costs. Adjust the fields on the left and watch the breakdown update instantly on the right. No wizard, no signup. Part of a 5-tool suite — see tabs above.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">4 cost components</span>
+      <span class="hero-meta-item">Real-time results</span>
+      <span class="hero-meta-item">Free — no system access needed</span>
+      <span class="hero-meta-item">Educated estimate, not an audit</span>
+    </div>
+  </div>
+</div>
+
+<div class="calc-body">
+
+  <!-- CALCULATOR -->
+  <div class="calc-grid">
+
+    <!-- INPUT PANEL -->
+    <div class="input-panel">
+
+      <div class="input-section">
+        <div class="section-tag">// your operation</div>
+        <div class="input-row">
+          <div class="field-group">
+            <label class="field-label">Revenue per hour of normal production ($)</label>
+            <input class="tool-input" type="number" min="0" step="100" id="in_revenuePerHour" value="2200" oninput="onNum('revenuePerHour',this.value)">
+            <div class="field-hint">Annual revenue ÷ scheduled production hours/year is a quick way to estimate this.</div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Affected headcount during the incident</label>
+            <input class="tool-input" type="number" min="0" id="in_headcount" value="8" oninput="onNum('headcount',this.value)">
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Fully-loaded labor rate ($/hr)</label>
+          <input class="tool-input" type="number" min="0" step="1" id="in_laborRate" value="38" oninput="onNum('laborRate',this.value)">
+          <div class="field-hint">Wages plus benefits, payroll taxes, and overhead — typically 1.25–1.4× base hourly wage.</div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Are affected staff paid during the downtime?</label>
+          <div class="opt-cards" id="grp_paidDuringDowntime">
+            <button type="button" class="opt-card selected" onclick="onChoice('paidDuringDowntime','yes',this)">Yes — on the clock</button>
+            <button type="button" class="opt-card" onclick="onChoice('paidDuringDowntime','no',this)">No — sent home / reassigned</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-section">
+        <div class="section-tag">// the incident</div>
+        <div class="field-group">
+          <label class="field-label">Incident type</label>
+          <div class="opt-cards" id="grp_incidentType">
+            <button type="button" class="opt-card selected" onclick="onChoice('incidentType','equipment',this)">Equipment Failure</button>
+            <button type="button" class="opt-card" onclick="onChoice('incidentType','software-ot',this)">Software / OT Failure</button>
+            <button type="button" class="opt-card" onclick="onChoice('incidentType','power',this)">Power / Utility Outage</button>
+            <button type="button" class="opt-card" onclick="onChoice('incidentType','quality',this)">Quality Defect</button>
+            <button type="button" class="opt-card" onclick="onChoice('incidentType','supply-chain',this)">Supply Chain</button>
+            <button type="button" class="opt-card" onclick="onChoice('incidentType','safety',this)">Safety Incident</button>
+          </div>
+          <div class="field-hint">Changes the secondary-cost multiplier applied to scrap/rework and penalties below. See <a href="incident-cost-types.html">By Incident Type →</a></div>
+        </div>
+        <div class="input-row">
+          <div class="field-group">
+            <label class="field-label">Full-stoppage duration (hours)</label>
+            <input class="tool-input" type="number" min="0" step="0.25" id="in_downtimeHours" value="3" oninput="onNum('downtimeHours',this.value)">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Ramp-up / restart time (hours, optional)</label>
+            <input class="tool-input" type="number" min="0" step="0.25" id="in_restartHours" value="1" oninput="onNum('restartHours',this.value)">
+            <div class="field-hint">Counted at ~50% output loss — often forgotten, rarely zero.</div>
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="slider-row"><label class="field-label">Share of normal output actually lost during the stoppage</label><span class="slider-val" id="disp_throughputLoss">100%</span></div>
+          <input type="range" min="10" max="100" step="5" value="100" oninput="onRange('throughputLoss',this.value,'disp_throughputLoss','%')">
+          <div class="field-hint">100% for a full line-down event; lower for a partial slowdown or single-cell stoppage on a multi-line plant.</div>
+        </div>
+      </div>
+
+      <div class="input-section">
+        <div class="section-tag">// recovery & secondary costs</div>
+        <div class="input-row">
+          <div class="field-group">
+            <label class="field-label">Repair & recovery cost ($)</label>
+            <input class="tool-input" type="number" min="0" step="100" id="in_repairCost" value="1500" oninput="onNum('repairCost',this.value)">
+            <div class="field-hint">Parts, contractor callout, overtime premium.</div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Scrap / rework cost ($)</label>
+            <input class="tool-input" type="number" min="0" step="100" id="in_scrapCost" value="800" oninput="onNum('scrapCost',this.value)">
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Customer penalties, expedited freight, or SLA credits ($, optional)</label>
+          <input class="tool-input" type="number" min="0" step="100" id="in_penaltyCost" placeholder="e.g. 0" oninput="onNum('penaltyCost',this.value)">
+        </div>
+      </div>
+
+      <div class="input-section">
+        <div class="section-tag">// frequency</div>
+        <div class="field-group">
+          <label class="field-label">How many incidents like this per year?</label>
+          <input class="tool-input" type="number" min="0" id="in_incidentsPerYear" value="6" oninput="onNum('incidentsPerYear',this.value)">
+          <div class="field-hint">Used to estimate your annualized exposure below. Count near-misses and small stoppages too if they share this cost profile.</div>
+        </div>
+      </div>
+
+    </div><!-- /input-panel -->
+
+    <!-- OUTPUT PANEL -->
+    <div class="output-panel">
+
+      <div class="headline-card">
+        <div class="headline-tag">// Estimated cost of this incident</div>
+        <div class="headline-num" id="rHeadline">$0</div>
+        <div class="headline-range" id="rRange">Conservative $0 · Aggressive $0</div>
+      </div>
+
+      <div class="breakdown">
+        <div class="section-tag" style="margin-bottom:14px;">// cost breakdown</div>
+        <div id="catRows"></div>
+        <div class="cat-total-row">
+          <span class="cat-name">Total estimated cost — this incident</span>
+          <span class="cat-val" id="catTotalVal">$0</span>
+        </div>
+      </div>
+
+      <div class="fiveyr-card">
+        <h4>Annualized exposure</h4>
+        <p>Per-incident cost × incidents/year. See the <a href="incident-cost-index.html">Cost Index</a> for how this compares across incident types and company sizes.</p>
+        <div class="fiveyr-num" id="annualNum">$0</div>
+        <div class="field-hint" id="threeYearHint">3-year exposure at current rate: $0</div>
+      </div>
+
+      <div class="reco-card">
+        <div class="section-tag" style="margin-bottom:14px;">// where to focus first</div>
+        <div id="recoRows"></div>
+      </div>
+
+      <div class="email-card">
+        <h4>Want this emailed to you?</h4>
+        <p>Get a copy of this breakdown sent to your inbox — useful for sharing internally. No blur, no gate — this is just so you don't lose it.</p>
+        <div id="emailForm">
+          <input class="tool-input" id="leadName" type="text" placeholder="Your name">
+          <input class="tool-input" id="leadEmail" type="email" placeholder="Work email">
+          <input class="tool-input" id="leadCompany" type="text" placeholder="Company (optional)">
+          <div class="field-hint" id="leadError" style="color:#c53030;display:none;">Please enter your name and a valid work email.</div>
+          <button class="btn btn-run" style="width:100%;justify-content:center;margin-top:4px;" onclick="emailReport()">▸ Email Me This Report</button>
+        </div>
+        <div class="email-sent" id="emailSent">✓ Sent — check your inbox shortly.</div>
+      </div>
+
+    </div><!-- /output-panel -->
+
+  </div><!-- /calc-grid -->
+
+  <!-- HOW WE CALCULATE -->
+  <div class="guide-card">
+    <h2>How We Calculate</h2>
+    <p style="margin-bottom:18px;">This model uses your own inputs, not a universal industry average, to price out a specific incident. Four components anchor the math:</p>
+    <div class="stat-grid cols-3">
+      <div class="stat-tile">
+        <div class="stat-num">Production</div>
+        <div class="stat-label">Revenue/hr × downtime hours (plus half-weighted restart time) × % output lost</div>
+        <div class="stat-src">— your inputs</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num">Labor</div>
+        <div class="stat-label">Headcount × loaded rate × hours down, if staff stay on the clock</div>
+        <div class="stat-src">— your inputs</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num">Secondary</div>
+        <div class="stat-label">Scrap/rework + penalties, scaled by an incident-type multiplier</div>
+        <div class="stat-src">— type-specific</div>
+      </div>
+    </div>
+    <p>Repair/recovery cost is a direct passthrough of what you enter. The secondary-cost multiplier reflects that the same dollar of scrap or penalty tends to carry more downstream risk for a quality or safety event (recall, regulatory, reputational exposure) than for a straightforward equipment fix — currently 1.4× for safety incidents, 1.25× for quality defects, 1.1× for supply chain disruption, 1.05× for power outages, and 1.0× for equipment and software/OT failures. Annualized exposure is a simple linear projection (per-incident cost × incidents/year) rather than a compounding model — unlike technical debt, recurring operational incidents don't reliably compound year over year, so we don't pretend they do.</p>
+  </div>
+
+  <div class="disclaimer-box">
+    <div class="d-tag">⚠ Important disclaimer</div>
+    <p><strong>This is an educated estimate, not an audit.</strong> Figures are directional (typically ±30–40%) and derived entirely from the numbers you enter. We have no access to your production data, maintenance records, or financials — nothing here constitutes a financial, engineering, or insurance assessment.</p>
+    <p>Use this to frame an internal conversation about where downtime is actually costing you money and where a reliability investment would pay for itself — not as a precise forecast or a substitute for a formal operational assessment.</p>
+  </div>
+
+  <!-- TOOLKIT -->
+  <div class="guide-card">
+    <h2>The Complete Suite</h2>
+    <p style="margin-bottom:18px;">This calculator is one of five free, vendor-neutral tools for quantifying and acting on operational downtime.</p>
+    <div class="toolkit-grid">
+      <div class="toolkit-card">
+        <div class="tk-tag">Overview</div>
+        <h5>Operational Incident & Outage Cost</h5>
+        <p>The hub page — headline benchmarks, cost components, and links into the full suite.</p>
+        <a href="incident-cost.html">Open Overview →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Data</div>
+        <h5>Cost Index</h5>
+        <p>Benchmark tables by incident type, duration, and company size for SMB manufacturing.</p>
+        <a href="incident-cost-index.html">View the Index →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Reference</div>
+        <h5>By Incident Type</h5>
+        <p>Deep dive on each incident category — cost drivers, typical duration, and mitigations.</p>
+        <a href="incident-cost-types.html">Browse Types →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Reference</div>
+        <h5>Glossary</h5>
+        <p>MTTR, MTBF, OEE, RTO/RPO, and the rest of the operational-reliability vocabulary, plant-floor edition.</p>
+        <a href="incident-cost-glossary.html">Read the Glossary →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="guide-card">
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq-item" open>
+      <summary>How do I estimate revenue per hour of production?</summary>
+      <p>Divide annual revenue by your actual scheduled production hours per year (not calendar hours) — e.g., two shifts × 5 days × 50 weeks ≈ 4,000 hours. A $20M/yr plant on that schedule runs at roughly $5,000/hr. If output varies a lot by product line, use the line's own revenue and hours instead of the whole plant's.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Why does ramp-up time matter?</summary>
+      <p>Most lines don't return to full output the instant power or the machine comes back — there's a warm-up, requalification, or re-sequencing period. Ignoring it is one of the most common ways teams understate what an incident actually cost.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What if staff are reassigned instead of idle?</summary>
+      <p>Select "No — sent home / reassigned" and the labor-cost component drops to zero, since that cost isn't actually incremental. If they're doing lower-value work instead of being fully idle, you could still estimate a partial cost manually and add it to the repair/recovery field.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How is the incident-type multiplier justified?</summary>
+      <p>It only applies to the scrap/rework and penalty inputs, not your whole total — the idea is that the same dollar of scrap carries more downstream tail risk (recall, regulatory action, reputational damage) for a quality or safety event than for a routine equipment fix. It's a modeling judgment call, not a cited statistic — adjust your penalty/scrap inputs directly if you think it overstates or understates your situation.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Can I use this for a single workstation or cell instead of a whole line?</summary>
+      <p>Yes — just scale your revenue-per-hour and headcount inputs down to that workstation or cell's actual output and staffing, rather than the whole plant's.</p>
+    </details>
+  </div>
+
+  <div class="cta-bar">
+    <div class="cta-bar-tag">// Want a real number, not an estimate?</div>
+    <h3>Get a formal operational resilience assessment.</h3>
+    <p>A structured engagement reviews your actual production data, maintenance records, and incident logs to replace this estimate with hard numbers and a prioritized reliability roadmap.</p>
+    <div class="cta-bar-actions">
+      <a href="index.html#contact" class="btn btn-teal">▸ Book a Free Discovery Call</a>
+      <a href="tools.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Explore More Free Tools</a>
+    </div>
+  </div>
+
+</div><!-- /calc-body -->
+
+<footer>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <div class="footer-col-title">Calculators</div>
+      <a href="incident-cost-calculator.html">Incident Cost Calculator</a>
+      <a href="incident-cost-index.html">Cost Index</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">By Incident Type</div>
+      <a href="incident-cost-types.html#equipment">Equipment Failure</a>
+      <a href="incident-cost-types.html#software-ot">Software / OT Failure</a>
+      <a href="incident-cost-types.html#power">Power / Utility Outage</a>
+      <a href="incident-cost-types.html#quality">Quality Defect & Recall</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Resources</div>
+      <a href="incident-cost.html">Overview</a>
+      <a href="incident-cost-glossary.html">Glossary</a>
+      <a href="tools.html">All Free Tools</a>
+    </div>
+  </div>
+  <p class="footer-fineprint">Stragentech.com is an independent resource. Headline benchmark figures are cited from Siemens/Senseye, Vorne/OEE.com, and ITIC; calculator results are illustrative estimates based on your own inputs, not measurements of your actual operation. Not affiliated with any equipment vendor or research firm.</p>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Stragentech.com. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="tools.html">Apps</a>
+      <a href="index.html">Main Site</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('themeToggle').addEventListener('click',function(){
+  var html=document.documentElement;
+  var isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  localStorage.setItem('stragentech-theme',isDark?'light':'dark');
+});
+
+// ── STATE ────────────────────────────────────────────────────────────────
+let state = {
+  revenuePerHour:2200, headcount:8, laborRate:38, paidDuringDowntime:'yes',
+  incidentType:'equipment',
+  downtimeHours:3, restartHours:1, throughputLoss:100,
+  repairCost:1500, scrapCost:800, penaltyCost:undefined,
+  incidentsPerYear:6,
+};
+
+function onNum(key, val){
+  state[key] = val === '' ? undefined : parseFloat(val);
+  recalc();
+}
+function onRange(key, val, dispId, suffix){
+  state[key] = parseFloat(val);
+  document.getElementById(dispId).textContent = val + suffix;
+  recalc();
+}
+function onChoice(key, val, btn){
+  state[key] = val;
+  btn.parentElement.querySelectorAll('.opt-card').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  recalc();
+}
+
+// ── CALCULATION ──────────────────────────────────────────────────────────
+// Secondary-cost multiplier is a modeling judgment call reflecting downstream
+// tail risk (recall / regulatory / reputational), not a cited statistic.
+const SECONDARY_MULTIPLIER = {
+  'equipment':1.00, 'software-ot':1.00, 'power':1.05,
+  'quality':1.25, 'supply-chain':1.10, 'safety':1.40,
+};
+const INCIDENT_LABEL = {
+  'equipment':'Equipment Failure', 'software-ot':'Software / OT Failure', 'power':'Power / Utility Outage',
+  'quality':'Quality Defect', 'supply-chain':'Supply Chain Disruption', 'safety':'Safety Incident',
+};
+
+function computeResults(){
+  const revenuePerHour = state.revenuePerHour || 0;
+  const downtimeHours = state.downtimeHours || 0;
+  const restartHours = state.restartHours || 0;
+  const throughputLossFrac = (state.throughputLoss!==undefined ? state.throughputLoss : 100)/100;
+
+  const lostProduction = revenuePerHour * (downtimeHours + restartHours*0.5) * throughputLossFrac;
+
+  const headcount = state.headcount || 0;
+  const laborRate = state.laborRate || 0;
+  const idleLabor = state.paidDuringDowntime === 'yes' ? headcount * laborRate * (downtimeHours + restartHours) : 0;
+
+  const recovery = state.repairCost || 0;
+
+  const mult = SECONDARY_MULTIPLIER[state.incidentType] || 1.0;
+  const secondary = ((state.scrapCost||0) + (state.penaltyCost||0)) * mult;
+
+  const total = lostProduction + idleLabor + recovery + secondary;
+  const conservative = total * 0.7;
+  const aggressive = total * 1.35;
+
+  const incidentsPerYear = state.incidentsPerYear || 0;
+  const annualized = total * incidentsPerYear;
+  const threeYear = annualized * 3;
+
+  return {
+    categories:[
+      {key:'lostProduction', name:'Lost Production Value', value:lostProduction},
+      {key:'idleLabor', name:'Idle Labor Cost', value:idleLabor},
+      {key:'recovery', name:'Recovery & Repair Cost', value:recovery},
+      {key:'secondary', name:'Secondary Costs (Scrap/Rework + Penalties)', value:secondary},
+    ],
+    total, conservative, aggressive, annualized, threeYear,
+  };
+}
+
+const RECOMMENDATIONS = {
+  lostProduction:{h:'Reduce single points of failure', p:'Map where a single machine, line, or utility feed can stop the whole operation. Redundancy, buffer stock between stages, or alternate routing cuts the duration of the next stoppage even when it can\'t prevent it.'},
+  idleLabor:{h:'Build a flexible redeployment protocol', p:'Cross-train operators on adjacent stations and pre-define a "what do people do during a stoppage" plan — 5S, preventive tasks, or temporary reassignment — so idle time isn\'t automatically dead time.'},
+  recovery:{h:'Shift from reactive to predictive maintenance', p:'Track MTBF by asset in a CMMS, add vibration/thermal monitoring to your highest-failure-cost equipment, and stock critical spares for anything with a long lead time.'},
+  secondary:{h:'Tighten the secondary-cost tail', p:'For quality events: in-line SPC and incoming-material inspection. For supply chain: dual-source critical inputs. For safety: a near-miss reporting culture that catches issues before they become stop-work events.'},
+};
+
+function fmtMoney(n){
+  n = Math.max(0, Math.round(n||0));
+  return '$' + n.toLocaleString('en-US');
+}
+
+function recalc(){
+  const results = computeResults();
+
+  document.getElementById('rHeadline').textContent = fmtMoney(results.total);
+  document.getElementById('rRange').textContent = `Conservative ${fmtMoney(results.conservative)} · Aggressive ${fmtMoney(results.aggressive)}`;
+
+  const maxVal = Math.max(...results.categories.map(c=>c.value), 1);
+  document.getElementById('catRows').innerHTML = results.categories.map(c => `
+    <div class="cat-row">
+      <div class="cat-row-head"><span class="cat-name">${c.name}</span><span class="cat-val">${fmtMoney(c.value)}</span></div>
+      <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${Math.max(2,(c.value/maxVal*100))}%"></div></div>
+    </div>`).join('');
+  document.getElementById('catTotalVal').textContent = fmtMoney(results.total);
+
+  document.getElementById('annualNum').textContent = fmtMoney(results.annualized);
+  document.getElementById('threeYearHint').textContent = `3-year exposure at current rate: ${fmtMoney(results.threeYear)}`;
+
+  const top = [...results.categories].sort((a,b)=>b.value-a.value).slice(0,3).filter(c=>c.value>0);
+  document.getElementById('recoRows').innerHTML = top.map(c => {
+    const r = RECOMMENDATIONS[c.key];
+    return `<div class="reco-item"><div class="reco-cat">${c.name} — ${fmtMoney(c.value)}</div><h5>${r.h}</h5><p>${r.p}</p></div>`;
+  }).join('') || '<div class="reco-item"><p>Adjust the fields on the left to see tailored recommendations.</p></div>';
+
+  window._latestResults = results;
+  try{ localStorage.setItem('stragentech-icc-incident-cost', String(Math.round(results.total))); }catch(e){}
+}
+
+// ── EMAIL REPORT (non-blocking) ─────────────────────────────────────────
+function emailReport(){
+  const name = document.getElementById('leadName').value.trim();
+  const email = document.getElementById('leadEmail').value.trim();
+  const company = document.getElementById('leadCompany').value.trim();
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errEl = document.getElementById('leadError');
+  if(!name || !emailRe.test(email)){
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+  const results = window._latestResults || computeResults();
+  if(typeof gtag!=='undefined') gtag('event','tool_report_emailed',{'tool_name':'incident_cost_calculator'});
+
+  const summary = results.categories.map(c => `${c.name}: ${fmtMoney(c.value)}`).join('; ');
+  fetch('https://formspree.io/f/xpqerpje', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      'Source':'Incident Cost Calculator',
+      'Name':name,
+      'email':email,
+      'Company':company,
+      'Incident Type':INCIDENT_LABEL[state.incidentType]||state.incidentType,
+      'Estimated Cost (This Incident)':fmtMoney(results.total),
+      'Estimated Cost Range':`${fmtMoney(results.conservative)} – ${fmtMoney(results.aggressive)}`,
+      'Annualized Exposure':fmtMoney(results.annualized),
+      '3-Year Exposure':fmtMoney(results.threeYear),
+      'Category Breakdown':summary,
+      'Incidents Per Year':state.incidentsPerYear,
+    })
+  }).catch(()=>{ /* non-blocking — UI already shows sent state */ });
+
+  document.getElementById('emailForm').style.display = 'none';
+  document.getElementById('emailSent').classList.add('show');
+}
+
+recalc();
+
+document.querySelectorAll('.btn, a[href*="contact"]').forEach(function(el){
+  el.addEventListener('click', function(){
+    if(typeof gtag==='undefined') return;
+    gtag('event','cta_click',{
+      'cta_label': el.textContent.trim().replace(/[→↗▸]/g,'').trim(),
+      'page_location': window.location.pathname
+    });
+  });
+});
+</script>
+</body>
+</html>

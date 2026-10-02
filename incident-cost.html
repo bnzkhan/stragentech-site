@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4954SHKF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JY4954SHKF');
+</script>
+<script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operational Incident & Outage Cost Calculator — Stragentech</title>
+<meta name="description" content="What does unplanned downtime actually cost your plant? A free suite of tools for SMB manufacturers: an incident cost calculator, a cost index by incident type, a browse-by-type reference, and a glossary — covering equipment failure, OT/software failure, power outages, quality defects, supply chain disruption, and safety incidents.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f0f2f5;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#4b5563;
+  --gray-600:#1f2937;
+  --gray-800:#1e2333;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --amber:#b3691a;
+  --amber-pale:#fbf1e4;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
+
+/* ── NAV ── */
+nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:200;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-brand-img{height:44px;width:auto;display:block;}
+.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);white-space:nowrap;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
+.nav-links a:hover{color:var(--teal);background:var(--teal-pale);}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:7px 14px!important;border-radius:5px;font-weight:600;}
+
+/* ── STATS BANNER ── */
+.stats-banner{background:#0d1117;padding:10px 32px;overflow-x:auto;}
+.stats-banner::-webkit-scrollbar{display:none;}
+.stats-banner-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:28px;white-space:nowrap;}
+.stats-banner-item{font-family:var(--font-mono);font-size:11.5px;color:rgba(255,255,255,0.6);}
+.stats-banner-item strong{color:var(--teal-mid);font-weight:600;}
+[data-theme="dark"] .stats-banner{background:#1c2128;}
+
+/* ── SUBNAV (tool tabs) ── */
+.subnav{position:sticky;top:72px;z-index:190;background:var(--white);border-bottom:1px solid var(--gray-100);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.subnav::-webkit-scrollbar{display:none;}
+.subnav-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:2px;padding:0 32px;}
+.subnav-tab{font-family:var(--font-mono);font-size:12px;color:var(--gray-400);text-decoration:none;padding:14px 13px 12px;border-bottom:2px solid transparent;white-space:nowrap;transition:all .18s;flex-shrink:0;}
+.subnav-tab:hover{color:var(--teal);}
+.subnav-tab.active{color:var(--ink);border-bottom-color:var(--teal);font-weight:600;}
+
+/* ── SHARED GUIDE / CONTENT COMPONENTS ── */
+.guide-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
+.guide-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+.guide-card h2{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:10px;}
+.guide-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.guide-card p{font-size:14px;color:var(--gray-600);line-height:1.7;font-weight:300;}
+.guide-card p+p{margin-top:10px;}
+
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.stat-grid.cols-3{grid-template-columns:repeat(3,1fr);}
+.stat-tile{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:20px 18px;}
+.stat-tile .stat-num{font-family:var(--font-serif);font-size:28px;color:var(--teal-dark);line-height:1;margin-bottom:6px;}
+.stat-tile .stat-label{font-size:12px;color:var(--gray-600);font-weight:500;line-height:1.4;margin-bottom:4px;}
+.stat-tile .stat-src{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);}
+
+.gtable{width:100%;border-collapse:collapse;font-size:13px;}
+.gtable th{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.5px;text-transform:uppercase;color:var(--teal);text-align:left;padding:8px 12px;border-bottom:1px solid var(--gray-100);}
+.gtable td{padding:10px 12px;border-bottom:1px solid var(--gray-100);color:var(--gray-600);}
+.gtable tr:last-child td{border-bottom:none;}
+.gtable td:first-child,.gtable th:first-child{padding-left:0;}
+.table-scroll{overflow-x:auto;}
+
+.badge-pill{display:inline-block;font-family:var(--font-mono);font-size:10px;padding:3px 9px;border-radius:20px;background:var(--teal-pale);color:var(--teal-dark);font-weight:600;}
+.badge-pill.amber{background:var(--amber-pale);color:var(--amber);}
+.badge-pill.blue{background:var(--blue-pale);color:var(--blue);}
+.badge-pill.red{background:#fbe8e8;color:#c53030;}
+[data-theme="dark"] .badge-pill.red{background:rgba(197,48,48,0.15);color:#f28b8b;}
+
+.step-list{counter-reset:step;}
+.step-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--gray-100);}
+.step-item:last-child{border-bottom:none;padding-bottom:0;}
+.step-item:first-child{padding-top:0;}
+.step-num{counter-increment:step;font-family:var(--font-serif);font-size:22px;color:var(--teal-mid);flex-shrink:0;width:34px;}
+.step-item h5{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.step-item p{font-size:13px;color:var(--gray-600);line-height:1.65;font-weight:300;}
+
+.faq-item{border-bottom:1px solid var(--gray-100);padding:14px 0;}
+.faq-item:last-child{border-bottom:none;padding-bottom:0;}
+.faq-item summary{font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:'+';font-family:var(--font-mono);color:var(--teal);font-size:16px;flex-shrink:0;}
+.faq-item[open] summary::after{content:'−';}
+.faq-item p{font-size:13px;color:var(--gray-600);line-height:1.7;font-weight:300;margin-top:10px;}
+
+.tool-cross-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+
+.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
+.btn-run{background:var(--ink);color:var(--white);font-weight:500;}
+.btn-run:hover{background:var(--teal-dark);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
+.btn-teal:hover{background:var(--teal-dark);}
+
+[data-theme="dark"] .subnav{background:rgba(13,17,23,0.95);}
+[data-theme="dark"] .stat-tile,[data-theme="dark"] .guide-card{background:#21262d;}
+
+@media(max-width:760px){
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .stat-grid.cols-3{grid-template-columns:1fr 1fr;}
+}
+
+/* ── HERO ── */
+.calc-hero{padding:36px 32px 24px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
+.calc-hero-inner{max-width:var(--max-w);margin:0 auto;}
+.calc-hero h1{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:400;letter-spacing:-0.3px;margin-bottom:8px;color:var(--ink);line-height:1.1;}
+.calc-hero h1 em{font-style:italic;color:var(--teal);}
+.calc-hero p{font-size:15px;color:var(--gray-400);max-width:680px;line-height:1.65;font-weight:300;margin-bottom:14px;}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;}
+.hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
+.hero-meta-item::before{content:'▸';color:var(--teal);}
+
+/* ── TOOLKIT / TYPE GRID ── */
+.toolkit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.toolkit-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;}
+[data-theme="dark"] .toolkit-card{background:#21262d;}
+.toolkit-card .tk-tag{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.toolkit-card h5{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.toolkit-card p{font-size:12px;color:var(--gray-400);line-height:1.6;font-weight:300;margin-bottom:12px;flex-grow:1;}
+.toolkit-card a{font-family:var(--font-mono);font-size:11.5px;color:var(--teal-dark);text-decoration:none;font-weight:600;}
+.toolkit-card a:hover{text-decoration:underline;}
+@media(max-width:760px){.toolkit-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.toolkit-grid{grid-template-columns:1fr;}}
+
+.disclaimer-box{background:var(--amber-pale);border:1px solid #ecd6b0;border-radius:10px;padding:20px 24px;margin-bottom:20px;}
+.disclaimer-box .d-tag{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.disclaimer-box p{font-size:12.5px;color:#6b4a1f;line-height:1.7;font-weight:400;margin-bottom:8px;}
+.disclaimer-box p:last-child{margin-bottom:0;}
+
+.cta-bar{background:#0d1117;border-radius:10px;padding:36px;text-align:center;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
+.cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.cta-bar h3{font-family:var(--font-serif);font-size:24px;color:var(--white);font-weight:400;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar h3{color:var(--ink);}
+.cta-bar p{font-size:13.5px;color:rgba(255,255,255,0.5);max-width:440px;margin:0 auto 22px;font-weight:300;}
+[data-theme="dark"] .cta-bar p{color:var(--gray-400);}
+.cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
+.footer-cols{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:26px;border-bottom:1px solid var(--gray-100);margin-bottom:18px;}
+.footer-col-title{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.footer-col a{display:block;font-size:13px;color:var(--gray-600);text-decoration:none;padding:4px 0;font-weight:300;}
+.footer-col a:hover{color:var(--teal);}
+.footer-fineprint{max-width:var(--max-w);margin:0 auto 16px;font-size:11.5px;color:var(--gray-400);line-height:1.7;font-weight:300;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
+.footer-links a:hover{color:var(--teal);}
+@media(max-width:760px){.footer-cols{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-cols{grid-template-columns:1fr;}}
+
+@media(max-width:480px){
+  .nav-brand-sub{display:none;}
+}
+
+/* ── DARK MODE ── */
+.theme-toggle{background:none;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;padding:6px 8px;color:var(--gray-600);display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s;flex-shrink:0;margin-left:4px;}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal);}
+.theme-toggle .icon-sun{display:none;}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+[data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);}
+[data-theme="dark"] nav{background:rgba(13,17,23,0.95)!important;}
+[data-theme="dark"] .nav-links a:hover{background:rgba(255,255,255,0.06);}
+[data-theme="dark"] .nav-cta{background:var(--teal)!important;color:#0d1117!important;}
+[data-theme="dark"] .btn-run{background:var(--teal);color:#0d1117;}
+[data-theme="dark"] .btn-run:hover{background:var(--teal-dark);}
+[data-theme="dark"] .btn-outline{border-color:var(--gray-200);color:var(--gray-600);}
+[data-theme="dark"] .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+[data-theme="dark"] .disclaimer-box{background:#1c1a10;border-color:#3d3010;}
+[data-theme="dark"] .disclaimer-box p{color:#c9a84c;}
+[data-theme="dark"] footer{background:#0a0e14;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://www.stragentech.com" class="nav-brand">
+      <img src="assets/logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
+      <span class="nav-brand-sub">/ incident cost calculator</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="tools.html">← Tools</a></li>
+      <li><a href="https://calendar.app.google/gSTNDgChThJVdzh8A" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="stats-banner">
+  <div class="stats-banner-inner">
+    <span class="stats-banner-item"><strong>11%</strong> of annual revenue lost to unplanned downtime, on average, across global manufacturers — Siemens/Senseye "True Cost of Downtime"</span>
+    <span class="stats-banner-item"><strong>60%</strong> average OEE in manufacturing vs. <strong>85%</strong> "world-class" benchmark — Vorne / OEE.com</span>
+    <span class="stats-banner-item"><strong>98%</strong> of organizations say a single hour of downtime costs over <strong>$100K</strong> — ITIC</span>
+  </div>
+</div>
+
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="incident-cost.html" class="subnav-tab active">Overview</a>
+    <a href="incident-cost-calculator.html" class="subnav-tab">Calculator</a>
+    <a href="incident-cost-index.html" class="subnav-tab">Cost Index</a>
+    <a href="incident-cost-types.html" class="subnav-tab">By Incident Type</a>
+    <a href="incident-cost-glossary.html" class="subnav-tab">Glossary</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <h1>Operational Incident & <em>Outage Cost</em> Calculator</h1>
+    <p>Equipment failures, OT/software crashes, power outages, quality defects, supply chain disruptions, safety stoppages — every one of them has a real dollar cost, and most SMB manufacturers have never actually run the numbers. This free suite estimates what unplanned downtime costs your specific operation, benchmarks it against published industry research, and shows you where to focus first.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">Built for SMB manufacturing</span>
+      <span class="hero-meta-item">Free — no signup required</span>
+      <span class="hero-meta-item">Your inputs, not someone else's averages</span>
+      <span class="hero-meta-item">5-tool suite — see tabs above</span>
+    </div>
+  </div>
+</div>
+
+<div class="guide-body">
+
+  <!-- HOW MUCH IS DOWNTIME COSTING YOU -->
+  <div class="guide-card">
+    <h2>How Much Is Downtime Really Costing You?</h2>
+    <p style="margin-bottom:18px;">Most plants track uptime. Far fewer translate an hour of downtime into an actual dollar figure that shows up in a budget conversation — which means the case for fixing the root cause never gets made with the urgency it deserves. These three figures are widely cited across manufacturing and IT-operations research:</p>
+    <div class="stat-grid cols-3">
+      <div class="stat-tile">
+        <div class="stat-num">11%</div>
+        <div class="stat-label">Of annual revenue lost to unplanned downtime, on average, among global manufacturers</div>
+        <div class="stat-src">— Siemens/Senseye, "True Cost of Downtime"</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num">60% → 85%</div>
+        <div class="stat-label">Typical manufacturing OEE vs. the "world-class" benchmark</div>
+        <div class="stat-src">— Vorne / OEE.com</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Of organizations report a single hour of downtime costs over $100K</div>
+        <div class="stat-src">— ITIC</div>
+      </div>
+    </div>
+    <p>These are useful context, not your number. Your actual cost depends on your revenue per hour of production, your labor structure, how many incidents you actually absorb per year, and what kind of incident it is — a 20-minute line jam is a very different event from a 6-hour plant-wide power outage. <a href="incident-cost-calculator.html">Run your own numbers on the Calculator →</a></p>
+  </div>
+
+  <!-- BROWSE BY TYPE -->
+  <div class="guide-card">
+    <h2>Browse by Incident Type</h2>
+    <p style="margin-bottom:18px;">Not all downtime is the same shape. Each of these carries a different cost profile — some hit production value hardest, others hit scrap, penalties, or idle labor. <a href="incident-cost-types.html">See the full breakdown on the By Incident Type page →</a></p>
+    <div class="toolkit-grid">
+      <div class="toolkit-card">
+        <div class="tk-tag">High · Common</div>
+        <h5>Unplanned Equipment Failure</h5>
+        <p>Bearing seizures, motor burnout, hydraulic/pneumatic failures, conveyor jams. Usually the single most frequent category.</p>
+        <a href="incident-cost-types.html#equipment">Explore →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">High · Growing</div>
+        <h5>Software / Controls / OT Failure</h5>
+        <p>PLC/SCADA crashes, HMI failures, firmware bugs, OT network loss, MES/ERP outages blocking the scheduling floor.</p>
+        <a href="incident-cost-types.html#software-ot">Explore →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Varies · Severe</div>
+        <h5>Power / Utility Outage</h5>
+        <p>Grid loss, voltage sag, compressed air or utility interruption — often worse than the outage window itself once restart/ramp-up time is counted.</p>
+        <a href="incident-cost-types.html#power">Explore →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Med · Costly</div>
+        <h5>Quality Defect & Recall</h5>
+        <p>Out-of-spec batches, contamination, mislabeling, field returns — cost shows up in scrap, rework, and customer trust.</p>
+        <a href="incident-cost-types.html#quality">Explore →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Med · External</div>
+        <h5>Supply Chain Disruption</h5>
+        <p>Supplier outage, raw material shortage, logistics failure — a starved line costs almost as much as a broken one.</p>
+        <a href="incident-cost-types.html#supply-chain">Explore →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">High · Regulatory</div>
+        <h5>Safety / Compliance Incident</h5>
+        <p>Injury, near-miss stop-work, OSHA/EPA findings — idle labor plus legal, insurance, and reputational exposure.</p>
+        <a href="incident-cost-types.html#safety">Explore →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW COST IS CALCULATED -->
+  <div class="guide-card">
+    <h2>How Incident Cost Is Calculated</h2>
+    <p style="margin-bottom:6px;">Our calculator models cost across four components — the same structure used across most operational-downtime research, adapted for a plant-floor context:</p>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div><h5>Lost production value</h5><p>Revenue your line would have generated during the downtime window, adjusted for how much of normal output was actually lost (a full stoppage vs. a partial slowdown).</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div><h5>Idle labor cost</h5><p>Operators, technicians, and line staff who are paid whether or not the line is running — multiplied by headcount affected and hours down.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div><h5>Recovery & repair cost</h5><p>Parts, contractor callouts, overtime premiums, and the restart/ramp-up time many teams forget to count until output is back at full rate.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div><h5>Secondary costs</h5><p>Scrap and rework, expedited freight, customer penalties or SLA credits, and — for safety or quality events especially — reputational and regulatory exposure.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COST SNAPSHOT -->
+  <div class="guide-card">
+    <h2>Cost Snapshot: SMB Manufacturing</h2>
+    <p style="margin-bottom:18px;">Illustrative examples, not survey data — these run a representative 50–250 employee, single-plant manufacturer (~$20M/yr revenue, two shifts) through our own calculator at typical durations for each incident type. Your numbers will differ; use the <a href="incident-cost-calculator.html">Calculator</a> for your own plant.</p>
+    <div class="table-scroll">
+      <table class="gtable">
+        <tr><th>Incident Type</th><th>Typical Duration</th><th>Illustrative Cost</th><th>Primary Driver</th></tr>
+        <tr><td>Unplanned equipment failure</td><td>2–4 hrs</td><td>$9K – $19K</td><td>Lost production + repair</td></tr>
+        <tr><td>Software / controls / OT failure</td><td>1–3 hrs</td><td>$5K – $14K</td><td>Lost production + IT/OT support</td></tr>
+        <tr><td>Power / utility outage</td><td>1–6 hrs (+ restart)</td><td>$6K – $40K</td><td>Lost production, whole-plant</td></tr>
+        <tr><td>Quality defect / recall event</td><td>N/A — per batch</td><td>$8K – $60K+</td><td>Scrap/rework + customer penalty</td></tr>
+        <tr><td>Supply chain disruption</td><td>4 hrs – 3 days</td><td>$7K – $75K</td><td>Idle labor + starved-line production loss</td></tr>
+        <tr><td>Safety / compliance incident</td><td>1–8 hrs stop-work</td><td>$5K – $30K+</td><td>Idle labor + regulatory/legal exposure</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:14px;">See the full index, including cost-by-duration and cost-by-company-size tables, on the <a href="incident-cost-index.html">Cost Index page →</a></p>
+  </div>
+
+  <div class="cta-bar">
+    <div class="cta-bar-tag">// See your own number</div>
+    <h3>Run the Incident Cost Calculator.</h3>
+    <p>Plug in your revenue, labor structure, and a recent incident's duration — get a cost breakdown and an annualized exposure estimate in under two minutes.</p>
+    <div class="cta-bar-actions">
+      <a href="incident-cost-calculator.html" class="btn btn-teal">▸ Open the Calculator</a>
+      <a href="index.html#contact" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Book a Free Discovery Call</a>
+    </div>
+  </div>
+
+  <!-- TOOLKIT -->
+  <div class="guide-card">
+    <h2>The Complete Suite</h2>
+    <p style="margin-bottom:18px;">Five free, vendor-neutral tools for putting a number on operational downtime and knowing where to act first.</p>
+    <div class="toolkit-grid">
+      <div class="toolkit-card">
+        <div class="tk-tag">Overview</div>
+        <h5>Operational Incident & Outage Cost</h5>
+        <p>The hub page — headline benchmarks, cost components, and links into the full suite.</p>
+        <a href="incident-cost.html">You're here</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Calculator</div>
+        <h5>Incident Cost Calculator</h5>
+        <p>Model a real incident against your own revenue, labor, and recovery costs — get a full breakdown instantly.</p>
+        <a href="incident-cost-calculator.html">Open the Calculator →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Data</div>
+        <h5>Cost Index</h5>
+        <p>Benchmark tables by incident type, duration, and company size for SMB manufacturing.</p>
+        <a href="incident-cost-index.html">View the Index →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Reference</div>
+        <h5>By Incident Type</h5>
+        <p>Deep dive on each incident category — cost drivers, typical duration, and mitigations.</p>
+        <a href="incident-cost-types.html">Browse Types →</a>
+      </div>
+      <div class="toolkit-card">
+        <div class="tk-tag">Reference</div>
+        <h5>Glossary</h5>
+        <p>MTTR, MTBF, OEE, RTO/RPO, and the rest of the operational-reliability vocabulary, plant-floor edition.</p>
+        <a href="incident-cost-glossary.html">Read the Glossary →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="guide-card">
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq-item" open>
+      <summary>Is this calculator specific to manufacturing?</summary>
+      <p>Yes. Unlike generic IT-downtime or cybersecurity cost calculators, this suite is built around the cost structure of a physical production operation — lost production value, idle plant-floor labor, scrap/rework, and recovery/restart costs — scaled for SMB manufacturers rather than large enterprises or data-center operators.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What counts as an "operational incident" here?</summary>
+      <p>Any unplanned event that stops or degrades production, quality, or safety on the plant floor — equipment failure, a software/OT/controls failure, a power or utility outage, a quality defect or recall, a supply chain disruption, or a safety/compliance stoppage. See the <a href="incident-cost-types.html">By Incident Type</a> page for the full breakdown.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Where do the benchmark figures come from?</summary>
+      <p>The three headline stats (11% revenue loss, 60%/85% OEE, 98%/$100K) are drawn from published, widely-cited industry research — Siemens/Senseye, Vorne/OEE.com, and ITIC. The cost-snapshot tables and calculator output are our own illustrative estimates based on typical SMB inputs, clearly labeled as such — not survey results. Full methodology on the <a href="incident-cost-index.html">Cost Index</a> page.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Do I need to share any data to use this?</summary>
+      <p>No. The calculator runs entirely in your browser — nothing is sent anywhere unless you choose to email yourself a copy of the results.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How accurate is the calculator?</summary>
+      <p>It's a directional estimate, not an audit. It's only as good as the numbers you put in — revenue per hour, labor rate, and incident duration. Treat the output as a basis for an internal conversation about where to invest in reliability, not a precise forecast.</p>
+    </details>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <div class="footer-col-title">Calculators</div>
+      <a href="incident-cost-calculator.html">Incident Cost Calculator</a>
+      <a href="incident-cost-index.html">Cost Index</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">By Incident Type</div>
+      <a href="incident-cost-types.html#equipment">Equipment Failure</a>
+      <a href="incident-cost-types.html#software-ot">Software / OT Failure</a>
+      <a href="incident-cost-types.html#power">Power / Utility Outage</a>
+      <a href="incident-cost-types.html#quality">Quality Defect & Recall</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Resources</div>
+      <a href="incident-cost-glossary.html">Glossary</a>
+      <a href="tech-debt-calculator.html">Tech Debt Calculator ↗</a>
+      <a href="tools.html">All Free Tools</a>
+    </div>
+  </div>
+  <p class="footer-fineprint">Stragentech.com is an independent resource. Headline benchmark figures are cited from Siemens/Senseye, Vorne/OEE.com, and ITIC; cost-snapshot and calculator figures are illustrative estimates based on typical SMB inputs, not measurements of your actual operation or results from a formal survey. Not affiliated with any equipment vendor or research firm.</p>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Stragentech.com. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="tools.html">Apps</a>
+      <a href="index.html">Main Site</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('themeToggle').addEventListener('click',function(){
+  var html=document.documentElement;
+  var isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  localStorage.setItem('stragentech-theme',isDark?'light':'dark');
+});
+document.querySelectorAll('.btn, a[href*="contact"]').forEach(function(el){
+  el.addEventListener('click', function(){
+    if(typeof gtag==='undefined') return;
+    gtag('event','cta_click',{
+      'cta_label': el.textContent.trim().replace(/[→↗▸]/g,'').trim(),
+      'page_location': window.location.pathname
+    });
+  });
+});
+</script>
+</body>
+</html>
