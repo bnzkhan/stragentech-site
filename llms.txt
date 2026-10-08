@@ -1,0 +1,52 @@
+# Stragentech
+
+> Stragentech is a fractional CTO and agentic technology advisory practice for SMB manufacturers and B2B SaaS companies, led by Bilal A. Khan. It helps operations and engineering leaders stabilize legacy platforms, pay down technical debt, and deploy governed agentic AI for industrial operational intelligence — detect, investigate, and act on operational signals with human oversight where it matters.
+
+Stragentech's approach: stabilize the platform first, then scale autonomous action. Work spans industrial IoT and operational intelligence, technical debt reduction, and fractional CTO engagements, grounded in experience building platforms that processed real-time data from millions of connected devices. Also a member of CTOx, a vetted network of 220+ fractional CTO operators.
+
+All tools below are free, vendor-neutral, and require no signup to use.
+
+## Main Site
+
+- [Home](https://www.stragentech.com/): Services, approach, results, and contact — Agentic Operational Intelligence loop (detect → investigate → act), engagement process, and free discovery call booking.
+- [Tools Hub](https://www.stragentech.com/tools.html): Index of all free interactive tools and calculator suites.
+
+## Tech Debt Assessment Suite (10 tools)
+
+- [Cost Calculator](https://www.stragentech.com/tech-debt-calculator.html): Real-time calculator estimating the annual cost of legacy technical debt across 8 cost dimensions (velocity, architecture, licensing, FinOps, staffing, security, operations).
+- [Assessment Scorecard](https://www.stragentech.com/tech-debt-assessment.html): 10-dimension structured evaluation of technical debt, benchmarked against industry standards.
+- [Velocity Impact Calculator](https://www.stragentech.com/tech-debt-velocity.html): Quantifies the dollar cost of declining engineering throughput caused by debt.
+- [Refactoring ROI Calculator](https://www.stragentech.com/tech-debt-roi.html): Models payback period and 3-year return on a debt-reduction initiative.
+- [Metrics Guide](https://www.stragentech.com/tech-debt-metrics.html): Which engineering and code-quality metrics to track, and what good looks like.
+- [Industry Benchmarks](https://www.stragentech.com/tech-debt-benchmarks.html): Debt ratio, DORA metrics, and cost profile by company stage and industry.
+- [Compound Interest Visualizer](https://www.stragentech.com/tech-debt-interest.html): How the cost of unaddressed debt grows over time under different scenarios.
+- [Types of Technical Debt](https://www.stragentech.com/tech-debt-types.html): Martin Fowler's deliberate/inadvertent, reckless/prudent quadrant framework.
+- [Payoff Strategies](https://www.stragentech.com/tech-debt-payoff.html): Debt sprints, the 20% rule, Strangler Fig, and the boy scout rule, compared.
+- [Business Case Builder](https://www.stragentech.com/tech-debt-business-case.html): Template and guide for presenting technical debt to non-technical stakeholders.
+- [Tech Debt Whitepaper](https://www.stragentech.com/tech-debt-whitepaper.html): "Tech Debt Is an Operations Problem" — why legacy code is an operations and P&L issue, not just an engineering one.
+
+## Operational Incident & Outage Cost Suite (5 tools, SMB manufacturing)
+
+- [Overview](https://www.stragentech.com/incident-cost.html): Hub page — what unplanned downtime costs SMB manufacturers, cost components, and links into the full suite.
+- [Incident Cost Calculator](https://www.stragentech.com/incident-cost-calculator.html): Real-time calculator modeling the cost of a specific operational incident (equipment failure, software/OT failure, power outage, quality defect, supply chain disruption, safety incident) against your own revenue, labor, and recovery costs.
+- [Cost Index](https://www.stragentech.com/incident-cost-index.html): Benchmark tables by incident type, downtime duration, and company size, plus cited industry research (Siemens/Senseye, Vorne/OEE.com, ITIC).
+- [By Incident Type](https://www.stragentech.com/incident-cost-types.html): Deep dive on each of the 6 incident categories — cost drivers, typical duration, and mitigations.
+- [Glossary](https://www.stragentech.com/incident-cost-glossary.html): Plant-floor operational reliability glossary — MTTR, MTBF, OEE, TEEP, RTO/RPO, SCADA/PLC/HMI, and more.
+
+## Operational Intelligence
+
+- [Readiness Scorecard](https://www.stragentech.com/oi-scorecard.html): 12-question, 5-dimension assessment of operational intelligence / AI readiness maturity, with AI-generated interpretation.
+- [Agentic AIoT Operational Intelligence Playbook](https://www.stragentech.com/agentic-aiot-playbook.html): How SMB manufacturers deploy Agentic AI + Industrial IoT to eliminate unplanned downtime and automate remediation.
+- [From Alert Fatigue to Predictive Operations](https://www.stragentech.com/iot-alert-fatigue-deck.html): Moving from threshold-based alerting to ML anomaly detection and agentic corrective action in industrial IoT.
+- [Earned Autonomy: Governing Agentic AI at the Industrial Edge](https://www.stragentech.com/earned-autonomy-whitepaper.html): Governance framework for agentic AI on the plant floor — four-plane architecture, per-action autonomy tiers, and audit trails.
+
+## AI Strategy & Readiness
+
+- [AI Readiness Whitepaper](https://www.stragentech.com/whitepaper-ai-readiness.html): Lessons from modernizing legacy stacks and raising compliance posture ahead of AI adoption.
+- [6 Questions Before Building an AI Strategy](https://www.stragentech.com/ai_strategy_mit_carousel.html): MIT Sloan-grounded executive framework for AI strategy that avoids expensive, directionless experiments.
+
+## Contact
+
+- Email: info@stragentech.com
+- LinkedIn: https://linkedin.com/in/bilalakhan
+- Free 30-minute discovery call: https://www.stragentech.com/#contact
