@@ -13,11 +13,22 @@
       "has": [
         {
           "type": "host",
-          "value": "apps.stragentech.com"
+          "value": "tools.stragentech.com"
         }
       ],
       "destination": "/tools.html",
       "permanent": false
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "apps.stragentech.com"
+        }
+      ],
+      "destination": "https://tools.stragentech.com/:path*",
+      "permanent": true
     }
   ]
 }
