@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4954SHKF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JY4954SHKF');
+</script>
+<script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Edge & IIoT: From Passive Sensors to Autonomous Agent Networks — Stragentech</title>
+<link rel="canonical" href="https://www.stragentech.com/agentic-edge-iiot.html">
+<meta name="description" content="The shift from cloud-bound AIoT to Agentic IoT: a three-tier architecture of cloud, edge gateway, and device agents running closed sense-reason-act loops. An interactive breakdown of the research, the protocol bottleneck, and three gaps worth watching before you deploy it on a plant floor.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f0f2f5;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#4b5563;
+  --gray-600:#1f2937;
+  --gray-800:#1e2333;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --amber:#b3691a;
+  --amber-pale:#fbf1e4;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
+
+/* ── NAV ── */
+nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:200;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-brand-img{height:44px;width:auto;display:block;}
+.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);white-space:nowrap;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
+.nav-links a:hover{color:var(--teal);background:var(--teal-pale);}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:7px 14px!important;border-radius:5px;font-weight:600;}
+
+/* ── SHARED GUIDE / CONTENT COMPONENTS ── */
+.guide-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
+.guide-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+.guide-card h2{font-family:var(--font-serif);font-size:26px;font-weight:400;color:var(--ink);margin-bottom:12px;}
+.guide-card h3{font-family:var(--font-serif);font-size:20px;font-weight:400;color:var(--ink);margin:20px 0 8px;}
+.guide-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.guide-card p{font-size:15px;color:var(--gray-600);line-height:1.75;font-weight:300;}
+.guide-card p+p{margin-top:12px;}
+.guide-card ul{padding-left:20px;margin-top:8px;}
+.guide-card li{font-size:15px;color:var(--gray-600);line-height:1.75;font-weight:300;margin-bottom:4px;}
+
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0;}
+.stat-tile{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:20px 18px;}
+.stat-tile .stat-num{font-family:var(--font-serif);font-size:28px;color:var(--teal-dark);line-height:1;margin-bottom:6px;}
+.stat-tile .stat-label{font-size:12px;color:var(--gray-600);font-weight:500;line-height:1.4;margin-bottom:4px;}
+.stat-tile .stat-src{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);}
+
+.badge-pill{display:inline-block;font-family:var(--font-mono);font-size:10px;padding:3px 9px;border-radius:20px;background:var(--teal-pale);color:var(--teal-dark);font-weight:600;}
+.badge-pill.amber{background:var(--amber-pale);color:var(--amber);}
+.badge-pill.blue{background:var(--blue-pale);color:var(--blue);}
+
+.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+
+.gap-item{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--gray-100);}
+.gap-item:last-child{border-bottom:none;padding-bottom:0;}
+.gap-item:first-child{padding-top:0;}
+.gap-num{font-family:var(--font-serif);font-size:26px;color:var(--teal-mid);flex-shrink:0;width:38px;}
+.gap-item h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:5px;}
+.gap-item p{font-size:14px;color:var(--gray-600);line-height:1.7;font-weight:300;}
+
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
+.btn-teal:hover{background:var(--teal-dark);}
+
+[data-theme="dark"] nav{background:rgba(13,17,23,0.95)!important;}
+[data-theme="dark"] .nav-links a:hover{background:rgba(255,255,255,0.06);}
+[data-theme="dark"] .nav-cta{background:var(--teal)!important;color:#0d1117!important;}
+[data-theme="dark"] .stat-tile,[data-theme="dark"] .guide-card{background:#21262d;}
+
+@media(max-width:760px){
+  .stat-grid{grid-template-columns:1fr;}
+}
+
+/* ── HERO ── */
+.calc-hero{padding:40px 32px 28px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
+.calc-hero-inner{max-width:var(--max-w);margin:0 auto;}
+.calc-hero h1{font-family:var(--font-serif);font-size:clamp(28px,4.2vw,46px);font-weight:400;letter-spacing:-0.3px;margin-bottom:10px;color:var(--ink);line-height:1.12;}
+.calc-hero h1 em{font-style:italic;color:var(--teal);}
+.calc-hero p{font-size:16px;color:var(--gray-400);max-width:700px;line-height:1.7;font-weight:300;margin-bottom:16px;}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;}
+.hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
+.hero-meta-item::before{content:'▸';color:var(--teal);}
+
+/* ── DIAGRAM ── */
+.diagram-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:24px 26px 26px;margin-bottom:20px;}
+[data-theme="dark"] .diagram-card{background:#21262d;}
+.diagram-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:16px;}
+.diagram-head h2{font-family:var(--font-serif);font-size:22px;font-weight:400;color:var(--ink);margin-bottom:3px;}
+.diagram-head p{font-size:13px;color:var(--gray-400);font-weight:300;}
+.filter-deck{display:flex;gap:7px;flex-wrap:wrap;}
+.filter-chip{font-family:var(--font-mono);font-size:11px;padding:7px 13px;border:1px solid var(--gray-200);border-radius:20px;cursor:pointer;background:var(--white);color:var(--gray-600);transition:all .18s;}
+[data-theme="dark"] .filter-chip{background:#161b22;}
+.filter-chip:hover{border-color:var(--teal);color:var(--teal);}
+.filter-chip.is-active{background:var(--teal-pale);border-color:var(--teal);color:var(--teal-dark);font-weight:600;}
+
+.diagram-viewport{background:var(--off-white);border-radius:12px;padding:10px;}
+[data-theme="dark"] .diagram-viewport{background:#161b22;}
+svg.arch-diagram{width:100%;height:auto;display:block;}
+.stratum-group{cursor:pointer;}
+.stratum-card{transition:fill .2s ease,stroke .2s ease,stroke-width .2s ease;}
+.stratum-group:hover .stratum-card{stroke:var(--teal);stroke-width:2.5px;}
+.stratum-group.is-selected .stratum-card{stroke:var(--teal);stroke-width:3px;}
+.flow-line{transition:opacity .25s ease;}
+.flow-line.is-dimmed{opacity:0.12;}
+
+.detail-panel{background:var(--off-white);border-radius:10px;padding:18px 22px;margin-top:16px;}
+[data-theme="dark"] .detail-panel{background:#161b22;}
+.detail-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+.detail-head h4{font-size:15px;font-weight:600;color:var(--ink);}
+.detail-panel p{font-size:13.5px;color:var(--gray-600);line-height:1.65;font-weight:300;margin-bottom:12px;}
+.detail-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;}
+.metric-item{display:flex;flex-direction:column;gap:2px;}
+.metric-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.5px;}
+.metric-value{font-family:var(--font-mono);font-size:13px;color:var(--ink);font-weight:500;}
+@media(max-width:600px){.diagram-head{flex-direction:column;}}
+
+/* ── REFERENCES ── */
+.ref-list{list-style:none;counter-reset:ref;}
+.ref-list li{counter-increment:ref;font-size:13px;color:var(--gray-600);line-height:1.7;font-weight:300;padding:10px 0 10px 32px;border-bottom:1px solid var(--gray-100);position:relative;}
+.ref-list li:last-child{border-bottom:none;}
+.ref-list li::before{content:'[' counter(ref) ']';position:absolute;left:0;top:10px;font-family:var(--font-mono);font-size:11px;color:var(--teal);}
+.ref-list a{color:var(--teal-dark);text-decoration:none;}
+.ref-list a:hover{text-decoration:underline;}
+
+.cta-bar{background:#0d1117;border-radius:10px;padding:36px;text-align:center;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
+.cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.cta-bar h3{font-family:var(--font-serif);font-size:24px;color:var(--white);font-weight:400;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar h3{color:var(--ink);}
+.cta-bar p{font-size:13.5px;color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto 22px;font-weight:300;}
+[data-theme="dark"] .cta-bar p{color:var(--gray-400);}
+.cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.related-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:18px 20px;}
+[data-theme="dark"] .related-card{background:#21262d;}
+.related-card .tk-tag{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.related-card h5{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.related-card p{font-size:12px;color:var(--gray-400);line-height:1.6;font-weight:300;margin-bottom:10px;}
+.related-card a{font-family:var(--font-mono);font-size:11.5px;color:var(--teal-dark);text-decoration:none;font-weight:600;}
+.related-card a:hover{text-decoration:underline;}
+@media(max-width:600px){.related-grid{grid-template-columns:1fr;}}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
+.footer-fineprint{max-width:var(--max-w);margin:0 auto 16px;font-size:11.5px;color:var(--gray-400);line-height:1.7;font-weight:300;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
+.footer-links a:hover{color:var(--teal);}
+
+@media(max-width:480px){.nav-brand-sub{display:none;}}
+
+/* ── DARK MODE ── */
+.theme-toggle{background:none;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;padding:6px 8px;color:var(--gray-600);display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s;flex-shrink:0;margin-left:4px;}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal);}
+.theme-toggle .icon-sun{display:none;}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+[data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);}
+[data-theme="dark"] footer{background:#0a0e14;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://www.stragentech.com" class="nav-brand">
+      <img src="assets/logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
+      <span class="nav-brand-sub">/ insights</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#insights">← Insights</a></li>
+      <li><a href="https://calendar.app.google/gSTNDgChThJVdzh8A" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <h1>Agentic Edge &amp; IIoT: From Passive Sensors to <em>Autonomous Agent Networks</em></h1>
+    <p>Traditional AIoT sends telemetry up and waits for the cloud to think. Agentic IoT closes the loop locally — edge and device agents that sense, reason, plan, and act in real time, escalating to the cloud only for the decisions that actually need it. Here's the architecture, the research behind it, and three gaps worth watching before you deploy it on a plant floor.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">12 min read</span>
+      <span class="hero-meta-item">Interactive architecture diagram</span>
+      <span class="hero-meta-item">4 primary sources cited</span>
+    </div>
+  </div>
+</div>
+
+<div class="guide-body">
+
+  <!-- INTRO -->
+  <div class="guide-card">
+    <p>In July 2026, a paper titled <em>"Agentic IoT: Architectures, Applications, and Challenges Toward Cognitive Ecosystems"</em> formalized something that's been happening piecemeal across industrial deployments for a couple of years: the shift from AIoT — static edge models that extract features and ship them to the cloud — to <strong>Agentic IoT</strong>, where edge and device agents form closed perception-reasoning-action loops and only escalate to the cloud when the decision actually warrants it.<sup>[1]</sup></p>
+    <p>For SMB manufacturers, this isn't an academic distinction. It's the difference between a vibration sensor that emails you an alert three shifts after a bearing starts failing, and a gateway agent that cross-references the anomaly against maintenance history, checks it against a safety envelope, and either takes a bounded corrective action or routes it to a human — in the time it takes the conveyor to make one more pass.</p>
+  </div>
+
+  <!-- INTERACTIVE DIAGRAM -->
+  <div class="diagram-card">
+    <div class="diagram-head">
+      <div>
+        <h2>The Three-Tier Control Loop</h2>
+        <p>Click a layer for detail. Use the filters to trace a single data channel.</p>
+      </div>
+      <div class="filter-deck" role="tablist" aria-label="Data flow filters">
+        <button class="filter-chip is-active" data-filter="all" aria-pressed="true">All Channels</button>
+        <button class="filter-chip" data-filter="ingestion" aria-pressed="false">Ingestion (Upstream)</button>
+        <button class="filter-chip" data-filter="decision" aria-pressed="false">Decision (Downstream)</button>
+        <button class="filter-chip" data-filter="safety" aria-pressed="false">Safety Boundary</button>
+      </div>
+    </div>
+
+    <div class="diagram-viewport">
+      <svg class="arch-diagram" viewBox="0 0 860 450" id="archDiagram" role="img" aria-label="Three-tier architecture: strategic cloud, agentic edge gateway, and device/NPU agents, connected by ingestion, decision, and safety data channels">
+        <defs>
+          <marker id="caretUp" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 2 7 L 5 2 L 8 7" fill="none" stroke="#00b87a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <marker id="caretDown" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 2 3 L 5 8 L 8 3" fill="none" stroke="#1a6fd4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- CONNECTORS -->
+        <path class="flow-line" data-flow="ingestion" d="M 320 168 L 320 128" fill="none" stroke="#00b87a" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretUp)"/>
+        <path class="flow-line" data-flow="decision" d="M 520 124 L 520 164" fill="none" stroke="#1a6fd4" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretDown)"/>
+        <path class="flow-line" data-flow="ingestion" d="M 320 324 L 320 284" fill="none" stroke="#00b87a" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretUp)"/>
+        <path class="flow-line" data-flow="decision" d="M 520 280 L 520 320" fill="none" stroke="#1a6fd4" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretDown)"/>
+        <path class="flow-line" data-flow="safety" d="M 690 220 Q 760 250 782 288" fill="none" stroke="#b3691a" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretDown)"/>
+
+        <!-- PILL LABELS -->
+        <g class="flow-line" data-flow="ingestion">
+          <rect x="266" y="138" width="108" height="20" rx="10" fill="var(--teal-pale)"/>
+          <text x="320" y="152" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-style="italic" fill="var(--teal-dark)">Telemetry ↑</text>
+        </g>
+        <g class="flow-line" data-flow="decision">
+          <rect x="462" y="138" width="116" height="20" rx="10" fill="var(--blue-pale)"/>
+          <text x="520" y="152" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-style="italic" fill="var(--blue)">Policy Sync ↓</text>
+        </g>
+        <g class="flow-line" data-flow="ingestion">
+          <rect x="258" y="294" width="124" height="20" rx="10" fill="var(--teal-pale)"/>
+          <text x="320" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-style="italic" fill="var(--teal-dark)">Sensor Stream ↑</text>
+        </g>
+        <g class="flow-line" data-flow="decision">
+          <rect x="465" y="294" width="110" height="20" rx="10" fill="var(--blue-pale)"/>
+          <text x="520" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-style="italic" fill="var(--blue)">Actuation ↓</text>
+        </g>
+        <g class="flow-line" data-flow="safety">
+          <rect x="715" y="292" width="130" height="20" rx="10" fill="var(--amber-pale)"/>
+          <text x="780" y="306" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-style="italic" fill="var(--amber)">MCP Safety Gate</text>
+        </g>
+
+        <!-- STRATUM 1: CLOUD -->
+        <g class="stratum-group" data-layer="cloud">
+          <rect class="stratum-card" x="150" y="20" width="560" height="104" rx="30" fill="var(--gray-50)" stroke="var(--gray-200)" stroke-width="1.5"/>
+          <text x="430" y="54" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="16" font-weight="600" fill="var(--ink)">Strategic Cloud</text>
+          <text x="430" y="76" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12.5" font-style="italic" fill="var(--gray-600)">global memory &amp; fleet-wide model synthesis</text>
+          <text x="430" y="94" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12.5" font-style="italic" fill="var(--gray-600)">long-horizon planning</text>
+        </g>
+
+        <!-- STRATUM 2: EDGE GATEWAY -->
+        <g class="stratum-group is-selected" data-layer="edge">
+          <rect class="stratum-card" x="150" y="168" width="560" height="112" rx="32" fill="var(--teal-pale)" stroke="var(--teal)" stroke-width="2.5"/>
+          <text x="430" y="204" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="17" font-weight="700" fill="var(--ink)">Agentic Edge Gateway</text>
+          <text x="430" y="226" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-style="italic" fill="var(--teal-dark)">multi-agent orchestration &amp; context engine</text>
+          <text x="430" y="244" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-style="italic" fill="var(--teal-dark)">MCP tool-calling to plant systems</text>
+          <text x="430" y="264" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11.5" fill="var(--gray-400)">latency budget: 10ms – 50ms</text>
+        </g>
+
+        <!-- STRATUM 3: DEVICE / NPU -->
+        <g class="stratum-group" data-layer="device">
+          <rect class="stratum-card" x="150" y="324" width="560" height="96" rx="28" fill="var(--gray-50)" stroke="var(--gray-200)" stroke-width="1.5"/>
+          <text x="430" y="358" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="15" font-weight="600" fill="var(--ink)">Device &amp; NPU Agents</text>
+          <text x="430" y="380" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12.5" font-style="italic" fill="var(--gray-600)">TinyML perception-action loops</text>
+          <text x="430" y="398" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12.5" font-style="italic" fill="var(--gray-600)">sub-10ms local actuation</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- DETAIL PANEL -->
+    <div class="detail-panel">
+      <div class="detail-head">
+        <h4 id="layerTitle">Stratum 2 · Agentic Edge Gateway</h4>
+        <span class="badge-pill" id="layerBadge">Focal layer</span>
+      </div>
+      <p id="layerDesc">Orchestrates local multi-agent tool-calling over MCP, caches a live context graph, and enforces a deterministic fallback policy whenever the cloud link is slow, saturated, or down.</p>
+      <div class="detail-metrics">
+        <div class="metric-item"><span class="metric-label">Latency Budget</span><span class="metric-value" id="metricLatency">10ms – 50ms</span></div>
+        <div class="metric-item"><span class="metric-label">Hardware Profile</span><span class="metric-value" id="metricHW">Industrial PC / edge server</span></div>
+        <div class="metric-item"><span class="metric-label">Agent Framework</span><span class="metric-value" id="metricFramework">LangGraph / MCP host · 3B–8B SLMs</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE CLOSED LOOP -->
+  <div class="guide-card">
+    <h2>The Closed Loop: Sense → Reason → Plan → Act → Learn</h2>
+    <p>Traditional AIoT is a one-way street. A sensor extracts a feature, ships it to the cloud, and waits — the "intelligence" lives entirely upstream, and the edge device is just a funnel. Agentic IoT replaces that with a closed cognitive cycle running at every tier: sense the environment, reason about what changed, plan a response, act within a bounded envelope, and feed the outcome back in as a learning signal for the next cycle.<sup>[1]</sup></p>
+    <p>The cycle runs at different speeds depending on where it's happening. A device-layer agent might complete sense-to-act in under 10 milliseconds for a reflexive safety interlock. An edge-gateway agent runs the same cycle over tens of milliseconds, coordinating several device agents and deciding what's worth escalating. A cloud-layer agent runs it over minutes or longer, updating the models and policies the lower tiers actually execute. None of the three can do the others' job — and that mismatch in time budget is the whole reason the architecture is layered in the first place.</p>
+  </div>
+
+  <!-- THREE STRATA -->
+  <div class="guide-card">
+    <h2>Three Strata, Three Latency Budgets</h2>
+    <p>The architecture above isn't an arbitrary diagram convention — it maps directly onto what each tier's hardware can actually afford to compute in the time it has:</p>
+    <div class="gap-item">
+      <div class="gap-num">01</div>
+      <div><h4>Device &amp; NPU agents — &lt;10ms</h4><p>Quantized, 1B-class or smaller TinyML models running directly on NPU-equipped silicon. No network round-trip in the loop at all, because the loop has to close before a network round-trip would even return. This is the tier that catches the bearing that's about to seize, not the one that explains why.</p></div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">02</div>
+      <div><h4>Edge gateway agents — 10–50ms</h4><p>3B–8B-class small language models running on an industrial PC or edge server, close enough to the floor to aggregate several device agents' context and make a coordinated call, far enough from any single machine to see the pattern across a line rather than a sensor. This is where most of the genuinely new engineering work in Agentic IoT actually lives.</p></div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">03</div>
+      <div><h4>Strategic cloud agents — seconds to minutes</h4><p>Frontier-scale models with the deepest context window and the least time pressure — fleet-wide pattern synthesis, long-horizon maintenance planning, and the periodic model/policy updates that the edge and device tiers then execute locally. The cloud is the strategist, not the reflex.</p></div>
+    </div>
+  </div>
+
+  <!-- PROTOCOL BOTTLENECK -->
+  <div class="guide-card">
+    <h2>The Real Bottleneck Is Protocol Translation</h2>
+    <p>Most of the attention on Agentic IoT goes to the models. The harder engineering problem is underneath them. Constrained plant-floor devices speak lightweight telemetry protocols — MQTT, CoAP, raw WebSocket frames — built to move small payloads cheaply and reliably. Agent systems speak an entirely different kind of protocol — the Model Context Protocol (MCP) and emerging agent-to-agent (A2A) negotiation standards — built to carry structured context, tool schemas, and goals.<sup>[2]</sup></p>
+    <p>The edge gateway is the translation layer between the two, and it's doing more work than that description makes it sound like. Turning a raw MQTT payload into a context object an agent can reason over, and turning an agent's decision into a command a PLC will actually accept, is the connective tissue that makes the whole stack function — and it's also where most deployments that look great in a demo quietly fall apart in production, because the demo never had to talk to a fifteen-year-old SCADA historian.</p>
+  </div>
+
+  <!-- SIGNAL FROM THE FIELD -->
+  <div class="guide-card">
+    <h2>Signal From the Field</h2>
+    <p style="margin-bottom:4px;">Three trends showing up consistently across early industrial Agentic IoT deployments and the research tracking them:</p>
+    <div class="stat-grid">
+      <div class="stat-tile">
+        <div class="stat-num">~43%</div>
+        <div class="stat-label">Reduction in unplanned downtime reported across early agentic IIoT deployments</div>
+        <div class="stat-src">— industry field reporting, 2026</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num">1B–3B</div>
+        <div class="stat-label">Parameter range for SLMs now running locally on NPU-equipped edge silicon</div>
+        <div class="stat-src">— hardware trend across 2025–26</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num">MCP</div>
+        <div class="stat-label">Emerging as the default integration layer connecting edge agents to live SCADA/time-series systems</div>
+        <div class="stat-src">— protocol adoption trend</div>
+      </div>
+    </div>
+    <p style="font-size:12.5px;color:var(--gray-400);">The 43% figure is reported across early field deployments rather than a single controlled study — treat it as directional, not a guarantee, and validate against your own baseline before building a business case on it.</p>
+  </div>
+
+  <!-- GAPS -->
+  <div class="guide-card">
+    <h2>What the Research Gets Right — and Three Gaps Worth Watching</h2>
+    <p>The architectural papers do a genuinely good job standardizing vocabulary and layering for a field that badly needed it. But three practical engineering realities need more attention than they're currently getting before this moves from research paper to plant floor:</p>
+    <div class="gap-item">
+      <div class="gap-num">1</div>
+      <div><h4>Determinism vs. autonomy</h4><p>In safety-critical industrial control — power, pressure vessels, anything that moves fast and hurts people — nondeterministic LLM reasoning is a non-starter as the thing directly actuating hardware. What's needed is a hybrid: agentic reasoning proposes, but a verified, deterministic baseline enforces hard mathematical safety bounds over what the agent is actually allowed to do. The research describes the agentic layer well; it says much less about the assurance layer that has to sit underneath it before a plant safety engineer will sign off.</p></div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">2</div>
+      <div><h4>Edge memory degradation</h4><p>Running retrieval-augmented generation and persistent vector state on an edge gateway sounds straightforward in a paper. In practice, memory-footprint management and state synchronization across network partitions — a gateway losing its uplink for ten minutes during a cell outage, then needing to reconcile — remain genuinely unsolved edge-hardware problems, not just an implementation detail to be worked out later.</p></div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">3</div>
+      <div><h4>Economic and compute costs</h4><p>Multi-agent negotiation at scale generates real token and communication overhead, and that overhead has a unit-economic cost that doesn't show up in an architecture diagram. Until small language models get meaningfully more token-efficient, full agentic autonomy — versus a narrower, well-scoped agentic layer — runs into real cost friction at the edge, especially for an SMB manufacturer that isn't buying hyperscaler-scale discounts.</p></div>
+    </div>
+  </div>
+
+  <!-- RESEARCH LANDSCAPE -->
+  <div class="guide-card">
+    <h2>The Research Landscape</h2>
+    <p style="margin-bottom:14px;">Four papers currently anchor this field, each contributing a different piece of the picture:</p>
+    <h3>Agentic IoT: Architectures, Applications, and Challenges Toward Cognitive Ecosystems</h3>
+    <p>The formal definition of the paradigm shift this article is built around — a unified, multi-tiered architecture where localized agents operate directly on edge and gateway nodes, forming perception-reasoning-action loops that negotiate tasks and handle failures locally without waiting on the cloud.<sup>[1]</sup></p>
+    <h3>Edge General Intelligence Through World Models, Large Language Models, and Agentic AI</h3>
+    <p>Pairs World Models — as the cognitive core that runs counterfactual "what-if" simulations — with Agentic AI as the interaction layer, addressing the high-dimensional spatial-temporal dynamics of robotics and industrial floors before an agent takes an autonomous hardware action.<sup>[3]</sup></p>
+    <h3>Agentic Edge Intelligence: A Research Agenda</h3>
+    <p>Sets a theoretical framework for real-time AI economies at the edge — how decentralized agents use mechanism design to negotiate bandwidth, compute, and data trading dynamically across heterogeneous IoT nodes, from the distributed-systems research group behind much of the foundational edge-computing literature.<sup>[4]</sup></p>
+    <h3>Agentic Federated Learning: The Future of Distributed Training Orchestration</h3>
+    <p>Replaces static, centralized federated-learning aggregators with autonomous server and client agents — client agents on edge hardware adjusting model complexity and privacy budget against real thermal/CPU constraints, server agents orchestrating unbiased training across a heterogeneous device fleet.<sup>[5]</sup></p>
+
+    <ol class="ref-list" style="margin-top:20px;">
+      <li id="r1">Sevinç, O. et al. (2026). <em>Agentic IoT: Architectures, Applications, and Challenges Toward Cognitive Ecosystems.</em> <a href="https://arxiv.org/abs/2607.04219" target="_blank" rel="noopener">arXiv:2607.04219</a></li>
+      <li id="r2">OWASP GenAI Security Project and related 2026 protocol literature on Model Context Protocol (MCP) and agent-to-agent (A2A) negotiation standards as the integration layer for agentic systems.</li>
+      <li id="r3">Edge General Intelligence Through World Models, Large Language Models, and Agentic AI. <em>IEEE Transactions on Cognitive Communications and Networking</em>, Vol. 12 (2026).</li>
+      <li id="r4">Dustdar, S. et al. <em>Agentic Edge Intelligence: A Research Agenda.</em> IEEE/ACM International Conference on Utility and Cloud Computing (UCC) / Aalto University (2025–2026).</li>
+      <li id="r5">Agentic Federated Learning: The Future of Distributed Training Orchestration. ICLR 2026 Workshop on AI for Strategic Decision Making.</li>
+    </ol>
+  </div>
+
+  <div class="cta-bar">
+    <div class="cta-bar-tag">// Where this actually lands</div>
+    <h3>SMB manufacturers don't need all five papers. They need a gateway that doesn't fall over.</h3>
+    <p>The architecture above is the target state. Getting there from a plant running threshold alerts and a spreadsheet is a sequencing problem — stabilize the platform, prove the edge-gateway loop on one line, then widen it.</p>
+    <div class="cta-bar-actions">
+      <a href="index.html#contact" class="btn btn-teal">▸ Book a Free Discovery Call</a>
+      <a href="agentic-aiot-playbook.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Read the AIoT Playbook</a>
+    </div>
+  </div>
+
+  <!-- RELATED -->
+  <div class="guide-card">
+    <h2>Related Reading</h2>
+    <div class="related-grid">
+      <div class="related-card">
+        <div class="tk-tag">Playbook</div>
+        <h5>Agentic AIoT Operational Intelligence Playbook</h5>
+        <p>How SMB manufacturers deploy the edge-gateway layer in practice — a 90-day fast-start plan and eight high-value applications.</p>
+        <a href="agentic-aiot-playbook.html">Open the Playbook →</a>
+      </div>
+      <div class="related-card">
+        <div class="tk-tag">Whitepaper</div>
+        <h5>Earned Autonomy: Governing Agentic AI at the Industrial Edge</h5>
+        <p>The governance layer this article's "determinism vs. autonomy" gap points to — tiered autonomy, runtime assurance, and audit trails.</p>
+        <a href="earned-autonomy-whitepaper.html">Read the Whitepaper →</a>
+      </div>
+      <div class="related-card">
+        <div class="tk-tag">Calculator</div>
+        <h5>Incident Cost Calculator</h5>
+        <p>Put a number on what the downtime this architecture targets is actually costing your plant today.</p>
+        <a href="incident-cost-calculator.html">Open the Calculator →</a>
+      </div>
+      <div class="related-card">
+        <div class="tk-tag">Deck</div>
+        <h5>From Alert Fatigue to Predictive Operations</h5>
+        <p>The architectural pattern for moving from threshold-based alerting to agentic corrective action.</p>
+        <a href="iot-alert-fatigue-deck.html">Read the Deck →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p class="footer-fineprint">Stragentech.com is an independent resource. This article synthesizes publicly available research — see the References section for full citations — plus field observations from Stragentech's own engagements. Not affiliated with the cited papers' authors or institutions.</p>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Stragentech.com. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="index.html#insights">Insights</a>
+      <a href="tools.html">Tools</a>
+      <a href="index.html">Main Site</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('themeToggle').addEventListener('click',function(){
+  var html=document.documentElement;
+  var isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  localStorage.setItem('stragentech-theme',isDark?'light':'dark');
+});
+
+// ── DIAGRAM INTERACTIVITY ──────────────────────────────────────────────
+const LAYER_DETAIL = {
+  cloud: {
+    title: 'Stratum 1 · Strategic Cloud',
+    badge: 'Planning layer',
+    desc: 'Fleet-wide model synthesis, long-horizon maintenance planning, and global memory — the layer with the deepest reasoning budget and the least time pressure.',
+    latency: 'Seconds – minutes',
+    hw: 'Hyperscale GPU / TPU clusters',
+    framework: 'Frontier LLMs, RAG over fleet history',
+  },
+  edge: {
+    title: 'Stratum 2 · Agentic Edge Gateway',
+    badge: 'Focal layer',
+    desc: 'Orchestrates local multi-agent tool-calling over MCP, caches a live context graph, and enforces a deterministic fallback policy whenever the cloud link is slow, saturated, or down.',
+    latency: '10ms – 50ms',
+    hw: 'Industrial PC / edge server',
+    framework: 'LangGraph / MCP host · 3B–8B SLMs',
+  },
+  device: {
+    title: 'Stratum 3 · Device & NPU Agents',
+    badge: 'Reflex layer',
+    desc: 'TinyML perception-action loops running directly on NPU-equipped silicon — the layer that has to be right in under 10 milliseconds, with no network in the loop.',
+    latency: '< 10ms',
+    hw: 'NPU-equipped SoC / microcontroller',
+    framework: 'TinyML / quantized 1B-class models',
+  },
+};
+
+function selectLayer(layer){
+  document.querySelectorAll('.stratum-group').forEach(function(g){
+    g.classList.toggle('is-selected', g.dataset.layer === layer);
+  });
+  const d = LAYER_DETAIL[layer];
+  document.getElementById('layerTitle').textContent = d.title;
+  document.getElementById('layerBadge').textContent = d.badge;
+  document.getElementById('layerDesc').textContent = d.desc;
+  document.getElementById('metricLatency').textContent = d.latency;
+  document.getElementById('metricHW').textContent = d.hw;
+  document.getElementById('metricFramework').textContent = d.framework;
+}
+
+document.querySelectorAll('.stratum-group').forEach(function(g){
+  g.addEventListener('click', function(){ selectLayer(g.dataset.layer); });
+});
+
+document.querySelectorAll('.filter-chip').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.filter-chip').forEach(function(b){
+      b.classList.remove('is-active');
+      b.setAttribute('aria-pressed','false');
+    });
+    btn.classList.add('is-active');
+    btn.setAttribute('aria-pressed','true');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.flow-line').forEach(function(el){
+      const match = filter === 'all' || el.dataset.flow === filter;
+      el.classList.toggle('is-dimmed', !match);
+    });
+    if(typeof gtag!=='undefined') gtag('event','diagram_filter',{'filter':filter,'page_location':window.location.pathname});
+  });
+});
+
+document.querySelectorAll('.btn, a[href*="contact"]').forEach(function(el){
+  el.addEventListener('click', function(){
+    if(typeof gtag==='undefined') return;
+    gtag('event','cta_click',{
+      'cta_label': el.textContent.trim().replace(/[→↗▸]/g,'').trim(),
+      'page_location': window.location.pathname
+    });
+  });
+});
+</script>
+</body>
+</html>
