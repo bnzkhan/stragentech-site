@@ -131,7 +131,7 @@ svg.arch-diagram{width:100%;height:auto;display:block;}
 .stratum-group{cursor:pointer;}
 .stratum-card{transition:fill .2s ease,stroke .2s ease,stroke-width .2s ease;}
 .stratum-group:hover .stratum-card{stroke:var(--teal);stroke-width:2.5px;}
-.stratum-group.is-selected .stratum-card{stroke:var(--teal);stroke-width:3px;}
+.stratum-group.is-selected .stratum-card{fill:var(--teal-pale);stroke:var(--teal);stroke-width:3px;}
 .flow-line{transition:opacity .25s ease;}
 .flow-line.is-dimmed{opacity:0.12;}
 
@@ -252,20 +252,41 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
     <div class="diagram-viewport">
       <svg class="arch-diagram" viewBox="0 0 860 450" id="archDiagram" role="img" aria-label="Three-tier architecture: strategic cloud, agentic edge gateway, and device/NPU agents, connected by ingestion, decision, and safety data channels">
         <defs>
-          <marker id="caretUp" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-            <path d="M 2 7 L 5 2 L 8 7" fill="none" stroke="#00b87a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Arrowhead tip points along local +x; orient="auto" then rotates it to match each path's actual direction of travel. -->
+          <marker id="caretTeal" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M 2 2 L 8 5 L 2 8" fill="none" stroke="#00b87a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </marker>
-          <marker id="caretDown" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-            <path d="M 2 3 L 5 8 L 8 3" fill="none" stroke="#1a6fd4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <marker id="caretBlue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M 2 2 L 8 5 L 2 8" fill="none" stroke="#1a6fd4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <marker id="caretAmber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M 2 2 L 8 5 L 2 8" fill="none" stroke="#b3691a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </marker>
         </defs>
 
-        <!-- CONNECTORS -->
-        <path class="flow-line" data-flow="ingestion" d="M 320 168 L 320 128" fill="none" stroke="#00b87a" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretUp)"/>
-        <path class="flow-line" data-flow="decision" d="M 520 124 L 520 164" fill="none" stroke="#1a6fd4" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretDown)"/>
-        <path class="flow-line" data-flow="ingestion" d="M 320 324 L 320 284" fill="none" stroke="#00b87a" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretUp)"/>
-        <path class="flow-line" data-flow="decision" d="M 520 280 L 520 320" fill="none" stroke="#1a6fd4" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretDown)"/>
-        <path class="flow-line" data-flow="safety" d="M 690 220 Q 760 250 782 288" fill="none" stroke="#b3691a" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretDown)"/>
+        <!-- CONNECTORS — each wrapped with its own traveling pulse dot (animateMotion along the same path, via <mpath>) -->
+        <g class="flow-line" data-flow="ingestion">
+          <path id="p-ing1" d="M 320 168 L 320 128" fill="none" stroke="#00b87a" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretTeal)"/>
+          <circle r="3.5" fill="#00b87a"><animateMotion dur="1.6s" begin="0s" repeatCount="indefinite"><mpath href="#p-ing1"/></animateMotion></circle>
+          <circle r="3.5" fill="#00b87a" opacity="0.5"><animateMotion dur="1.6s" begin="0.8s" repeatCount="indefinite"><mpath href="#p-ing1"/></animateMotion></circle>
+        </g>
+        <g class="flow-line" data-flow="decision">
+          <path id="p-dec1" d="M 520 124 L 520 164" fill="none" stroke="#1a6fd4" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretBlue)"/>
+          <circle r="3.5" fill="#1a6fd4"><animateMotion dur="1.6s" begin="0.4s" repeatCount="indefinite"><mpath href="#p-dec1"/></animateMotion></circle>
+          <circle r="3.5" fill="#1a6fd4" opacity="0.5"><animateMotion dur="1.6s" begin="1.2s" repeatCount="indefinite"><mpath href="#p-dec1"/></animateMotion></circle>
+        </g>
+        <g class="flow-line" data-flow="ingestion">
+          <path id="p-ing2" d="M 320 324 L 320 284" fill="none" stroke="#00b87a" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretTeal)"/>
+          <circle r="3.5" fill="#00b87a"><animateMotion dur="1.3s" begin="0.2s" repeatCount="indefinite"><mpath href="#p-ing2"/></animateMotion></circle>
+        </g>
+        <g class="flow-line" data-flow="decision">
+          <path id="p-dec2" d="M 520 280 L 520 320" fill="none" stroke="#1a6fd4" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretBlue)"/>
+          <circle r="3.5" fill="#1a6fd4"><animateMotion dur="1.3s" begin="0.6s" repeatCount="indefinite"><mpath href="#p-dec2"/></animateMotion></circle>
+        </g>
+        <g class="flow-line" data-flow="safety">
+          <path id="p-saf1" d="M 690 220 Q 760 250 782 288" fill="none" stroke="#b3691a" stroke-width="1.6" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#caretAmber)"/>
+          <circle r="3.5" fill="#b3691a"><animateMotion dur="1.8s" begin="0s" repeatCount="indefinite"><mpath href="#p-saf1"/></animateMotion></circle>
+        </g>
 
         <!-- PILL LABELS -->
         <g class="flow-line" data-flow="ingestion">
@@ -298,8 +319,8 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
         </g>
 
         <!-- STRATUM 2: EDGE GATEWAY -->
-        <g class="stratum-group is-selected" data-layer="edge">
-          <rect class="stratum-card" x="150" y="168" width="560" height="112" rx="32" fill="var(--teal-pale)" stroke="var(--teal)" stroke-width="2.5"/>
+        <g class="stratum-group" data-layer="edge">
+          <rect class="stratum-card" x="150" y="168" width="560" height="112" rx="32" fill="var(--gray-50)" stroke="var(--gray-200)" stroke-width="1.5"/>
           <text x="430" y="204" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="17" font-weight="700" fill="var(--ink)">Agentic Edge Gateway</text>
           <text x="430" y="226" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-style="italic" fill="var(--teal-dark)">multi-agent orchestration &amp; context engine</text>
           <text x="430" y="244" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-style="italic" fill="var(--teal-dark)">MCP tool-calling to plant systems</text>
@@ -535,6 +556,7 @@ function selectLayer(layer){
 document.querySelectorAll('.stratum-group').forEach(function(g){
   g.addEventListener('click', function(){ selectLayer(g.dataset.layer); });
 });
+selectLayer('edge');
 
 document.querySelectorAll('.filter-chip').forEach(function(btn){
   btn.addEventListener('click', function(){
