@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4954SHKF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JY4954SHKF');
+</script>
+<script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legacy Risk X-ray — Stragentech</title>
+<link rel="canonical" href="https://www.stragentech.com/legacy-risk-xray.html">
+<meta name="description" content="Free scanner for end-of-life, security, and license exposure hiding in your legacy stack. Enter the products and versions you run — get a Lifecycle Risk Score, a cost/liability range, and a prioritized modernization sequence in under two minutes.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f0f2f5;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#4b5563;
+  --gray-600:#1f2937;
+  --gray-800:#1e2333;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --amber:#b3691a;
+  --amber-pale:#fbf1e4;
+  --red:#c53030;
+  --red-pale:#fbe8e8;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
+
+/* ── NAV ── */
+nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:200;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-brand-img{height:44px;width:auto;display:block;}
+.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);white-space:nowrap;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
+.nav-links a:hover{color:var(--teal);background:var(--teal-pale);}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:7px 14px!important;border-radius:5px;font-weight:600;}
+
+/* ── STATS BANNER ── */
+.stats-banner{background:#0d1117;padding:10px 32px;overflow-x:auto;}
+.stats-banner::-webkit-scrollbar{display:none;}
+.stats-banner-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:28px;white-space:nowrap;}
+.stats-banner-item{font-family:var(--font-mono);font-size:11.5px;color:rgba(255,255,255,0.6);}
+.stats-banner-item strong{color:var(--teal-mid);font-weight:600;}
+[data-theme="dark"] .stats-banner{background:#1c2128;}
+
+/* ── SHARED GUIDE / CONTENT COMPONENTS ── */
+.guide-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
+.guide-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+.guide-card h2{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:10px;}
+.guide-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.guide-card p{font-size:14px;color:var(--gray-600);line-height:1.7;font-weight:300;}
+.guide-card p+p{margin-top:10px;}
+.guide-card ul{padding-left:20px;margin-top:8px;}
+.guide-card li{font-size:13.5px;color:var(--gray-600);line-height:1.75;font-weight:300;margin-bottom:4px;}
+
+.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+
+.field-group{margin-bottom:16px;}
+.field-label{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);letter-spacing:0.5px;margin-bottom:6px;display:block;}
+.field-hint{font-size:12px;color:var(--gray-400);font-weight:300;margin-top:6px;line-height:1.5;}
+.tool-input{width:100%;background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;padding:10px 12px;font-size:13px;color:var(--ink);font-family:var(--font-body);outline:none;transition:border-color .2s;}
+.tool-input:focus{border-color:var(--teal);}
+.tool-input::placeholder{color:var(--gray-400);}
+[data-theme="dark"] .tool-input{background:#161b22;}
+
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
+.btn-run{background:var(--ink);color:var(--white);font-weight:500;}
+.btn-run:hover{background:var(--teal-dark);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
+.btn-teal:hover{background:var(--teal-dark);}
+.btn:disabled{opacity:0.5;cursor:not-allowed;}
+
+[data-theme="dark"] .stat-tile,[data-theme="dark"] .guide-card{background:#21262d;}
+
+/* ── HERO ── */
+.calc-hero{padding:36px 32px 24px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
+.calc-hero-inner{max-width:var(--max-w);margin:0 auto;}
+.calc-hero h1{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:400;letter-spacing:-0.3px;margin-bottom:8px;color:var(--ink);line-height:1.1;}
+.calc-hero h1 em{font-style:italic;color:var(--teal);}
+.calc-hero p{font-size:15px;color:var(--gray-400);max-width:680px;line-height:1.65;font-weight:300;margin-bottom:14px;}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;}
+.hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
+.hero-meta-item::before{content:'▸';color:var(--teal);}
+
+/* ── INPUT PANEL: ADD-A-ROW ── */
+.input-panel{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+[data-theme="dark"] .input-panel{background:#21262d;}
+.quick-chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;}
+.quick-chip{font-family:var(--font-mono);font-size:11px;padding:7px 13px;border:1px solid var(--gray-200);border-radius:20px;cursor:pointer;background:var(--off-white);color:var(--gray-600);transition:all .18s;}
+[data-theme="dark"] .quick-chip{background:#161b22;}
+.quick-chip:hover{border-color:var(--teal);color:var(--teal-dark);background:var(--teal-pale);}
+
+.row-head{display:none;}
+.product-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;align-items:end;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+.product-row:last-of-type{border-bottom:none;}
+.row-remove{background:none;border:none;color:var(--gray-400);cursor:pointer;font-size:18px;line-height:1;padding:9px 6px;border-radius:5px;transition:all .18s;}
+.row-remove:hover{color:var(--red);background:var(--red-pale);}
+@media(max-width:760px){
+  .product-row{grid-template-columns:1fr 1fr;grid-template-areas:"name name" "version version" "cost apps" "remove remove";}
+  .product-row .f-name{grid-area:name;} .product-row .f-version{grid-area:version;}
+  .product-row .f-cost{grid-area:cost;} .product-row .f-apps{grid-area:apps;}
+  .row-remove{grid-area:remove;justify-self:end;}
+}
+.row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+
+/* ── RESULTS ── */
+.headline-card{background:#0d1117;border-radius:10px;padding:28px 26px;text-align:center;margin-bottom:20px;}
+[data-theme="dark"] .headline-card{background:#1c2128;}
+.headline-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.75);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.headline-num{font-family:var(--font-serif);font-size:clamp(40px,7vw,64px);color:#ffffff;font-weight:400;line-height:1;margin-bottom:10px;}
+.band-pill{display:inline-block;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:1px;padding:5px 16px;border-radius:20px;text-transform:uppercase;}
+.band-pill.Stable{background:rgba(0,184,122,0.18);color:#5eead4;}
+.band-pill.Aging{background:rgba(179,105,26,0.2);color:#f5c27f;}
+.band-pill.Exposed{background:rgba(217,119,6,0.22);color:#fdba74;}
+.band-pill.Critical{background:rgba(197,48,48,0.22);color:#fca5a5;}
+
+.cost-card{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:22px 24px;margin-bottom:20px;}
+[data-theme="dark"] .cost-card{background:#161b22;}
+.cost-total{font-family:var(--font-serif);font-size:32px;color:var(--teal-dark);margin-bottom:4px;}
+.cost-lines{margin-top:16px;display:grid;gap:10px;}
+.cost-line{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;padding:8px 0;border-bottom:1px solid var(--gray-100);}
+.cost-line:last-child{border-bottom:none;}
+.cost-line .cl-name{color:var(--gray-600);}
+.cost-line .cl-val{font-family:var(--font-mono);font-weight:600;color:var(--ink);white-space:nowrap;}
+
+.item-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:18px 20px;margin-bottom:12px;}
+[data-theme="dark"] .item-card{background:#21262d;}
+.item-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+.item-name{font-size:15px;font-weight:600;color:var(--ink);}
+.item-version{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);margin-left:6px;}
+.src-badge{font-family:var(--font-mono);font-size:9.5px;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px;font-weight:700;white-space:nowrap;}
+.src-badge.verified{background:var(--teal-pale);color:var(--teal-dark);}
+.src-badge.ai-estimate{background:var(--amber-pale);color:var(--amber);}
+.src-badge.not-found{background:var(--gray-100);color:var(--gray-400);}
+.item-meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px;}
+.item-meta-field{font-size:12px;color:var(--gray-400);}
+.item-meta-field strong{color:var(--gray-600);font-weight:500;}
+.item-bar-track{height:7px;background:var(--gray-50);border-radius:4px;overflow:hidden;margin-bottom:4px;}
+.item-bar-fill{height:100%;border-radius:4px;transition:width .3s;}
+.item-score-label{font-family:var(--font-mono);font-size:11px;color:var(--gray-600);display:flex;justify-content:space-between;}
+.item-note{font-size:12px;color:var(--amber);font-weight:400;margin-top:8px;font-style:italic;}
+
+.narrative-body{white-space:pre-wrap;font-size:14px;color:var(--gray-600);line-height:1.75;font-weight:300;}
+
+.email-card{background:var(--white);border:1px dashed var(--gray-200);border-radius:10px;padding:20px 22px;margin-bottom:20px;}
+[data-theme="dark"] .email-card{background:#21262d;}
+.email-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.email-card p{font-size:12.5px;color:var(--gray-400);font-weight:300;margin-bottom:12px;line-height:1.6;}
+.email-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px;}
+@media(max-width:700px){.email-row{grid-template-columns:1fr;}}
+.email-sent{font-size:12.5px;color:var(--teal-dark);font-weight:600;display:none;}
+.email-sent.show{display:block;}
+
+.disclaimer-box{background:var(--amber-pale);border:1px solid #ecd6b0;border-radius:10px;padding:20px 24px;margin-bottom:20px;}
+.disclaimer-box .d-tag{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.disclaimer-box p{font-size:12.5px;color:#6b4a1f;line-height:1.7;font-weight:400;margin-bottom:8px;}
+.disclaimer-box p:last-child{margin-bottom:0;}
+[data-theme="dark"] .disclaimer-box{background:#1c1a10;border-color:#3d3010;}
+[data-theme="dark"] .disclaimer-box p{color:#c9a84c;}
+
+.faq-item{border-bottom:1px solid var(--gray-100);padding:14px 0;}
+.faq-item:last-child{border-bottom:none;padding-bottom:0;}
+.faq-item summary{font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:'+';font-family:var(--font-mono);color:var(--teal);font-size:16px;flex-shrink:0;}
+.faq-item[open] summary::after{content:'−';}
+.faq-item p{font-size:13px;color:var(--gray-600);line-height:1.7;font-weight:300;margin-top:10px;}
+
+.cta-bar{background:#0d1117;border-radius:10px;padding:36px;text-align:center;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
+.cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.cta-bar h3{font-family:var(--font-serif);font-size:24px;color:var(--white);font-weight:400;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar h3{color:var(--ink);}
+.cta-bar p{font-size:13.5px;color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto 22px;font-weight:300;}
+[data-theme="dark"] .cta-bar p{color:var(--gray-400);}
+.cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+.loading-state{text-align:center;padding:40px 20px;}
+.loading-spinner{width:32px;height:32px;border:3px solid var(--gray-100);border-top-color:var(--teal);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-state p{font-family:var(--font-mono);font-size:12px;color:var(--gray-400);}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
+.footer-fineprint{max-width:var(--max-w);margin:0 auto 16px;font-size:11.5px;color:var(--gray-400);line-height:1.7;font-weight:300;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
+.footer-links a:hover{color:var(--teal);}
+[data-theme="dark"] footer{background:#0a0e14;}
+
+@media(max-width:480px){.nav-brand-sub{display:none;}}
+
+/* ── DARK MODE ── */
+.theme-toggle{background:none;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;padding:6px 8px;color:var(--gray-600);display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s;flex-shrink:0;margin-left:4px;}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal);}
+.theme-toggle .icon-sun{display:none;}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+[data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);}
+[data-theme="dark"] nav{background:rgba(13,17,23,0.95)!important;}
+[data-theme="dark"] .nav-links a:hover{background:rgba(255,255,255,0.06);}
+[data-theme="dark"] .nav-cta{background:var(--teal)!important;color:#0d1117!important;}
+[data-theme="dark"] .btn-run{background:var(--teal);color:#0d1117;}
+[data-theme="dark"] .btn-run:hover{background:var(--teal-dark);}
+[data-theme="dark"] .btn-outline{border-color:var(--gray-200);color:var(--gray-600);}
+[data-theme="dark"] .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://www.stragentech.com" class="nav-brand">
+      <img src="assets/logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
+      <span class="nav-brand-sub">/ legacy risk x-ray</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="tools.html">← Tools</a></li>
+      <li><a href="https://calendar.app.google/gSTNDgChThJVdzh8A" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="stats-banner">
+  <div class="stats-banner-inner">
+    <span class="stats-banner-item">Free, vendor-neutral scan — <strong>no code, no SBOM, no PII required</strong></span>
+    <span class="stats-banner-item">EOL data lets <strong>CVE reporting end</strong> — a "clean" scan can still be badly exposed</span>
+    <span class="stats-banner-item">Results in <strong>under 2 minutes</strong></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <h1>Legacy Risk <em>X-ray</em></h1>
+    <p>Find the end-of-life, security, and license exposure hiding in your stack — and what it's actually costing you to leave it there. Type in what you run (or click an example below), and get a Lifecycle Risk Score, a cost/liability range, and a prioritized fix-it-first list in under two minutes.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">No signup required</span>
+      <span class="hero-meta-item">Live EOL data, not guesses</span>
+      <span class="hero-meta-item">AI-prioritized modernization sequence</span>
+    </div>
+  </div>
+</div>
+
+<div class="guide-body">
+
+  <!-- INPUT -->
+  <div class="input-panel">
+    <div class="section-tag">// what's in your stack?</div>
+    <p style="font-size:13px;color:var(--gray-400);font-weight:300;margin-bottom:14px;">Enter any operating system, runtime, framework, database, or enterprise product + version. Not sure where to start? Click one below to see how it works:</p>
+    <div class="quick-chips" id="quickChips">
+      <button type="button" class="quick-chip" data-name="Windows Server" data-version="2012 R2">Windows Server 2012 R2</button>
+      <button type="button" class="quick-chip" data-name="Java" data-version="8">Java 8</button>
+      <button type="button" class="quick-chip" data-name=".NET Framework" data-version="4.7">.NET Framework 4.7</button>
+      <button type="button" class="quick-chip" data-name="PostgreSQL" data-version="11">PostgreSQL 11</button>
+      <button type="button" class="quick-chip" data-name="Angular" data-version="1.5">AngularJS 1.5</button>
+      <button type="button" class="quick-chip" data-name="Oracle Forms" data-version="11g">Oracle Forms 11g</button>
+    </div>
+
+    <div id="rowsContainer"></div>
+
+    <div class="row-actions">
+      <button type="button" class="btn btn-outline" id="addRowBtn">+ Add Another Product</button>
+      <button type="button" class="btn btn-outline" id="exampleStackBtn">▸ Try an Example Stack</button>
+      <button type="button" class="btn btn-teal" id="scanBtn" style="margin-left:auto;">▸ Scan My Stack</button>
+    </div>
+    <div class="field-hint" id="inputError" style="color:var(--red);display:none;margin-top:10px;">Enter at least one product name to scan.</div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading-state" id="loadingState" style="display:none;">
+    <div class="loading-spinner"></div>
+    <p>Checking EOL status, scanning for known CVEs, and writing your prioritization brief…</p>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="resultsWrap" style="display:none;">
+
+    <div class="headline-card">
+      <div class="headline-tag">// Composite Lifecycle Risk Score</div>
+      <div class="headline-num" id="rScore">0</div>
+      <span class="band-pill" id="rBand">Stable</span>
+    </div>
+
+    <div class="cost-card">
+      <div class="section-tag" style="margin-bottom:10px;">// estimated cost / liability</div>
+      <div class="cost-total" id="costTotal">$0 – $0</div>
+      <div class="field-hint">Illustrative range built from your inputs — not a precise forecast. See assumptions below.</div>
+      <div class="cost-lines">
+        <div class="cost-line"><span class="cl-name">Wasted spend on EOL/unsupported support contracts</span><span class="cl-val" id="costWasted">$0 – $0</span></div>
+        <div class="cost-line"><span class="cl-name">Deferred-modernization penalty (grows the longer you wait)</span><span class="cl-val" id="costMod">$0 – $0</span></div>
+        <div class="cost-line"><span class="cl-name">Risk-adjusted exposure (expected cost of an incident)</span><span class="cl-val" id="costExp">$0 – $0</span></div>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <h2>Per-Item Breakdown</h2>
+      <div id="itemCards"></div>
+    </div>
+
+    <div class="guide-card">
+      <h2>What This Means</h2>
+      <div class="narrative-body" id="narrativeBody">—</div>
+    </div>
+
+    <div class="email-card">
+      <h4>Want the full report?</h4>
+      <p>Get this breakdown — plus the prioritized modernization sequence — emailed to you. Useful for sharing with finance or a diligence team.</p>
+      <div id="emailForm">
+        <div class="email-row">
+          <input class="tool-input" id="leadName" type="text" placeholder="Your name">
+          <input class="tool-input" id="leadEmail" type="email" placeholder="Work email">
+          <input class="tool-input" id="leadCompany" type="text" placeholder="Company (optional)">
+        </div>
+        <div class="field-hint" id="leadError" style="color:var(--red);display:none;">Please enter your name and a valid work email.</div>
+        <button class="btn btn-run" style="width:100%;justify-content:center;margin-top:4px;" id="emailBtn">▸ Email Me The Full Report</button>
+      </div>
+      <div class="email-sent" id="emailSent">✓ Sent — check your inbox shortly.</div>
+    </div>
+
+  </div><!-- /resultsWrap -->
+
+  <!-- METHODOLOGY -->
+  <div class="guide-card">
+    <h2>How We Score This</h2>
+    <p>No black-box third-party risk score — every point is explainable. Each item's 0–100 Lifecycle Risk Score is built from three weighted components:</p>
+    <ul>
+      <li><strong>End-of-life status (up to 55 pts)</strong> — pulled live from <a href="https://endoflife.date" target="_blank" rel="noopener">endoflife.date</a>'s public database where the product is tracked. Scales with years past EOL — the longer it's been end-of-life, the higher the points.</li>
+      <li><strong>Security exposure (up to 25 pts)</strong> — a live CVE check via <a href="https://osv.dev" target="_blank" rel="noopener">OSV.dev</a> where applicable, plus a flat uplift whenever a product is EOL. That uplift exists because new CVEs stop being filed for EOL components — the silence is risk, not safety.</li>
+      <li><strong>Support availability (up to 10 pts)</strong> — whether paid extended support is even an option, or the product is fully abandoned.</li>
+      <li><strong>Criticality multiplier (1.0× – 1.3×)</strong> — applied based on how many of your apps depend on that one component.</li>
+    </ul>
+    <p>Products not in the free public EOL database (common for older enterprise COTS like Oracle Forms, WebLogic, or Documentum) get an AI-generated estimate instead of a live lookup — and every result is labeled <span class="src-badge verified" style="margin:0 2px;">verified</span> or <span class="src-badge ai-estimate" style="margin:0 2px;">ai-estimate</span> so you always know which is which.</p>
+  </div>
+
+  <div class="disclaimer-box">
+    <div class="d-tag">⚠ Important disclaimer</div>
+    <p><strong>This is an educated estimate, not an audit.</strong> EOL dates are pulled from a live public database and are generally reliable; CVE counts are best-effort and skew toward open-source package ecosystems rather than enterprise COTS; AI-estimated items and the entire cost/liability range are directional, not precise. We have no access to your actual systems, contracts, or codebase.</p>
+    <p>Use this to prioritize an internal conversation about where lifecycle risk is actually concentrated — not as a substitute for a formal technical due diligence engagement.</p>
+  </div>
+
+  <!-- FAQ -->
+  <div class="guide-card">
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq-item" open>
+      <summary>Why does a "clean" scan from my CVE tool still show up risky here?</summary>
+      <p>Once a product goes end-of-life, there's no maintainer left to coordinate CVE disclosure — new vulnerabilities in EOL software are often simply never filed. A standard dependency scanner reads that silence as "no known issues." This tool treats it as exactly the opposite: EOL status carries the largest weight in the score regardless of what a CVE count shows.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What counts as a "product" I should enter?</summary>
+      <p>Anything with its own release/support lifecycle: operating systems, language runtimes (Java, .NET, Python, PHP, Ruby), web frameworks (Angular, React, Rails, Laravel, Spring), databases, web/app servers, and enterprise COTS platforms (Oracle, SAP, Documentum, WebLogic). Click a quick-add chip above to see the expected format.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What if my product isn't recognized?</summary>
+      <p>Try the most common/generic name for it (e.g. "PostgreSQL" rather than a specific distribution's packaging name). If it's a well-known enterprise product not in the free public EOL database, the tool asks AI to generate an estimate instead — clearly labeled as an estimate, not a verified lookup.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Is this a replacement for a real technical audit?</summary>
+      <p>No. It's a free, directional starting point using public data and your own inputs. A real technical due diligence or modernization assessment reviews your actual codebase, contracts, and infrastructure — <a href="index.html#contact">book a discovery call</a> if that's the next step.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Do you store what I enter?</summary>
+      <p>No code, no SBOM, and no system access are requested in this version — just product names and versions you type in, sent to our serverless function to run the live lookups and generate your result. Nothing is stored unless you explicitly ask to have the report emailed to you.</p>
+    </details>
+  </div>
+
+  <div class="cta-bar">
+    <div class="cta-bar-tag">// Want a real number, not an estimate?</div>
+    <h3>Get a formal Technical Due Diligence or Modernization assessment.</h3>
+    <p>A structured engagement reviews your actual codebase, contracts, and infrastructure to replace this estimate with hard numbers and a prioritized remediation roadmap — the same lens we bring to PE technical diligence and enterprise modernization work.</p>
+    <div class="cta-bar-actions">
+      <a href="index.html#contact" class="btn btn-teal">▸ Book a Free Discovery Call</a>
+      <a href="tools.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Explore More Free Tools</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p class="footer-fineprint">Stragentech.com is an independent resource. EOL data is sourced live from endoflife.date; CVE data from OSV.dev; items not in either database receive an AI-generated estimate, clearly labeled. Cost/liability figures are illustrative, assumption-based estimates, not survey data or a precise forecast. Not affiliated with endoflife.date, OSV.dev, or any vendor named in results.</p>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Stragentech.com. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="tools.html">Apps</a>
+      <a href="index.html">Main Site</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('themeToggle').addEventListener('click',function(){
+  var html=document.documentElement;
+  var isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  localStorage.setItem('stragentech-theme',isDark?'light':'dark');
+});
+
+// ── ROW MANAGEMENT ───────────────────────────────────────────────────────
+let rowId = 0;
+function addRow(prefill){
+  rowId++;
+  const id = rowId;
+  const wrap = document.createElement('div');
+  wrap.className = 'product-row';
+  wrap.dataset.rowId = id;
+  wrap.innerHTML = `
+    <div class="field-group f-name" style="margin-bottom:0;">
+      <label class="field-label">Product</label>
+      <input class="tool-input" type="text" placeholder="e.g. Windows Server" value="${prefill && prefill.name ? prefill.name : ''}">
+    </div>
+    <div class="field-group f-version" style="margin-bottom:0;">
+      <label class="field-label">Version</label>
+      <input class="tool-input" type="text" placeholder="e.g. 2012 R2" value="${prefill && prefill.version ? prefill.version : ''}">
+    </div>
+    <div class="field-group f-cost" style="margin-bottom:0;">
+      <label class="field-label">Annual Cost ($)</label>
+      <input class="tool-input" type="number" min="0" placeholder="optional" value="${prefill && prefill.licenseCost ? prefill.licenseCost : ''}">
+    </div>
+    <div class="field-group f-apps" style="margin-bottom:0;">
+      <label class="field-label"># Dependent Apps</label>
+      <input class="tool-input" type="number" min="1" placeholder="1" value="${prefill && prefill.dependentApps ? prefill.dependentApps : ''}">
+    </div>
+    <button type="button" class="row-remove" aria-label="Remove row">×</button>
+  `;
+  wrap.querySelector('.row-remove').addEventListener('click', function(){
+    wrap.remove();
+  });
+  document.getElementById('rowsContainer').appendChild(wrap);
+  return wrap;
+}
+
+function firstEmptyNameInput(){
+  const rows = document.querySelectorAll('.product-row');
+  for (const r of rows){
+    const nameInput = r.querySelector('.f-name input');
+    if (!nameInput.value.trim()) return r;
+  }
+  return null;
+}
+
+document.getElementById('addRowBtn').addEventListener('click', function(){ addRow(); });
+
+document.getElementById('exampleStackBtn').addEventListener('click', function(){
+  document.getElementById('rowsContainer').innerHTML = '';
+  rowId = 0;
+  addRow({name:'Windows Server', version:'2012 R2', licenseCost:8000, dependentApps:3});
+  addRow({name:'Java', version:'8', licenseCost:0, dependentApps:6});
+  addRow({name:'.NET Framework', version:'4.7', licenseCost:0, dependentApps:2});
+  addRow({name:'PostgreSQL', version:'11', licenseCost:0, dependentApps:1});
+  addRow({name:'Oracle Forms', version:'11g', licenseCost:45000, dependentApps:4});
+  if(typeof gtag!=='undefined') gtag('event','tool_example_loaded',{'tool_name':'legacy_risk_xray'});
+});
+
+document.querySelectorAll('.quick-chip').forEach(function(chip){
+  chip.addEventListener('click', function(){
+    let target = firstEmptyNameInput();
+    if (!target) target = addRow();
+    target.querySelector('.f-name input').value = chip.dataset.name;
+    target.querySelector('.f-version input').value = chip.dataset.version;
+  });
+});
+
+// start with 2 empty rows so the form doesn't look intimidatingly blank
+addRow();
+addRow();
+
+// ── SCAN ─────────────────────────────────────────────────────────────────
+function fmtMoney(n){
+  n = Math.max(0, Math.round(n||0));
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(n % 1000000 === 0 ? 0 : 1) + 'M';
+  return '$' + n.toLocaleString('en-US');
+}
+
+function collectItems(){
+  const rows = document.querySelectorAll('.product-row');
+  const items = [];
+  rows.forEach(function(r){
+    const name = r.querySelector('.f-name input').value.trim();
+    if (!name) return;
+    items.push({
+      name,
+      version: r.querySelector('.f-version input').value.trim() || 'latest',
+      licenseCost: parseFloat(r.querySelector('.f-cost input').value) || 0,
+      dependentApps: parseFloat(r.querySelector('.f-apps input').value) || 1,
+    });
+  });
+  return items;
+}
+
+let latestScan = null;
+
+document.getElementById('scanBtn').addEventListener('click', async function(){
+  const items = collectItems();
+  const errEl = document.getElementById('inputError');
+  if (!items.length){
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  if(typeof gtag!=='undefined') gtag('event','tool_scan_started',{'tool_name':'legacy_risk_xray','item_count':items.length});
+
+  document.getElementById('resultsWrap').style.display = 'none';
+  document.getElementById('loadingState').style.display = 'block';
+  this.disabled = true;
+
+  try{
+    const res = await fetch('/api/lifecycle-scan', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({items}),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Scan failed');
+    renderResults(data);
+    latestScan = data;
+    document.getElementById('resultsWrap').scrollIntoView({behavior:'smooth', block:'start'});
+    if(typeof gtag!=='undefined') gtag('event','tool_scan_completed',{'tool_name':'legacy_risk_xray','score':data.composite.score});
+  }catch(e){
+    document.getElementById('loadingState').style.display = 'none';
+    alert('Something went wrong running the scan. Please try again in a moment, or email info@stragentech.com if it persists.');
+  }finally{
+    document.getElementById('loadingState').style.display = 'none';
+    this.disabled = false;
+  }
+});
+
+const BAND_COLOR = {Stable:'#00b87a', Aging:'#d97706', Exposed:'#ea580c', Critical:'#c53030'};
+
+function renderResults(data){
+  document.getElementById('rScore').textContent = data.composite.score;
+  const bandEl = document.getElementById('rBand');
+  bandEl.textContent = data.composite.band;
+  bandEl.className = 'band-pill ' + data.composite.band;
+
+  document.getElementById('costTotal').textContent = fmtMoney(data.cost.total.low) + ' – ' + fmtMoney(data.cost.total.high);
+  document.getElementById('costWasted').textContent = fmtMoney(data.cost.wastedSpend.low) + ' – ' + fmtMoney(data.cost.wastedSpend.high);
+  document.getElementById('costMod').textContent = fmtMoney(data.cost.deferredModernization.low) + ' – ' + fmtMoney(data.cost.deferredModernization.high);
+  document.getElementById('costExp').textContent = fmtMoney(data.cost.riskAdjustedExposure.low) + ' – ' + fmtMoney(data.cost.riskAdjustedExposure.high);
+
+  document.getElementById('itemCards').innerHTML = data.items.map(function(it){
+    const color = BAND_COLOR[it.riskScore>=75?'Critical':it.riskScore>=50?'Exposed':it.riskScore>=25?'Aging':'Stable'];
+    const eolLine = it.source === 'not-found'
+      ? 'Not recognized'
+      : (it.isEol ? `EOL ${it.eolDate || ''} · ${it.yearsPastEol} yr past EOL` : 'Currently supported');
+    const cveLine = it.cve && it.cve.count > 0 ? `${it.cve.count} known CVE(s), highest: ${it.cve.highestSeverity}` : 'No CVEs found via OSV';
+    const notes = (it.notes || []).map(function(n){ return `<div class="item-note">${n}</div>`; }).join('');
+    return `
+      <div class="item-card">
+        <div class="item-head">
+          <div><span class="item-name">${it.name}</span><span class="item-version">${it.version}</span></div>
+          <span class="src-badge ${it.source}">${it.source.replace('-',' ')}</span>
+        </div>
+        <div class="item-meta">
+          <span class="item-meta-field"><strong>${eolLine}</strong></span>
+          <span class="item-meta-field">${cveLine}</span>
+        </div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:${it.riskScore}%;background:${color};"></div></div>
+        <div class="item-score-label"><span>Lifecycle Risk Score</span><span>${it.riskScore}/100</span></div>
+        ${notes}
+      </div>`;
+  }).join('');
+
+  document.getElementById('narrativeBody').textContent = data.narrative;
+}
+
+// ── EMAIL REPORT ─────────────────────────────────────────────────────────
+document.getElementById('emailBtn').addEventListener('click', function(){
+  const name = document.getElementById('leadName').value.trim();
+  const email = document.getElementById('leadEmail').value.trim();
+  const company = document.getElementById('leadCompany').value.trim();
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errEl = document.getElementById('leadError');
+  if(!name || !emailRe.test(email) || !latestScan){
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+  if(typeof gtag!=='undefined') gtag('event','tool_report_emailed',{'tool_name':'legacy_risk_xray'});
+
+  const summary = latestScan.items.map(function(it){ return `${it.name} ${it.version}: risk ${it.riskScore}/100 (${it.source})`; }).join('; ');
+  fetch('https://formspree.io/f/xpqerpje', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      'Source':'Legacy Risk X-ray',
+      'Name':name,
+      'email':email,
+      'Company':company,
+      'Composite Score':latestScan.composite.score + ' (' + latestScan.composite.band + ')',
+      'Cost Range':fmtMoney(latestScan.cost.total.low) + ' - ' + fmtMoney(latestScan.cost.total.high),
+      'Item Summary':summary,
+      'Narrative':latestScan.narrative,
+    })
+  }).catch(function(){ /* non-blocking */ });
+
+  document.getElementById('emailForm').style.display = 'none';
+  document.getElementById('emailSent').classList.add('show');
+});
+
+document.querySelectorAll('.btn, a[href*="contact"]').forEach(function(el){
+  el.addEventListener('click', function(){
+    if(typeof gtag==='undefined') return;
+    gtag('event','cta_click',{
+      'cta_label': el.textContent.trim().replace(/[→↗▸×]/g,'').trim(),
+      'page_location': window.location.pathname
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -5,6 +5,10 @@
     {
       "source": "/api/analyze",
       "destination": "/api/analyze.js"
+    },
+    {
+      "source": "/api/lifecycle-scan",
+      "destination": "/api/lifecycle-scan.js"
     }
   ],
   "redirects": [
