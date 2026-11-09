@@ -329,7 +329,7 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
     <p>Enter your current annual cost of technical debt below (use the <a href="tech-debt-calculator.html" style="color:var(--teal-dark);">Cost Calculator</a> if you don't have this number yet), and see how it compounds over 5 years under each strategy.</p>
     <div class="field-group" style="max-width:360px;margin-top:16px;">
       <label class="field-label">Current annual debt cost ($/yr)</label>
-      <input class="tool-input" id="baseCost" type="number" min="0" step="1000" value="400000" oninput="renderVisualizer()">
+      <input class="tool-input" id="baseCost" type="number" min="0" step="1000" value="400000" oninput="onInterestInput()">
       <div class="field-hint"><a href="#" id="prefillLink" onclick="prefillFromCalc(event)" style="color:var(--teal-dark);text-decoration:none;">← Prefill from the Cost Calculator</a></div>
     </div>
 
@@ -491,6 +491,11 @@ function fmtMoney(n){
   return '$' + n.toLocaleString('en-US');
 }
 
+let tdiTracked=false;
+function onInterestInput(){
+  if(!tdiTracked){ tdiTracked=true; if(typeof gtag!=='undefined') gtag('event','tool_completed',{'tool_name':'tech_debt_interest_visualizer'}); }
+  renderVisualizer();
+}
 function computeScenario(base, rate){
   let cum = 0;
   for(let y=1; y<=5; y++){ cum += base * Math.pow(1+rate, y); }

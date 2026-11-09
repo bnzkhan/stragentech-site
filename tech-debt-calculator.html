@@ -759,19 +759,26 @@ let state = {
   incidentsPerMonth:4, avgResolutionHours:3, downtimeRevenuePerHr:undefined,
 };
 
+let tdcTracked=false;
+function trackFirstRun(){
+  if(!tdcTracked){ tdcTracked=true; if(typeof gtag!=='undefined') gtag('event','tool_completed',{'tool_name':'tech_debt_calculator'}); }
+}
 function onNum(key, val){
   state[key] = val === '' ? undefined : parseFloat(val);
+  trackFirstRun();
   recalc();
 }
 function onRange(key, val, dispId, suffix){
   state[key] = parseFloat(val);
   document.getElementById(dispId).textContent = val + suffix;
+  trackFirstRun();
   recalc();
 }
 function onChoice(key, val, btn){
   state[key] = val;
   btn.parentElement.querySelectorAll('.opt-card').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
+  trackFirstRun();
   recalc();
 }
 

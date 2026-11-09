@@ -627,19 +627,26 @@ let state = {
   incidentsPerYear:6,
 };
 
+let iccTracked=false;
+function trackFirstRun(){
+  if(!iccTracked){ iccTracked=true; if(typeof gtag!=='undefined') gtag('event','tool_completed',{'tool_name':'incident_cost_calculator'}); }
+}
 function onNum(key, val){
   state[key] = val === '' ? undefined : parseFloat(val);
+  trackFirstRun();
   recalc();
 }
 function onRange(key, val, dispId, suffix){
   state[key] = parseFloat(val);
   document.getElementById(dispId).textContent = val + suffix;
+  trackFirstRun();
   recalc();
 }
 function onChoice(key, val, btn){
   state[key] = val;
   btn.parentElement.querySelectorAll('.opt-card').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
+  trackFirstRun();
   recalc();
 }
 
