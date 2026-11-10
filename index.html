@@ -341,7 +341,13 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .field-error.show{display:block;}
 
 /* ── FOOTER ── */
-footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding:28px 32px;}
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding:40px 32px 22px;}
+.footer-cols{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:18px;}
+.footer-col-title{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;padding:4px 0;font-weight:300;}
+.footer-col a:hover{color:var(--teal);}
+@media(max-width:760px){.footer-cols{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-cols{grid-template-columns:1fr;}}
 .footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
 .footer-copy{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.3);}
 .footer-links{display:flex;gap:20px;}
@@ -953,6 +959,29 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 
 <!-- FOOTER -->
 <footer>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <div class="footer-col-title">Tech Debt Suite</div>
+      <a href="tech-debt-calculator.html">Cost Calculator</a>
+      <a href="tech-debt-assessment.html">Assessment Scorecard</a>
+      <a href="tech-debt-velocity.html">Velocity Impact</a>
+      <a href="tech-debt-roi.html">Refactoring ROI</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Incident Cost Suite</div>
+      <a href="incident-cost.html">Overview</a>
+      <a href="incident-cost-calculator.html">Incident Cost Calculator</a>
+      <a href="incident-cost-index.html">Cost Index</a>
+      <a href="incident-cost-glossary.html">Glossary</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">More Tools &amp; Insights</div>
+      <a href="oi-scorecard.html">OI Readiness Scorecard</a>
+      <a href="legacy-risk-xray.html">Legacy Risk X-ray</a>
+      <a href="fractional-cto-cost-calculator.html">Fractional CTO Cost Calculator</a>
+      <a href="tools.html">All Free Tools →</a>
+    </div>
+  </div>
   <div class="footer-inner">
     <div class="footer-copy">© 2026 Stragentech LLC · Agentic Technology Partners · Seattle, WA</div>
     <div class="footer-links">

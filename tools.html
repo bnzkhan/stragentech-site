@@ -180,7 +180,13 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);-webkit-backdro
 .cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
 
 /* ── FOOTER ── */
-footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
+footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
+.footer-cols{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:26px;border-bottom:1px solid var(--gray-100);margin-bottom:18px;}
+.footer-col-title{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.footer-col a{display:block;font-size:13px;color:var(--gray-600);text-decoration:none;padding:4px 0;font-weight:300;}
+.footer-col a:hover{color:var(--teal);}
+@media(max-width:760px){.footer-cols{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-cols{grid-template-columns:1fr;}}
 .footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
 .footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
 .footer-links{display:flex;gap:16px;}
@@ -456,6 +462,29 @@ footer{border-top:1px solid var(--gray-100);padding:20px 32px;}
 </div><!-- /tools-body -->
 
 <footer>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <div class="footer-col-title">Tech Debt Suite</div>
+      <a href="tech-debt-calculator.html">Cost Calculator</a>
+      <a href="tech-debt-assessment.html">Assessment Scorecard</a>
+      <a href="tech-debt-velocity.html">Velocity Impact</a>
+      <a href="tech-debt-roi.html">Refactoring ROI</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Incident Cost Suite</div>
+      <a href="incident-cost.html">Overview</a>
+      <a href="incident-cost-calculator.html">Incident Cost Calculator</a>
+      <a href="incident-cost-index.html">Cost Index</a>
+      <a href="incident-cost-glossary.html">Glossary</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">More Tools &amp; Insights</div>
+      <a href="oi-scorecard.html">OI Readiness Scorecard</a>
+      <a href="legacy-risk-xray.html">Legacy Risk X-ray</a>
+      <a href="fractional-cto-cost-calculator.html">Fractional CTO Cost Calculator</a>
+      <a href="index.html#insights">Insights</a>
+    </div>
+  </div>
   <div class="footer-inner">
     <span class="footer-copy">Built by Bilal A. Khan · stragentech.com · tools.stragentech.com</span>
     <div class="footer-links">
