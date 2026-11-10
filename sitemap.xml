@@ -2,67 +2,147 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.stragentech.com/</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.stragentech.com/tools.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
+
+  <!-- Tech Debt Assessment Suite -->
   <url>
     <loc>https://www.stragentech.com/tech-debt-calculator.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.stragentech.com/tech-debt-assessment.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.stragentech.com/tech-debt-velocity.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.stragentech.com/tech-debt-roi.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.stragentech.com/tech-debt-metrics.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.stragentech.com/tech-debt-benchmarks.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.stragentech.com/tech-debt-business-case.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.stragentech.com/tech-debt-interest.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.stragentech.com/tech-debt-types.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.stragentech.com/tech-debt-payoff.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/tech-debt-whitepaper.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Operational Incident & Outage Cost Suite -->
+  <url>
+    <loc>https://www.stragentech.com/incident-cost.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/incident-cost-calculator.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/incident-cost-index.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/incident-cost-types.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/incident-cost-glossary.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Standalone Tools -->
+  <url>
+    <loc>https://www.stragentech.com/oi-scorecard.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/legacy-risk-xray.html</loc>
+    <lastmod>2026-11-10</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.stragentech.com/fractional-cto-cost-calculator.html</loc>
     <lastmod>2026-11-10</lastmod>
     <priority>0.7</priority>
+  </url>
+
+  <!-- Insights / Operational Intelligence -->
+  <url>
+    <loc>https://www.stragentech.com/agentic-edge-iiot.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/agentic-aiot-playbook.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/iot-alert-fatigue-deck.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/earned-autonomy-whitepaper.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- AI Strategy & Readiness -->
+  <url>
+    <loc>https://www.stragentech.com/whitepaper-ai-readiness.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.stragentech.com/ai_strategy_mit_carousel.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.5</priority>
   </url>
 </urlset>
