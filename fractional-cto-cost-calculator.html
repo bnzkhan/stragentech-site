@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4954SHKF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JY4954SHKF');
+</script>
+<script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fractional CTO Cost Calculator — Stragentech</title>
+<link rel="canonical" href="https://www.stragentech.com/fractional-cto-cost-calculator.html">
+<meta name="description" content="Free calculator comparing the modeled 12-month cost of a full-time CTO vs. a fractional CTO vs. a senior contractor — built on US compensation and fractional-market rate benchmarks.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f0f2f5;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#4b5563;
+  --gray-600:#1f2937;
+  --gray-800:#1e2333;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --amber:#b3691a;
+  --amber-pale:#fbf1e4;
+  --red:#c53030;
+  --red-pale:#fbe8e8;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
+
+/* ── NAV ── */
+nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:200;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-brand-img{height:44px;width:auto;display:block;}
+.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);white-space:nowrap;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
+.nav-links a:hover{color:var(--teal);background:var(--teal-pale);}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:7px 14px!important;border-radius:5px;font-weight:600;}
+
+.stats-banner{background:#0d1117;padding:10px 32px;overflow-x:auto;}
+.stats-banner::-webkit-scrollbar{display:none;}
+.stats-banner-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:28px;white-space:nowrap;}
+.stats-banner-item{font-family:var(--font-mono);font-size:11.5px;color:rgba(255,255,255,0.6);}
+.stats-banner-item strong{color:var(--teal-mid);font-weight:600;}
+[data-theme="dark"] .stats-banner{background:#1c2128;}
+
+/* ── SHARED GUIDE / CONTENT COMPONENTS ── */
+.guide-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
+.guide-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+.guide-card h2{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:10px;}
+.guide-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.guide-card p{font-size:14px;color:var(--gray-600);line-height:1.7;font-weight:300;}
+.guide-card p+p{margin-top:10px;}
+.guide-card ul{padding-left:20px;margin-top:8px;}
+.guide-card li{font-size:13.5px;color:var(--gray-600);line-height:1.75;font-weight:300;margin-bottom:4px;}
+
+.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+
+.field-group{margin-bottom:16px;}
+.field-label{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);letter-spacing:0.5px;margin-bottom:6px;display:block;}
+.field-hint{font-size:12px;color:var(--gray-400);font-weight:300;margin-top:6px;line-height:1.5;}
+.tool-input{width:100%;background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;padding:10px 12px;font-size:13px;color:var(--ink);font-family:var(--font-body);outline:none;transition:border-color .2s;}
+.tool-input:focus{border-color:var(--teal);}
+.tool-input::placeholder{color:var(--gray-400);}
+[data-theme="dark"] .tool-input{background:#161b22;}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:700px){.input-row{grid-template-columns:1fr;}}
+
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
+.btn-run{background:var(--ink);color:var(--white);font-weight:500;}
+.btn-run:hover{background:var(--teal-dark);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
+.btn-teal:hover{background:var(--teal-dark);}
+.btn:disabled{opacity:0.5;cursor:not-allowed;}
+
+[data-theme="dark"] .stat-tile,[data-theme="dark"] .guide-card{background:#21262d;}
+
+/* ── HERO ── */
+.calc-hero{padding:36px 32px 24px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
+.calc-hero-inner{max-width:var(--max-w);margin:0 auto;}
+.calc-hero h1{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:400;letter-spacing:-0.3px;margin-bottom:8px;color:var(--ink);line-height:1.1;}
+.calc-hero h1 em{font-style:italic;color:var(--teal);}
+.calc-hero p{font-size:15px;color:var(--gray-400);max-width:680px;line-height:1.65;font-weight:300;margin-bottom:14px;}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;}
+.hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
+.hero-meta-item::before{content:'▸';color:var(--teal);}
+
+/* ── INPUT PANEL ── */
+.input-panel{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+[data-theme="dark"] .input-panel{background:#21262d;}
+.preset-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.preset-btn{font-family:var(--font-mono);font-size:12px;padding:9px 16px;border:1px solid var(--gray-200);border-radius:20px;background:var(--white);color:var(--gray-600);cursor:pointer;transition:all .18s;}
+.preset-btn:hover,.preset-btn.selected{border-color:var(--teal);color:var(--teal-dark);background:var(--teal-pale);}
+[data-theme="dark"] .preset-btn{background:#161b22;}
+.subgroup-tag{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1.5px;text-transform:uppercase;margin:22px 0 12px;padding-top:18px;border-top:1px solid var(--gray-100);}
+.subgroup-tag:first-of-type{margin-top:0;padding-top:0;border-top:none;}
+.subgroup-tag strong{color:var(--teal-dark);}
+
+/* ── RESULTS ── */
+.headline-card{background:#0d1117;border-radius:10px;padding:30px 28px;text-align:center;margin-bottom:20px;}
+[data-theme="dark"] .headline-card{background:#1c2128;}
+.headline-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.75);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.headline-num{font-family:var(--font-serif);font-size:clamp(36px,6vw,58px);color:#ffffff;font-weight:400;line-height:1;margin-bottom:8px;}
+.headline-sub{font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:4px;}
+.headline-note{font-size:12.5px;color:rgba(255,255,255,0.4);font-weight:300;max-width:460px;margin:14px auto 0;line-height:1.6;}
+
+.breakdown{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+[data-theme="dark"] .breakdown{background:#21262d;}
+.cat-row{margin-bottom:16px;}
+.cat-row:last-child{margin-bottom:0;}
+.cat-row-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;flex-wrap:wrap;gap:6px;}
+.cat-name{font-size:13px;font-weight:600;color:var(--ink);}
+.cat-sub{font-size:11.5px;color:var(--gray-400);font-weight:300;margin-left:6px;}
+.cat-val{font-family:var(--font-mono);font-size:14px;color:var(--ink);font-weight:600;}
+.cat-bar-track{height:10px;background:var(--gray-50);border-radius:5px;overflow:hidden;}
+.cat-bar-fill{height:100%;border-radius:5px;transition:width .4s;}
+
+.xtable{width:100%;border-collapse:collapse;font-size:13px;}
+.xtable th{font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;color:var(--gray-400);text-align:left;padding:9px 12px;border-bottom:1px solid var(--gray-100);}
+.xtable td{padding:11px 12px;border-bottom:1px solid var(--gray-100);vertical-align:top;font-size:13px;color:var(--gray-600);}
+.xtable tr:last-child td{border-bottom:none;}
+.xtable td:first-child,.xtable th:first-child{padding-left:0;font-weight:500;color:var(--ink);}
+.table-scroll{overflow-x:auto;}
+
+.email-card{background:var(--white);border:1px dashed var(--gray-200);border-radius:10px;padding:20px 22px;margin-bottom:20px;}
+[data-theme="dark"] .email-card{background:#21262d;}
+.email-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.email-card p{font-size:12.5px;color:var(--gray-400);font-weight:300;margin-bottom:12px;line-height:1.6;}
+.email-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px;}
+@media(max-width:700px){.email-row{grid-template-columns:1fr;}}
+.email-sent{font-size:12.5px;color:var(--teal-dark);font-weight:600;display:none;}
+.email-sent.show{display:block;}
+
+.disclaimer-box{background:var(--amber-pale);border:1px solid #ecd6b0;border-radius:10px;padding:20px 24px;margin-bottom:20px;}
+.disclaimer-box .d-tag{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.disclaimer-box p{font-size:12.5px;color:#6b4a1f;line-height:1.7;font-weight:400;margin-bottom:8px;}
+.disclaimer-box p:last-child{margin-bottom:0;}
+[data-theme="dark"] .disclaimer-box{background:#1c1a10;border-color:#3d3010;}
+[data-theme="dark"] .disclaimer-box p{color:#c9a84c;}
+
+.faq-item{border-bottom:1px solid var(--gray-100);padding:14px 0;}
+.faq-item:last-child{border-bottom:none;padding-bottom:0;}
+.faq-item summary{font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:'+';font-family:var(--font-mono);color:var(--teal);font-size:16px;flex-shrink:0;}
+.faq-item[open] summary::after{content:'−';}
+.faq-item p{font-size:13px;color:var(--gray-600);line-height:1.7;font-weight:300;margin-top:10px;}
+
+.cta-bar{background:#0d1117;border-radius:10px;padding:36px;text-align:center;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
+.cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.cta-bar h3{font-family:var(--font-serif);font-size:24px;color:var(--white);font-weight:400;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar h3{color:var(--ink);}
+.cta-bar p{font-size:13.5px;color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto 22px;font-weight:300;}
+[data-theme="dark"] .cta-bar p{color:var(--gray-400);}
+.cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
+.footer-fineprint{max-width:var(--max-w);margin:0 auto 16px;font-size:11.5px;color:var(--gray-400);line-height:1.7;font-weight:300;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
+.footer-links a:hover{color:var(--teal);}
+[data-theme="dark"] footer{background:#0a0e14;}
+
+@media(max-width:480px){.nav-brand-sub{display:none;}}
+
+/* ── DARK MODE ── */
+.theme-toggle{background:none;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;padding:6px 8px;color:var(--gray-600);display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s;flex-shrink:0;margin-left:4px;}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal);}
+.theme-toggle .icon-sun{display:none;}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+[data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);}
+[data-theme="dark"] nav{background:rgba(13,17,23,0.95)!important;}
+[data-theme="dark"] .nav-links a:hover{background:rgba(255,255,255,0.06);}
+[data-theme="dark"] .nav-cta{background:var(--teal)!important;color:#0d1117!important;}
+[data-theme="dark"] .btn-run{background:var(--teal);color:#0d1117;}
+[data-theme="dark"] .btn-run:hover{background:var(--teal-dark);}
+[data-theme="dark"] .btn-outline{border-color:var(--gray-200);color:var(--gray-600);}
+[data-theme="dark"] .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://www.stragentech.com" class="nav-brand">
+      <img src="assets/logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
+      <span class="nav-brand-sub">/ fractional cto cost calculator</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="tools.html">← Tools</a></li>
+      <li><a href="https://calendar.app.google/gSTNDgChThJVdzh8A" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="stats-banner">
+  <div class="stats-banner-inner">
+    <span class="stats-banner-item">Free — <strong>no signup required</strong></span>
+    <span class="stats-banner-item">Modeled on <strong>US compensation &amp; fractional-market rate data</strong></span>
+    <span class="stats-banner-item">Results in <strong>under a minute</strong></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <h1>Fractional CTO <em>Cost Calculator</em></h1>
+    <p>What would it actually cost to get senior technology leadership — a full-time hire, a fractional CTO, or a senior contractor? Model all three side by side on your own numbers, in US dollars, before you commit to a path.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">12-month modeled comparison</span>
+      <span class="hero-meta-item">US salary &amp; market-rate benchmarks</span>
+      <span class="hero-meta-item">Free, no signup</span>
+    </div>
+  </div>
+</div>
+
+<div class="guide-body">
+
+  <!-- INPUTS -->
+  <div class="input-panel" id="wizard">
+    <div class="section-tag">// your assumptions</div>
+
+    <div class="field-group">
+      <label class="field-label">Company Stage (sets starter defaults below)</label>
+      <div class="preset-row" id="presetRow">
+        <button type="button" class="preset-btn" data-stage="seed" onclick="applyStage('seed', this)">Seed</button>
+        <button type="button" class="preset-btn selected" data-stage="seriesA" onclick="applyStage('seriesA', this)">Series A</button>
+        <button type="button" class="preset-btn" data-stage="seriesB" onclick="applyStage('seriesB', this)">Series B</button>
+        <button type="button" class="preset-btn" data-stage="growth" onclick="applyStage('growth', this)">Growth / Late-Stage</button>
+      </div>
+      <div class="field-hint">Every field below is editable — the stage buttons just set a reasonable US starting point.</div>
+    </div>
+
+    <div class="subgroup-tag"><strong>Option A</strong> — Full-Time CTO Hire</div>
+    <div class="input-row">
+      <div class="field-group">
+        <label class="field-label">Annual base salary ($)</label>
+        <input class="tool-input" type="number" min="0" step="1000" id="ftSalary" value="200000">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Benefits &amp; employer overhead (%)</label>
+        <input class="tool-input" type="number" min="0" max="100" id="ftOverhead" value="42">
+        <div class="field-hint">US average loaded-cost add-on (payroll tax, healthcare, 401k, etc.) — base salary alone understates the real cost.</div>
+      </div>
+    </div>
+    <div class="input-row">
+      <div class="field-group">
+        <label class="field-label">Recruiting / search cost ($)</label>
+        <input class="tool-input" type="number" min="0" step="1000" id="ftRecruiting" value="36000">
+        <div class="field-hint">Average executive cost-per-hire (search fees, interview time, relocation).</div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Months to fill the role</label>
+        <input class="tool-input" type="number" min="0" max="24" id="ftMonthsToFill" value="5">
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Cost of delay while the seat is empty ($/month)</label>
+      <input class="tool-input" type="number" min="0" step="1000" id="ftDelayCost" value="15000">
+      <div class="field-hint">What a stalled roadmap, delayed launch, or missed fundraising milestone costs you per month with no technical leader in the room. Set to 0 to exclude.</div>
+    </div>
+
+    <div class="subgroup-tag"><strong>Option B</strong> — Fractional CTO</div>
+    <div class="field-group">
+      <label class="field-label">Monthly retainer ($)</label>
+      <input class="tool-input" type="number" min="0" step="500" id="fracRetainer" value="12000">
+      <div class="field-hint">US fractional CTO retainers typically run $8,000–$25,000/month depending on scope and days/week — adjust to the engagement you're evaluating.</div>
+    </div>
+
+    <div class="subgroup-tag"><strong>Option C</strong> — Senior Independent Contractor</div>
+    <div class="input-row">
+      <div class="field-group">
+        <label class="field-label">Hourly rate ($)</label>
+        <input class="tool-input" type="number" min="0" id="contractorRate" value="200">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Hours per week</label>
+        <input class="tool-input" type="number" min="0" max="60" id="contractorHours" value="20">
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-top:4px;">
+      <button class="btn btn-run" onclick="calculateComparison()">▸ Calculate the Comparison</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results" style="display:none;">
+
+    <div class="headline-card">
+      <div class="headline-tag">// Modeled 12-month savings vs. a full-time hire</div>
+      <div class="headline-num" id="rHeadline">$0</div>
+      <div class="headline-sub" id="rSub">0% lower first-year cost</div>
+      <div class="headline-note">A lower number isn't automatically the right call — see "What this comparison doesn't measure" below before you decide.</div>
+    </div>
+
+    <div class="breakdown">
+      <div class="section-tag">// 12-month modeled cost, all three options</div>
+      <div id="catRows"></div>
+    </div>
+
+    <div class="guide-card">
+      <div class="section-tag">// how the full-time number breaks down</div>
+      <div class="table-scroll">
+        <table class="xtable"><tbody id="ftBreakdownRows"></tbody></table>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <h2>What This Comparison Doesn't Measure</h2>
+      <p>The dollar figures above are directly comparable. What they're buying is not. Before you decide on cost alone, weigh these dimensions too:</p>
+      <div class="table-scroll">
+        <table class="xtable">
+          <thead><tr><th></th><th>Full-Time CTO</th><th>Fractional CTO</th><th>Contractor</th></tr></thead>
+          <tbody>
+            <tr><td>Availability</td><td>Full-time, always on</td><td>Scheduled days/week, usually reachable between</td><td>Scoped hours only</td></tr>
+            <tr><td>Accountability for outcomes</td><td>Full ownership</td><td>Full ownership, contractually scoped</td><td>Task/project-level, not org-level</td></tr>
+            <tr><td>Org &amp; team leadership</td><td>Native to the role</td><td>Yes, by design</td><td>Rarely in scope</td></tr>
+            <tr><td>Ramp time to productive</td><td>60–90+ days</td><td>Days to weeks</td><td>Days to weeks</td></tr>
+            <tr><td>Continuity risk</td><td>Single point of failure</td><td>Often backed by a bench/network</td><td>Single point of failure</td></tr>
+            <tr><td>Best fit</td><td>Post–Series B/C, sustained technical org</td><td>Pre-seed through growth, or alongside a full-time hire during a gap</td><td>Narrow, well-defined project work</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <h4>Want this comparison emailed to you?</h4>
+      <p>Useful for sharing with a co-founder, board member, or finance lead.</p>
+      <div id="emailForm">
+        <div class="email-row">
+          <input class="tool-input" id="leadName" type="text" placeholder="Your name">
+          <input class="tool-input" id="leadEmail" type="email" placeholder="Work email">
+          <input class="tool-input" id="leadCompany" type="text" placeholder="Company (optional)">
+        </div>
+        <div class="field-hint" id="leadError" style="color:var(--red);display:none;">Please enter your name and a valid work email.</div>
+        <button class="btn btn-run" style="width:100%;justify-content:center;margin-top:4px;" id="emailBtn">▸ Email Me This Comparison</button>
+      </div>
+      <div class="email-sent" id="emailSent">✓ Sent — check your inbox shortly.</div>
+    </div>
+
+    <div class="disclaimer-box">
+      <div class="d-tag">⚠ Important disclaimer</div>
+      <p><strong>These are planning estimates, not financial, hiring, or legal advice.</strong> Salary, overhead, recruiting, and rate figures are illustrative US-market benchmarks, not a survey of your specific industry, geography, or candidate pool. The full-time model counts a full year of loaded salary plus a one-time delay cost, which can overstate true calendar-year-one spend if the hire starts partway through the year.</p>
+      <p>Use this to sanity-check the order of magnitude, then validate against your own compensation data and the actual engagement scope you're considering.</p>
+    </div>
+
+  </div>
+
+  <!-- METHODOLOGY (always visible) -->
+  <div class="guide-card">
+    <h2>How We Calculate This</h2>
+    <p>Three independent 12-month totals, each built from the inputs above:</p>
+    <ul>
+      <li><strong>Full-Time CTO</strong> = (base salary × (1 + benefits/overhead %)) + recruiting cost + (cost of delay × months to fill).</li>
+      <li><strong>Fractional CTO</strong> = monthly retainer × 12.</li>
+      <li><strong>Senior Contractor</strong> = hourly rate × hours/week × 48 working weeks/year.</li>
+    </ul>
+    <p>Default benchmarks are directional, drawn from publicly reported US figures: executive base salaries scale roughly $165K–$270K+ from seed to growth stage (compensation surveys such as Built In and Kruze Consulting); benefits/payroll overhead runs ~40–45% of base in the US (Bureau of Labor Statistics); average executive cost-per-hire is reported around $36,000 (SHRM); and fractional CTO retainers in the US market typically fall between $8,000 and $25,000/month depending on scope and days/week (fractional-marketplace rate data, e.g. Fractionus, Go Fractional, A.Team). Every one of these is a benchmark, not a quote — adjust freely.</p>
+  </div>
+
+  <!-- FAQ -->
+  <div class="guide-card">
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq-item" open>
+      <summary>What's the real difference between a fractional CTO and a contractor?</summary>
+      <p>A contractor is typically scoped to a project or a deliverable. A fractional CTO holds the role itself — technical strategy, architecture decisions, team leadership, vendor and hiring calls, and accountability for outcomes — just on a part-time cadence instead of full-time. That's why the "what this doesn't measure" table above treats them very differently even when the dollar figures land close together.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How many days a week does a fractional CTO typically work?</summary>
+      <p>Most US engagements run 1–3 days per week, sometimes expressed as a set number of hours or a fixed monthly retainer instead. Early-stage companies often start lighter (1 day/week) and increase cadence around fundraising, a major technical decision, or a team build-out.</p>
+    </details>
+    <details class="faq-item">
+      <summary>When does it make sense to hire full-time instead?</summary>
+      <p>Generally once the engineering org reaches a size and complexity where day-to-day presence, team management, and always-on accountability matter more than the cost savings — commonly somewhere around Series B/C, or earlier if technology is the core product. Many companies also use a fractional CTO as a bridge while running a full-time search, which is exactly the "cost of delay" scenario this calculator is built to model.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Are these numbers specific to my company?</summary>
+      <p>No — they're US-market benchmarks meant to get you in the right order of magnitude quickly. Your actual compensation band depends on your location, industry, funding stage, and the specific candidate pool. Swap in your own numbers wherever you have them.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Do you store what I enter?</summary>
+      <p>No. Everything runs in your browser — nothing is sent anywhere unless you explicitly ask to have the comparison emailed to you.</p>
+    </details>
+  </div>
+
+  <div class="cta-bar">
+    <div class="cta-bar-tag">// Considering a fractional CTO?</div>
+    <h3>See what a fractional engagement with Stragentech would actually look like.</h3>
+    <p>Skip the generic benchmark — get a real scoping conversation about your team, your roadmap, and what cadence actually fits.</p>
+    <div class="cta-bar-actions">
+      <a href="index.html#contact" class="btn btn-teal">▸ Book a Free Discovery Call</a>
+      <a href="tools.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Explore More Free Tools</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p class="footer-fineprint">Stragentech.com is an independent resource. Default benchmarks reference publicly reported US compensation and fractional-market rate data (BLS, SHRM, and compensation/marketplace surveys including Built In, Kruze Consulting, Fractionus, Go Fractional, and A.Team) and are illustrative, not a guarantee of your actual cost. Not affiliated with any company named above.</p>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Stragentech.com. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="tools.html">Tools</a>
+      <a href="index.html">Main Site</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('themeToggle').addEventListener('click',function(){
+  var html=document.documentElement;
+  var isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  localStorage.setItem('stragentech-theme',isDark?'light':'dark');
+});
+
+// ── FRACTIONAL CTO COST CALCULATOR ───────────────────────────────────────
+const STAGE_PRESETS = {
+  seed:    {ftSalary:165000, fracRetainer:8000,  contractorRate:175},
+  seriesA: {ftSalary:200000, fracRetainer:12000, contractorRate:200},
+  seriesB: {ftSalary:235000, fracRetainer:16000, contractorRate:225},
+  growth:  {ftSalary:270000, fracRetainer:20000, contractorRate:250},
+};
+const WORK_WEEKS_PER_YEAR = 48;
+
+function applyStage(key, btnEl){
+  const p = STAGE_PRESETS[key];
+  document.getElementById('ftSalary').value = p.ftSalary;
+  document.getElementById('fracRetainer').value = p.fracRetainer;
+  document.getElementById('contractorRate').value = p.contractorRate;
+  document.querySelectorAll('#presetRow .preset-btn').forEach(b=>b.classList.remove('selected'));
+  if(btnEl) btnEl.classList.add('selected');
+}
+
+function fmtMoney(n){
+  n = Math.round(n);
+  const sign = n<0 ? '-' : '';
+  return sign + '$' + Math.abs(n).toLocaleString('en-US');
+}
+
+let results = null;
+
+function calculateComparison(){
+  const ftSalary = parseFloat(document.getElementById('ftSalary').value) || 0;
+  const ftOverheadPct = (parseFloat(document.getElementById('ftOverhead').value) || 0) / 100;
+  const ftRecruiting = parseFloat(document.getElementById('ftRecruiting').value) || 0;
+  const ftMonthsToFill = parseFloat(document.getElementById('ftMonthsToFill').value) || 0;
+  const ftDelayCost = parseFloat(document.getElementById('ftDelayCost').value) || 0;
+  const fracRetainer = parseFloat(document.getElementById('fracRetainer').value) || 0;
+  const contractorRate = parseFloat(document.getElementById('contractorRate').value) || 0;
+  const contractorHours = parseFloat(document.getElementById('contractorHours').value) || 0;
+
+  const ftSalaryLoaded = ftSalary * (1 + ftOverheadPct);
+  const ftDelayTotal = ftDelayCost * ftMonthsToFill;
+  const ftTotal = ftSalaryLoaded + ftRecruiting + ftDelayTotal;
+
+  const fracTotal = fracRetainer * 12;
+  const contractorTotal = contractorRate * contractorHours * WORK_WEEKS_PER_YEAR;
+
+  const savingsVsFrac = ftTotal - fracTotal;
+  const savingsPctVsFrac = ftTotal > 0 ? (savingsVsFrac / ftTotal * 100) : 0;
+
+  results = {
+    ftSalaryLoaded, ftRecruiting, ftDelayTotal, ftTotal,
+    fracTotal, contractorTotal, savingsVsFrac, savingsPctVsFrac,
+  };
+
+  renderResults();
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+  if(typeof gtag!=='undefined') gtag('event','tool_completed',{'tool_name':'fractional_cto_cost_calculator','savings_pct':Math.round(savingsPctVsFrac)});
+}
+
+function renderResults(){
+  const r = results;
+  const isSavings = r.savingsVsFrac >= 0;
+  document.getElementById('rHeadline').textContent = fmtMoney(Math.abs(r.savingsVsFrac));
+  document.getElementById('rSub').textContent = isSavings
+    ? `${r.savingsPctVsFrac.toFixed(0)}% lower modeled first-year cost than a full-time hire`
+    : `Fractional retainer runs ${Math.abs(r.savingsPctVsFrac).toFixed(0)}% higher than modeled full-time cost — check your inputs`;
+
+  const maxVal = Math.max(r.ftTotal, r.fracTotal, r.contractorTotal, 1);
+  const rows = [
+    {name:'Full-Time CTO', sub:'salary + overhead + recruiting + delay', val:r.ftTotal, color:'linear-gradient(90deg,#c53030,#e07070)'},
+    {name:'Fractional CTO', sub:'monthly retainer × 12', val:r.fracTotal, color:'linear-gradient(90deg,var(--teal),var(--teal-dark))'},
+    {name:'Senior Contractor', sub:'hourly rate × hrs/wk × 48 weeks', val:r.contractorTotal, color:'linear-gradient(90deg,var(--blue),#5b94e0)'},
+  ];
+  document.getElementById('catRows').innerHTML = rows.map(c => `
+    <div class="cat-row">
+      <div class="cat-row-head"><span><span class="cat-name">${c.name}</span><span class="cat-sub">${c.sub}</span></span><span class="cat-val">${fmtMoney(c.val)}/yr</span></div>
+      <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${Math.max(2,(c.val/maxVal*100))}%;background:${c.color};"></div></div>
+    </div>`).join('');
+
+  document.getElementById('ftBreakdownRows').innerHTML = `
+    <tr><td>Loaded salary (base + benefits/overhead)</td><td style="font-family:var(--font-mono);">${fmtMoney(r.ftSalaryLoaded)}</td></tr>
+    <tr><td>Recruiting / search cost</td><td style="font-family:var(--font-mono);">${fmtMoney(r.ftRecruiting)}</td></tr>
+    <tr><td>Cost of delay while seat is empty</td><td style="font-family:var(--font-mono);">${fmtMoney(r.ftDelayTotal)}</td></tr>
+    <tr><td style="font-weight:600;">Total modeled 12-month cost</td><td style="font-family:var(--font-mono);font-weight:600;">${fmtMoney(r.ftTotal)}</td></tr>
+  `;
+}
+
+// ── EMAIL REPORT ─────────────────────────────────────────────────────────
+document.getElementById('emailBtn').addEventListener('click', function(){
+  const name = document.getElementById('leadName').value.trim();
+  const email = document.getElementById('leadEmail').value.trim();
+  const company = document.getElementById('leadCompany').value.trim();
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errEl = document.getElementById('leadError');
+  if(!name || !emailRe.test(email) || !results){
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+  if(typeof gtag!=='undefined') gtag('event','tool_report_emailed',{'tool_name':'fractional_cto_cost_calculator'});
+
+  fetch('https://formspree.io/f/xpqerpje', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      'Source':'Fractional CTO Cost Calculator',
+      'Name':name,
+      'email':email,
+      'Company':company,
+      'Full-Time CTO (12mo)':fmtMoney(results.ftTotal),
+      'Fractional CTO (12mo)':fmtMoney(results.fracTotal),
+      'Senior Contractor (12mo)':fmtMoney(results.contractorTotal),
+      'Modeled Savings vs Full-Time':fmtMoney(results.savingsVsFrac),
+    })
+  }).catch(function(){ /* non-blocking */ });
+
+  document.getElementById('emailForm').style.display = 'none';
+  document.getElementById('emailSent').classList.add('show');
+});
+
+document.querySelectorAll('.btn, a[href*="contact"]').forEach(function(el){
+  el.addEventListener('click', function(){
+    if(typeof gtag==='undefined') return;
+    gtag('event','cta_click',{
+      'cta_label': el.textContent.trim().replace(/[→↗▸×]/g,'').trim(),
+      'page_location': window.location.pathname
+    });
+  });
+});
+</script>
+</body>
+</html>
