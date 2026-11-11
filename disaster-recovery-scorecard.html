@@ -18,6 +18,8 @@
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.23/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.23/vfs_fonts.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
@@ -141,11 +143,34 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdro
 [data-theme="dark"] .sc-actions{background:#161b22;}
 .sc-actions-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
 
-.tool-output{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:24px;min-height:120px;font-size:13.5px;line-height:1.85;color:var(--gray-600);font-family:var(--font-body);white-space:pre-wrap;margin-top:20px;display:none;}
+.tool-output{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:24px;min-height:120px;font-size:13.5px;line-height:1.85;color:var(--gray-600);font-family:var(--font-body);margin-top:20px;display:none;}
 [data-theme="dark"] .tool-output{background:#161b22;}
 .tool-output.visible{display:block;}
-.tool-output.loading{color:var(--teal);}
+.tool-output.loading{color:var(--teal);white-space:pre-wrap;}
 .output-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+
+/* ── AI REPORT HEADLINE + FORMATTED BODY ── */
+.dr-headline-card{background:#0d1117;border-radius:10px;padding:26px;text-align:center;margin-bottom:18px;display:none;}
+.dr-headline-card.visible{display:block;}
+[data-theme="dark"] .dr-headline-card{background:#1c2128;}
+.dr-headline-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.75);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.dr-headline-num{font-family:var(--font-serif);font-size:clamp(34px,6vw,52px);color:#ffffff;font-weight:400;line-height:1;margin-bottom:10px;}
+.band-pill{display:inline-block;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:1px;padding:5px 16px;border-radius:20px;text-transform:uppercase;}
+.band-pill.AdHoc{background:rgba(197,48,48,0.22);color:#fca5a5;}
+.band-pill.Developing{background:rgba(217,119,6,0.22);color:#fdba74;}
+.band-pill.Standardized{background:rgba(26,111,212,0.2);color:#93c5fd;}
+.band-pill.Resilient{background:rgba(0,184,122,0.18);color:#5eead4;}
+
+.dr-report h3{font-family:var(--font-serif);font-size:18px;font-weight:400;color:var(--ink);margin:20px 0 8px;}
+.dr-report h3:first-child{margin-top:0;}
+.dr-report p{margin-bottom:10px;}
+.dr-report ul,.dr-report ol{padding-left:20px;margin-bottom:10px;}
+.dr-report li{margin-bottom:6px;}
+.dr-report strong{color:var(--ink);font-weight:600;}
+.dr-report hr{border:none;border-top:1px solid var(--gray-100);margin:16px 0;}
+
+.dr-pdf-actions{display:none;gap:10px;flex-wrap:wrap;margin-top:18px;padding-top:18px;border-top:1px solid var(--gray-100);}
+.dr-pdf-actions.visible{display:flex;}
 
 .email-card{background:var(--white);border:1px dashed var(--gray-200);border-radius:10px;padding:20px 22px;margin-top:20px;display:none;}
 .email-card.visible{display:block;}
@@ -290,9 +315,18 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
     <button class="btn btn-run" onclick="runScorecardAnalysis()">▸ Get My AI-Interpreted Results</button>
   </div>
 
+  <div class="dr-headline-card" id="drHeadline">
+    <div class="dr-headline-tag">// Overall DR/BC Maturity</div>
+    <div class="dr-headline-num" id="drScoreNum">0 / 100</div>
+    <span class="band-pill" id="drLevel">—</span>
+  </div>
+
   <div id="sc-output" class="tool-output">
     <div class="output-label">// Disaster Recovery Readiness Scorecard Results</div>
-    <div id="sc-result"></div>
+    <div class="dr-report" id="sc-result"></div>
+    <div class="dr-pdf-actions" id="drPdfActions">
+      <button class="btn btn-outline" id="downloadPdfBtn" type="button">⬇ Download PDF Report</button>
+    </div>
   </div>
 
   <div class="email-card" id="emailCard">
@@ -466,6 +500,8 @@ function selectAnswer(qi, oi, el){
 }
 
 let lastSummary = '';
+let lastReportScore = null;
+let lastReportLevel = null;
 
 async function runScorecardAnalysis(){
   const dims = {};
@@ -483,40 +519,45 @@ async function runScorecardAnalysis(){
 SCORECARD RESPONSES:
 ${summary}
 
-Provide a structured report in this exact format:
+Respond with exactly two parts, in this exact order, and nothing else — no markdown anywhere (no #, *, —, or code fences), and no commentary outside these two parts.
 
-OVERALL DR/BC MATURITY LEVEL: [Ad Hoc / Developing / Standardized / Resilient] — [score]/100
+PART 1 — a single line with this EXACT format, no other words on the line:
+SCORE:[0-100 integer]|LEVEL:[Ad Hoc OR Developing OR Standardized OR Resilient]
 
-DIMENSION SCORES (each dimension is worth up to 6 points — 2 questions, 0-3 points each):
-• Business Impact & Recovery Objectives: [score]/6 — [one-line summary]
-• Backup & Data Resilience: [score]/6 — [one-line summary]
-• Infrastructure & Redundancy: [score]/6 — [one-line summary]
-• Documentation & Runbooks: [score]/6 — [one-line summary]
-• Testing & Exercises: [score]/6 — [one-line summary]
-• Governance, Communication & Compliance: [score]/6 — [one-line summary]
+PART 2 — starting on the next line, an HTML fragment using ONLY these tags: <h3>, <p>, <ul>, <ol>, <li>, <strong>, <hr>. Structure it exactly as:
 
-KEY STRENGTHS:
-• [strength 1]
-• [strength 2]
-
-HIGHEST-PRIORITY GAPS:
-1. [most critical gap — specific and actionable]
-2. [second gap]
-3. [third gap]
-
-IF A REAL INCIDENT HAPPENED TODAY:
-[2-3 candid, specific sentences predicting what would actually happen based on their exact answers — name the single biggest point of failure]
-
-RECOMMENDED STARTING POINT:
-[Based on their specific responses, the single best first initiative — be specific and actionable, not generic]
-
-ESTIMATED TIME TO MATERIALLY REDUCE RISK:
-[Realistic timeline estimate with what success looks like]`;
+<h3>Dimension Scores</h3>
+<ul>
+<li><strong>Business Impact &amp; Recovery Objectives: [0-6]/6</strong> — one-line summary</li>
+<li><strong>Backup &amp; Data Resilience: [0-6]/6</strong> — one-line summary</li>
+<li><strong>Infrastructure &amp; Redundancy: [0-6]/6</strong> — one-line summary</li>
+<li><strong>Documentation &amp; Runbooks: [0-6]/6</strong> — one-line summary</li>
+<li><strong>Testing &amp; Exercises: [0-6]/6</strong> — one-line summary</li>
+<li><strong>Governance, Communication &amp; Compliance: [0-6]/6</strong> — one-line summary</li>
+</ul>
+<hr>
+<h3>Key Strengths</h3>
+<ul><li>strength 1</li><li>strength 2</li></ul>
+<hr>
+<h3>Highest-Priority Gaps</h3>
+<ol><li>most critical gap — specific and actionable</li><li>second gap</li><li>third gap</li></ol>
+<hr>
+<h3>If a Real Incident Happened Today</h3>
+<p>2-3 candid, specific sentences predicting what would actually happen based on their exact answers — name the single biggest point of failure</p>
+<hr>
+<h3>Recommended Starting Point</h3>
+<p>Based on their specific responses, the single best first initiative — be specific and actionable, not generic</p>
+<hr>
+<h3>Estimated Time to Materially Reduce Risk</h3>
+<p>Realistic timeline estimate with what success looks like</p>`;
 
   const outputEl = document.getElementById('sc-output');
   const resultEl = document.getElementById('sc-result');
+  const headlineEl = document.getElementById('drHeadline');
   outputEl.classList.add('visible', 'loading');
   resultEl.textContent = 'Analyzing your responses...';
+  headlineEl.classList.remove('visible');
+  document.getElementById('drPdfActions').classList.remove('visible');
   if(typeof gtag!=='undefined') gtag('event','tool_scan_started',{'tool_name':'disaster_recovery_scorecard'});
 
   try{
@@ -525,13 +566,14 @@ ESTIMATED TIME TO MATERIALLY REDUCE RISK:
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1300,
+        max_tokens: 2200,
         messages: [{role: 'user', content: prompt}]
       })
     });
     const data = await res.json();
     outputEl.classList.remove('loading');
-    resultEl.textContent = data.content?.map(b => b.text || '').join('') || 'No response received.';
+    const raw = data.content?.map(b => b.text || '').join('') || 'No response received.';
+    renderReport(raw);
     document.getElementById('emailCard').classList.add('visible');
     if(typeof gtag!=='undefined') gtag('event','tool_completed',{'tool_name':'disaster_recovery_scorecard'});
   } catch(e){
@@ -540,10 +582,160 @@ ESTIMATED TIME TO MATERIALLY REDUCE RISK:
   }
 }
 
+function renderReport(raw){
+  const headlineEl = document.getElementById('drHeadline');
+  const resultEl = document.getElementById('sc-result');
+  const m = raw.match(/^\s*SCORE:\s*(\d{1,3})\s*\|\s*LEVEL:\s*([^\n]+)\n([\s\S]*)$/);
+  if(m){
+    lastReportScore = parseInt(m[1], 10);
+    lastReportLevel = m[2].trim();
+    const bodyHtml = m[3].trim();
+    document.getElementById('drScoreNum').textContent = lastReportScore + ' / 100';
+    const levelEl = document.getElementById('drLevel');
+    levelEl.textContent = lastReportLevel;
+    levelEl.className = 'band-pill ' + lastReportLevel.replace(/\s+/g, '');
+    headlineEl.classList.add('visible');
+    resultEl.innerHTML = bodyHtml;
+  } else {
+    lastReportScore = null;
+    lastReportLevel = null;
+    headlineEl.classList.remove('visible');
+    resultEl.textContent = raw;
+  }
+  document.getElementById('drPdfActions').classList.add('visible');
+}
+
 renderScorecard();
 
+// ── PDF GENERATION ───────────────────────────────────────────────────────
+let logoBase64Cache = null;
+async function getLogoBase64(){
+  if(logoBase64Cache) return logoBase64Cache;
+  const res = await fetch('assets/logo-horiz.png');
+  const blob = await res.blob();
+  logoBase64Cache = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+  return logoBase64Cache;
+}
+
+function runsFromNode(el){
+  const runs = [];
+  el.childNodes.forEach(n => {
+    if(n.nodeType === 3){ runs.push({text: n.textContent}); }
+    else if(n.nodeType === 1 && n.tagName === 'STRONG'){ runs.push({text: n.textContent, bold:true}); }
+    else if(n.nodeType === 1){ runs.push({text: n.textContent || ''}); }
+  });
+  return runs.length ? runs : [{text: el.textContent || ''}];
+}
+
+function reportHtmlToPdfContent(containerEl){
+  const content = [];
+  containerEl.childNodes.forEach(el => {
+    if(el.nodeType !== 1) return;
+    const tag = el.tagName.toLowerCase();
+    if(tag === 'h3'){
+      content.push({text: el.textContent, style:'h3', margin:[0,14,0,6]});
+    } else if(tag === 'p'){
+      content.push({text: runsFromNode(el), fontSize:10, color:'#333333', margin:[0,0,0,8], lineHeight:1.35});
+    } else if(tag === 'ul' || tag === 'ol'){
+      const items = Array.from(el.children).map(li => ({text: runsFromNode(li), fontSize:10, color:'#333333', lineHeight:1.3}));
+      content.push(Object.assign(tag === 'ul' ? {ul: items} : {ol: items}, {margin:[0,2,0,8]}));
+    } else if(tag === 'hr'){
+      content.push({canvas:[{type:'line', x1:0, y1:0, x2:495, y2:0, lineWidth:0.5, lineColor:'#dddddd'}], margin:[0,8,0,8]});
+    }
+  });
+  return content;
+}
+
+async function buildPdfDocDefinition(){
+  const logo = await getLogoBase64();
+  const today = new Date().toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+  const bodyContent = reportHtmlToPdfContent(document.getElementById('sc-result'));
+
+  const dims = {};
+  SC_QUESTIONS.forEach((q, i) => {
+    if(!dims[q.dim]) dims[q.dim] = [];
+    dims[q.dim].push({q: q.q, a: q.opts[sc_answers[i] || 0]});
+  });
+  const appendixContent = [{text:'Appendix: Your Answers', style:'h3', margin:[0,0,0,8], pageBreak:'before'}];
+  Object.entries(dims).forEach(([d, qs]) => {
+    appendixContent.push({text:d, bold:true, fontSize:11, color:'#008f5e', margin:[0,10,0,4]});
+    qs.forEach(q => {
+      appendixContent.push({text:[{text:'Q: ', bold:true}, {text:q.q}], fontSize:9, color:'#444444', margin:[0,2,0,1]});
+      appendixContent.push({text:[{text:'A: ', bold:true}, {text:q.a}], fontSize:9, color:'#111111', margin:[0,0,0,6]});
+    });
+  });
+
+  const headlineBlock = lastReportScore !== null ? [{
+    table:{widths:['*'], body:[[{
+      stack:[
+        {text:(lastReportLevel||'').toUpperCase(), fontSize:11, bold:true, color:'#5eead4', alignment:'center'},
+        {text:lastReportScore + ' / 100', fontSize:26, bold:true, color:'#ffffff', alignment:'center', margin:[0,4,0,0]}
+      ],
+      fillColor:'#0d1117', margin:[0,14,0,14]
+    }]]},
+    layout:'noBorders', margin:[0,0,0,18]
+  }] : [];
+
+  return {
+    pageSize:'LETTER',
+    pageMargins:[50,86,50,60],
+    header:{
+      margin:[50,24,50,0],
+      columns:[
+        {image: logo, width:100},
+        {text:'Disaster Recovery Readiness Report', alignment:'right', fontSize:9, color:'#888888', margin:[0,12,0,0]}
+      ]
+    },
+    footer: function(currentPage, pageCount){
+      return {
+        margin:[50,6,50,0],
+        stack:[
+          {canvas:[{type:'line', x1:0, y1:0, x2:495, y2:0, lineWidth:0.5, lineColor:'#dddddd'}]},
+          {columns:[
+            {text:'© 2026 Stragentech.com. All rights reserved. This is a directional self-assessment, not a formal audit.', fontSize:7, color:'#999999', margin:[0,6,0,0], width:'*'},
+            {text: currentPage + ' / ' + pageCount, alignment:'right', fontSize:7, color:'#999999', margin:[0,6,0,0], width:60}
+          ]}
+        ]
+      };
+    },
+    content:[
+      {text:'Disaster Recovery Readiness Report', style:'title', margin:[0,0,0,2]},
+      {text:'Prepared ' + today, fontSize:9, color:'#888888', margin:[0,0,0,16]},
+      ...headlineBlock,
+      ...bodyContent,
+      ...appendixContent,
+    ],
+    styles:{
+      title:{fontSize:20, bold:true, color:'#0d1117'},
+      h3:{fontSize:13, bold:true, color:'#0d1117'},
+    },
+    defaultStyle:{fontSize:10, color:'#333333'}
+  };
+}
+
+document.getElementById('downloadPdfBtn').addEventListener('click', async function(){
+  this.disabled = true;
+  const originalText = this.textContent;
+  this.textContent = 'Building PDF...';
+  try{
+    const docDefinition = await buildPdfDocDefinition();
+    pdfMake.createPdf(docDefinition).download('Stragentech-DR-Readiness-Report.pdf');
+    if(typeof gtag!=='undefined') gtag('event','tool_report_downloaded',{'tool_name':'disaster_recovery_scorecard'});
+  }catch(e){
+    alert('Could not build the PDF. Please try again, or use "Email Me This Report" instead.');
+  }finally{
+    this.disabled = false;
+    this.textContent = originalText;
+  }
+});
+
 // ── EMAIL REPORT ─────────────────────────────────────────────────────────
-document.getElementById('emailBtn').addEventListener('click', function(){
+document.getElementById('emailBtn').addEventListener('click', async function(){
   const name = document.getElementById('leadName').value.trim();
   const email = document.getElementById('leadEmail').value.trim();
   const company = document.getElementById('leadCompany').value.trim();
@@ -556,19 +748,40 @@ document.getElementById('emailBtn').addEventListener('click', function(){
   errEl.style.display = 'none';
   if(typeof gtag!=='undefined') gtag('event','tool_report_emailed',{'tool_name':'disaster_recovery_scorecard'});
 
+  const btn = this;
+  btn.disabled = true;
+  const originalText = btn.textContent;
+  btn.textContent = 'Sending...';
+
+  const formData = new FormData();
+  formData.append('Source', 'Disaster Recovery Readiness Scorecard');
+  formData.append('Name', name);
+  formData.append('email', email);
+  formData.append('Company', company);
+  formData.append('Scorecard Answers', lastSummary);
+  formData.append('AI Report', document.getElementById('sc-result').innerText);
+  if(lastReportScore !== null){
+    formData.append('Overall Score', lastReportScore + '/100 (' + lastReportLevel + ')');
+  }
+
+  try{
+    const docDefinition = await buildPdfDocDefinition();
+    const pdfBlob = await new Promise(resolve => {
+      pdfMake.createPdf(docDefinition).getBlob(resolve);
+    });
+    formData.append('attachment', pdfBlob, 'Stragentech-DR-Readiness-Report.pdf');
+  }catch(e){
+    // PDF attachment is best-effort — the email still sends with the text fields above
+  }
+
   fetch('https://formspree.io/f/xpqerpje', {
     method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({
-      'Source':'Disaster Recovery Readiness Scorecard',
-      'Name':name,
-      'email':email,
-      'Company':company,
-      'Scorecard Answers':lastSummary,
-      'AI Report':document.getElementById('sc-result').textContent,
-    })
+    headers:{'Accept':'application/json'},
+    body: formData,
   }).catch(function(){ /* non-blocking */ });
 
+  btn.disabled = false;
+  btn.textContent = originalText;
   document.getElementById('emailForm').style.display = 'none';
   document.getElementById('emailSent').classList.add('show');
 });
