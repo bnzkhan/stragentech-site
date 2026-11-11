@@ -52,6 +52,9 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdro
 .nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nav-brand-img{height:44px;width:auto;display:block;}
+.nav-brand-img.dark-logo{display:none;}
+[data-theme="dark"] .nav-brand-img.light-logo{display:none;}
+[data-theme="dark"] .nav-brand-img.dark-logo{display:block;}
 .nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);white-space:nowrap;}
 .nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
 .nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
@@ -205,7 +208,8 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
 <nav>
   <div class="nav-inner">
     <a href="https://www.stragentech.com" class="nav-brand">
-      <img src="assets/logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
+      <img src="assets/logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img light-logo">
+      <img src="assets/logo-horiz-lrg-dark.png" alt="Stragentech" class="nav-brand-img dark-logo">
       <span class="nav-brand-sub">/ insights</span>
     </a>
     <ul class="nav-links">
