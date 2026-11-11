@@ -276,6 +276,13 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .cred-list{display:flex;flex-direction:column;gap:10px;}
 .cred-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--gray-600);font-weight:400;}
 .cred-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);margin-top:7px;flex-shrink:0;}
+
+.about-logo-graphic{display:flex;justify-content:center;filter:drop-shadow(0 10px 28px rgba(13,17,23,0.18));}
+.about-logo-svg{width:100%;max-width:220px;height:auto;display:block;}
+.about-logo-wordmark{margin-top:16px;}
+.about-logo-name{font-family:var(--font-body);font-weight:700;font-size:28px;letter-spacing:0.3px;color:var(--ink);}
+.about-logo-name span{color:#4a93c9;}
+.about-logo-tagline{font-family:var(--font-mono);font-size:10.5px;letter-spacing:2.5px;color:var(--gray-400);text-transform:uppercase;margin-top:6px;}
 .onepager-box{background:var(--off-white);border:2px dashed var(--gray-200);border-radius:16px;padding:48px 40px;text-align:center;}
 .onepager-icon{width:64px;height:64px;background:var(--teal-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;}
 .onepager-box h3{font-size:21px;font-weight:600;color:var(--ink);margin-bottom:10px;}
@@ -738,7 +745,106 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
         </div>
       </div>
       <div style="text-align:center;">
-        <img src="assets/Stragentech-logo.jpg" alt="Operational Intelligence Redefined" style="width:100%;max-width:300px;border-radius:12px;display:block;margin:0 auto;box-shadow:0 8px 40px rgba(13,17,23,0.12);"><br><br>
+        <div class="about-logo-graphic" role="img" aria-label="Stragentech — Agentic Technology Partners">
+          <svg viewBox="85 28 130 132" class="about-logo-svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="hexGradTop" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#5fc08e"/>
+                <stop offset="100%" stop-color="#4aa6b6"/>
+              </linearGradient>
+              <linearGradient id="hexGradLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#6bb0e0"/>
+                <stop offset="100%" stop-color="#3b7cb8"/>
+              </linearGradient>
+              <linearGradient id="hexGradRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3d6ea3"/>
+                <stop offset="100%" stop-color="#1f3a5c"/>
+              </linearGradient>
+            </defs>
+
+            <!-- hexagons (static) -->
+            <polygon points="150,40 177.7,56 177.7,88 150,104 122.3,88 122.3,56" fill="url(#hexGradTop)"/>
+            <polygon points="122.3,88 150,104 150,136 122.3,152 94.6,136 94.6,104" fill="url(#hexGradLeft)"/>
+            <polygon points="177.7,88 205.4,104 205.4,136 177.7,152 150,136 150,104" fill="url(#hexGradRight)"/>
+
+            <!-- COMPASS (top hex) -->
+            <g transform="translate(150,72)">
+              <circle r="17" fill="none" stroke="#ffffff" stroke-width="2.2"/>
+              <line x1="0" y1="-20.5" x2="0" y2="-17" stroke="#ffffff" stroke-width="2.2"/>
+              <line x1="0" y1="17" x2="0" y2="20.5" stroke="#ffffff" stroke-width="2.2"/>
+              <line x1="-20.5" y1="0" x2="-17" y2="0" stroke="#ffffff" stroke-width="2.2"/>
+              <line x1="17" y1="0" x2="20.5" y2="0" stroke="#ffffff" stroke-width="2.2"/>
+              <g class="about-anim-group about-anim-compass">
+                <path d="M 0,-13 L 2.6,0 L 0,13 L -2.6,0 Z" fill="#ffffff"/>
+                <animateTransform attributeName="transform" type="rotate" values="17;53;17" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1" dur="7s" repeatCount="indefinite"/>
+              </g>
+              <circle r="2.3" fill="#ffffff"/>
+            </g>
+
+            <!-- NETWORK (left hex) -->
+            <g transform="translate(122.3,120)">
+              <g stroke="#ffffff" stroke-opacity="0.55" stroke-width="0.9" fill="none">
+                <path id="netE-01" d="M 0,0 L 13.86,-8"/>
+                <path id="netE-03" d="M 0,0 L -13.86,-8"/>
+                <path id="netE-05" d="M 0,0 L 0,16"/>
+                <path id="netE-12" d="M 13.86,-8 L 0,-16"/>
+                <path id="netE-23" d="M 0,-16 L -13.86,-8"/>
+                <path id="netE-34" d="M -13.86,-8 L -13.86,8"/>
+                <path id="netE-45" d="M -13.86,8 L 0,16"/>
+                <path id="netE-56" d="M 0,16 L 13.86,8"/>
+                <path id="netE-61" d="M 13.86,8 L 13.86,-8"/>
+                <path d="M 0,0 L 6.93,-4"/>
+                <path d="M 0,0 L -6.93,-4"/>
+                <path d="M 0,0 L 0,8"/>
+                <path d="M 6.93,-4 L 13.86,-8"/>
+                <path d="M -6.93,-4 L -13.86,-8"/>
+                <path d="M 0,8 L 0,16"/>
+              </g>
+              <g fill="#ffffff">
+                <circle cx="0" cy="0" r="2.4"/>
+                <circle cx="13.86" cy="-8" r="2"/>
+                <circle cx="0" cy="-16" r="2"/>
+                <circle cx="-13.86" cy="-8" r="2"/>
+                <circle cx="-13.86" cy="8" r="2"/>
+                <circle cx="0" cy="16" r="2"/>
+                <circle cx="13.86" cy="8" r="2"/>
+              </g>
+              <g class="about-anim-group about-anim-network" fill="#ffffff">
+                <circle r="1.8"><animateMotion dur="6s" begin="0s" repeatCount="indefinite"><mpath href="#netE-12"/></animateMotion></circle>
+                <circle r="1.8"><animateMotion dur="6s" begin="1s" repeatCount="indefinite"><mpath href="#netE-23"/></animateMotion></circle>
+                <circle r="1.8"><animateMotion dur="6s" begin="2s" repeatCount="indefinite"><mpath href="#netE-34"/></animateMotion></circle>
+                <circle r="1.8"><animateMotion dur="6s" begin="3s" repeatCount="indefinite"><mpath href="#netE-45"/></animateMotion></circle>
+                <circle r="1.8"><animateMotion dur="6s" begin="4s" repeatCount="indefinite"><mpath href="#netE-56"/></animateMotion></circle>
+                <circle r="1.8"><animateMotion dur="6s" begin="5s" repeatCount="indefinite"><mpath href="#netE-61"/></animateMotion></circle>
+              </g>
+            </g>
+
+            <!-- GEAR (right hex) -->
+            <g transform="translate(177.7,120)">
+              <g class="about-anim-group about-anim-gear">
+                <g fill="#ffffff">
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(0)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(45)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(90)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(135)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(180)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(225)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(270)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(315)"/>
+                </g>
+                <circle r="14" fill="none" stroke="#ffffff" stroke-width="2"/>
+                <circle r="7" fill="none" stroke="#ffffff" stroke-width="2"/>
+                <circle r="2.6" fill="#ffffff"/>
+                <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="22s" repeatCount="indefinite"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="about-logo-wordmark">
+          <div class="about-logo-name">STRAGEN<span>TECH</span></div>
+          <div class="about-logo-tagline">Agentic Technology Partners</div>
+        </div>
+        <br>
         <!-- <img src="assets/headshot.jpg" alt="Bilal A. Khan" style="width:100%;max-width:300px;border-radius:12px;display:block;margin:0 auto;box-shadow:0 8px 40px rgba(13,17,23,0.12);">
         <h3 style="font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin:20px 0 6px;letter-spacing:-0.2px;">Bilal A. Khan</h3>
         <p style="font-family:var(--font-mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px;">Fractional CTO · Principal Partner</p> -->
@@ -1200,6 +1306,15 @@ document.querySelectorAll('.btn').forEach(function(el){
   window.addEventListener('resize', function(){
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(initHeroParticles, 300);
+  });
+})();
+</script>
+<script>
+(function(){
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.about-anim-group animateTransform, .about-anim-group animateMotion').forEach(function(el){
+    el.setAttribute('repeatCount', '1');
+    el.setAttribute('dur', '1ms');
   });
 })();
 </script>
