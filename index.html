@@ -278,11 +278,11 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .cred-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);margin-top:7px;flex-shrink:0;}
 
 .about-logo-graphic{display:flex;justify-content:center;filter:drop-shadow(0 10px 28px rgba(13,17,23,0.18));}
-.about-logo-svg{width:100%;max-width:220px;height:auto;display:block;}
-.about-logo-wordmark{margin-top:16px;}
-.about-logo-name{font-family:var(--font-body);font-weight:700;font-size:28px;letter-spacing:0.3px;color:var(--ink);}
+.about-logo-svg{width:100%;max-width:330px;height:auto;display:block;}
+.about-logo-wordmark{margin-top:24px;}
+.about-logo-name{font-family:var(--font-body);font-weight:700;font-size:42px;letter-spacing:0.3px;color:var(--ink);}
 .about-logo-name span{color:#4a93c9;}
-.about-logo-tagline{font-family:var(--font-mono);font-size:10.5px;letter-spacing:2.5px;color:var(--gray-400);text-transform:uppercase;margin-top:6px;}
+.about-logo-tagline{font-family:var(--font-mono);font-size:16px;letter-spacing:2.5px;color:var(--gray-400);text-transform:uppercase;margin-top:9px;}
 .onepager-box{background:var(--off-white);border:2px dashed var(--gray-200);border-radius:16px;padding:48px 40px;text-align:center;}
 .onepager-icon{width:64px;height:64px;background:var(--teal-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;}
 .onepager-box h3{font-size:21px;font-weight:600;color:var(--ink);margin-bottom:10px;}
@@ -763,9 +763,9 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
             </defs>
 
             <!-- hexagons (static) -->
-            <polygon points="150,40 177.7,56 177.7,88 150,104 122.3,88 122.3,56" fill="url(#hexGradTop)"/>
-            <polygon points="122.3,88 150,104 150,136 122.3,152 94.6,136 94.6,104" fill="url(#hexGradLeft)"/>
-            <polygon points="177.7,88 205.4,104 205.4,136 177.7,152 150,136 150,104" fill="url(#hexGradRight)"/>
+            <polygon points="150,42 176,57 176,87 150,102 124,87 124,57" fill="url(#hexGradTop)"/>
+            <polygon points="122.3,90 148.3,105 148.3,135 122.3,150 96.3,135 96.3,105" fill="url(#hexGradLeft)"/>
+            <polygon points="177.7,90 203.7,105 203.7,135 177.7,150 151.7,135 151.7,105" fill="url(#hexGradRight)"/>
 
             <!-- COMPASS (top hex) -->
             <g transform="translate(150,72)">
@@ -781,41 +781,48 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
               <circle r="2.3" fill="#ffffff"/>
             </g>
 
-            <!-- NETWORK (left hex) -->
+            <!-- NETWORK (left hex) — 3D wireframe cube -->
             <g transform="translate(122.3,120)">
-              <g stroke="#ffffff" stroke-opacity="0.55" stroke-width="0.9" fill="none">
-                <path id="netE-01" d="M 0,0 L 13.86,-8"/>
-                <path id="netE-03" d="M 0,0 L -13.86,-8"/>
-                <path id="netE-05" d="M 0,0 L 0,16"/>
-                <path id="netE-12" d="M 13.86,-8 L 0,-16"/>
-                <path id="netE-23" d="M 0,-16 L -13.86,-8"/>
-                <path id="netE-34" d="M -13.86,-8 L -13.86,8"/>
-                <path id="netE-45" d="M -13.86,8 L 0,16"/>
-                <path id="netE-56" d="M 0,16 L 13.86,8"/>
-                <path id="netE-61" d="M 13.86,8 L 13.86,-8"/>
-                <path d="M 0,0 L 6.93,-4"/>
-                <path d="M 0,0 L -6.93,-4"/>
-                <path d="M 0,0 L 0,8"/>
-                <path d="M 6.93,-4 L 13.86,-8"/>
-                <path d="M -6.93,-4 L -13.86,-8"/>
-                <path d="M 0,8 L 0,16"/>
+              <g stroke="#ffffff" stroke-opacity="0.8" stroke-width="1" fill="none" stroke-linecap="round">
+                <!-- front face -->
+                <path id="cubeE-ftl-ftr" d="M -12.5,-5.5 L 5.5,-5.5"/>
+                <path id="cubeE-ftr-fbr" d="M 5.5,-5.5 L 5.5,12.5"/>
+                <path id="cubeE-fbr-fbl" d="M 5.5,12.5 L -12.5,12.5"/>
+                <path id="cubeE-fbl-ftl" d="M -12.5,12.5 L -12.5,-5.5"/>
+                <!-- back face -->
+                <path id="cubeE-btl-btr" d="M -5.5,-12.5 L 12.5,-12.5"/>
+                <path id="cubeE-btr-bbr" d="M 12.5,-12.5 L 12.5,5.5"/>
+                <path id="cubeE-bbr-bbl" d="M 12.5,5.5 L -5.5,5.5"/>
+                <path id="cubeE-bbl-btl" d="M -5.5,5.5 L -5.5,-12.5"/>
+                <!-- depth connectors -->
+                <path id="cubeE-ftl-btl" d="M -12.5,-5.5 L -5.5,-12.5"/>
+                <path id="cubeE-ftr-btr" d="M 5.5,-5.5 L 12.5,-12.5"/>
+                <path id="cubeE-fbr-bbr" d="M 5.5,12.5 L 12.5,5.5"/>
+                <path id="cubeE-fbl-bbl" d="M -12.5,12.5 L -5.5,5.5"/>
               </g>
               <g fill="#ffffff">
-                <circle cx="0" cy="0" r="2.4"/>
-                <circle cx="13.86" cy="-8" r="2"/>
-                <circle cx="0" cy="-16" r="2"/>
-                <circle cx="-13.86" cy="-8" r="2"/>
-                <circle cx="-13.86" cy="8" r="2"/>
-                <circle cx="0" cy="16" r="2"/>
-                <circle cx="13.86" cy="8" r="2"/>
+                <circle cx="-12.5" cy="-5.5" r="1.8"/>
+                <circle cx="5.5" cy="-5.5" r="1.8"/>
+                <circle cx="5.5" cy="12.5" r="1.8"/>
+                <circle cx="-12.5" cy="12.5" r="1.8"/>
+                <circle cx="-5.5" cy="-12.5" r="1.8"/>
+                <circle cx="12.5" cy="-12.5" r="1.8"/>
+                <circle cx="12.5" cy="5.5" r="1.8"/>
+                <circle cx="-5.5" cy="5.5" r="1.8"/>
               </g>
               <g class="about-anim-group about-anim-network" fill="#ffffff">
-                <circle r="1.8"><animateMotion dur="6s" begin="0s" repeatCount="indefinite"><mpath href="#netE-12"/></animateMotion></circle>
-                <circle r="1.8"><animateMotion dur="6s" begin="1s" repeatCount="indefinite"><mpath href="#netE-23"/></animateMotion></circle>
-                <circle r="1.8"><animateMotion dur="6s" begin="2s" repeatCount="indefinite"><mpath href="#netE-34"/></animateMotion></circle>
-                <circle r="1.8"><animateMotion dur="6s" begin="3s" repeatCount="indefinite"><mpath href="#netE-45"/></animateMotion></circle>
-                <circle r="1.8"><animateMotion dur="6s" begin="4s" repeatCount="indefinite"><mpath href="#netE-56"/></animateMotion></circle>
-                <circle r="1.8"><animateMotion dur="6s" begin="5s" repeatCount="indefinite"><mpath href="#netE-61"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="0.0s" repeatCount="indefinite"><mpath href="#cubeE-ftl-ftr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="0.6s" repeatCount="indefinite"><mpath href="#cubeE-ftr-fbr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="1.2s" repeatCount="indefinite"><mpath href="#cubeE-fbr-fbl"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="1.8s" repeatCount="indefinite"><mpath href="#cubeE-fbl-ftl"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="2.4s" repeatCount="indefinite"><mpath href="#cubeE-btl-btr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="3.0s" repeatCount="indefinite"><mpath href="#cubeE-btr-bbr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="3.6s" repeatCount="indefinite"><mpath href="#cubeE-bbr-bbl"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="4.2s" repeatCount="indefinite"><mpath href="#cubeE-bbl-btl"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="4.8s" repeatCount="indefinite"><mpath href="#cubeE-ftl-btl"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="5.4s" repeatCount="indefinite"><mpath href="#cubeE-ftr-btr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="6.0s" repeatCount="indefinite"><mpath href="#cubeE-fbr-bbr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="6.6s" repeatCount="indefinite"><mpath href="#cubeE-fbl-bbl"/></animateMotion></circle>
               </g>
             </g>
 
