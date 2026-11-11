@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4954SHKF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JY4954SHKF');
+</script>
+<script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disaster Recovery Readiness Scorecard — Stragentech</title>
+<link rel="canonical" href="https://www.stragentech.com/disaster-recovery-scorecard.html">
+<meta name="description" content="12 questions across 6 dimensions of disaster recovery and business continuity maturity — backup resilience, redundancy, documentation, testing, and governance. Free, AI-interpreted, works for cloud, on-prem, or hybrid.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f0f2f5;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#4b5563;
+  --gray-600:#1f2937;
+  --gray-800:#1e2333;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --amber:#b3691a;
+  --amber-pale:#fbf1e4;
+  --red:#c53030;
+  --red-pale:#fbe8e8;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
+
+/* ── NAV ── */
+nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:200;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-brand-img{height:44px;width:auto;display:block;}
+.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);white-space:nowrap;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
+.nav-links a:hover{color:var(--teal);background:var(--teal-pale);}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:7px 14px!important;border-radius:5px;font-weight:600;}
+
+.stats-banner{background:#0d1117;padding:10px 32px;overflow-x:auto;}
+.stats-banner::-webkit-scrollbar{display:none;}
+.stats-banner-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:28px;white-space:nowrap;}
+.stats-banner-item{font-family:var(--font-mono);font-size:11.5px;color:rgba(255,255,255,0.6);}
+.stats-banner-item strong{color:var(--teal-mid);font-weight:600;}
+[data-theme="dark"] .stats-banner{background:#1c2128;}
+
+/* ── SHARED GUIDE / CONTENT COMPONENTS ── */
+.guide-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
+.guide-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+.guide-card h2{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:10px;}
+.guide-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.guide-card p{font-size:14px;color:var(--gray-600);line-height:1.7;font-weight:300;}
+.guide-card p+p{margin-top:10px;}
+.guide-card ul{padding-left:20px;margin-top:8px;}
+.guide-card li{font-size:13.5px;color:var(--gray-600);line-height:1.75;font-weight:300;margin-bottom:6px;}
+
+.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.stat-tile{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:18px 16px;}
+.stat-tile .stat-num{font-family:var(--font-serif);font-size:26px;color:var(--teal-dark);line-height:1;margin-bottom:6px;}
+.stat-tile .stat-label{font-size:11.5px;color:var(--gray-600);font-weight:500;line-height:1.4;margin-bottom:4px;}
+.stat-tile .stat-src{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);}
+@media(max-width:600px){.stat-grid{grid-template-columns:1fr;}}
+
+.field-group{margin-bottom:16px;}
+.field-label{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);letter-spacing:0.5px;margin-bottom:6px;display:block;}
+.field-hint{font-size:12px;color:var(--gray-400);font-weight:300;margin-top:6px;line-height:1.5;}
+.tool-input{width:100%;background:var(--off-white);border:1px solid var(--gray-100);border-radius:6px;padding:10px 12px;font-size:13px;color:var(--ink);font-family:var(--font-body);outline:none;transition:border-color .2s;}
+.tool-input:focus{border-color:var(--teal);}
+.tool-input::placeholder{color:var(--gray-400);}
+[data-theme="dark"] .tool-input{background:#161b22;}
+
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
+.btn-run{background:var(--ink);color:var(--white);font-weight:500;}
+.btn-run:hover{background:var(--teal-dark);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
+.btn-teal:hover{background:var(--teal-dark);}
+.btn:disabled{opacity:0.5;cursor:not-allowed;}
+
+[data-theme="dark"] .stat-tile,[data-theme="dark"] .guide-card{background:#21262d;}
+
+/* ── HERO ── */
+.calc-hero{padding:36px 32px 24px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
+.calc-hero-inner{max-width:var(--max-w);margin:0 auto;}
+.calc-hero h1{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:400;letter-spacing:-0.3px;margin-bottom:8px;color:var(--ink);line-height:1.1;}
+.calc-hero h1 em{font-style:italic;color:var(--teal);}
+.calc-hero p{font-size:15px;color:var(--gray-400);max-width:620px;line-height:1.65;font-weight:300;margin-bottom:14px;}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;}
+.hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
+.hero-meta-item::before{content:'▸';color:var(--teal);}
+
+/* ── QUIZ ── */
+.progress-wrap{margin-bottom:28px;}
+.progress-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;display:flex;justify-content:space-between;}
+.progress-bar{height:4px;background:var(--gray-100);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .4s;}
+
+.dim-label{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin:28px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--gray-100);}
+.dim-label:first-of-type{margin-top:0;}
+
+.sc-q{margin-bottom:12px;padding:18px;background:var(--off-white);border:1px solid var(--gray-100);border-radius:8px;transition:border-color .2s;}
+[data-theme="dark"] .sc-q{background:#161b22;}
+.sc-q.answered{border-color:var(--teal-mid);background:var(--teal-pale);}
+[data-theme="dark"] .sc-q.answered{background:rgba(0,184,122,0.08);}
+.q-num{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);margin-bottom:6px;}
+.q-text{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.5;}
+.q-opts{display:flex;gap:7px;flex-wrap:wrap;}
+.q-opt{font-family:var(--font-mono);font-size:11px;padding:7px 13px;border:1px solid var(--gray-200);border-radius:4px;cursor:pointer;transition:all .18s;color:var(--gray-600);background:var(--white);line-height:1.4;}
+[data-theme="dark"] .q-opt{background:#21262d;}
+.q-opt:hover{border-color:var(--teal);color:var(--teal);}
+.q-opt.selected{background:var(--teal-pale);border-color:var(--teal);color:var(--teal-dark);font-weight:500;}
+[data-theme="dark"] .q-opt.selected{background:rgba(0,184,122,0.15);}
+
+.sc-actions{display:none;margin-top:28px;padding:24px;background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;text-align:center;}
+[data-theme="dark"] .sc-actions{background:#161b22;}
+.sc-actions-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+
+.tool-output{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:24px;min-height:120px;font-size:13.5px;line-height:1.85;color:var(--gray-600);font-family:var(--font-body);white-space:pre-wrap;margin-top:20px;display:none;}
+[data-theme="dark"] .tool-output{background:#161b22;}
+.tool-output.visible{display:block;}
+.tool-output.loading{color:var(--teal);}
+.output-label{font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+
+.email-card{background:var(--white);border:1px dashed var(--gray-200);border-radius:10px;padding:20px 22px;margin-top:20px;display:none;}
+.email-card.visible{display:block;}
+[data-theme="dark"] .email-card{background:#21262d;}
+.email-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.email-card p{font-size:12.5px;color:var(--gray-400);font-weight:300;margin-bottom:12px;line-height:1.6;}
+.email-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px;}
+@media(max-width:600px){.email-row{grid-template-columns:1fr;}}
+.email-sent{font-size:12.5px;color:var(--teal-dark);font-weight:600;display:none;}
+.email-sent.show{display:block;}
+
+.disclaimer-box{background:var(--amber-pale);border:1px solid #ecd6b0;border-radius:10px;padding:20px 24px;margin-bottom:20px;}
+.disclaimer-box .d-tag{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.disclaimer-box p{font-size:12.5px;color:#6b4a1f;line-height:1.7;font-weight:400;margin-bottom:8px;}
+.disclaimer-box p:last-child{margin-bottom:0;}
+[data-theme="dark"] .disclaimer-box{background:#1c1a10;border-color:#3d3010;}
+[data-theme="dark"] .disclaimer-box p{color:#c9a84c;}
+
+.faq-item{border-bottom:1px solid var(--gray-100);padding:14px 0;}
+.faq-item:last-child{border-bottom:none;padding-bottom:0;}
+.faq-item summary{font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:'+';font-family:var(--font-mono);color:var(--teal);font-size:16px;flex-shrink:0;}
+.faq-item[open] summary::after{content:'−';}
+.faq-item p{font-size:13px;color:var(--gray-600);line-height:1.7;font-weight:300;margin-top:10px;}
+
+.cta-bar{background:#0d1117;border-radius:10px;padding:36px;text-align:center;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
+.cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.cta-bar h3{font-family:var(--font-serif);font-size:24px;color:var(--white);font-weight:400;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar h3{color:var(--ink);}
+.cta-bar p{font-size:13.5px;color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto 22px;font-weight:300;}
+[data-theme="dark"] .cta-bar p{color:var(--gray-400);}
+.cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
+[data-theme="dark"] footer{background:#0a0e14;}
+.footer-cols{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:26px;border-bottom:1px solid var(--gray-100);margin-bottom:18px;}
+.footer-col-title{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.footer-col a{display:block;font-size:13px;color:var(--gray-600);text-decoration:none;padding:4px 0;font-weight:300;}
+.footer-col a:hover{color:var(--teal);}
+@media(max-width:760px){.footer-cols{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-cols{grid-template-columns:1fr;}}
+.footer-fineprint{max-width:var(--max-w);margin:0 auto 16px;font-size:11.5px;color:var(--gray-400);line-height:1.7;font-weight:300;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
+.footer-links a:hover{color:var(--teal);}
+
+@media(max-width:480px){.nav-brand-sub{display:none;}}
+
+/* ── DARK MODE ── */
+.theme-toggle{background:none;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;padding:6px 8px;color:var(--gray-600);display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s;flex-shrink:0;margin-left:4px;}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal);}
+.theme-toggle .icon-sun{display:none;}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+[data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);}
+[data-theme="dark"] nav{background:rgba(13,17,23,0.95)!important;}
+[data-theme="dark"] .nav-links a:hover{background:rgba(255,255,255,0.06);}
+[data-theme="dark"] .nav-cta{background:var(--teal)!important;color:#0d1117!important;}
+[data-theme="dark"] .btn-run{background:var(--teal);color:#0d1117;}
+[data-theme="dark"] .btn-run:hover{background:var(--teal-dark);}
+[data-theme="dark"] .btn-outline{border-color:var(--gray-200);color:var(--gray-600);}
+[data-theme="dark"] .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://www.stragentech.com" class="nav-brand">
+      <img src="assets/logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img">
+      <span class="nav-brand-sub">/ disaster recovery scorecard</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="tools.html">← Tools</a></li>
+      <li><a href="https://calendar.app.google/gSTNDgChThJVdzh8A" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="stats-banner">
+  <div class="stats-banner-inner">
+    <span class="stats-banner-item">Free — <strong>no signup required</strong></span>
+    <span class="stats-banner-item">Works for <strong>cloud, on-prem, or hybrid</strong></span>
+    <span class="stats-banner-item">Results in <strong>~3 minutes</strong></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <h1>Disaster Recovery <em>Readiness Scorecard</em></h1>
+    <p>12 questions across 6 dimensions of disaster recovery and business continuity maturity — recovery objectives, backup resilience, redundancy, documentation, testing, and governance. Find out where you'd actually land if a real incident hit today, not where you hope you'd land.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">6 dimensions scored</span>
+      <span class="hero-meta-item">AI-interpreted results</span>
+      <span class="hero-meta-item">No signup required</span>
+    </div>
+  </div>
+</div>
+
+<div class="guide-body">
+
+  <div class="stat-grid">
+    <div class="stat-tile">
+      <div class="stat-num">96%</div>
+      <div class="stat-label">of ransomware attacks specifically target backup repositories</div>
+      <div class="stat-src">Veeam Ransomware Trends Report</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-num">88%</div>
+      <div class="stat-label">of SMB data breaches involve ransomware</div>
+      <div class="stat-src">Verizon Data Breach Investigations Report</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-num">$375K <span style="font-size:14px;color:var(--gray-400);">vs</span> $3M</div>
+      <div class="stat-label">median recovery cost when backups are intact vs. destroyed</div>
+      <div class="stat-src">Sophos, State of Ransomware</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Progress</span>
+      <span id="progress-count">0 / 12 answered</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="sc-progress" style="width:0%"></div></div>
+  </div>
+
+  <div id="scorecard-questions"></div>
+
+  <div class="sc-actions" id="sc-actions">
+    <div class="sc-actions-label">All 12 answered — ready for your scored report</div>
+    <button class="btn btn-run" onclick="runScorecardAnalysis()">▸ Get My AI-Interpreted Results</button>
+  </div>
+
+  <div id="sc-output" class="tool-output">
+    <div class="output-label">// Disaster Recovery Readiness Scorecard Results</div>
+    <div id="sc-result"></div>
+  </div>
+
+  <div class="email-card" id="emailCard">
+    <h4>Want this report emailed to you?</h4>
+    <p>Useful for sharing with a co-founder, ops lead, or whoever owns continuity planning.</p>
+    <div id="emailForm">
+      <div class="email-row">
+        <input class="tool-input" id="leadName" type="text" placeholder="Your name">
+        <input class="tool-input" id="leadEmail" type="email" placeholder="Work email">
+        <input class="tool-input" id="leadCompany" type="text" placeholder="Company (optional)">
+      </div>
+      <div class="field-hint" id="leadError" style="color:var(--red);display:none;">Please enter your name and a valid work email.</div>
+      <button class="btn btn-run" style="width:100%;justify-content:center;margin-top:4px;" id="emailBtn">▸ Email Me This Report</button>
+    </div>
+    <div class="email-sent" id="emailSent">✓ Sent — check your inbox shortly.</div>
+  </div>
+
+  <!-- METHODOLOGY -->
+  <div class="guide-card">
+    <h2>How We Score This</h2>
+    <p>Twelve questions, two per dimension, each scored on a 0–3 maturity scale and interpreted by AI against a model built from established disaster recovery and business continuity frameworks — not a generic checklist:</p>
+    <ul>
+      <li><strong>Business Impact &amp; Recovery Objectives</strong> — whether RTOs/RPOs are defined and grounded in an actual Business Impact Analysis, per <a href="https://csrc.nist.gov/pubs/sp/800/34/final" target="_blank" rel="noopener">NIST SP 800-34</a>'s contingency planning process.</li>
+      <li><strong>Backup &amp; Data Resilience</strong> — immutability, air-gapping, and restore testing, given how routinely backup repositories are the attacker's first target (see stats above).</li>
+      <li><strong>Infrastructure &amp; Redundancy</strong> — single points of failure and failover design, adapted from the fault-isolation and redundancy practices in AWS's Well-Architected Framework Reliability Pillar — the same lens applies whether you're on AWS, another cloud, or on-premises.</li>
+      <li><strong>Documentation &amp; Runbooks</strong> and <strong>Testing &amp; Exercises</strong> — whether a plan exists independent of any one person's memory, and whether it's actually been exercised — the plan-development and testing/maintenance stages of the NIST contingency planning lifecycle.</li>
+      <li><strong>Governance, Communication &amp; Compliance</strong> — clear incident roles and escalation paths, aligned with the business continuity management system approach in <a href="https://www.iso.org/standard/75106.html" target="_blank" rel="noopener">ISO 22301</a>.</li>
+    </ul>
+    <p>The four maturity levels (Ad Hoc, Developing, Standardized, Resilient) are a simplified version of the five-level Ad Hoc → Fragmented → Standardized → Proactive → Adaptive progression commonly used in industry DR maturity models.</p>
+  </div>
+
+  <div class="disclaimer-box">
+    <div class="d-tag">⚠ Important disclaimer</div>
+    <p><strong>This is a directional self-assessment, not a formal audit.</strong> The AI interpretation is based entirely on your own answers — there's no independent verification of your actual infrastructure, backups, or documentation. Treat the score and narrative as a prioritization aid, not a certification of compliance or resilience.</p>
+    <p>If recovery objectives, compliance posture, or cyber insurance requirements are on the line, pair this with a formal Business Impact Analysis and DR test — not a substitute for one.</p>
+  </div>
+
+  <!-- FAQ -->
+  <div class="guide-card">
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq-item" open>
+      <summary>How is this different from just asking "do you have a DR plan"?</summary>
+      <p>Most informal checks stop at "yes/no, we have a plan." This scorecard breaks disaster recovery into six dimensions that tend to fail independently of each other — you can have a written plan and still have untested restores, or tested restores and still have a single person who's the only one who knows how to execute them. The AI report is built to surface exactly which of those gaps is yours.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What do the maturity levels mean?</summary>
+      <p><strong>Ad Hoc</strong> — recovery depends on improvisation and tribal knowledge in the moment. <strong>Developing</strong> — some pieces exist but are inconsistent or undocumented. <strong>Standardized</strong> — documented, repeatable processes exist for critical systems. <strong>Resilient</strong> — tested, redundant, and not dependent on any single person, system, or site. These map onto the commonly used Ad Hoc → Fragmented → Standardized → Proactive → Adaptive industry progression, condensed to four tiers here.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Is this specific to cloud, on-premises, or hybrid environments?</summary>
+      <p>Neither — the six dimensions (objectives, backups, redundancy, documentation, testing, governance) apply regardless of where your infrastructure actually lives. A few questions mention cloud concepts like multi-region failover, but the underlying maturity question — "is there a fallback, and has it been tested?" — is the same whether that fallback is a second AWS region or a second physical site.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Is this a replacement for a formal DR audit or Business Impact Analysis?</summary>
+      <p>No. It's a free, directional starting point you can complete in a few minutes using only what you already know. A real Business Impact Analysis or DR audit reviews your actual systems, backup logs, and recovery test evidence — <a href="index.html#contact">book a discovery call</a> if that's the next step.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Do you store what I enter?</summary>
+      <p>No. Your answers are sent to our AI service solely to generate your report and are not stored. Nothing is saved anywhere unless you explicitly ask to have the report emailed to you.</p>
+    </details>
+  </div>
+
+  <div class="cta-bar">
+    <div class="cta-bar-tag">// Want a real audit, not a self-assessment?</div>
+    <h3>Get a formal Business Impact Analysis and DR test.</h3>
+    <p>A structured engagement reviews your actual systems, backup integrity, and recovery evidence to replace this self-assessment with a validated RTO/RPO baseline and a prioritized remediation plan.</p>
+    <div class="cta-bar-actions">
+      <a href="index.html#contact" class="btn btn-teal">▸ Book a Free Discovery Call</a>
+      <a href="tools.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Explore More Free Tools</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <div class="footer-col-title">Tech Debt Suite</div>
+      <a href="tech-debt-calculator.html">Cost Calculator</a>
+      <a href="tech-debt-assessment.html">Assessment Scorecard</a>
+      <a href="tech-debt-velocity.html">Velocity Impact</a>
+      <a href="tech-debt-roi.html">Refactoring ROI</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Incident Cost Suite</div>
+      <a href="incident-cost.html">Overview</a>
+      <a href="incident-cost-calculator.html">Incident Cost Calculator</a>
+      <a href="incident-cost-index.html">Cost Index</a>
+      <a href="incident-cost-glossary.html">Glossary</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">More Tools &amp; Insights</div>
+      <a href="oi-scorecard.html">OI Readiness Scorecard</a>
+      <a href="legacy-risk-xray.html">Legacy Risk X-ray</a>
+      <a href="fractional-cto-cost-calculator.html">Fractional CTO Cost Calculator</a>
+      <a href="disaster-recovery-scorecard.html">Disaster Recovery Scorecard</a>
+      <a href="tools.html">All Free Tools →</a>
+    </div>
+  </div>
+  <p class="footer-fineprint">Stragentech.com is an independent resource. Cited statistics are sourced from Veeam's Ransomware Trends Report, Verizon's Data Breach Investigations Report, and Sophos's State of Ransomware research; scoring is AI-interpreted from your own self-reported answers, not independently verified. Not affiliated with Veeam, Verizon, Sophos, NIST, ISO, or AWS.</p>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Stragentech.com. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="tools.html">Tools</a>
+      <a href="index.html">Main Site</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('themeToggle').addEventListener('click',function(){
+  var html=document.documentElement;
+  var isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  localStorage.setItem('stragentech-theme',isDark?'light':'dark');
+});
+
+// ── DISASTER RECOVERY READINESS SCORECARD ───────────────────────────────
+const SC_QUESTIONS = [
+  {dim:'Business Impact & Recovery Objectives', q:'Have you defined Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO) for your critical systems?', opts:["No — we've never formally defined these","Informally, but not documented or validated","Documented for our most critical systems","Documented and validated for all critical systems, tied to business impact"]},
+  {dim:'Business Impact & Recovery Objectives', q:'When was your last formal Business Impact Analysis (BIA) — identifying which systems/processes matter most and what downtime actually costs?', opts:['Never performed one','More than 2 years ago','Within the last 1–2 years','Within the last year, and kept current as systems change']},
+  {dim:'Backup & Data Resilience', q:'How are your backups protected against ransomware (immutability, air-gapping, offline/offsite copies)?', opts:['Backups live on the same network as production, no special protection','Some offsite backups, but not immutable or air-gapped','Immutable or air-gapped copies for critical systems','Immutable, air-gapped, and geographically separated copies, regularly verified']},
+  {dim:'Backup & Data Resilience', q:"When did you last actually test restoring from backup (not just confirm the backup job 'succeeded')?", opts:['Never / not sure if restores work','More than a year ago','Within the last 6–12 months','Restores are tested on a regular schedule (quarterly or more)']},
+  {dim:'Infrastructure & Redundancy', q:'If your primary data center or cloud region went down right now, what happens to your critical systems?', opts:['Full outage until we manually rebuild somewhere','Manual failover to a secondary site, hours of effort','Automated or semi-automated failover, partial redundancy','Automated multi-region/multi-site failover, minimal manual intervention']},
+  {dim:'Infrastructure & Redundancy', q:'How dependent are your critical workflows on a single vendor, data center, or piece of legacy infrastructure with no fallback?', opts:['Heavily dependent — no fallback exists','Some single points of failure, known but unaddressed','Key single points of failure have been identified and mitigated','Redundancy is designed in by default for anything critical']},
+  {dim:'Documentation & Runbooks', q:'Do you have a written disaster recovery plan or runbook that a non-expert could follow during an actual incident?', opts:['No written plan exists','Exists but outdated, incomplete, or only in someone’s head','Documented and reasonably current for major systems','Documented, current, and accessible even if primary systems are down']},
+  {dim:'Documentation & Runbooks', q:"If the person who 'knows how everything works' were unreachable during an incident, could your team still recover?", opts:['No — recovery knowledge lives with 1–2 people','Partially — some things are written down','Mostly — key systems have documented recovery steps','Yes — recovery doesn’t depend on any single person']},
+  {dim:'Testing & Exercises', q:'How often do you run a disaster recovery test or tabletop exercise (not just a backup check)?', opts:['Never','Ad hoc, no regular cadence','Annually','At least twice a year, including surprise/unannounced scenarios']},
+  {dim:'Testing & Exercises', q:'After your last DR test or real incident, were the findings documented and actually fixed?', opts:["We haven't had a test or incident to learn from",'Issues were found but mostly not addressed','Major issues were fixed, minor ones often slip','Findings are tracked to closure every time, plan updated accordingly']},
+  {dim:'Governance, Communication & Compliance', q:'During an outage, is it clear who declares a disaster, who communicates with customers/leadership, and who executes recovery?', opts:['No defined roles — people figure it out in the moment','Roles exist informally but aren’t written down','Roles and an escalation path are documented','Documented, rehearsed, and includes customer/stakeholder communication templates']},
+  {dim:'Governance, Communication & Compliance', q:'Do you have compliance or contractual obligations (SOC 2, HIPAA, PCI-DSS, customer SLAs, cyber insurance) tied to your DR/BC posture, and are you confident you’d meet them today?', opts:["Not sure what's required of us",'Requirements are known but we likely wouldn’t pass review today','We’d mostly meet requirements, some gaps known','We actively track and meet all DR/BC-related compliance and contractual requirements']},
+];
+
+let sc_answers = {};
+
+function renderScorecard(){
+  const container = document.getElementById('scorecard-questions');
+  container.innerHTML = '';
+  let lastDim = '';
+  SC_QUESTIONS.forEach((q, i) => {
+    if(q.dim !== lastDim){
+      const label = document.createElement('div');
+      label.className = 'dim-label';
+      label.textContent = q.dim;
+      container.appendChild(label);
+      lastDim = q.dim;
+    }
+    const div = document.createElement('div');
+    div.className = 'sc-q';
+    div.id = 'q-' + i;
+    div.innerHTML = `<div class="q-num">Q${i+1} of ${SC_QUESTIONS.length}</div><div class="q-text">${q.q}</div><div class="q-opts">${q.opts.map((o,j)=>`<button class="q-opt" onclick="selectAnswer(${i},${j},this)">${o}</button>`).join('')}</div>`;
+    container.appendChild(div);
+  });
+}
+
+function selectAnswer(qi, oi, el){
+  el.closest('.q-opts').querySelectorAll('.q-opt').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('q-'+qi).classList.add('answered');
+  sc_answers[qi] = oi;
+  const answered = Object.keys(sc_answers).length;
+  const pct = answered / SC_QUESTIONS.length * 100;
+  document.getElementById('sc-progress').style.width = pct + '%';
+  document.getElementById('progress-count').textContent = answered + ' / ' + SC_QUESTIONS.length + ' answered';
+  if(answered >= SC_QUESTIONS.length){
+    const actions = document.getElementById('sc-actions');
+    actions.style.display = 'block';
+    actions.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+}
+
+let lastSummary = '';
+
+async function runScorecardAnalysis(){
+  const dims = {};
+  SC_QUESTIONS.forEach((q, i) => {
+    if(!dims[q.dim]) dims[q.dim] = [];
+    dims[q.dim].push({q: q.q, a: q.opts[sc_answers[i] || 0]});
+  });
+  const summary = Object.entries(dims).map(([d,qs]) =>
+    `${d}:\n${qs.map(q => `  Q: ${q.q}\n  A: ${q.a}`).join('\n')}`
+  ).join('\n\n');
+  lastSummary = summary;
+
+  const prompt = `You are Bilal Khan, a Fractional CTO who has led disaster recovery, business continuity, and legacy modernization programs for industrial manufacturers, PE-backed portfolio companies, and B2B SaaS businesses — including large-scale production systems at Amazon AWS IoT and Boeing/Jeppesen ForeFlight. A potential client has completed a Disaster Recovery Readiness Scorecard. Analyze their responses and provide a scored report.
+
+SCORECARD RESPONSES:
+${summary}
+
+Provide a structured report in this exact format:
+
+OVERALL DR/BC MATURITY LEVEL: [Ad Hoc / Developing / Standardized / Resilient] — [score]/100
+
+DIMENSION SCORES (each dimension is worth up to 6 points — 2 questions, 0-3 points each):
+• Business Impact & Recovery Objectives: [score]/6 — [one-line summary]
+• Backup & Data Resilience: [score]/6 — [one-line summary]
+• Infrastructure & Redundancy: [score]/6 — [one-line summary]
+• Documentation & Runbooks: [score]/6 — [one-line summary]
+• Testing & Exercises: [score]/6 — [one-line summary]
+• Governance, Communication & Compliance: [score]/6 — [one-line summary]
+
+KEY STRENGTHS:
+• [strength 1]
+• [strength 2]
+
+HIGHEST-PRIORITY GAPS:
+1. [most critical gap — specific and actionable]
+2. [second gap]
+3. [third gap]
+
+IF A REAL INCIDENT HAPPENED TODAY:
+[2-3 candid, specific sentences predicting what would actually happen based on their exact answers — name the single biggest point of failure]
+
+RECOMMENDED STARTING POINT:
+[Based on their specific responses, the single best first initiative — be specific and actionable, not generic]
+
+ESTIMATED TIME TO MATERIALLY REDUCE RISK:
+[Realistic timeline estimate with what success looks like]`;
+
+  const outputEl = document.getElementById('sc-output');
+  const resultEl = document.getElementById('sc-result');
+  outputEl.classList.add('visible', 'loading');
+  resultEl.textContent = 'Analyzing your responses...';
+  if(typeof gtag!=='undefined') gtag('event','tool_scan_started',{'tool_name':'disaster_recovery_scorecard'});
+
+  try{
+    const res = await fetch('/api/analyze', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1300,
+        messages: [{role: 'user', content: prompt}]
+      })
+    });
+    const data = await res.json();
+    outputEl.classList.remove('loading');
+    resultEl.textContent = data.content?.map(b => b.text || '').join('') || 'No response received.';
+    document.getElementById('emailCard').classList.add('visible');
+    if(typeof gtag!=='undefined') gtag('event','tool_completed',{'tool_name':'disaster_recovery_scorecard'});
+  } catch(e){
+    outputEl.classList.remove('loading');
+    resultEl.textContent = 'Error connecting to AI. Please try again or contact info@stragentech.com';
+  }
+}
+
+renderScorecard();
+
+// ── EMAIL REPORT ─────────────────────────────────────────────────────────
+document.getElementById('emailBtn').addEventListener('click', function(){
+  const name = document.getElementById('leadName').value.trim();
+  const email = document.getElementById('leadEmail').value.trim();
+  const company = document.getElementById('leadCompany').value.trim();
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errEl = document.getElementById('leadError');
+  if(!name || !emailRe.test(email)){
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+  if(typeof gtag!=='undefined') gtag('event','tool_report_emailed',{'tool_name':'disaster_recovery_scorecard'});
+
+  fetch('https://formspree.io/f/xpqerpje', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      'Source':'Disaster Recovery Readiness Scorecard',
+      'Name':name,
+      'email':email,
+      'Company':company,
+      'Scorecard Answers':lastSummary,
+      'AI Report':document.getElementById('sc-result').textContent,
+    })
+  }).catch(function(){ /* non-blocking */ });
+
+  document.getElementById('emailForm').style.display = 'none';
+  document.getElementById('emailSent').classList.add('show');
+});
+
+document.querySelectorAll('.btn, a[href*="contact"]').forEach(function(el){
+  el.addEventListener('click', function(){
+    if(typeof gtag==='undefined') return;
+    gtag('event','cta_click',{
+      'cta_label': el.textContent.trim().replace(/[→↗▸×]/g,'').trim(),
+      'page_location': window.location.pathname
+    });
+  });
+});
+</script>
+</body>
+</html>

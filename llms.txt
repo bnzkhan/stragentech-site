@@ -37,6 +37,7 @@ All tools below are free, vendor-neutral, and require no signup to use.
 
 - [Legacy Risk X-ray](https://www.stragentech.com/legacy-risk-xray.html): Scans the products/versions you enter for end-of-life, security (CVE), and license exposure using live EOL/CVE data, returning a Lifecycle Risk Score, a cost/liability range, and an AI-prioritized modernization sequence.
 - [Fractional CTO Cost Calculator](https://www.stragentech.com/fractional-cto-cost-calculator.html): Models the 12-month cost of a full-time CTO hire vs. a fractional CTO vs. a senior contractor, using US compensation and fractional-market rate benchmarks.
+- [Disaster Recovery Readiness Scorecard](https://www.stragentech.com/disaster-recovery-scorecard.html): 12-question, 6-dimension assessment of disaster recovery and business continuity maturity (recovery objectives, backup resilience, redundancy, documentation, testing, governance), with AI-generated interpretation.
 
 ## Operational Intelligence
 
