@@ -172,6 +172,18 @@ nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdro
 .dr-pdf-actions{display:none;gap:10px;flex-wrap:wrap;margin-top:18px;padding-top:18px;border-top:1px solid var(--gray-100);}
 .dr-pdf-actions.visible{display:flex;}
 
+/* ── DOWNLOAD LEAD-CAPTURE MODAL ── */
+.dr-modal-overlay{display:none;position:fixed;inset:0;background:rgba(13,17,23,0.65);z-index:500;align-items:center;justify-content:center;padding:20px;}
+.dr-modal-overlay.visible{display:flex;}
+.dr-modal-card{position:relative;background:var(--white);border-radius:12px;padding:30px 30px 26px;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(13,17,23,0.35);}
+[data-theme="dark"] .dr-modal-card{background:#21262d;}
+.dr-modal-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:20px;line-height:1;color:var(--gray-400);cursor:pointer;padding:4px 8px;border-radius:5px;}
+.dr-modal-close:hover{color:var(--ink);background:var(--gray-50);}
+.dr-modal-card h3{font-family:var(--font-serif);font-size:21px;font-weight:400;color:var(--ink);margin-bottom:6px;}
+.dr-modal-card p{font-size:13px;color:var(--gray-400);line-height:1.6;margin-bottom:18px;font-weight:300;}
+.dr-modal-card .field-group{margin-bottom:12px;}
+.dr-modal-card .field-group:last-of-type{margin-bottom:6px;}
+
 .email-card{background:var(--white);border:1px dashed var(--gray-200);border-radius:10px;padding:20px 22px;margin-top:20px;display:none;}
 .email-card.visible{display:block;}
 [data-theme="dark"] .email-card{background:#21262d;}
@@ -436,6 +448,19 @@ footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
     </div>
   </div>
 </footer>
+
+<div class="dr-modal-overlay" id="downloadModalOverlay">
+  <div class="dr-modal-card">
+    <button class="dr-modal-close" id="downloadModalClose" type="button" aria-label="Close">×</button>
+    <h3>Get Your PDF Report</h3>
+    <p>Just need a few details before your report downloads — we'll never spam you.</p>
+    <div class="field-group"><input class="tool-input" id="dlName" type="text" placeholder="Your name"></div>
+    <div class="field-group"><input class="tool-input" id="dlEmail" type="email" placeholder="Work email"></div>
+    <div class="field-group"><input class="tool-input" id="dlCompany" type="text" placeholder="Company (optional)"></div>
+    <div class="field-hint" id="dlError" style="color:var(--red);display:none;">Please enter your name and a valid work email.</div>
+    <button class="btn btn-run" id="dlSubmitBtn" type="button" style="width:100%;justify-content:center;margin-top:4px;">▸ Download My PDF Report</button>
+  </div>
+</div>
 
 <script>
 document.getElementById('themeToggle').addEventListener('click',function(){
@@ -718,21 +743,91 @@ async function buildPdfDocDefinition(){
   };
 }
 
-document.getElementById('downloadPdfBtn').addEventListener('click', async function(){
-  this.disabled = true;
-  const originalText = this.textContent;
-  this.textContent = 'Building PDF...';
+// ── DOWNLOAD LEAD-CAPTURE MODAL ──────────────────────────────────────────
+let capturedDownloadLead = null;
+
+function openDownloadModal(){
+  document.getElementById('downloadModalOverlay').classList.add('visible');
+  document.getElementById('dlName').focus();
+}
+function closeDownloadModal(){
+  document.getElementById('downloadModalOverlay').classList.remove('visible');
+}
+
+document.getElementById('downloadPdfBtn').addEventListener('click', function(){
+  if(capturedDownloadLead){
+    triggerPdfDownload();
+  } else {
+    openDownloadModal();
+  }
+});
+
+document.getElementById('downloadModalClose').addEventListener('click', closeDownloadModal);
+document.getElementById('downloadModalOverlay').addEventListener('click', function(e){
+  if(e.target === this) closeDownloadModal();
+});
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeDownloadModal();
+});
+
+document.getElementById('dlSubmitBtn').addEventListener('click', function(){
+  const name = document.getElementById('dlName').value.trim();
+  const email = document.getElementById('dlEmail').value.trim();
+  const company = document.getElementById('dlCompany').value.trim();
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errEl = document.getElementById('dlError');
+  if(!name || !emailRe.test(email)){
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+  capturedDownloadLead = {name, email, company};
+  if(typeof gtag!=='undefined') gtag('event','tool_lead_captured',{'tool_name':'disaster_recovery_scorecard','capture_point':'pdf_download'});
+  closeDownloadModal();
+  triggerPdfDownload();
+});
+
+function logDownloadLead(pdfBlob){
+  const lead = capturedDownloadLead;
+  if(!lead) return;
+  const formData = new FormData();
+  formData.append('Source', 'Disaster Recovery Readiness Scorecard (PDF Download)');
+  formData.append('Name', lead.name);
+  formData.append('email', lead.email);
+  formData.append('Company', lead.company);
+  formData.append('Scorecard Answers', lastSummary);
+  formData.append('AI Report', document.getElementById('sc-result').innerText);
+  if(lastReportScore !== null){
+    formData.append('Overall Score', lastReportScore + '/100 (' + lastReportLevel + ')');
+  }
+  if(pdfBlob){
+    formData.append('attachment', pdfBlob, 'Stragentech-DR-Readiness-Report.pdf');
+  }
+  fetch('https://formspree.io/f/xpqerpje', {
+    method:'POST',
+    headers:{'Accept':'application/json'},
+    body: formData,
+  }).catch(function(){ /* non-blocking */ });
+}
+
+async function triggerPdfDownload(){
+  const btn = document.getElementById('downloadPdfBtn');
+  btn.disabled = true;
+  const originalText = btn.textContent;
+  btn.textContent = 'Building PDF...';
   try{
     const docDefinition = await buildPdfDocDefinition();
-    pdfMake.createPdf(docDefinition).download('Stragentech-DR-Readiness-Report.pdf');
+    const pdfDoc = pdfMake.createPdf(docDefinition);
+    pdfDoc.download('Stragentech-DR-Readiness-Report.pdf');
     if(typeof gtag!=='undefined') gtag('event','tool_report_downloaded',{'tool_name':'disaster_recovery_scorecard'});
+    pdfDoc.getBlob(function(blob){ logDownloadLead(blob); });
   }catch(e){
     alert('Could not build the PDF. Please try again, or use "Email Me This Report" instead.');
   }finally{
-    this.disabled = false;
-    this.textContent = originalText;
+    btn.disabled = false;
+    btn.textContent = originalText;
   }
-});
+}
 
 // ── EMAIL REPORT ─────────────────────────────────────────────────────────
 document.getElementById('emailBtn').addEventListener('click', async function(){
