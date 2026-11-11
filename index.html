@@ -82,6 +82,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 #home{min-height:100vh;display:flex;align-items:center;padding:100px 32px 80px;background:var(--white);position:relative;overflow:hidden;}
 .hero-bg-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,var(--gray-100) 1px,transparent 0);background-size:28px 28px;opacity:0.7;}
 .hero-bg-fade{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0) 40%,rgba(0,184,122,0.04) 100%);}
+.hero-particles{position:absolute;inset:0;z-index:0;}
 .hero-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1;}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--teal-pale);border:1px solid var(--teal-mid);border-radius:20px;padding:6px 16px;margin-bottom:28px;}
 .hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2.2s ease-in-out infinite;}
@@ -442,7 +443,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 
 <!-- HERO -->
 <section id="home">
-  <div class="hero-bg-pattern"></div>
+  <div id="tsparticles-hero" class="hero-particles"></div>
   <div class="hero-bg-fade"></div>
   <div class="hero-inner">
     <div class="hero-left">
@@ -1146,6 +1147,60 @@ document.querySelectorAll('.btn').forEach(function(el){
   });
 
   startLoop();
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+<script>
+(function(){
+  function isDark(){ return document.documentElement.getAttribute('data-theme') === 'dark'; }
+  function isNarrow(){ return window.innerWidth < 640; }
+
+  function particlesConfig(){
+    var dark = isDark();
+    var narrow = isNarrow();
+    return {
+      particles: {
+        number: { value: narrow ? 18 : 44, density: { enable:true, value_area: 900 } },
+        color: { value: dark ? ['#00e0a0','#4fa8ff'] : ['#00b87a','#1a6fd4'] },
+        shape: { type:'circle' },
+        opacity: { value: dark ? 0.75 : 0.6, random:false },
+        size: { value: 2.4, random:true },
+        line_linked: {
+          enable:true, distance: narrow ? 105 : 140,
+          color: dark ? '#00e0a0' : '#00b87a',
+          opacity: dark ? 0.35 : 0.28, width:1.1
+        },
+        move: { enable:true, speed:0.6, direction:'none', random:true, straight:false, out_mode:'out', bounce:false }
+      },
+      interactivity: {
+        detect_on:'canvas',
+        events: { onhover:{ enable:false }, onclick:{ enable:false }, resize:true }
+      },
+      retina_detect:true
+    };
+  }
+
+  function initHeroParticles(){
+    if(typeof particlesJS === 'undefined') return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if(window.pJSDom && window.pJSDom.length){
+      try{ window.pJSDom[0].pJS.fn.vendors.destroypJS(); }catch(e){}
+      window.pJSDom = [];
+    }
+    particlesJS('tsparticles-hero', particlesConfig());
+  }
+
+  if(document.readyState === 'complete'){ initHeroParticles(); }
+  else{ window.addEventListener('load', initHeroParticles); }
+
+  var toggle = document.getElementById('themeToggle');
+  if(toggle) toggle.addEventListener('click', function(){ setTimeout(initHeroParticles, 50); });
+
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(initHeroParticles, 300);
+  });
 })();
 </script>
 </body>
