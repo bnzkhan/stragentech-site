@@ -45,7 +45,7 @@ All tools below are free, vendor-neutral, and require no signup to use.
 - [Agentic AIoT Operational Intelligence Playbook](https://www.stragentech.com/agentic-aiot-playbook.html): How SMB manufacturers deploy Agentic AI + Industrial IoT to eliminate unplanned downtime and automate remediation.
 - [From Alert Fatigue to Predictive Operations](https://www.stragentech.com/iot-alert-fatigue-deck.html): Moving from threshold-based alerting to ML anomaly detection and agentic corrective action in industrial IoT.
 - [Earned Autonomy: Governing Agentic AI at the Industrial Edge](https://www.stragentech.com/earned-autonomy-whitepaper.html): Governance framework for agentic AI on the plant floor — four-plane architecture, per-action autonomy tiers, and audit trails.
-- [2027 Planning Kit](https://www.stragentech.com/2027-planning-kit.html): Three free tools for annual technology planning — Brainstorm for Questions (BFQ), the Amazon PR-FAQ ("Working Backwards") method, and a stabilize-automate-modernize roadmap checklist. Free PDF download.
+- [Roadmap Planning Kit](https://www.stragentech.com/roadmap-planning-kit.html): Three free tools for annual technology planning — Brainstorm for Questions (BFQ), the Amazon PR-FAQ ("Working Backwards") method, and a stabilize-automate-modernize roadmap checklist. Free PDF download.
 
 ## AI Strategy & Readiness
 
