@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4954SHKF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JY4954SHKF');
+</script>
+<script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027 Planning Kit — Stragentech</title>
+<link rel="canonical" href="https://www.stragentech.com/2027-planning-kit.html">
+<meta name="description" content="Three free tools for writing a 2027 technology plan your service P&L will believe — Brainstorm for Questions, the Amazon PR-FAQ (Working Backwards) method, and a stabilize-automate-modernize roadmap checklist. Built for connected-equipment OEMs and SMB operators.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f0f2f5;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#4b5563;
+  --gray-600:#1f2937;
+  --gray-800:#1e2333;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --amber:#b3691a;
+  --amber-pale:#fbf1e4;
+  --red:#c53030;
+  --red-pale:#fbe8e8;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
+
+/* ── NAV ── */
+nav{background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-100);padding:0 32px;position:sticky;top:0;z-index:200;}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-brand-img{height:44px;width:auto;display:block;}
+.nav-brand-img.dark-logo{display:none;}
+[data-theme="dark"] .nav-brand-img.light-logo{display:none;}
+[data-theme="dark"] .nav-brand-img.dark-logo{display:block;}
+.nav-brand-sub{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);white-space:nowrap;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:12px;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .18s;}
+.nav-links a:hover{color:var(--teal);background:var(--teal-pale);}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:7px 14px!important;border-radius:5px;font-weight:600;}
+
+.stats-banner{background:#0d1117;padding:10px 32px;overflow-x:auto;}
+.stats-banner::-webkit-scrollbar{display:none;}
+.stats-banner-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:28px;white-space:nowrap;}
+.stats-banner-item{font-family:var(--font-mono);font-size:11.5px;color:rgba(255,255,255,0.6);}
+.stats-banner-item strong{color:var(--teal-mid);font-weight:600;}
+[data-theme="dark"] .stats-banner{background:#1c2128;}
+
+/* ── SHARED GUIDE / CONTENT COMPONENTS ── */
+.guide-body{max-width:var(--max-w);margin:0 auto;padding:28px 32px 48px;}
+.guide-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:26px 28px;margin-bottom:20px;}
+[data-theme="dark"] .guide-card{background:#21262d;}
+.guide-card h2{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:10px;}
+.guide-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.guide-card p{font-size:14px;color:var(--gray-600);line-height:1.7;font-weight:300;}
+.guide-card p+p{margin-top:10px;}
+.guide-card ul{padding-left:20px;margin-top:8px;}
+.guide-card li{font-size:13.5px;color:var(--gray-600);line-height:1.75;font-weight:300;margin-bottom:6px;}
+
+.section-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);}
+.tool-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--teal-pale);color:var(--teal-dark);font-family:var(--font-mono);font-size:12px;font-weight:700;margin-right:10px;flex-shrink:0;}
+[data-theme="dark"] .tool-num{background:rgba(0,184,122,0.15);}
+.tool-title-row{display:flex;align-items:center;margin-bottom:6px;}
+
+.kit-checklist{list-style:none;padding-left:0!important;margin-top:10px;}
+.kit-checklist li{font-size:13.5px;color:var(--gray-600);line-height:1.6;font-weight:300;padding:9px 0 9px 30px;position:relative;border-bottom:1px solid var(--gray-100);margin-bottom:0!important;}
+.kit-checklist li:last-child{border-bottom:none;}
+.kit-checklist li::before{content:'';position:absolute;left:0;top:11px;width:15px;height:15px;border:1.5px solid var(--gray-200);border-radius:4px;}
+.kit-checklist-group{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin:18px 0 4px;}
+.kit-checklist-group:first-of-type{margin-top:6px;}
+
+.qa-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:10px;}
+@media(max-width:700px){.qa-cols{grid-template-columns:1fr;}}
+.qa-col-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.qa-col ul{padding-left:18px;margin-top:0;}
+.qa-col li{font-size:13px;color:var(--gray-600);line-height:1.65;font-weight:300;margin-bottom:8px;}
+
+.prfaq-field{border-bottom:1px solid var(--gray-100);padding:14px 0;}
+.prfaq-field:last-child{border-bottom:none;}
+.prfaq-field h5{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.prfaq-field span{font-size:13px;color:var(--gray-400);font-weight:300;font-style:italic;}
+
+.rule-list{counter-reset:rule;padding-left:0!important;}
+.rule-list li{list-style:none;counter-increment:rule;padding-left:30px!important;position:relative;}
+.rule-list li::before{content:counter(rule) '.';position:absolute;left:0;top:0;font-family:var(--font-mono);font-weight:700;color:var(--teal);font-size:13px;}
+
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:12px;padding:10px 20px;border-radius:5px;text-decoration:none;letter-spacing:0.5px;transition:all .2s;cursor:pointer;border:none;}
+.btn-run{background:var(--ink);color:var(--white);font-weight:500;}
+.btn-run:hover{background:var(--teal-dark);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+.btn-teal{background:var(--teal);color:var(--white);font-weight:700;}
+.btn-teal:hover{background:var(--teal-dark);}
+
+/* ── HERO ── */
+.calc-hero{padding:36px 32px 24px;border-bottom:1px solid var(--gray-100);background:var(--off-white);}
+.calc-hero-inner{max-width:var(--max-w);margin:0 auto;}
+.calc-hero h1{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:400;letter-spacing:-0.3px;margin-bottom:8px;color:var(--ink);line-height:1.1;}
+.calc-hero h1 em{font-style:italic;color:var(--teal);}
+.calc-hero p{font-size:15px;color:var(--gray-400);max-width:680px;line-height:1.65;font-weight:300;margin-bottom:14px;}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;}
+.hero-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:5px;}
+.hero-meta-item::before{content:'▸';color:var(--teal);}
+
+.download-card{background:var(--ink);border-radius:10px;padding:28px 30px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+[data-theme="dark"] .download-card{background:#1c2128;border:1px solid var(--gray-100);}
+.download-card h4{font-size:17px;font-weight:600;color:var(--white);margin-bottom:4px;}
+[data-theme="dark"] .download-card h4{color:var(--ink);}
+.download-card p{font-size:13px;color:rgba(255,255,255,0.5);font-weight:300;margin:0;}
+[data-theme="dark"] .download-card p{color:var(--gray-400);}
+
+.cta-bar{background:#0d1117;border-radius:10px;padding:36px;text-align:center;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
+.cta-bar-tag{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.cta-bar h3{font-family:var(--font-serif);font-size:24px;color:var(--white);font-weight:400;margin-bottom:8px;}
+[data-theme="dark"] .cta-bar h3{color:var(--ink);}
+.cta-bar p{font-size:13.5px;color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto 22px;font-weight:300;}
+[data-theme="dark"] .cta-bar p{color:var(--gray-400);}
+.cta-bar-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--gray-100);padding:40px 32px 22px;}
+[data-theme="dark"] footer{background:#0a0e14;}
+.footer-cols{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:26px;border-bottom:1px solid var(--gray-100);margin-bottom:18px;}
+.footer-col-title{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.footer-col a{display:block;font-size:13px;color:var(--gray-600);text-decoration:none;padding:4px 0;font-weight:300;}
+.footer-col a:hover{color:var(--teal);}
+@media(max-width:760px){.footer-cols{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-cols{grid-template-columns:1fr;}}
+.footer-fineprint{max-width:var(--max-w);margin:0 auto 16px;font-size:11.5px;color:var(--gray-400);line-height:1.7;font-weight:300;}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);text-decoration:none;}
+.footer-links a:hover{color:var(--teal);}
+
+@media(max-width:480px){.nav-brand-sub{display:none;}}
+
+/* ── DARK MODE ── */
+.theme-toggle{background:none;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;padding:6px 8px;color:var(--gray-600);display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s;flex-shrink:0;margin-left:4px;}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal);}
+.theme-toggle .icon-sun{display:none;}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+[data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);}
+[data-theme="dark"] nav{background:rgba(13,17,23,0.95)!important;}
+[data-theme="dark"] .nav-links a:hover{background:rgba(255,255,255,0.06);}
+[data-theme="dark"] .nav-cta{background:var(--teal)!important;color:#0d1117!important;}
+[data-theme="dark"] .btn-run{background:var(--teal);color:#0d1117;}
+[data-theme="dark"] .btn-run:hover{background:var(--teal-dark);}
+[data-theme="dark"] .btn-outline{border-color:var(--gray-200);color:var(--gray-600);}
+[data-theme="dark"] .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+
+/* ── PRINT (used to generate the downloadable PDF) ── */
+@media print{
+  nav,.stats-banner,.theme-toggle,.download-card,.cta-bar,footer{display:none!important;}
+  body{font-size:13px;}
+  .guide-card{border:none;padding:0;margin-bottom:22px;break-inside:avoid;}
+  .guide-body{padding:0 8px;max-width:100%;}
+  .calc-hero{background:none;border-bottom:2px solid #0d1117;padding:0 8px 16px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://www.stragentech.com" class="nav-brand">
+      <img src="assets/logo-horiz-lrg.png" alt="Stragentech" class="nav-brand-img light-logo">
+      <img src="assets/logo-horiz-lrg-dark.png" alt="Stragentech" class="nav-brand-img dark-logo">
+      <span class="nav-brand-sub">/ 2027 planning kit</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="tools.html">← Tools</a></li>
+      <li><a href="https://calendar.app.google/gSTNDgChThJVdzh8A" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="stats-banner">
+  <div class="stats-banner-inner">
+    <span class="stats-banner-item">Free — <strong>no signup required</strong></span>
+    <span class="stats-banner-item">Built on <strong>Amazon's OP1 / PR-FAQ planning discipline</strong></span>
+    <span class="stats-banner-item">One <strong>90-minute session</strong></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <h1>2027 <em>Planning Kit</em></h1>
+    <p>Three tools for writing a technology plan your service P&amp;L will believe: brainstorm the questions, work backwards from the customer, then check the roadmap. Built for connected-equipment OEMs and operations-heavy SMBs — the same discipline Amazon uses for its own annual planning, scaled to a 200-person team.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">3 tools</span>
+      <span class="hero-meta-item">1 session or 3 short ones</span>
+      <span class="hero-meta-item">Free PDF download</span>
+    </div>
+  </div>
+</div>
+
+<div class="guide-body">
+
+  <div class="guide-card">
+    <h2>How to Use It</h2>
+    <p>Run it as one 90-minute session with your engineering, connected-product, and service leads — or as three short ones. Use the tools in this order: questions first, then the customer outcome, then the plan.</p>
+    <ol class="rule-list" style="margin-top:14px;">
+      <li style="margin-bottom:10px;"><strong>Brainstorm for questions (20 min).</strong> Generate questions only. No answers allowed until the list is done. Pick the three that would change the plan most.</li>
+      <li style="margin-bottom:10px;"><strong>Write the press release and FAQ (40 min).</strong> Date it December 2027. Describe what a customer's operations lead can do that they can't today. The FAQ is where the hard tradeoffs surface.</li>
+      <li><strong>Check the roadmap (30 min).</strong> Hold the draft plan against the checklist. Anything without an owner, a date, and a measure isn't in the plan yet.</li>
+    </ol>
+    <p style="margin-top:16px;"><strong>Why written narratives.</strong> At Amazon, annual planning ran on written narratives in sentences, with no slides. A narrative makes it hard to skip what didn't work last year, and it makes the plan reviewable by people who weren't in the room. The same discipline works for a 200-person equipment maker.</p>
+  </div>
+
+  <div class="guide-card">
+    <h2>What a Good 2027 Plan Has That Most Don't</h2>
+    <ul>
+      <li>The tech debt behind last year's worst field-service months — named, costed, and owned.</li>
+      <li>An explicit boundary for what software and agents may do to fielded units without a person.</li>
+      <li>A Q1 that stabilizes before it automates, and automates before it modernizes.</li>
+      <li>An AI line with a value test: Gartner advises that every AI investment show business value within 90 days or be cut.</li>
+    </ul>
+  </div>
+
+  <div class="download-card">
+    <div>
+      <h4>Get the full kit as a PDF</h4>
+      <p>All three tools, formatted to print and bring into the room.</p>
+    </div>
+    <a href="downloads/Stragentech-2027-Planning-Kit.pdf" download class="btn btn-teal" onclick="if(typeof gtag!=='undefined') gtag('event','tool_report_downloaded',{'tool_name':'2027_planning_kit'});">⬇ Download the Planning Kit (PDF)</a>
+  </div>
+
+  <!-- TOOL 1 -->
+  <div class="guide-card">
+    <div class="section-tag">// tool 1</div>
+    <div class="tool-title-row"><span class="tool-num">1</span><h2 style="margin-bottom:0;">Brainstorm for Questions (BFQ)</h2></div>
+    <p>Better questions make better plans. Spend the first 20 minutes on questions only.</p>
+    <h4 style="margin-top:18px;">Rules</h4>
+    <ol class="rule-list">
+      <li style="margin-bottom:8px;">Questions only. Anyone who starts answering gets redirected.</li>
+      <li style="margin-bottom:8px;">Aim for 30+ questions in 15 minutes. Quantity first.</li>
+      <li style="margin-bottom:8px;">Sort into three piles: answered already, answerable with data we have, nobody knows.</li>
+      <li>Vote on the three questions that would change the plan most. Those become the plan's opening section.</li>
+    </ol>
+    <h4 style="margin-top:20px;">Starter questions for a connected-equipment OEM</h4>
+    <div class="qa-cols">
+      <div class="qa-col">
+        <div class="qa-col-title">Fleet and field service</div>
+        <ul>
+          <li>Which three failure modes drove the most truck rolls last year?</li>
+          <li>What share of dispatches could have been resolved remotely?</li>
+          <li>Which hardware revision costs us the most to support?</li>
+          <li>How long does it take to answer "which units, which firmware, which sites" after an advisory?</li>
+        </ul>
+      </div>
+      <div class="qa-col">
+        <div class="qa-col-title">AI and automation</div>
+        <ul>
+          <li>Which actions would we let software take on a customer's unit without a person? Which never?</li>
+          <li>What would an AI pilot have to show in 90 days to keep its funding?</li>
+          <li>Whose data would we be training on, and who owns it?</li>
+        </ul>
+      </div>
+      <div class="qa-col">
+        <div class="qa-col-title">Platform and tech debt</div>
+        <ul>
+          <li>Which part of the connected-product stack does only one person understand?</li>
+          <li>What would break first if device count doubled?</li>
+          <li>Can we roll back a firmware release on one cohort today?</li>
+        </ul>
+      </div>
+      <div class="qa-col">
+        <div class="qa-col-title">People and money</div>
+        <ul>
+          <li>Which hire are we making because a process is broken?</li>
+          <li>What are we paying for that nobody uses?</li>
+        </ul>
+      </div>
+    </div>
+    <h4 style="margin-top:18px;">The moonshot question</h4>
+    <p>If the installed base doubled by 2029 and service headcount stayed flat, what would have to be true of our platform?</p>
+  </div>
+
+  <!-- TOOL 2 -->
+  <div class="guide-card">
+    <div class="section-tag">// tool 2</div>
+    <div class="tool-title-row"><span class="tool-num">2</span><h2 style="margin-bottom:0;">Work Backwards: the PR-FAQ</h2></div>
+    <p>Write the announcement before the roadmap. If the press release isn't exciting to a customer, the roadmap won't be either. (Format from <em>Working Backwards</em>, Bryar and Carr, 2021.)</p>
+    <h4 style="margin-top:18px;">The press release (one page, dated December 2027)</h4>
+    <div class="prfaq-field"><h5>Headline</h5><span>What a customer can now do, in their words.</span></div>
+    <div class="prfaq-field"><h5>Subheading</h5><span>Who it's for and the main benefit, in one sentence.</span></div>
+    <div class="prfaq-field"><h5>The problem</h5><span>What the customer's operations lead dealt with before. Use their numbers: downtime, truck rolls, recovery time.</span></div>
+    <div class="prfaq-field"><h5>The solution</h5><span>What changed, described as the customer experiences it. No architecture.</span></div>
+    <div class="prfaq-field"><h5>Quote from your leader</h5><span>Why you did it.</span></div>
+    <div class="prfaq-field"><h5>Quote from a customer</h5><span>What it changed for them. If you can't imagine a believable one, stop here.</span></div>
+    <h4 style="margin-top:20px;">The FAQ</h4>
+    <div class="qa-cols">
+      <div class="qa-col">
+        <div class="qa-col-title">External (customers ask)</div>
+        <ul>
+          <li>What does it cost me, and what do I stop paying for?</li>
+          <li>What happens to units already in the field?</li>
+          <li>What can it do to my equipment without asking?</li>
+        </ul>
+      </div>
+      <div class="qa-col">
+        <div class="qa-col-title">Internal (your leadership asks)</div>
+        <ul>
+          <li>What has to be stabilized first?</li>
+          <li>What are we not doing so we can do this?</li>
+          <li>What would make us stop?</li>
+          <li>Who owns it, and how will we know by end of Q1?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL 3 -->
+  <div class="guide-card">
+    <div class="section-tag">// tool 3</div>
+    <div class="tool-title-row"><span class="tool-num">3</span><h2 style="margin-bottom:0;">2027 Roadmap Checklist</h2></div>
+    <p>Every item needs an owner, a date, and a measure. Order matters: stabilize, then automate, then modernize.</p>
+    <div class="kit-checklist-group">Stabilize (Q1)</div>
+    <ul class="kit-checklist">
+      <li>The tech debt behind the worst field-service months is listed, with a cost and an owner for each item</li>
+      <li>You can answer "which units, which firmware, which customer sites" within an hour</li>
+      <li>Firmware releases go out by cohort, with a tested rollback</li>
+      <li>Knowledge held by one person (provisioning, a legacy service) is written down</li>
+    </ul>
+    <div class="kit-checklist-group">Automate (Q2–Q3)</div>
+    <ul class="kit-checklist">
+      <li>The first workflow is chosen for low consequence and high volume, such as alarm triage before dispatch</li>
+      <li>An autonomy boundary is written and signed: what software may do alone, what waits for approval, what stays with a person</li>
+      <li>Success is measured as truck rolls avoided without a rollback, not "% autonomous"</li>
+      <li>Each AI investment has a 90-day value test and a stop rule</li>
+    </ul>
+    <div class="kit-checklist-group">Modernize (Q3–Q4)</div>
+    <ul class="kit-checklist">
+      <li>Platform changes are tied to a customer outcome from the PR-FAQ</li>
+      <li>Vendor contracts include an exit plan for data, logs, and policies</li>
+      <li>The plan names what you'll revisit in January once Q4 actuals are in</li>
+    </ul>
+  </div>
+
+  <div class="cta-bar">
+    <div class="cta-bar-tag">// Want a second set of eyes on your 2027 plan?</div>
+    <h3>Run it with us instead of just a worksheet.</h3>
+    <p>The Roadmap Planning Workshop runs this exact kit live with your leadership team — plus the facilitation to get through the hard tradeoffs in one sitting.</p>
+    <div class="cta-bar-actions">
+      <a href="index.html#planning-workshop" class="btn btn-teal">▸ Book the Planning Workshop</a>
+      <a href="tools.html" class="btn btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);">Explore More Free Tools</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <div class="footer-col-title">Tech Debt Suite</div>
+      <a href="tech-debt-calculator.html">Cost Calculator</a>
+      <a href="tech-debt-assessment.html">Assessment Scorecard</a>
+      <a href="tech-debt-velocity.html">Velocity Impact</a>
+      <a href="tech-debt-roi.html">Refactoring ROI</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Incident Cost Suite</div>
+      <a href="incident-cost.html">Overview</a>
+      <a href="incident-cost-calculator.html">Incident Cost Calculator</a>
+      <a href="incident-cost-index.html">Cost Index</a>
+      <a href="incident-cost-glossary.html">Glossary</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">More Tools &amp; Insights</div>
+      <a href="oi-scorecard.html">OI Readiness Scorecard</a>
+      <a href="legacy-risk-xray.html">Legacy Risk X-ray</a>
+      <a href="fractional-cto-cost-calculator.html">Fractional CTO Cost Calculator</a>
+      <a href="disaster-recovery-scorecard.html">Disaster Recovery Scorecard</a>
+      <a href="tools.html">All Free Tools →</a>
+    </div>
+  </div>
+  <p class="footer-fineprint">Stragentech.com is an independent resource. The PR-FAQ ("Working Backwards") format is drawn from publicly described Amazon planning practices and the book <em>Working Backwards</em> (Bryar &amp; Carr, 2021); the 90-day AI value-test guidance references Gartner's public commentary on AI investment review cycles. Not affiliated with Amazon or Gartner.</p>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Stragentech.com. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="tools.html">Tools</a>
+      <a href="index.html">Main Site</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('themeToggle').addEventListener('click',function(){
+  var html=document.documentElement;
+  var isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  localStorage.setItem('stragentech-theme',isDark?'light':'dark');
+});
+
+document.querySelectorAll('.btn, a[href*="contact"]').forEach(function(el){
+  el.addEventListener('click', function(){
+    if(typeof gtag==='undefined') return;
+    gtag('event','cta_click',{
+      'cta_label': el.textContent.trim().replace(/[→↗▸⬇]/g,'').trim(),
+      'page_location': window.location.pathname
+    });
+  });
+});
+</script>
+</body>
+</html>
