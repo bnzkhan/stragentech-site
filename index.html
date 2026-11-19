@@ -296,13 +296,6 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .about-logo-name span{color:#4a93c9;}
 .about-logo-tagline{font-family:var(--font-mono);font-size:16px;letter-spacing:2.5px;color:var(--gray-400);text-transform:uppercase;margin-top:9px;}
 
-.intro-video-trigger{position:relative;display:inline-block;cursor:pointer;margin:28px auto 0;}
-.intro-video-trigger:focus-visible{outline:2px solid var(--teal);outline-offset:4px;}
-.intro-video-poster{width:100%;max-width:220px;border-radius:12px;display:block;margin:0 auto;box-shadow:0 8px 40px rgba(13,17,23,0.12);}
-.intro-video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(13,17,23,0.72);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;padding-left:3px;transition:all .2s;}
-.intro-video-trigger:hover .intro-video-play{background:var(--teal);transform:translate(-50%,-50%) scale(1.08);}
-.intro-video-name{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin:20px 0 6px;letter-spacing:-0.2px;}
-.intro-video-title{font-family:var(--font-mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;}
 .btn-watch-intro{width:100%;justify-content:center;margin-bottom:12px;}
 
 .video-modal-overlay{display:none;position:fixed;inset:0;background:rgba(13,17,23,0.8);z-index:500;align-items:center;justify-content:center;padding:24px;}
@@ -899,13 +892,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
           <div class="about-logo-name">STRAGEN<span>TECH</span></div>
           <div class="about-logo-tagline">Agentic Technology Partners</div>
         </div>
-        <div class="intro-video-trigger" id="introVideoTrigger" role="button" tabindex="0" aria-label="Play video introduction from Bilal Khan">
-          <img src="assets/headshot.jpg" alt="Bilal A. Khan" class="intro-video-poster">
-          <span class="intro-video-play">▶</span>
-        </div>
-        <h3 class="intro-video-name">Bilal A. Khan</h3>
-        <p class="intro-video-title">Fractional CTO · Principal Partner</p>
-        <button type="button" class="btn btn-outline btn-watch-intro" id="watchIntroBtn">▶ Watch the Intro (44s)</button>
+        <button type="button" class="btn btn-outline btn-watch-intro" id="watchIntroBtn" style="margin-top:28px;">▶ Watch the Intro (44s)</button>
         <a href="downloads/BK-1pager.pdf" class="btn btn-primary" style="width:100%;justify-content:center;" download>Download 1-Pager (PDF) →</a>
       </div>
     </div>
@@ -1407,10 +1394,6 @@ document.querySelectorAll('.btn').forEach(function(el){
     overlay.classList.remove('visible');
   }
 
-  document.getElementById('introVideoTrigger').addEventListener('click', openVideoModal);
-  document.getElementById('introVideoTrigger').addEventListener('keydown', function(e){
-    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openVideoModal(); }
-  });
   document.getElementById('watchIntroBtn').addEventListener('click', openVideoModal);
   document.getElementById('videoModalClose').addEventListener('click', closeVideoModal);
   overlay.addEventListener('click', function(e){ if(e.target === overlay) closeVideoModal(); });
