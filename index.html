@@ -295,6 +295,22 @@ h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;
 .about-logo-name{font-family:var(--font-body);font-weight:700;font-size:42px;letter-spacing:0.3px;color:var(--ink);}
 .about-logo-name span{color:#4a93c9;}
 .about-logo-tagline{font-family:var(--font-mono);font-size:16px;letter-spacing:2.5px;color:var(--gray-400);text-transform:uppercase;margin-top:9px;}
+
+.intro-video-trigger{position:relative;display:inline-block;cursor:pointer;margin:28px auto 0;}
+.intro-video-trigger:focus-visible{outline:2px solid var(--teal);outline-offset:4px;}
+.intro-video-poster{width:100%;max-width:220px;border-radius:12px;display:block;margin:0 auto;box-shadow:0 8px 40px rgba(13,17,23,0.12);}
+.intro-video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(13,17,23,0.72);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;padding-left:3px;transition:all .2s;}
+.intro-video-trigger:hover .intro-video-play{background:var(--teal);transform:translate(-50%,-50%) scale(1.08);}
+.intro-video-name{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin:20px 0 6px;letter-spacing:-0.2px;}
+.intro-video-title{font-family:var(--font-mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;}
+.btn-watch-intro{width:100%;justify-content:center;margin-bottom:12px;}
+
+.video-modal-overlay{display:none;position:fixed;inset:0;background:rgba(13,17,23,0.8);z-index:500;align-items:center;justify-content:center;padding:24px;}
+.video-modal-overlay.visible{display:flex;}
+.video-modal-card{position:relative;max-width:860px;width:100%;}
+.video-modal-card video{width:100%;aspect-ratio:16/9;border-radius:10px;display:block;background:#000;object-fit:contain;}
+.video-modal-close{position:absolute;top:-38px;right:0;background:none;border:none;font-size:28px;line-height:1;color:#fff;cursor:pointer;padding:4px 10px;}
+.video-modal-close:hover{color:var(--teal);}
 .onepager-box{background:var(--off-white);border:2px dashed var(--gray-200);border-radius:16px;padding:48px 40px;text-align:center;}
 .onepager-icon{width:64px;height:64px;background:var(--teal-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;}
 .onepager-box h3{font-size:21px;font-weight:600;color:var(--ink);margin-bottom:10px;}
@@ -883,10 +899,13 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
           <div class="about-logo-name">STRAGEN<span>TECH</span></div>
           <div class="about-logo-tagline">Agentic Technology Partners</div>
         </div>
-        <br>
-        <!-- <img src="assets/headshot.jpg" alt="Bilal A. Khan" style="width:100%;max-width:300px;border-radius:12px;display:block;margin:0 auto;box-shadow:0 8px 40px rgba(13,17,23,0.12);">
-        <h3 style="font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin:20px 0 6px;letter-spacing:-0.2px;">Bilal A. Khan</h3>
-        <p style="font-family:var(--font-mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px;">Fractional CTO · Principal Partner</p> -->
+        <div class="intro-video-trigger" id="introVideoTrigger" role="button" tabindex="0" aria-label="Play video introduction from Bilal Khan">
+          <img src="assets/headshot.jpg" alt="Bilal A. Khan" class="intro-video-poster">
+          <span class="intro-video-play">▶</span>
+        </div>
+        <h3 class="intro-video-name">Bilal A. Khan</h3>
+        <p class="intro-video-title">Fractional CTO · Principal Partner</p>
+        <button type="button" class="btn btn-outline btn-watch-intro" id="watchIntroBtn">▶ Watch the Intro (44s)</button>
         <a href="downloads/BK-1pager.pdf" class="btn btn-primary" style="width:100%;justify-content:center;" download>Download 1-Pager (PDF) →</a>
       </div>
     </div>
@@ -1355,6 +1374,47 @@ document.querySelectorAll('.btn').forEach(function(el){
     el.setAttribute('repeatCount', '1');
     el.setAttribute('dur', '1ms');
   });
+})();
+</script>
+
+<div class="video-modal-overlay" id="videoModalOverlay">
+  <div class="video-modal-card">
+    <button class="video-modal-close" id="videoModalClose" type="button" aria-label="Close">×</button>
+    <video id="introVideoEl" controls playsinline preload="none" poster="assets/headshot.jpg">
+      <source id="introVideoSource" src="" type="video/mp4">
+    </video>
+  </div>
+</div>
+
+<script>
+(function(){
+  var overlay = document.getElementById('videoModalOverlay');
+  var video = document.getElementById('introVideoEl');
+  var source = document.getElementById('introVideoSource');
+  var VIDEO_SRC = 'assets/Bilal_Khan_fCTO_Intro_Short_v2.mp4';
+
+  function openVideoModal(){
+    if(!source.getAttribute('src')){
+      source.setAttribute('src', VIDEO_SRC);
+      video.load();
+    }
+    overlay.classList.add('visible');
+    video.play().catch(function(){});
+    if(typeof gtag!=='undefined') gtag('event','intro_video_played',{'page_location':window.location.pathname});
+  }
+  function closeVideoModal(){
+    video.pause();
+    overlay.classList.remove('visible');
+  }
+
+  document.getElementById('introVideoTrigger').addEventListener('click', openVideoModal);
+  document.getElementById('introVideoTrigger').addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openVideoModal(); }
+  });
+  document.getElementById('watchIntroBtn').addEventListener('click', openVideoModal);
+  document.getElementById('videoModalClose').addEventListener('click', closeVideoModal);
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeVideoModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeVideoModal(); });
 })();
 </script>
 </body>

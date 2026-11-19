@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JY4954SHKF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JY4954SHKF');
+</script>
+<script>(function(){var t=localStorage.getItem('stragentech-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stragentech | Fractional CTO &amp; AI Transformation</title>
+<meta name="robots" content="noindex"><!-- PREVIEW FILE: remove this line when promoting to index.html -->
+<link rel="canonical" href="https://www.stragentech.com/">
+<meta name="description" content="Fractional CTO practice helping growing companies adopt AI that pays back: AI roadmaps, agent rollouts and senior technology leadership. Seattle and remote.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.stragentech.com/">
+<meta property="og:title" content="Stragentech | Fractional CTO &amp; AI Transformation">
+<meta property="og:description" content="Senior technology leadership and a practical path into AI for growing companies.">
+<meta property="og:image" content="https://www.stragentech.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --white:#ffffff;
+  --off-white:#f0f2f5;
+  --gray-50:#f3f4f7;
+  --gray-100:#e8eaee;
+  --gray-200:#d0d4dc;
+  --gray-400:#4b5563;
+  --gray-600:#1f2937;
+  --gray-800:#1e2333;
+  --ink:#0d1117;
+  --teal:#00b87a;
+  --teal-dark:#008f5e;
+  --teal-pale:#e8faf3;
+  --teal-mid:#b3edd9;
+  --blue:#1a6fd4;
+  --blue-pale:#e8f0fc;
+  --font-serif:'Instrument Serif',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1080px;
+  --radius:8px;
+  /* Orbit graphic — aliased to the tokens above so it recolors automatically with [data-theme="dark"] */
+  --orbit-track:var(--gray-100);
+  --orbit-hub-bg:var(--white);
+  --orbit-hub-border:var(--gray-100);
+  --orbit-node-bg:var(--white);
+  --orbit-node-border:var(--gray-100);
+  --orbit-title:var(--ink);
+  --orbit-name:var(--ink);
+  --orbit-desc:var(--gray-400);
+  --orbit-sub:var(--gray-400);
+  --orbit-teal:var(--teal);
+  --orbit-teal-dark:var(--teal-dark);
+  --orbit-teal-pale:var(--teal-pale);
+  --orbit-orange:#ff9500;
+  --orbit-hitl:#5b6b82;
+  --orbit-hitl-dots:rgba(139,146,160,0.38);
+  --orbit-hitl-bg:rgba(255,255,255,0.55);
+  --orbit-hitl-border:rgba(91,107,130,0.40);
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--gray-100);}
+.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px;}
+.nav-logo{display:flex;align-items:center;text-decoration:none;}
+.nav-logo-img{height:44px;width:auto;display:block;}
+.nav-logo-img.dark-logo{display:none;}
+[data-theme="dark"] .nav-logo-img.light-logo{display:none;}
+[data-theme="dark"] .nav-logo-img.dark-logo{display:block;}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none;}
+.nav-links a{font-size:14px;font-weight:500;color:var(--gray-600);text-decoration:none;padding:7px 12px;border-radius:6px;transition:all .18s;}
+.nav-links a:hover{color:var(--ink);background:var(--gray-50);}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:8px 18px!important;border-radius:6px!important;}
+.nav-cta:hover{background:var(--teal-dark)!important;}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px;}
+
+/* ── HERO ── */
+#home{min-height:100vh;display:flex;align-items:center;padding:100px 32px 80px;background:var(--white);position:relative;overflow:hidden;}
+.hero-bg-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,var(--gray-100) 1px,transparent 0);background-size:28px 28px;opacity:0.7;}
+.hero-bg-fade{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0) 40%,rgba(0,184,122,0.04) 100%);}
+.hero-particles{position:absolute;inset:0;z-index:0;}
+.hero-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--teal-pale);border:1px solid var(--teal-mid);border-radius:20px;padding:6px 16px;margin-bottom:28px;}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2.2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0.5;}}
+.hero-badge span{font-family:var(--font-mono);font-size:12px;color:var(--teal-dark);letter-spacing:0.5px;font-weight:500;}
+h1{font-family:var(--font-serif);font-size:clamp(40px,5.5vw,66px);line-height:1.08;font-weight:400;color:var(--ink);margin-bottom:22px;letter-spacing:-0.5px;}
+h1 em{font-style:italic;color:var(--teal);}
+.hero-sub{font-size:18px;font-weight:400;line-height:1.75;color:var(--gray-600);margin-bottom:40px;max-width:520px;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.hero-friction{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);letter-spacing:0.5px;}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:14px;font-weight:500;padding:13px 26px;border-radius:var(--radius);text-decoration:none;transition:all .2s;cursor:pointer;border:none;}
+.btn-primary{background:var(--ink);color:var(--white);}
+.btn-primary:hover{background:var(--teal-dark);transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+/* ── SHARED SECTION ── */
+section{padding:88px 32px;}
+.section-inner{max-width:var(--max-w);margin:0 auto;}
+.section-label{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+h2{font-family:var(--font-serif);font-size:clamp(30px,4vw,46px);font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:14px;letter-spacing:-0.3px;}
+.section-sub{font-size:18px;font-weight:400;color:var(--gray-400);line-height:1.75;max-width:520px;}
+.section-header{margin-bottom:52px;}
+
+/* ── FREE TOOL BANNER ── */
+.free-banner-row{display:flex;flex-direction:column;gap:12px;margin-bottom:52px;}
+.free-banner{background:var(--off-white);border:1px solid var(--gray-100);border-radius:10px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;transition:border-color .2s;}
+.free-banner:hover{border-color:var(--teal-mid);}
+.free-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
+.free-banner h3{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.free-banner p{font-size:14px;color:var(--gray-400);font-weight:300;}
+.btn-sm{font-size:13px;padding:9px 20px;}
+
+/* ── PROBLEM ── */
+#problem{background:var(--off-white);padding:72px 32px;}
+.problem-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr 1.8fr;gap:72px;align-items:start;}
+.problem-left h2{font-size:32px;}
+.problem-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.problem-card{background:var(--white);border:1px solid var(--gray-100);border-radius:10px;padding:22px 24px;transition:all .2s;}
+.problem-card:hover{border-color:var(--teal-mid);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,184,122,0.07);}
+.problem-card-icon{font-size:20px;margin-bottom:10px;}
+.problem-card h4{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+.problem-card p{font-size:14px;line-height:1.65;color:var(--gray-400);font-weight:400;}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px;}
+.svc-card{border:1px solid var(--gray-100);border-radius:12px;padding:28px;background:var(--white);transition:all .2s;position:relative;overflow:hidden;}
+.svc-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--blue));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.svc-card:hover{border-color:var(--gray-200);box-shadow:0 6px 32px rgba(13,17,23,0.07);transform:translateY(-2px);}
+.svc-card:hover::after{transform:scaleX(1);}
+.svc-icon{width:44px;height:44px;background:var(--teal-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px;}
+.svc-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+.svc-card h3{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.svc-card p{font-size:14px;color:var(--gray-400);line-height:1.7;font-weight:400;margin-bottom:16px;}
+.svc-bullets{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.svc-bullets li{font-size:13px;color:var(--gray-600);padding-left:16px;position:relative;font-weight:400;}
+.svc-bullets li::before{content:'→';position:absolute;left:0;color:var(--teal);font-size:11px;top:1px;}
+.svc-price{font-family:var(--font-mono);font-size:12px;color:var(--gray-400);margin-top:18px;padding-top:14px;border-top:1px solid var(--gray-100);}
+.svc-cta-bar{background:var(--ink);border-radius:12px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.svc-cta-bar h3{font-family:var(--font-serif);font-size:26px;color:var(--white);font-weight:400;max-width:400px;line-height:1.3;}
+.svc-cta-bar p{font-size:14px;color:rgba(255,255,255,0.55);margin-top:6px;font-weight:300;}
+
+/* ── WORKSHOP OFFER CARD ── */
+.workshop-offer-card{border:1px solid var(--gray-100);border-radius:14px;padding:44px 48px;background:var(--off-white);}
+.workshop-offer-tag{font-family:var(--font-mono);font-size:11px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.workshop-offer-card h3{font-family:var(--font-serif);font-size:30px;font-weight:400;color:var(--ink);margin-bottom:12px;line-height:1.2;}
+.workshop-offer-card p.workshop-offer-sub{font-size:15px;color:var(--gray-600);line-height:1.75;font-weight:400;max-width:740px;margin-bottom:24px;}
+.workshop-offer-feats{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:30px;max-width:740px;}
+.workshop-offer-feats li{font-size:14px;color:var(--gray-600);padding-left:24px;position:relative;line-height:1.65;font-weight:400;}
+.workshop-offer-feats li strong{color:var(--ink);font-weight:600;}
+.workshop-offer-feats li::before{content:'✓';position:absolute;left:0;top:1px;color:var(--teal);font-weight:700;font-size:13px;}
+.workshop-offer-actions{display:flex;gap:12px;flex-wrap:wrap;}
+[data-theme="dark"] .workshop-offer-card{background:#1c2128;border-color:var(--gray-100);}
+
+/* ── ORBIT GRAPHIC ── */
+.orbit{position:relative;width:460px;height:460px;--orbit-dur:14s;max-width:100%;aspect-ratio:1/1;margin:0 auto;}
+.orbit .ring-svg{position:absolute;inset:0;width:100%;height:100%;}
+.orbit .rotor{transform-origin:230px 230px;animation:orbit-spin var(--orbit-dur) linear infinite;}
+@keyframes orbit-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.orbit .track-ring{fill:none;stroke:var(--orbit-track);stroke-width:1.5;}
+.orbit .progress-arc{fill:none;stroke:var(--orbit-teal);stroke-width:2.5;stroke-linecap:round;}
+.orbit .hub-bg{fill:var(--orbit-hub-bg);stroke:var(--orbit-hub-border);stroke-width:1;}
+.orbit .spoke{stroke:var(--orbit-track);stroke-width:1;}
+
+.orbit .center-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;width:186px;}
+.orbit .center-title{font-family:var(--font-serif);font-size:27px;line-height:1.06;color:var(--orbit-title);letter-spacing:-0.2px;}
+.orbit .center-sub{font-family:var(--font-mono);font-size:10px;color:var(--orbit-sub);letter-spacing:1.5px;margin-top:14px;}
+.orbit .status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--orbit-orange);margin-right:6px;vertical-align:middle;animation:orbit-blink 2.6s ease-in-out infinite;}
+@keyframes orbit-blink{0%,100%{opacity:1}50%{opacity:0.18}}
+
+.orbit .node{position:absolute;width:132px;transform:translate(-50%,-50%);text-align:center;}
+.orbit .node-dot{width:60px;height:60px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:var(--orbit-node-bg);border:1.5px solid var(--orbit-node-border);transition:all .4s;}
+.orbit .node.active .node-dot{border-color:var(--orbit-teal);background:var(--orbit-teal-pale);box-shadow:0 0 0 6px rgba(0,184,122,0.10),0 8px 28px rgba(0,184,122,0.18);transform:scale(1.08);}
+.orbit .node-name{font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--orbit-name);letter-spacing:0.5px;transition:color .4s;overflow-wrap:break-word;}
+.orbit .node.active .node-name{color:var(--orbit-teal-dark);}
+.orbit .node-desc{font-family:var(--font-body);font-size:10px;color:var(--orbit-desc);line-height:1.4;font-weight:300;margin-top:3px;}
+
+.orbit .icon{width:44px;height:44px;display:block;}
+.orbit .icon .stroke-teal{stroke:var(--orbit-teal);fill:none;}
+.orbit .icon .fill-teal{fill:var(--orbit-teal);}
+
+/* ── HITL local orbit, centered on the agent.act node-dot ── */
+.orbit .act-hitl{position:absolute;width:104px;height:104px;transform:translate(-50%,-50%);pointer-events:none;z-index:1;}
+.orbit .hitl-dotted{position:absolute;inset:0;border-radius:50%;border:1.5px dotted var(--orbit-hitl-dots);}
+.orbit .hitl-rotor{position:absolute;inset:0;transform-origin:center;animation:orbit-spin 11s linear infinite;}
+.orbit .hitl-mini{
+  position:absolute;top:0;left:50%;width:34px;height:34px;border-radius:50%;
+  background:var(--orbit-hitl-bg);border:1px solid var(--orbit-hitl-border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:0 2px 8px rgba(13,17,23,0.06);
+  backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px);
+  animation:orbit-spinrev 11s linear infinite;transform-origin:center;
+}
+@keyframes orbit-spinrev{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-360deg)}}
+.orbit .hitl-mini svg{width:16px;height:16px;margin-top:1px;}
+.orbit .hitl-mini svg path,.orbit .hitl-mini svg circle{fill:var(--orbit-hitl);}
+.orbit .hitl-mini .lbl{font-family:var(--font-mono);font-size:5px;font-weight:600;color:var(--orbit-hitl);letter-spacing:0.5px;line-height:1;}
+
+@media(max-width:520px){
+  .orbit{width:340px;height:340px;}
+  .orbit .node{width:104px;}
+  .orbit .node-dot{width:50px;height:50px;}
+  .orbit .icon{width:34px;height:34px;}
+  .orbit .center-title{font-size:21px;}
+  .orbit .center-label{width:150px;}
+  .orbit .act-hitl{width:88px;height:88px;}
+  .orbit .hitl-mini{width:30px;height:30px;}
+  .orbit .hitl-mini svg{width:14px;height:14px;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .orbit .rotor,.orbit .status-dot,.orbit .hitl-rotor,.orbit .hitl-mini{animation:none;}
+  .orbit .icon .radar-sweep{display:none;}
+}
+
+.orbit.is-paused .rotor,
+.orbit.is-paused .status-dot,
+.orbit.is-paused .hitl-rotor,
+.orbit.is-paused .hitl-mini,
+.orbit.is-paused .radar-sweep {
+  animation-play-state: paused;
+}
+
+/* ── PROCESS ── */
+#process{background:var(--white);}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+.process-grid::before{content:'';position:absolute;top:28px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,var(--teal-mid),var(--gray-200));z-index:0;}
+.process-step{text-align:center;padding:0 16px;position:relative;z-index:1;}
+.process-num{width:56px;height:56px;border-radius:50%;background:var(--white);border:1.5px solid var(--teal-mid);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-family:var(--font-serif);font-size:20px;color:var(--teal);}
+.process-week{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.process-step h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.process-step p{font-size:14px;color:var(--gray-400);line-height:1.65;font-weight:400;}
+
+/* ── RESULTS ── */
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.result-card{border:1px solid var(--gray-100);border-radius:12px;padding:28px;background:var(--white);transition:border-color .2s;}
+.result-card:hover{border-color:var(--teal-mid);}
+.result-card.featured{background:var(--ink);border-color:var(--ink);}
+.result-card.featured *{color:var(--white)!important;}
+.result-card.featured .result-num{color:var(--teal)!important;}
+.result-card.featured .result-label{color:rgba(255,255,255,0.5)!important;}
+.result-co{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
+.result-card.featured .result-co{color:rgba(0,184,122,0.8)!important;}
+.result-card h3{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.result-card p{font-size:14px;color:var(--gray-400);line-height:1.65;font-weight:400;margin-bottom:20px;}
+.result-metrics{display:flex;gap:24px;flex-wrap:wrap;}
+.result-num{font-family:var(--font-serif);font-size:30px;color:var(--teal);line-height:1;}
+.result-label{font-size:10px;color:var(--gray-400);font-weight:400;margin-top:3px;text-transform:uppercase;letter-spacing:0.5px;}
+
+/* ── WHO WE WORK WITH ── */
+#niches{background:var(--off-white);}
+.niches-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;}
+.niche-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:28px;transition:all .2s;}
+.niche-card:hover{border-color:var(--teal-mid);box-shadow:0 4px 20px rgba(0,184,122,0.06);}
+.niche-card.wide{grid-column:1/-1;background:linear-gradient(135deg,var(--teal-pale),var(--blue-pale));border-color:var(--teal-mid);}
+.niche-icon{font-size:28px;margin-bottom:14px;}
+.niche-card h3{font-size:18px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.niche-card p{font-size:14px;color:var(--gray-400);line-height:1.7;font-weight:400;margin-bottom:16px;}
+.niche-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.niche-tag{background:var(--teal-pale);color:var(--teal-dark);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:500;}
+
+/* ── ENGAGEMENT MODELS ── */
+.eng-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.eng-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:28px;text-align:left;transition:all .2s;}
+.eng-card:hover{border-color:var(--gray-200);box-shadow:0 4px 20px rgba(13,17,23,0.06);}
+.eng-card.highlight{background:var(--ink);border-color:var(--ink);}
+.eng-card.highlight *{color:var(--white)!important;}
+.eng-card.highlight .eng-price{color:var(--teal)!important;}
+.eng-card.highlight .eng-feat::before{color:var(--teal)!important;}
+.eng-card.highlight .btn-primary{background:var(--teal)!important;color:var(--ink)!important;}
+.eng-label{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+.eng-card h3{font-size:18px;font-weight:600;color:var(--ink);margin-bottom:0;}
+.eng-price{font-family:var(--font-serif);font-size:32px;color:var(--teal);line-height:1;margin:14px 0 4px;}
+.eng-duration{font-size:13px;color:var(--gray-400);margin-bottom:20px;}
+.eng-feats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:26px;}
+.eng-feat{font-size:14px;color:var(--gray-600);padding-left:18px;position:relative;font-weight:400;}
+.eng-feat::before{content:'✓';position:absolute;left:0;color:var(--teal);font-size:12px;font-weight:600;}
+
+/* ── ABOUT / 1-PAGER ── */
+.about-1pager-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.about-bio{font-size:17px;font-weight:400;line-height:1.85;color:var(--gray-600);margin-bottom:24px;}
+.about-bio strong{font-weight:600;color:var(--ink);}
+.cred-title{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;margin-top:30px;}
+.cred-list{display:flex;flex-direction:column;gap:10px;}
+.cred-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--gray-600);font-weight:400;}
+.cred-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);margin-top:7px;flex-shrink:0;}
+
+.about-logo-graphic{display:flex;justify-content:center;filter:drop-shadow(0 10px 28px rgba(13,17,23,0.18));}
+.about-logo-svg{width:100%;max-width:330px;height:auto;display:block;}
+.about-logo-wordmark{margin-top:24px;}
+.about-logo-name{font-family:var(--font-body);font-weight:700;font-size:42px;letter-spacing:0.3px;color:var(--ink);}
+.about-logo-name span{color:#4a93c9;}
+.about-logo-tagline{font-family:var(--font-mono);font-size:16px;letter-spacing:2.5px;color:var(--gray-400);text-transform:uppercase;margin-top:9px;}
+.onepager-box{background:var(--off-white);border:2px dashed var(--gray-200);border-radius:16px;padding:48px 40px;text-align:center;}
+.onepager-icon{width:64px;height:64px;background:var(--teal-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;}
+.onepager-box h3{font-size:21px;font-weight:600;color:var(--ink);margin-bottom:10px;}
+.onepager-box p{font-size:14px;color:var(--gray-400);line-height:1.75;margin-bottom:28px;font-weight:300;}
+.onepager-note{margin-top:14px;}
+.onepager-note a{font-size:12px;color:var(--gray-400);text-decoration:none;font-family:var(--font-mono);letter-spacing:0.5px;}
+.onepager-coming{margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-200);font-family:var(--font-mono);font-size:10px;color:var(--gray-400);letter-spacing:1px;}
+
+/* ── TESTIMONIALS ── */
+#testimonials{background:var(--off-white);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.testi-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:28px;}
+.testi-stars{color:var(--teal);font-size:13px;letter-spacing:2px;margin-bottom:14px;}
+.testi-quote{font-family:var(--font-serif);font-style:italic;font-size:17px;line-height:1.65;color:var(--ink);margin-bottom:20px;font-weight:400;}
+.testi-attr{display:flex;align-items:center;gap:12px;border-top:1px solid var(--gray-100);padding-top:16px;}
+.testi-avatar{width:38px;height:38px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--white);flex-shrink:0;}
+.testi-name{font-size:14px;font-weight:600;color:var(--ink);}
+.testi-role{font-size:12px;color:var(--gray-400);}
+
+/* ── INSIGHTS ── */
+.blog-carousel-wrap{position:relative;}
+.blog-controls{display:flex;justify-content:space-between;gap:8px;margin-bottom:16px;}
+#insights .section-header{margin-bottom:20px;}
+.blog-arrow{width:70px;height:70px;border-radius:50%;border:1px solid var(--gray-100);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:all .2s;font-size:53px;font-weight:900;line-height:1;flex-shrink:0;}
+.blog-arrow:hover{color:var(--teal);border-color:var(--teal);}
+.blog-grid{display:flex;gap:18px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:4px;}
+.blog-grid::-webkit-scrollbar{display:none;}
+.blog-card{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;overflow:hidden;transition:all .2s;min-width:240px;flex:0 0 calc(36% - 9px);}
+.blog-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(13,17,23,0.08);}
+.blog-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:36px;}
+.blog-img.c1{background:linear-gradient(135deg,var(--teal-pale),var(--teal-mid));}
+.blog-img.c2{background:linear-gradient(135deg,var(--blue-pale),#b3cef4);}
+.blog-img.c3{background:linear-gradient(135deg,#f0f4ff,#c5d4f4);}
+.blog-img.c4{background:linear-gradient(135deg,#e0f2fe,#93c5fd);}
+.blog-img.c5{background:linear-gradient(135deg,#fef9c3,#fde68a);}
+.blog-img.c6{background:linear-gradient(135deg,#f0fdf4,#86efac);}
+.blog-body{padding:22px;}
+.blog-tag{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.blog-card h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:7px;line-height:1.45;}
+.blog-card p{font-size:13px;color:var(--gray-400);line-height:1.65;font-weight:400;margin-bottom:12px;}
+.blog-meta{font-size:11px;color:var(--gray-400);font-family:var(--font-mono);}
+
+/* ── CONTACT ── */
+#contact{background:var(--ink);}
+.contact-grid{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contact-left .section-label{color:rgba(0,184,122,0.8);}
+.contact-left h2{color:var(--white);}
+.contact-left .section-sub{color:rgba(255,255,255,0.5);}
+.contact-details{margin-top:40px;display:flex;flex-direction:column;gap:14px;}
+.contact-detail{display:flex;align-items:center;gap:14px;}
+.c-icon{width:38px;height:38px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.c-label{font-family:var(--font-mono);font-size:10px;color:rgba(0,184,122,0.7);letter-spacing:1px;margin-bottom:2px;}
+.c-val{font-size:14px;color:rgba(255,255,255,0.65);}
+.contact-form-wrap{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:32px;}
+.form-group{margin-bottom:14px;}
+.form-group label{display:block;font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:11px 14px;font-size:14px;color:var(--white);font-family:var(--font-body);transition:border-color .2s;outline:none;}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.25);}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--teal);}
+.form-group select option{background:var(--ink);color:var(--white);}
+.form-group textarea{resize:vertical;min-height:90px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+
+/* ── FORM VALIDATION ── */
+.form-group input.error,.form-group select.error,.form-group textarea.error{border-color:#e53e3e!important;}
+.field-error{font-size:11px;color:#e53e3e;margin-top:5px;display:none;font-family:var(--font-mono);letter-spacing:0.3px;}
+.field-error.show{display:block;}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding:40px 32px 22px;}
+.footer-cols{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:18px;}
+.footer-col-title{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;padding:4px 0;font-weight:300;}
+.footer-col a:hover{color:var(--teal);}
+@media(max-width:760px){.footer-cols{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-cols{grid-template-columns:1fr;}}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.3);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--teal);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:minmax(0,1fr);}
+  .problem-inner,.about-1pager-grid,.contact-grid{grid-template-columns:1fr;}
+  .services-grid,.results-grid,.niches-grid,.eng-grid,.testi-grid{grid-template-columns:1fr;}
+  .blog-grid{flex-direction:column;}
+  .blog-card{min-width:unset;flex:unset;width:100%;}
+  .process-grid{grid-template-columns:1fr 1fr;gap:24px;}
+  .process-grid::before{display:none;}
+  .problem-cards{grid-template-columns:1fr;}
+  .niche-card.wide{grid-column:auto;}
+  .nav-links{display:none;position:fixed;top:72px;left:0;right:0;background:var(--white);flex-direction:column;gap:0;border-bottom:1px solid var(--gray-100);padding:8px 0;z-index:199;}
+  .nav-links.open{display:flex;}
+  .nav-links li{width:100%;}
+  .nav-links a{display:block;padding:12px 24px;border-radius:0;}
+  .nav-toggle{display:block;}
+  .form-row{grid-template-columns:1fr;}
+  .svc-cta-bar{flex-direction:column;text-align:center;}
+}
+
+/* ── DARK MODE ── */
+.theme-toggle{background:none;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;padding:6px 8px;color:var(--gray-600);display:flex;align-items:center;justify-content:center;transition:border-color .18s,color .18s;flex-shrink:0;margin-left:4px;}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal);}
+.theme-toggle .icon-sun{display:none;}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+[data-theme="dark"]{--white:#0d1117;--off-white:#161b22;--gray-50:#1c2128;--gray-100:#2d333b;--gray-200:#444c56;--gray-400:#8b949e;--gray-600:#c9d1d9;--gray-800:#e6edf3;--ink:#f0f6fc;--teal-pale:rgba(0,184,122,0.1);--teal-mid:rgba(0,184,122,0.28);--blue-pale:rgba(26,111,212,0.1);--orbit-hitl:#aab4c6;--orbit-hitl-dots:rgba(255,255,255,0.22);--orbit-hitl-bg:rgba(255,255,255,0.10);--orbit-hitl-border:rgba(255,255,255,0.22);}
+[data-theme="dark"] nav{background:rgba(13,17,23,0.95)!important;}
+[data-theme="dark"] .nav-links a:hover{background:rgba(255,255,255,0.06);}
+[data-theme="dark"] .nav-cta{background:var(--teal)!important;color:#0d1117!important;}
+[data-theme="dark"] .nav-toggle svg rect{fill:var(--gray-600);}
+[data-theme="dark"] .btn-primary{background:var(--teal);color:#0d1117;}
+[data-theme="dark"] .btn-primary:hover{background:var(--teal-dark);}
+[data-theme="dark"] .btn-outline{border-color:var(--gray-200);color:var(--gray-600);}
+[data-theme="dark"] .btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+[data-theme="dark"] .hero-bg-pattern{opacity:0.2;}
+[data-theme="dark"] .result-card.featured{background:rgba(0,184,122,0.07);border-color:rgba(0,184,122,0.25);}
+[data-theme="dark"] .result-card.featured *{color:var(--ink)!important;}
+[data-theme="dark"] .result-card.featured .result-num{color:var(--teal)!important;}
+[data-theme="dark"] .result-card.featured .result-co{color:rgba(0,184,122,0.8)!important;}
+[data-theme="dark"] .result-card.featured .result-label{color:var(--gray-400)!important;}
+[data-theme="dark"] .svc-cta-bar{background:#1c2128;border:1px solid var(--gray-100);}
+[data-theme="dark"] .svc-cta-bar h3{color:var(--ink);}
+[data-theme="dark"] .svc-cta-bar p{color:var(--gray-400);}
+[data-theme="dark"] #contact{background:#0a0e14;}
+[data-theme="dark"] footer{background:#0a0e14;}
+[data-theme="dark"] .contact-left h2{color:var(--ink);}
+[data-theme="dark"] .problem-card,
+[data-theme="dark"] .svc-card,
+[data-theme="dark"] .result-card,
+[data-theme="dark"] .niche-card,
+[data-theme="dark"] .eng-card,
+[data-theme="dark"] .testi-card,
+[data-theme="dark"] .blog-card,
+[data-theme="dark"] .blog-arrow{background:#21262d;}
+
+/* ═════ REVAMP (Nov 2026) ═════ */
+:root{--max-w:1200px;--paper:#faf9f6;--radius:12px;}
+[data-theme="dark"]{--paper:#0d1117;}
+body{background:var(--paper);}
+#home{background:var(--paper);}
+.hero-particles{display:none;}
+#home::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 78% 45%,rgba(0,184,122,0.08),transparent 70%),radial-gradient(circle at 1px 1px,var(--gray-100) 1px,transparent 0);background-size:auto,28px 28px;opacity:.9;pointer-events:none;}
+[data-theme="dark"] #home::before{opacity:.35;}
+#home h1{font-size:clamp(2.6rem,5.2vw,4.4rem);line-height:1.02;text-wrap:balance;letter-spacing:-0.5px;}
+h2{font-size:clamp(2rem,3.4vw,3rem);text-wrap:balance;}
+.section-sub{max-width:640px;}
+section{padding:108px 32px;}
+.btn{border-radius:999px;}
+.btn .arr{transition:transform .2s;display:inline-block;}
+.btn:hover .arr{transform:translateX(3px);}
+.nav-cta{border-radius:999px!important;}
+.problem-card,.niche-card,.result-card,.blog-card,.svc2-card,.faq-item{border-radius:14px;}
+.problem-card:hover,.niche-card:hover{box-shadow:none;border-color:var(--teal);}
+.ico{width:40px;height:40px;border-radius:10px;background:var(--teal-pale);color:var(--teal-dark);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+[data-theme="dark"] .ico{color:var(--teal);}
+
+/* preview badge */
+.preview-flag{position:fixed;left:16px;bottom:16px;z-index:300;font-family:var(--font-mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;background:#ff9500;color:#0d1117;padding:6px 12px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.15);}
+
+/* proof strip */
+#proof{padding:36px 32px;background:var(--white);border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100);}
+.proof-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1.1fr 2fr;gap:40px;align-items:center;}
+.proof-label{font-family:var(--font-mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+.proof-names{font-size:15px;color:var(--gray-600);line-height:1.6;}
+.proof-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.proof-stat{border-left:2px solid var(--teal-mid);padding-left:14px;}
+.proof-num{font-family:var(--font-serif);font-size:32px;line-height:1;color:var(--ink);}
+.proof-cap{font-size:12px;color:var(--gray-400);margin-top:6px;line-height:1.4;}
+
+/* services bento */
+#services{background:var(--paper);}
+.svc2-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;grid-template-rows:auto auto;gap:18px;}
+.svc2-card{background:var(--white);border:1px solid var(--gray-100);padding:28px;display:flex;flex-direction:column;transition:border-color .2s,transform .2s;}
+.svc2-card:hover{border-color:var(--teal);transform:translateY(-2px);}
+.svc2-card.wide{grid-column:span 2;}
+.svc2-card.lead{grid-row:span 2;border:1.5px solid var(--teal);background:linear-gradient(180deg,var(--teal-pale),var(--white) 55%);}
+.svc2-badge{align-self:flex-start;font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;background:var(--teal);color:#0d1117;padding:4px 10px;border-radius:999px;margin-bottom:14px;}
+.svc2-tag{font-family:var(--font-mono);font-size:11px;color:var(--teal-dark);letter-spacing:.5px;margin-bottom:10px;}
+[data-theme="dark"] .svc2-tag{color:var(--teal);}
+.svc2-card h3{font-family:var(--font-serif);font-weight:400;font-size:28px;line-height:1.1;color:var(--ink);margin-bottom:10px;}
+.svc2-card.lead h3{font-size:36px;}
+.svc2-card p{font-size:15px;color:var(--gray-600);line-height:1.65;margin-bottom:16px;}
+.svc2-card ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px;}
+.svc2-card li{font-size:14px;color:var(--gray-600);padding-left:20px;position:relative;line-height:1.5;}
+.svc2-card li::before{content:'';position:absolute;left:2px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--teal-mid);border:1.5px solid var(--teal);}
+.svc2-card .btn{margin-top:auto;align-self:flex-start;}
+.svc2-more{margin-top:22px;font-size:15px;color:var(--gray-400);}
+.svc2-more a{color:var(--teal-dark);font-weight:500;text-decoration:none;}
+[data-theme="dark"] .svc2-card{background:#161b22;}
+[data-theme="dark"] .svc2-card.lead{background:linear-gradient(180deg,rgba(0,184,122,0.12),#161b22 60%);}
+
+/* niches 2x2 */
+.niches-grid.four{grid-template-columns:1fr 1fr;}
+.niche-note{margin-top:26px;font-size:14px;color:var(--gray-400);max-width:760px;}
+
+/* results as the dark band */
+#results{background:#0d1117!important;}
+#results h2,#results .result-card h3{color:#f0f6fc;}
+#results .section-sub,#results .result-card p,#results .result-label{color:#8b949e;}
+#results .result-card{background:#161b22;border-color:#2d333b;}
+#results .result-card.featured{background:rgba(0,184,122,0.08);border-color:rgba(0,184,122,0.35);}
+#results .result-card.featured *{color:inherit;}
+#results .result-num{color:#00d58c!important;}
+#results .result-co{color:#00d58c!important;}
+
+/* FAQ */
+#faq{background:var(--paper);}
+.faq-wrap{display:grid;grid-template-columns:1fr 1.7fr;gap:64px;align-items:start;max-width:var(--max-w);margin:0 auto;}
+.faq-list{display:flex;flex-direction:column;gap:10px;}
+.faq-item{background:var(--white);border:1px solid var(--gray-100);padding:0 24px;transition:border-color .2s;}
+.faq-item[open]{border-color:var(--teal-mid);}
+.faq-item summary{list-style:none;cursor:pointer;padding:20px 0;font-size:17px;font-weight:600;color:var(--ink);display:flex;justify-content:space-between;gap:16px;align-items:center;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:'+';font-family:var(--font-mono);font-weight:400;font-size:20px;color:var(--teal);transition:transform .2s;}
+.faq-item[open] summary::after{transform:rotate(45deg);}
+.faq-item p{font-size:15px;color:var(--gray-600);line-height:1.75;padding:0 0 22px;}
+[data-theme="dark"] .faq-item{background:#161b22;}
+
+.insights-more{margin-top:22px;font-size:15px;}
+.insights-more a{color:var(--teal-dark);text-decoration:none;font-weight:500;}
+.footer-also{max-width:var(--max-w);margin:14px auto 0;font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.35);}
+.footer-also a{color:rgba(255,255,255,0.55);text-decoration:none;}
+.footer-also a:hover{color:var(--teal);}
+.c-val a{color:inherit;text-decoration:none;border-bottom:1px dotted currentColor;}
+
+@media(max-width:960px){
+  .proof-inner,.faq-wrap{grid-template-columns:1fr;gap:24px;}
+  .proof-stats{grid-template-columns:1fr 1fr;}
+  .svc2-grid{grid-template-columns:1fr;}
+  .svc2-card.lead{grid-row:auto;}
+  .svc2-card.wide{grid-column:auto;}
+  .niches-grid.four{grid-template-columns:1fr;}
+  section{padding:80px 24px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .svc2-card,.btn .arr,.faq-item summary::after{transition:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">
+      <img src="assets/logo-horiz-lrg.png" alt="Stragentech" class="nav-logo-img light-logo">
+      <img src="assets/logo-horiz-lrg-dark.png" alt="Stragentech" class="nav-logo-img dark-logo">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#process">How It Works</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="tools.html">Tools ↗</a></li>
+      <li><a href="https://calendar.app.google/gSTNDgChThJVdzh8A" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+      <svg width="20" height="14" fill="none"><rect y="0" width="20" height="2" rx="1" fill="#1e2333"/><rect y="6" width="20" height="2" rx="1" fill="#1e2333"/><rect y="12" width="20" height="2" rx="1" fill="#1e2333"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg-fade"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="hero-badge-dot"></span><span>Fractional CTO · AI adoption &amp; transformation</span></div>
+      <h1>Your team uses AI.<br>Your business doesn't <em>run</em> on it yet.</h1>
+      <p class="hero-sub">Stragentech is a fractional CTO practice for growing companies. We turn scattered AI experiments into an operating system for your business: a clear roadmap, working agents in the workflows that matter, and senior technology leadership to make it stick.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Book a Free Discovery Call <span class="arr">→</span></a>
+        <a href="tools.html" class="btn btn-outline" onclick="if(typeof gtag!=='undefined') gtag('event','cta_click',{'cta':'hero_tools'});">Explore the free tools</a>
+      </div>
+      <p class="hero-friction">Free 30-min call · No commitment required</p>
+    </div>
+    <div class="hero-visual">
+      <div class="orbit" aria-label="Diagram: the Stragentech method. Stabilize, automate, scale, with a human in the loop.">
+        <svg class="ring-svg" viewBox="0 0 460 460" aria-hidden="true">
+          <g class="spokes"></g>
+          <circle class="track-ring" cx="230" cy="230" r="150"/>
+          <g class="rotor">
+            <circle class="progress-arc" cx="230" cy="230" r="150" stroke-dasharray="90 852"/>
+            <circle cx="230" cy="80" r="6" fill="#00b87a"/>
+          </g>
+          <circle class="hub-bg" cx="230" cy="230" r="92"/>
+        </svg>
+
+        <div class="center-label">
+          <div class="center-title">AI<br>Operating<br>System</div>
+          <div class="center-sub"><span class="status-dot"></span>human-led</div>
+        </div>
+
+        <!-- agent.detect (top, 12 o'clock) — animated radar -->
+        <div class="node detect-node" data-i="0" style="left:50%;top:17.4%;">
+          <div class="node-dot">
+            <svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
+              <defs>
+                <linearGradient id="orbitSweep" x1="24" y1="24" x2="24" y2="3" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#00b87a" stop-opacity="0.35"/>
+                  <stop offset="1" stop-color="#00b87a" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <circle cx="24" cy="24" r="21" class="stroke-teal" stroke-opacity="0.55" stroke-width="1.2" fill="rgba(0,184,122,0.05)"/>
+              <circle cx="24" cy="24" r="14" class="stroke-teal" stroke-opacity="0.30" stroke-width="1"/>
+              <circle cx="24" cy="24" r="7"  class="stroke-teal" stroke-opacity="0.30" stroke-width="1"/>
+              <line x1="24" y1="3" x2="24" y2="45" class="stroke-teal" stroke-opacity="0.22" stroke-width="0.8"/>
+              <line x1="3" y1="24" x2="45" y2="24" class="stroke-teal" stroke-opacity="0.22" stroke-width="0.8"/>
+              <g class="radar-sweep">
+                <path d="M24 24 L24 3 A21 21 0 0 1 37.5 7.9 Z" fill="url(#orbitSweep)"/>
+                <line x1="24" y1="24" x2="24" y2="3" class="stroke-teal" stroke-width="1.5" stroke-opacity="0.9"/>
+                <animateTransform attributeName="transform" type="rotate" from="0 24 24" to="360 24 24" dur="3s" repeatCount="indefinite"/>
+              </g>
+              <circle cx="33" cy="15" r="1.6" class="fill-teal"/>
+              <circle cx="24" cy="24" r="2.4" class="fill-teal"/>
+            </svg>
+          </div>
+          <div class="node-name">01 · stabilize</div>
+          <div class="node-desc">Fix the data and systems AI depends on</div>
+        </div>
+
+        <!-- agent.investigate (lower-right, 4 o'clock) — magnifying glass over nodes -->
+        <div class="node" data-i="1" style="left:82.6%;top:67.4%;">
+          <div class="node-dot">
+            <svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
+              <g class="stroke-teal" stroke-width="1.4" stroke-opacity="0.75">
+                <line x1="21" y1="21" x2="13" y2="13"/>
+                <line x1="21" y1="21" x2="30" y2="14"/>
+                <line x1="21" y1="21" x2="15" y2="30"/>
+                <line x1="21" y1="21" x2="29" y2="29"/>
+              </g>
+              <g class="fill-teal">
+                <circle cx="21" cy="21" r="2.4"/>
+                <circle cx="13" cy="13" r="1.8"/>
+                <circle cx="30" cy="14" r="1.8"/>
+                <circle cx="15" cy="30" r="1.8"/>
+                <circle cx="29" cy="29" r="1.8"/>
+              </g>
+              <circle cx="21" cy="21" r="15" class="stroke-teal" stroke-width="2.2" fill="none"/>
+              <line x1="32" y1="32" x2="42" y2="42" class="stroke-teal" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="node-name">02 · automate</div>
+          <div class="node-desc">Agents in the workflows that matter</div>
+        </div>
+
+        <!-- agent.act (lower-left, 8 o'clock) — lightning bolt -->
+        <div class="node" data-i="2" style="left:17.4%;top:67.4%;">
+          <div class="node-dot">
+            <svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M27 5 L13 27 L22 27 L19 43 L35 20 L26 20 L30 5 Z"
+                    class="fill-teal" stroke="none"/>
+            </svg>
+          </div>
+          <div class="node-name">03 · scale</div>
+          <div class="node-desc">More autonomy as trust is earned</div>
+        </div>
+
+        <!-- Human-in-the-loop marker, centered on the agent.act node-dot.
+             top is offset 4.8pts above the act node's own top (67.4%) so the
+             dotted ring centers on the ACT ICON circle, not the text block
+             beneath it — the act node's "top" marks the vertical center of
+             its whole dot+name+desc stack, not the icon alone. If the act
+             node moves, keep act-hitl's left equal to it and re-tune this
+             offset so the dotted ring stays concentric with the icon. -->
+        <div class="act-hitl" style="left:17.4%;top:62.6%;" aria-hidden="true">
+          <div class="hitl-dotted"></div>
+          <div class="hitl-rotor">
+            <div class="hitl-mini">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20.5 C4.5 15 8 13.6 12 13.6 C16 13.6 19.5 15 19.5 20.5 Z"/></svg>
+              <span class="lbl">HITL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<section id="proof" aria-label="Track record">
+  <div class="proof-inner">
+    <div>
+      <div class="proof-label">25+ years building systems that can't fail</div>
+      <div class="proof-names">Boeing / Jeppesen ForeFlight · Amazon / AWS · Dedicated Computing · Motorola</div>
+    </div>
+    <div class="proof-stats">
+      <div class="proof-stat"><div class="proof-num">75%</div><div class="proof-cap">decisions automated · Amazon</div></div>
+      <div class="proof-stat"><div class="proof-num">$37M+</div><div class="proof-cap">documented savings · Amazon</div></div>
+      <div class="proof-stat"><div class="proof-num">30%→95%</div><div class="proof-cap">compliance · Boeing / Jeppesen</div></div>
+      <div class="proof-stat"><div class="proof-num">Five-nines</div><div class="proof-cap">availability · AWS IoT Analytics</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="problem-inner">
+    <div class="problem-left">
+      <p class="section-label">The Challenge</p>
+      <h2>Most companies are busy with AI. Few are better for it.</h2>
+    </div>
+    <div class="problem-cards">
+      <div class="problem-card">
+        <div class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></div>
+        <h4>AI tools everywhere, results nowhere</h4>
+        <p>Your team has ChatGPT, Copilot and AI features inside a dozen tools you already pay for. Individual tasks got faster. Revenue, margin and cycle time didn't move.</p>
+      </div>
+      <div class="problem-card">
+        <div class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/></svg></div>
+        <h4>Pilots that never reach production</h4>
+        <p>The demo worked. Six months later it is still a demo, because nobody owned the integration, the data or the rollout.</p>
+      </div>
+      <div class="problem-card">
+        <div class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3.2 2.5-5 5.5-5s5.5 1.8 5.5 5"/><path d="M16 5.2a3 3 0 0 1 0 5.6M18 14.2c1.6.6 2.5 2.2 2.5 4.8"/></svg></div>
+        <h4>No one owns the technology decisions</h4>
+        <p>Vendors, a part-time developer and an overloaded operations lead are all making architecture calls. You are approving spend you can't evaluate.</p>
+      </div>
+      <div class="problem-card">
+        <div class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></div>
+        <h4>Legacy systems and messy data underneath</h4>
+        <p>AI amplifies whatever it sits on. Spreadsheets, brittle integrations and years of technical debt turn every AI project into a cleanup project first.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">What We Do</p>
+      <h2>One senior partner, from first roadmap to running system</h2>
+      <p class="section-sub">Four ways to work together. Each one stands alone, and each one funds the next. Most clients start with the roadmap.</p>
+    </div>
+    <div class="svc2-grid">
+      <div class="svc2-card lead">
+        <span class="svc2-badge">Start here</span>
+        <div class="svc2-tag">Fixed fee · 2–3 weeks</div>
+        <h3>AI Roadmap</h3>
+        <p>We interview your team, follow where the hours and the money go, and review the systems and data underneath. You get a plan you could hand to any builder.</p>
+        <ul>
+          <li>An AI org chart: which work goes to agents, which stays with people</li>
+          <li>Prioritized use cases with ROI ranges</li>
+          <li>A 90-day plan with one real go-live</li>
+          <li>The foundation fixes that have to come first</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Start with a roadmap <span class="arr">→</span></a>
+      </div>
+      <div class="svc2-card">
+        <div class="svc2-tag">90–120 min · leadership team</div>
+        <h3>AI Opportunity Workshop</h3>
+        <p>A working session with your leadership team. We cover what AI can and can't do for a business like yours, map where your people spend repeatable effort, and leave with a ranked list of candidates in your team's own words.</p>
+        <a href="#planning-workshop" class="btn btn-outline">Book the workshop <span class="arr">→</span></a>
+      </div>
+      <div class="svc2-card">
+        <div class="svc2-tag">Monthly retainer</div>
+        <h3>Fractional CTO</h3>
+        <p>Senior technology leadership without the full-time hire. We own the roadmap, architecture, vendors, security posture and the AI rollout, and report to you in plain English.</p>
+        <a href="#contact" class="btn btn-outline">Talk about a retainer <span class="arr">→</span></a>
+      </div>
+      <div class="svc2-card wide">
+        <div class="svc2-tag">Project-priced</div>
+        <h3>AI Operating System</h3>
+        <p>The build. Agents and automations wired into your real workflows, on your systems, with people approving the decisions that matter. Delivered with your team or vetted build partners. Your code, your data, your IP.</p>
+        <a href="#process" class="btn btn-outline">See how it works <span class="arr">→</span></a>
+      </div>
+    </div>
+    <p class="svc2-more">Also available: technical due diligence for investors and acquirers, and legacy modernization programs. <a href="#contact">Ask about these →</a></p>
+  </div>
+</section>
+
+<!-- WHO WE WORK WITH -->
+<section id="niches" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Who We Work With</p>
+      <h2>Built for growing companies at a technology turning point</h2>
+      <p class="section-sub">Typically $5M to $100M in revenue and 20 to 500 people, with no full-time senior technology leader, or with one who needs a second set of hands.</p>
+    </div>
+    <div class="niches-grid four">
+      <div class="niche-card">
+        <div class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+        <h3>You're spending on AI and can't point to the return</h3>
+        <p>Licenses, pilots and a lot of enthusiasm, but nothing you could show a board. You need to know where AI pays back in your business and in what order.</p>
+        <div class="niche-tags"><span class="niche-tag">AI Roadmap</span><span class="niche-tag">Use-case ROI</span><span class="niche-tag">Adoption</span></div>
+      </div>
+      <div class="niche-card">
+        <div class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/></svg></div>
+        <h3>You've outgrown your technology, but not enough for a full-time CTO</h3>
+        <p>The systems that got you here are straining, and the big decisions keep landing on your desk. You need an owner for technology a few days a month, not another executive salary.</p>
+        <div class="niche-tags"><span class="niche-tag">Fractional CTO</span><span class="niche-tag">Architecture</span><span class="niche-tag">Vendor &amp; Team Leadership</span></div>
+      </div>
+      <div class="niche-card">
+        <div class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5Z"/></svg></div>
+        <h3>Legacy systems are slowing everything down</h3>
+        <p>Releases take longer every quarter, security findings pile up, and every new idea hits the same old constraints. Stabilize and modernize without stopping the business.</p>
+        <div class="niche-tags"><span class="niche-tag">Modernization</span><span class="niche-tag">Tech Debt</span><span class="niche-tag">Security &amp; Compliance</span></div>
+      </div>
+      <div class="niche-card">
+        <div class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+        <h3>You're an investor who needs a straight technical read</h3>
+        <p>Pre-acquisition diligence or post-close technology leadership, from someone who has been the CTO inside a PE-backed company and understands the EBITDA lens.</p>
+        <div class="niche-tags"><span class="niche-tag">Technical Due Diligence</span><span class="niche-tag">Post-Acquisition Leadership</span><span class="niche-tag">Value Creation</span></div>
+      </div>
+    </div>
+    <p class="niche-note">Industry-agnostic by design. Deepest experience in regulated and operations-heavy businesses: aviation, industrial and IoT, healthcare and defense systems, e-commerce, and B2B SaaS.</p>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results" style="background:var(--off-white);">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Results</p>
+      <h2>Outcomes that show up in the business</h2>
+      <p class="section-sub">Results Bilal Khan delivered as an engineering leader inside Amazon, AWS, Boeing and a PE-backed hardware company. The same playbook, applied at your scale.</p>
+    </div>
+    <div class="results-grid">
+      <div class="result-card featured">
+        <div class="result-co">Amazon · AI decision automation</div>
+        <h3>ML-Based Agentic Decision Automation</h3>
+        <p>Re-architected legacy operations systems onto AWS with ML-based agentic automation — autonomous investigation, decisioning, and corrective action at scale across millions of daily signals.</p>
+        <div class="result-metrics">
+          <div class="result-metric"><div class="result-num">75%</div><div class="result-label">Automation achieved</div></div>
+          <div class="result-metric"><div class="result-num">$37M+</div><div class="result-label">Documented savings</div></div>
+          <div class="result-metric"><div class="result-num">98%</div><div class="result-label">Decision precision</div></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-co">Boeing / Jeppesen ForeFlight · Modernization</div>
+        <h3>Legacy Modernization & AI Automation</h3>
+        <p>Led architecture reviews and modernization strategy for 40+ legacy on-premise applications, plus agentic AI automation in complex aviation data processing workflows.</p>
+        <div class="result-metrics">
+          <div class="result-metric"><div class="result-num">95%</div><div class="result-label">Compliance (from 30%)</div></div>
+          <div class="result-metric"><div class="result-num">85%</div><div class="result-label">CVE reduction in 6mo</div></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-co">Dedicated Computing · PE-backed CTO</div>
+        <h3>Software organization built from scratch at a PE-backed company</h3>
+        <p>As CTO, defined the managed-services strategy, built the software organization from zero, and drove $7M of EMEA expansion for a PE-backed hardware company.</p>
+        <div class="result-metrics">
+          <div class="result-metric"><div class="result-num">$7M</div><div class="result-label">EMEA revenue</div></div>
+          <div class="result-metric"><div class="result-num">85%+</div><div class="result-label">On-time delivery (from &lt;50%)</div></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-co">AWS · Managed cloud platform</div>
+        <h3>Managed IoT Services Platform</h3>
+        <p>Owned and led delivery of AWS IoT Analytics — low-latency, highly available managed services continuously monitoring equipment and triggering automated responses.</p>
+        <div class="result-metrics">
+          <div class="result-metric"><div class="result-num">5-9s</div><div class="result-label">Availability</div></div>
+          <div class="result-metric"><div class="result-num">10x</div><div class="result-label">Team scale built</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">How It Works</p>
+      <h2>From first call to first results in 60 days</h2>
+      <p class="section-sub">A structured process designed to minimize your time investment while maximizing what gets learned and delivered quickly.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-num">1</div>
+        <div class="process-week">Week 1</div>
+        <h4>Discovery Call</h4>
+        <p>30 minutes to understand your context, primary pain points, and whether there's a fit worth exploring.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">2</div>
+        <div class="process-week">Weeks 1–3</div>
+        <h4>AI Roadmap</h4>
+        <p>We interview your team, review systems and data, and deliver a prioritized roadmap with quick wins and a 90-day plan.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">3</div>
+        <div class="process-week">Weeks 4–12</div>
+        <h4>First Go-Live</h4>
+        <p>We lead the highest-value roadmap items into production, starting with one real workflow, with monthly progress reviews with leadership.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">4</div>
+        <div class="process-week">Ongoing</div>
+        <h4>Scale & Sustain</h4>
+        <p>Ongoing fractional CTO partnership or transition to internal ownership — with documentation, training, and handoff support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP PLANNING WORKSHOP OFFERING -->
+<section id="planning-workshop" style="padding:48px 32px;background:var(--white);">
+  <div class="section-inner">
+    <div class="workshop-offer-card">
+      <div class="workshop-offer-tag">// Start here</div>
+      <h3>The AI Roadmap Planning Workshop</h3>
+      <p class="workshop-offer-sub">A structured planning session for SMB leadership teams, built on the same discipline Amazon uses for annual planning — Brainstorm-for-Questions and the PR-FAQ ("Working Backwards") method — to turn "where should we use AI" into a written, owned, dated plan your P&amp;L will actually believe.</p>
+      <ul class="workshop-offer-feats">
+        <li><strong>Brainstorm for Questions (BFQ)</strong> — surface the handful of questions that would change the plan most, before anyone's allowed to answer them.</li>
+        <li><strong>Work Backwards (PR-FAQ)</strong> — write the customer-facing announcement and FAQ first, so the roadmap has to earn it rather than the other way around.</li>
+        <li><strong>Roadmap Checklist</strong> — leave with a stabilize → automate → modernize plan where every line has an owner, a date, and a measure.</li>
+      </ul>
+      <div class="workshop-offer-actions">
+        <a href="#contact" class="btn btn-primary">Book the Planning Workshop</a>
+        <a href="tools.html#decks" class="btn btn-outline">Get the Free Planning Kit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRACTIONAL CTO COST CALCULATOR BANNER -->
+<section id="cto-cost" style="padding:48px 32px;background:var(--off-white);">
+  <div class="section-inner">
+    <div class="svc-cta-bar">
+      <div>
+        <h3>How much would a full-time CTO actually cost you?</h3>
+        <p>Free calculator — model a full-time hire, a fractional CTO, and a senior contractor side by side on your own numbers.</p>
+      </div>
+      <a href="fractional-cto-cost-calculator.html" class="btn" style="background:var(--teal);color:#0d1117;font-weight:700;" onclick="if(typeof gtag!=='undefined') gtag('event','tool_card_click',{'tool_name':'fractional_cto_cost_calculator'});">▸ Try the Cost Calculator</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / 1-PAGER -->
+<section id="about" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="about-1pager-grid">
+      <div>
+        <p class="section-label">About Stragentech</p>
+        <h2>Agentic Technology Partners</h2>
+        <p class="about-bio">I'm Bilal Khan. For more than 25 years I've led engineering for systems that are not allowed to fail: aviation software at Boeing and Jeppesen ForeFlight, cloud and IoT platforms at Amazon and AWS, and, as CTO of a PE-backed company, the compute platforms inside medical scanners, flight simulators and defense systems.</p>
+        <p class="about-bio">I started Stragentech to bring that discipline to growing companies that need senior technology leadership and a practical path into AI, without a full-time executive hire. My bias is simple: stabilize first, automate second, and keep people in control of the decisions that matter. Every engagement is measured in outcomes you can see on the P&amp;L: cost removed, hours returned, revenue unblocked.</p>
+        <div class="cred-title">Part of the CTOx Network</div>
+        <div class="cred-list">
+          <div class="cred-item"><span class="cred-dot"></span>Member of CTOx.com — a vetted network of 220+ fractional CTO operators, providing access to specialized expertise when engagements require it</div>
+          <div class="cred-item"><span class="cred-dot"></span>Seattle, WA · Available remote nationwide</div>
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <div class="about-logo-graphic" role="img" aria-label="Stragentech — Agentic Technology Partners">
+          <svg viewBox="85 28 130 132" class="about-logo-svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="hexGradTop" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#5fc08e"/>
+                <stop offset="100%" stop-color="#4aa6b6"/>
+              </linearGradient>
+              <linearGradient id="hexGradLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#6bb0e0"/>
+                <stop offset="100%" stop-color="#3b7cb8"/>
+              </linearGradient>
+              <linearGradient id="hexGradRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3d6ea3"/>
+                <stop offset="100%" stop-color="#1f3a5c"/>
+              </linearGradient>
+            </defs>
+
+            <!-- hexagons (static) -->
+            <polygon points="150,42 176,57 176,87 150,102 124,87 124,57" fill="url(#hexGradTop)"/>
+            <polygon points="122.3,90 148.3,105 148.3,135 122.3,150 96.3,135 96.3,105" fill="url(#hexGradLeft)"/>
+            <polygon points="177.7,90 203.7,105 203.7,135 177.7,150 151.7,135 151.7,105" fill="url(#hexGradRight)"/>
+
+            <!-- COMPASS (top hex) -->
+            <g transform="translate(150,72)">
+              <circle r="17" fill="none" stroke="#ffffff" stroke-width="2.2"/>
+              <line x1="0" y1="-20.5" x2="0" y2="-17" stroke="#ffffff" stroke-width="2.2"/>
+              <line x1="0" y1="17" x2="0" y2="20.5" stroke="#ffffff" stroke-width="2.2"/>
+              <line x1="-20.5" y1="0" x2="-17" y2="0" stroke="#ffffff" stroke-width="2.2"/>
+              <line x1="17" y1="0" x2="20.5" y2="0" stroke="#ffffff" stroke-width="2.2"/>
+              <g class="about-anim-group about-anim-compass">
+                <path d="M 0,-13 L 2.6,0 L 0,13 L -2.6,0 Z" fill="#ffffff"/>
+                <animateTransform attributeName="transform" type="rotate" values="17;53;17" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1" dur="7s" repeatCount="indefinite"/>
+              </g>
+              <circle r="2.3" fill="#ffffff"/>
+            </g>
+
+            <!-- NETWORK (left hex) — 3D wireframe cube -->
+            <g transform="translate(122.3,120)">
+              <g stroke="#ffffff" stroke-opacity="0.8" stroke-width="1" fill="none" stroke-linecap="round">
+                <!-- front face -->
+                <path id="cubeE-ftl-ftr" d="M -12.5,-5.5 L 5.5,-5.5"/>
+                <path id="cubeE-ftr-fbr" d="M 5.5,-5.5 L 5.5,12.5"/>
+                <path id="cubeE-fbr-fbl" d="M 5.5,12.5 L -12.5,12.5"/>
+                <path id="cubeE-fbl-ftl" d="M -12.5,12.5 L -12.5,-5.5"/>
+                <!-- back face -->
+                <path id="cubeE-btl-btr" d="M -5.5,-12.5 L 12.5,-12.5"/>
+                <path id="cubeE-btr-bbr" d="M 12.5,-12.5 L 12.5,5.5"/>
+                <path id="cubeE-bbr-bbl" d="M 12.5,5.5 L -5.5,5.5"/>
+                <path id="cubeE-bbl-btl" d="M -5.5,5.5 L -5.5,-12.5"/>
+                <!-- depth connectors -->
+                <path id="cubeE-ftl-btl" d="M -12.5,-5.5 L -5.5,-12.5"/>
+                <path id="cubeE-ftr-btr" d="M 5.5,-5.5 L 12.5,-12.5"/>
+                <path id="cubeE-fbr-bbr" d="M 5.5,12.5 L 12.5,5.5"/>
+                <path id="cubeE-fbl-bbl" d="M -12.5,12.5 L -5.5,5.5"/>
+              </g>
+              <g fill="#ffffff">
+                <circle cx="-12.5" cy="-5.5" r="1.8"/>
+                <circle cx="5.5" cy="-5.5" r="1.8"/>
+                <circle cx="5.5" cy="12.5" r="1.8"/>
+                <circle cx="-12.5" cy="12.5" r="1.8"/>
+                <circle cx="-5.5" cy="-12.5" r="1.8"/>
+                <circle cx="12.5" cy="-12.5" r="1.8"/>
+                <circle cx="12.5" cy="5.5" r="1.8"/>
+                <circle cx="-5.5" cy="5.5" r="1.8"/>
+              </g>
+              <g class="about-anim-group about-anim-network" fill="#ffffff">
+                <circle r="1.6"><animateMotion dur="7s" begin="0.0s" repeatCount="indefinite"><mpath href="#cubeE-ftl-ftr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="0.6s" repeatCount="indefinite"><mpath href="#cubeE-ftr-fbr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="1.2s" repeatCount="indefinite"><mpath href="#cubeE-fbr-fbl"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="1.8s" repeatCount="indefinite"><mpath href="#cubeE-fbl-ftl"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="2.4s" repeatCount="indefinite"><mpath href="#cubeE-btl-btr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="3.0s" repeatCount="indefinite"><mpath href="#cubeE-btr-bbr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="3.6s" repeatCount="indefinite"><mpath href="#cubeE-bbr-bbl"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="4.2s" repeatCount="indefinite"><mpath href="#cubeE-bbl-btl"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="4.8s" repeatCount="indefinite"><mpath href="#cubeE-ftl-btl"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="5.4s" repeatCount="indefinite"><mpath href="#cubeE-ftr-btr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="6.0s" repeatCount="indefinite"><mpath href="#cubeE-fbr-bbr"/></animateMotion></circle>
+                <circle r="1.6"><animateMotion dur="7s" begin="6.6s" repeatCount="indefinite"><mpath href="#cubeE-fbl-bbl"/></animateMotion></circle>
+              </g>
+            </g>
+
+            <!-- GEAR (right hex) -->
+            <g transform="translate(177.7,120)">
+              <g class="about-anim-group about-anim-gear">
+                <g fill="#ffffff">
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(0)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(45)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(90)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(135)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(180)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(225)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(270)"/>
+                  <rect x="-2" y="-19" width="4" height="6" transform="rotate(315)"/>
+                </g>
+                <circle r="14" fill="none" stroke="#ffffff" stroke-width="2"/>
+                <circle r="7" fill="none" stroke="#ffffff" stroke-width="2"/>
+                <circle r="2.6" fill="#ffffff"/>
+                <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="22s" repeatCount="indefinite"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="about-logo-wordmark">
+          <div class="about-logo-name">STRAGEN<span>TECH</span></div>
+          <div class="about-logo-tagline">Agentic Technology Partners</div>
+        </div>
+        <br>
+        <!-- <img src="assets/headshot.jpg" alt="Bilal A. Khan" style="width:100%;max-width:300px;border-radius:12px;display:block;margin:0 auto;box-shadow:0 8px 40px rgba(13,17,23,0.12);">
+        <h3 style="font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--ink);margin:20px 0 6px;letter-spacing:-0.2px;">Bilal A. Khan</h3>
+        <p style="font-family:var(--font-mono);font-size:11px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px;">Fractional CTO · Principal Partner</p> -->
+        <a href="downloads/BK-1pager.pdf" class="btn btn-primary" style="width:100%;justify-content:center;" download>Download 1-Pager (PDF) →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- INSIGHTS -->
+<section id="insights" style="background:var(--off-white);">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Insights</p>
+      <h2>Thinking on AI, technology leadership and scale</h2>
+      <p class="section-sub">Practical frameworks for CEOs and operators navigating AI transformation without a full-time technology leader.</p>
+    </div>
+    <div class="blog-carousel-wrap">
+      <div class="blog-controls">
+        <button class="blog-arrow blog-arrow-left" onclick="scrollBlog(-1)" aria-label="Previous">&#8249;</button>
+        <button class="blog-arrow blog-arrow-right" onclick="scrollBlog(1)" aria-label="Next">&#8250;</button>
+      </div>
+      <div class="blog-grid" id="blogGrid">
+      <div class="blog-card">
+        <div class="blog-img" style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);position:relative;overflow:hidden;align-items:flex-start;justify-content:flex-end;flex-direction:column;padding:18px 20px;">
+          <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#38bdf8,#818cf8);"></div>
+          <div style="font-family:var(--font-mono);font-size:9px;color:#38bdf8;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Stragentech Insights</div>
+          <div style="font-family:var(--font-serif);font-size:16px;color:#ffffff;line-height:1.35;font-weight:400;">6 Questions Every Leader Must Ask Before Building an AI Strategy</div>
+          <div style="font-family:var(--font-mono);font-size:9px;color:#64748b;margin-top:8px;">MIT Sloan · Executive Framework</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-tag">AI Strategy · MIT Framework</div>
+          <h4>Stop Chasing the Hype: Build an AI Strategy That Actually Sticks</h4>
+          <p>Six structured questions — grounded in MIT Sloan research — that separate leaders who extract real enterprise value from AI from those running expensive experiments that go nowhere.</p>
+          <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span class="blog-meta">8 slides · LinkedIn carousel</span>
+            <a href="ai_strategy_mit_carousel.html" style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">View Framework →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img c6"><img src="assets/card-images/techdebt-card-image.png" alt="Tech Debt Whitepaper" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="blog-body">
+          <div class="blog-tag">Tech Debt · Whitepaper</div>
+          <h4>Tech Debt Is an Operations Problem: The Hidden Cost Your P&L Isn't Capturing</h4>
+          <p>Legacy code isn't just a developer headache — it's slowing your operations, increasing your incident rate, and blocking every AI initiative you try to launch. Here's how to measure it.</p>
+          <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span class="blog-meta">Whitepaper · Free download</span>
+            <a href="tech-debt-whitepaper.html" style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Read Whitepaper →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img c3">🚀</div>
+        <div class="blog-body">
+          <div class="blog-tag">Digital Transformation · Whitepaper</div>
+          <h4>5 Things We Learned from Modernizing Boeing's Legacy Stack</h4>
+          <p>Lessons from taking 40+ legacy applications and a 30% compliance posture to 95% in 18 months.</p>
+          <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span class="blog-meta">7 min read · Free whitepaper</span>
+            <a href="whitepaper-ai-readiness.html" style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Read Whitepaper →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img"><img src="assets/card-images/earned-autonomy-card.png" alt="Earned Autonomy: four planes, one gate, five tiers" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="blog-body">
+          <div class="blog-tag">Agentic AI · Governance</div>
+          <h4>Earned Autonomy: Governing Agentic AI at the Industrial Edge</h4>
+          <p>The four-plane architecture, per-action autonomy tiers, and the calibrated trust metrics that let a plant grant an agent more authority over time — and the audit trail regulators and insurers will actually ask for.</p>
+          <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span class="blog-meta">Deep-dive whitepaper · Free download</span>
+            <a href="earned-autonomy-whitepaper.html" style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Read Whitepaper →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img c4">✈️</div>
+        <div class="blog-body">
+          <div class="blog-tag">Aviation & Aerospace · Whitepaper</div>
+          <h4>State of AI in Aviation: When Deterministic Certification Meets Learning Systems</h4>
+          <p>Where AI adoption in aviation stands today, why traditional certification frameworks are struggling to keep pace with ML systems, and what engineering leaders can do to close the gap.</p>
+          <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span class="blog-meta">Industry report · Free download</span>
+            <a href="downloads/State-of-AI-in-Aviation-Whitepaper.pdf" download style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Download Report →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img" style="background:linear-gradient(135deg,var(--teal-pale),var(--white));color:var(--teal-dark);"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+        <div class="blog-body">
+          <div class="blog-tag">Planning · Free kit</div>
+          <h4>The Roadmap Planning Kit</h4>
+          <p>Brainstorm-for-Questions, the PR-FAQ method and a stabilize, automate, modernize checklist: the three tools we use to turn "where should we use AI" into a dated plan.</p>
+          <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span class="blog-meta">3 tools · Free kit</span>
+            <a href="roadmap-planning-kit.html" style="font-family:var(--font-mono);font-size:11px;color:var(--teal);text-decoration:none;font-weight:500;letter-spacing:0.5px;border:1px solid var(--teal-mid);padding:5px 12px;border-radius:20px;background:var(--teal-pale);">Get the Kit →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <p class="insights-more">Working in industrial operations or IoT? <a href="tools.html#industrial">See the industrial library →</a></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-wrap">
+    <div>
+      <p class="section-label">Questions</p>
+      <h2>Before we talk</h2>
+      <p class="section-sub">Straight answers to what most leaders ask on the first call.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item"><summary>What does a fractional CTO actually do?</summary><p>The same job as a full-time CTO, sized to what you need. We own technology strategy, architecture, vendors, security and the AI roadmap, lead whoever builds for you, and report to you in plain English. You get senior judgment a few days a month instead of a full-time executive salary.</p></details>
+      <details class="faq-item"><summary>We're not a technology company. Is this for us?</summary><p>Yes. Most of the value is in companies whose product isn't software: the work runs on people, spreadsheets and a handful of systems, and that is exactly where AI and better technology decisions pay back fastest.</p></details>
+      <details class="faq-item"><summary>Do you build, or only advise?</summary><p>Both, in that order. We start with a roadmap so you know what is worth building. Then we lead the build, delivered by your team, by us, or with vetted build partners depending on scope. Either way you own the code, the data and the IP.</p></details>
+      <details class="faq-item"><summary>How is pricing structured?</summary><p>By deliverable and outcome, not by the hour. The AI Roadmap is a fixed fee, fractional leadership is a monthly retainer, and builds are project-priced. You see the number before any work starts.</p></details>
+      <details class="faq-item"><summary>Which AI tools and platforms do you use?</summary><p>We're vendor-neutral. We start from the workflow and choose what fits, which is often something you already pay for. Where it matters, we set things up so you own your agents and data rather than renting them.</p></details>
+      <details class="faq-item"><summary>How quickly will we see results?</summary><p>The roadmap takes two to three weeks. The target for the first working asset in production is within 60 to 90 days of starting.</p></details>
+      <details class="faq-item"><summary>Our data and systems are a mess. Should we fix that first?</summary><p>That is the first step of the work, not a reason to wait. We find the specific fixes AI depends on and do those, rather than launching a multi-year cleanup.</p></details>
+      <details class="faq-item"><summary>How do you handle security, compliance and risk?</summary><p>Our background is in regulated, safety-critical systems. Every roadmap names the no-go zones first, keeps a person in the loop for consequential decisions, and leaves an audit trail.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <p class="section-label">Get In Touch</p>
+      <h2>Discover What's Possible in 60 Days.</h2>
+      <p class="section-sub">Every engagement begins with a free 30-minute discovery call. No pitch, no pressure — just a conversation to see if there's a fit worth exploring.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="c-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+          <div><div class="c-label">Email</div><div class="c-val">info@stragentech.com</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="c-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></div>
+          <div><div class="c-label">LinkedIn</div><div class="c-val">linkedin.com/in/bilalakhan</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="c-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+          <div><div class="c-label">Tools</div><div class="c-val"><a href="https://tools.stragentech.com" target="_blank" rel="noopener">tools.stragentech.com</a></div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="c-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>
+          <div><div class="c-label">Location</div><div class="c-val">Seattle, WA · Available Remote</div></div>
+        </div>
+        <div style="margin-top:24px;padding:18px 20px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;">
+          <div class="c-label" style="margin-bottom:6px;">Also a member of</div>
+          <div style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.65;font-weight:300;">CTOx.com — a vetted network of 220+ fractional CTO operators. Every engagement benefits from the network's depth when specialized expertise is needed.</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-wrap">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" id="firstName" placeholder="Jane">
+          <span class="field-error" id="firstNameErr">Please enter your first name.</span>
+        </div>
+        <div class="form-group">
+          <label>Last Name *</label>
+          <input type="text" id="lastName" placeholder="Smith">
+          <span class="field-error" id="lastNameErr">Please enter your last name.</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" id="email" placeholder="jane@company.com">
+        <span class="field-error" id="emailErr">Please enter a valid email address.</span>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" id="phone" placeholder="+1 (206) 555-0100">
+        </div>
+        <div class="form-group">
+          <label>Company & Role *</label>
+          <input type="text" id="company" placeholder="CEO · Acme Co.">
+          <span class="field-error" id="companyErr">Please enter your company and role.</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>What best describes your situation? *</label>
+        <select id="situation">
+          <option value="" disabled selected>Select one...</option>
+          <option>AI adoption: we need a roadmap or don't know where to start</option>
+          <option>AI pilots have stalled or aren't paying back</option>
+          <option>We need a fractional CTO or technology leadership</option>
+          <option>Legacy modernization or technical debt</option>
+          <option>Technical due diligence (investor or acquirer)</option>
+          <option>Industrial or IoT operations</option>
+          <option>Other / not sure yet</option>
+        </select>
+        <span class="field-error" id="situationErr">Please select your situation.</span>
+      </div>
+      <div class="form-group">
+        <label>Tell us more (optional)</label>
+        <textarea id="message" placeholder="What's the core challenge you're trying to solve?"></textarea>
+      </div>
+      <button type="button" class="btn btn-primary" style="width:100%;justify-content:center;font-size:14px;padding:14px;" onclick="handleSubmit(this)">Book a Free Discovery Call →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <div class="footer-col-title">AI &amp; Leadership Tools</div>
+      <a href="fractional-cto-cost-calculator.html">Fractional CTO Cost Calculator</a>
+      <a href="roadmap-planning-kit.html">Roadmap Planning Kit</a>
+      <a href="legacy-risk-xray.html">Legacy Risk X-ray</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Tech Debt Suite</div>
+      <a href="tech-debt-calculator.html">Cost Calculator</a>
+      <a href="tech-debt-assessment.html">Assessment Scorecard</a>
+      <a href="tech-debt-velocity.html">Velocity Impact</a>
+      <a href="tech-debt-roi.html">Refactoring ROI</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">More Tools</div>
+      <a href="disaster-recovery-scorecard.html">Disaster Recovery Scorecard</a>
+      <a href="incident-cost.html">Incident Cost Suite</a>
+      <a href="oi-scorecard.html">OI Readiness Scorecard</a>
+      <a href="tools.html">All Free Tools →</a>
+    </div>
+  </div>
+  <div class="footer-inner">
+    <div class="footer-copy">© 2026 Stragentech LLC · Agentic Technology Partners · Seattle, WA</div>
+    <div class="footer-links">
+      <a href="tools.html">Tools</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="https://linkedin.com/in/bilalakhan" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="footer-also">Also building: <a href="https://sigaware.ai" target="_blank" rel="noopener">SigAware, AI for small-manufacturer maintenance ↗</a></div>
+</footer>
+<div class="preview-flag" aria-hidden="true">Preview · not live</div>
+
+<script>
+document.getElementById('themeToggle').addEventListener('click',function(){
+  var html=document.documentElement;
+  var isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  localStorage.setItem('stragentech-theme',isDark?'light':'dark');
+});
+
+function scrollBlog(dir){
+  var grid=document.getElementById('blogGrid');
+  var card=grid.querySelector('.blog-card');
+  var step=card.offsetWidth+18;
+  grid.scrollBy({left:dir*step,behavior:'smooth'});
+}
+
+function handleSubmit(btn){
+  document.querySelectorAll('.field-error').forEach(function(el){el.classList.remove('show');});
+  document.querySelectorAll('.error').forEach(function(el){el.classList.remove('error');});
+  var firstName=document.getElementById('firstName');
+  var lastName=document.getElementById('lastName');
+  var email=document.getElementById('email');
+  var phone=document.getElementById('phone');
+  var company=document.getElementById('company');
+  var situation=document.getElementById('situation');
+  var message=document.getElementById('message');
+  var valid=true;
+  if(!firstName.value.trim()){firstName.classList.add('error');document.getElementById('firstNameErr').classList.add('show');valid=false;}
+  if(!lastName.value.trim()){lastName.classList.add('error');document.getElementById('lastNameErr').classList.add('show');valid=false;}
+  var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!email.value.trim()||!emailRe.test(email.value.trim())){email.classList.add('error');document.getElementById('emailErr').classList.add('show');valid=false;}
+  if(!company.value.trim()){company.classList.add('error');document.getElementById('companyErr').classList.add('show');valid=false;}
+  if(!situation.value){situation.classList.add('error');document.getElementById('situationErr').classList.add('show');valid=false;}
+  if(!valid)return;
+  if(typeof gtag!=='undefined') gtag('event','contact_form_submit',{'situation_type':situation.value});
+  btn.textContent='Sending…';
+  btn.disabled=true;
+  fetch('https://formspree.io/f/xpqerpje',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      'First Name':firstName.value.trim(),
+      'Last Name':lastName.value.trim(),
+      'email':email.value.trim(),
+      'Phone':phone.value.trim(),
+      'Company & Role':company.value.trim(),
+      'Situation':situation.value,
+      'Message':message.value.trim()
+    })
+  })
+  .then(function(res){
+    if(res.ok){
+      btn.textContent='Message sent — we\'ll be in touch within 24 hours.';
+      btn.style.background='#008f5e';
+    } else {
+      btn.textContent='Something went wrong — please email info@stragentech.com';
+      btn.style.background='#c53030';
+      btn.disabled=false;
+    }
+  })
+  .catch(function(){
+    btn.textContent='Something went wrong — please email info@stragentech.com';
+    btn.style.background='#c53030';
+    btn.disabled=false;
+  });
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); document.getElementById('navLinks').classList.remove('open'); }
+  });
+});
+
+// ── GA4 CTA CLICK TRACKING ───────────────────────────────────────────────
+document.querySelectorAll('.btn').forEach(function(el){
+  el.addEventListener('click', function(){
+    if(typeof gtag==='undefined') return;
+    gtag('event','cta_click',{
+      'cta_label': el.textContent.trim().replace(/[→↗▸]/g,'').trim(),
+      'page_location': window.location.pathname
+    });
+  });
+});
+</script>
+<script>
+(function(){
+  var DUR = 14000; // MUST equal --orbit-dur (14s). If you change speed, change both.
+  var orbit = document.querySelector('.orbit');
+  if(!orbit) return;
+
+  // draw hub-to-node spokes
+  var spokes = orbit.querySelector('.spokes');
+  [-90, 30, 150].forEach(function(a){
+    var rad = a*Math.PI/180, hubR = 92, nodeR = 150;
+    var l = document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('x1', 230+hubR*Math.cos(rad));
+    l.setAttribute('y1', 230+hubR*Math.sin(rad));
+    l.setAttribute('x2', 230+nodeR*Math.cos(rad));
+    l.setAttribute('y2', 230+nodeR*Math.sin(rad));
+    l.setAttribute('class','spoke');
+    spokes.appendChild(l);
+  });
+
+  // highlight the node the pulse is currently passing (top -> 4 o'clock -> 8 o'clock)
+  var paused = false, rafId = null;
+  var nodes = orbit.querySelectorAll('.node');
+  var svg = orbit.querySelector('svg.ring-svg');
+
+  function tick(){
+    var t = (performance.now() % DUR) / DUR;
+    var active = 0;
+    if(t >= 0.16 && t < 0.5) active = 1;
+    else if(t >= 0.5 && t < 0.83) active = 2;
+    nodes.forEach(function(n){ n.classList.toggle('active', parseInt(n.dataset.i) === active); });
+    rafId = requestAnimationFrame(tick);
+  }
+  function startLoop(){ if(rafId === null) rafId = requestAnimationFrame(tick); }
+  function stopLoop(){ if(rafId !== null){ cancelAnimationFrame(rafId); rafId = null; } }
+
+  function pause(){
+    if(paused) return;
+    paused = true;
+    orbit.classList.add('is-paused');
+    stopLoop();
+    if(svg && svg.pauseAnimations) svg.pauseAnimations();
+  }
+  function resume(){
+    if(!paused) return;
+    paused = false;
+    orbit.classList.remove('is-paused');
+    startLoop();
+    if(svg && svg.unpauseAnimations) svg.unpauseAnimations();
+  }
+
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ e.isIntersecting ? resume() : pause(); });
+    }, { threshold: 0.1 }).observe(orbit);
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden) pause();
+    else {
+      var r = orbit.getBoundingClientRect();
+      if(r.bottom > 0 && r.top < window.innerHeight) resume();
+    }
+  });
+
+  startLoop();
+})();
+</script>
+<script>
+(function(){
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.about-anim-group animateTransform, .about-anim-group animateMotion').forEach(function(el){
+    el.setAttribute('repeatCount', '1');
+    el.setAttribute('dur', '1ms');
+  });
+})();
+</script>
+</body>
+</html>
